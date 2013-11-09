@@ -1,79 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Contributor License Agreement Chooser</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8">
+        <title>Contributor License Agreement Chooser</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="An experimental Contributor License Agreement Chooser built upon the past, to make a stronger chooser.">
+        <meta name="author" content="http://ContributorAgreements.org">
+        <link rel="shortcut icon" href="/favicon.png">
+        <!-- Bootstrap -->
+        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href="/bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
+	    <link href="/prettify.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet"> 
+    </head>
 
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/favicon.png">
-    <!-- Bootstrap -->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/prettify.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet"> 
-  </head>
-  <body>
+    <body>
     <div class='container'>
 		
 		<div class="span12">
-			<section id="wizard">
-			  <div class="page-header">
+		    <section id="wizard">
+			    <div class="page-header">
 	            <h1>Contributor License Agreement Chooser</h1>
                 <p>Please enter information below in order to build your
-                   Contributor License Agreement. <a href="mailto:support@contributoragreements.org">support@contributoragreements.org</a></p>
-	          </div>
+                   Contributor License Agreement. 
+                   <a href="mailto:support@contributoragreements.org">
+                   support@contributoragreements.org</a></p>
+                </div>
 	
 				<div id="rootwizard">
 					<div class="navbar">
-					  <div class="navbar-inner">
-					    <div class="container">
-					<ul>
-					  	<li><a href="#tab1" data-toggle="tab">General</a></li>
-						<li><a href="#tab2" data-toggle="tab">Copyright</a></li>
-						<li><a href="#tab3" data-toggle="tab">Patents</a></li>
-						<li><a href="#tab4" data-toggle="tab">Review</a></li>
-					</ul>
-					 </div>
-					  </div>
+					    <div class="navbar-inner">
+					        <div class="container">
+					            <ul class="bullets">
+					  	            <li><a href="#tab1" 
+                                           data-toggle="tab">1. General</a></li>
+						            <li><a href="#tab2" 
+                                           data-toggle="tab">2. Copyright</a>
+                                           </li>
+						            <li><a href="#tab3" 
+                                           data-toggle="tab">3. Patents</a></li>
+						            <li><a href="#tab4" 
+                                           data-toggle="tab">4. Review</a></li>
+						            <li><a href="#tab5" 
+                                           data-toggle="tab">5. Apply</a></li>
+					            </ul>
+					        </div>
+					    </div>
 					</div>
 					<div id="bar" class="progress progress-striped active">
-					  <div class="bar"></div>
+					    <div class="bar"></div>
 					</div>
+
 					<div class="tab-content">
 					    <div class="tab-pane" id="tab1">
+                            <label for="project-family-name">
+                            Project family Name</label>
+						    <input type='text' name='project-family-name' 
+                            id='project-family-name' 
+                            placeholder='Mozilla, Google, Apache...' 
+                            class="input-block-level">
 
-						    <input type='text' name='name' id='name' placeholder='Project Name'>
-						    <input type='text' name='name' id='name' placeholder='Project Website'>
-						    <input type='text' name='name' id='name' placeholder='Project Email'>
-                                <label for="exampleInputFile">Electronic Signature</label> 
-                                <input type="file" id="exampleInputFile">
-<br /><br />
-<div class="field">
-    <label for="agreement_media">In what jurisdiction is this agreement to be valid?</label><br />
-    <select size=3 id="jurisdiction" name="jurisdiction[]">
-      <option value="GFDL-1.1">United States</option>
-      <option value="GFDL-1.2">Canada</option>
-    </select>
-</div>
+                            <label for="project-name">Project Name</label>
+						    <input type='text' name='project-name' 
+                            id='project-name' 
+                            placeholder='Your widely identifiable project name.'
+                            class="input-block-level">
+
+                            <label for="project-website">Project Website</label>
+						    <input type='text' name='project-website' 
+                            id='project-website' 
+                            placeholder='Your fully qualified website name' 
+                            class="input-block-level">
+
+                            <label for="project-email">Project Email</label>
+						    <input type='text' name='project-email' 
+                            id='project-email' 
+                            placeholder='The primary email address that your project uses to receive email.' 
+                            class="input-block-level">
+
+                            <label for="contributor-signing-process">
+                            Contributor Signing Process Website Address</label>
+						    <input type='text' 
+                            name='contributor-signing-process' 
+                            id='contributor-signing-process' 
+                            placeholder='A website address where instructions exist or people may sign your agreement.' 
+                            class="input-block-level">
+
+                            <br /><br />
+
+                            <label for="field_jurisdiction">In what jurisdiction 
+                            is this agreement to be valid?</label>
+                            
+                            <br />
+
+                            <select id="field_jurisdiction"
+                            name="field_jurisdiction">
+
+                            <option value=""
+                            selected="selected" class="input-block-level">
+                            International
+                            </option>
+
+                            <option value="ar"
+                            >Argentina</option>
+
+                            <option value="au"
+                            >Australia</option>
+
+                            <option value="at"
+                            >Austria</option>
+
+                            <option value="be"
+                            >Belgium</option>
+
+                            <option value="br"
+                            >Brazil</option>
+
+                            <option value="bg"
+                            >Bulgaria</option>
+
+                            <option value="ca"
+                            >Canada</option>
+
+                            <option value="cl"
+                            >Chile</option>
+
+                            <option value="cn"
+                            >China Mainland</option>
+
+                            <option value="co"
+                            >Colombia</option>
+
+                            <option value="cr"
+                            >Costa Rica</option>
+
+                            <option value="hr"
+                            >Croatia</option>
+
+                            <option value="cz"
+                            >Czech Republic</option>
+
+                            <option value="dk"
+                            >Denmark</option>
+
+                            <option value="ec"
+                            >Ecuador</option>
+
+                            <option value="eg"
+                            >Egypt</option>
+
+                            <option value="ee"
+                            >Estonia</option>
+
+                            <option value="fi"
+                            >Finland</option>
+
+                            <option value="fr"
+                            >France</option>
+
+                            <option value="de"
+                            >Germany</option>
+
+                            <option value="gr"
+                            >Greece</option>
+
+                            <option value="gt"
+                            >Guatemala</option>
+
+                            <option value="hk"
+                            >Hong Kong</option>
+
+                            <option value="hu"
+                            >Hungary</option>
+
+                            <option value="in"
+                            >India</option>
+
+                            <option value="ie"
+                            >Ireland</option>
+
+                            <option value="il"
+                            >Israel</option>
+
+                            <option value="it"
+                            >Italy</option>
+
+                            <option value="jp"
+                            >Japan</option>
+
+                            <option value="lu"
+                            >Luxembourg</option>
+
+                            <option value="mk"
+                            >Macedonia</option>
+
+                            <option value="my"
+                            >Malaysia</option>
+
+                            <option value="mt"
+                            >Malta</option>
+
+                            <option value="mx"
+                            >Mexico</option>
+
+                            <option value="nl"
+                            >Netherlands</option>
+
+                            <option value="nz"
+                            >New Zealand</option>
+
+                            <option value="no"
+                            >Norway</option>
+
+                            <option value="pe"
+                            >Peru</option>
+
+                            <option value="ph"
+                            >Philippines</option>
+
+                            <option value="pl"
+                            >Poland</option>
+
+                            <option value="pt"
+                            >Portugal</option>
+
+                            <option value="pr"
+                            >Puerto Rico</option>
+
+                            <option value="ro"
+                            >Romania</option>
+
+                            <option value="rs"
+                            >Serbia</option>
+
+                            <option value="sg"
+                            >Singapore</option>
+
+                            <option value="si"
+                            >Slovenia</option>
+
+                            <option value="za"
+                            >South Africa</option>
+
+                            <option value="kr"
+                            >South Korea</option>
+
+                            <option value="es"
+                            >Spain</option>
+
+                            <option value="se"
+                            >Sweden</option>
+
+                            <option value="ch"
+                            >Switzerland</option>
+
+                            <option value="tw"
+                            >Taiwan</option>
+
+                            <option value="th"
+                            >Thailand</option>
+
+                            <option value="uk"
+                            >UK: England &amp; Wales</option>
+
+                            <option value="scotland"
+                            >UK: Scotland</option>
+
+                            <option value="ug"
+                            >Uganda</option>
+
+                            <option value="us"
+                            >United States</option>
+
+                            <option value="vn"
+                            >Vietnam</option>
+
+                            </select>
+
 					    </div>
-					    <div class="tab-pane" id="tab2">
-					      	
 
-  <div class="field">
+					    <div class="tab-pane" id="tab2">
+
     <label for="agreement_grant">Which style of contributor agreement would you like?</label><br />
     <select id="agreement_grant" name="agreement[grant]"><option value="cla">copyright license (CLA)</option>
 <option value="caa">copyright assignment (CAA)</option></select>
-  </div>
-  <div class="field">
+
     <label for="agreement_option">Choose an outbound license option:</label><br />
     <select id="agreement_option" name="agreement[option]"><option value="1">current license</option>
 <option value="2">list of licenses (choose below)</option>
 <option value="3">any OSI approved license</option>
 <option value="4">any FSF recommended copyleft license</option>
 <option value="5">any license</option></select>
-  </div>
-  <div class="field">
+
     <select multiple size=3 id="outboundlist" name="outboundlist[]">
       <option value="Apache-2.0">Apache License 2.0</option>
       <option value="Artistic-1.0">Artistic License 1.0</option>
@@ -91,8 +309,7 @@
       <option value="MIT">MIT License</option>
       <option value="MPL-1.1">Mozilla Public License 1.1</option>
     </select>
-  </div>
-  <div class="field">
+
     <label for="agreement_media">Would you like to add a media license?</label><br />
     <select multiple size=3 id="medialist" name="medialist[]">
       <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
@@ -125,26 +342,26 @@
       <option value="CC0-1.0">Creative Commons Zero v1.0 Universal</option>
 
     </select>
-
-</div>
 					    </div>
+
 						<div class="tab-pane" id="tab3">
-						
-<br /><br />
-<div class="field">
-    <label for="agreement_media">What type of Patent License do you want in your agreement?</label><br />
-    <select size=3 id="patenttype" name="patenttype[]">
-      <option value="GFDL-1.1">Traditional Patent License</option>
-      <option value="GFDL-1.2">Patent Pledge</option>
-    </select>
-</div>
+                            <label for="agreement_media">What type of Patent License do you want in your agreement?</label><br />
+                            <select size="3" id="patenttype" name="patenttype[]">
+                            <option value="GFDL-1.1">Traditional Patent License</option>
+                            <option value="GFDL-1.2">Patent Pledge</option>
+                            </select>					    
+                        </div>
 
-
-					    </div>
 						<div class="tab-pane" id="tab4">
                         <section id="review">
                         </section>
+
 					    </div>
+						<div class="tab-pane" id="tab5">
+                        <h3>Apply</h3>
+
+					    </div>
+
 						<ul class="pager wizard">
 							<li class="previous first" style="display:none;"><a href="#">First</a></li>
 							<li class="previous"><a href="#">Previous</a></li>
@@ -152,17 +369,23 @@
 						  	<li class="next"><a href="#">Next</a></li>
 						</ul>
 					</div>	
-				</div>
 				
+    <footer id="sponsor">Brought to you by <a href="http://contributoragreements.org/wordpress"><img id="calogo" onerror="this.onerror=null; this.src='http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.png'" src="http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.svg" alt="Contributor Agreements" /></a></footer>
 
-			
+			</section>
  		</div>
 	</div>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+
+
+    <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="/bootstrap3/js/bootstrap.min.js"></script> -->
+
+    <script src="/js/showdown.js"></script>
+
 	<script src="/jquery.bootstrap.wizard.js"></script>
 	<script src="/prettify.js"></script>
-	<script src="/pagedown/Markdown.Converter.js"></script>
 	<script>
 	$(document).ready(function() {
 	  	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {

@@ -1,3 +1,20 @@
 #result {
 
 }
+
+
+#sponsor {
+    text-align: center;
+}
+#calogo {
+    height: 70px;
+}
+
+.bullets {
+    width: 100%;
+}
+
+.navbar .nav>li {
+    width: 20%;
+
+}

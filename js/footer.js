@@ -4,9 +4,17 @@ $(document).ready(function() {
 
     // $('#myWizard').wizard()
     //
-    var converter = new Markdown.Converter();
-    $( "#review" ).load( "agreement-template.md" ).trigger('create');
-    // var text = converter.makeHtml( $( "#review" ).html() );
-    var textz = $( "#review" ).html();
-    console.log("text: " + textz);
+    // var Showdown = require('showdown');
+    var converter = new Showdown.converter();
+    $( "#review" ).load( "agreement-template.html", function() {
+          // $( "#review" ).html( converter.makeHtml( $( "#review" ).html() ));
+        // replace variables here
+    });
+
+
+    // console.log("myTest: " + myTest);
+
+    // $( "#review" ).html( converter.makeHtml( $( "#review" ).html() ) );
+    //var textz = $( "#review" ).html();
+    // console.log("text: " + textz);
 });
