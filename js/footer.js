@@ -9,6 +9,8 @@ $(document).ready(function() {
     $( "#review" ).load( "agreement-template.html", function() {
           // $( "#review" ).html( converter.makeHtml( $( "#review" ).html() ));
         // replace variables here
+        //
+        $("#embed-agreement").html( $( "#review" ).html() );
     });
 
 

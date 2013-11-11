@@ -6,12 +6,12 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="An experimental Contributor License Agreement Chooser built upon the past, to make a stronger chooser.">
         <meta name="author" content="http://ContributorAgreements.org">
-        <link rel="shortcut icon" href="/favicon.png">
+        <!-- <link rel="shortcut icon" href="/favicon.png"> -->
         <!-- Bootstrap -->
-        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- <link href="/bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
-	    <link href="/prettify.css" rel="stylesheet">
-        <link href="/css/style.css" rel="stylesheet"> 
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
+	    <link href="prettify.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet"> 
     </head>
 
     <body>
@@ -53,6 +53,19 @@
 
 					<div class="tab-content">
 					    <div class="tab-pane" id="tab1">
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+                              <h3>Your Contributor License Agreement</h3>
+                              <p>Enter in the information requested and at the end your completed agreement will be ready for use.</p>
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
                             <label for="project-family-name">
                             Project family Name</label>
 						    <input type='text' name='project-family-name' 
@@ -86,213 +99,38 @@
                             placeholder='A website address where instructions exist or people may sign your agreement.' 
                             class="input-block-level">
 
-                            <br /><br />
-
-                            <label for="field_jurisdiction">In what jurisdiction 
-                            is this agreement to be valid?</label>
-                            
-                            <br />
-
-                            <select id="field_jurisdiction"
-                            name="field_jurisdiction">
-
-                            <option value=""
-                            selected="selected" class="input-block-level">
-                            International
-                            </option>
-
-                            <option value="ar"
-                            >Argentina</option>
-
-                            <option value="au"
-                            >Australia</option>
-
-                            <option value="at"
-                            >Austria</option>
-
-                            <option value="be"
-                            >Belgium</option>
-
-                            <option value="br"
-                            >Brazil</option>
-
-                            <option value="bg"
-                            >Bulgaria</option>
-
-                            <option value="ca"
-                            >Canada</option>
-
-                            <option value="cl"
-                            >Chile</option>
-
-                            <option value="cn"
-                            >China Mainland</option>
-
-                            <option value="co"
-                            >Colombia</option>
-
-                            <option value="cr"
-                            >Costa Rica</option>
-
-                            <option value="hr"
-                            >Croatia</option>
-
-                            <option value="cz"
-                            >Czech Republic</option>
-
-                            <option value="dk"
-                            >Denmark</option>
-
-                            <option value="ec"
-                            >Ecuador</option>
-
-                            <option value="eg"
-                            >Egypt</option>
-
-                            <option value="ee"
-                            >Estonia</option>
-
-                            <option value="fi"
-                            >Finland</option>
-
-                            <option value="fr"
-                            >France</option>
-
-                            <option value="de"
-                            >Germany</option>
-
-                            <option value="gr"
-                            >Greece</option>
-
-                            <option value="gt"
-                            >Guatemala</option>
-
-                            <option value="hk"
-                            >Hong Kong</option>
-
-                            <option value="hu"
-                            >Hungary</option>
-
-                            <option value="in"
-                            >India</option>
-
-                            <option value="ie"
-                            >Ireland</option>
-
-                            <option value="il"
-                            >Israel</option>
-
-                            <option value="it"
-                            >Italy</option>
-
-                            <option value="jp"
-                            >Japan</option>
-
-                            <option value="lu"
-                            >Luxembourg</option>
-
-                            <option value="mk"
-                            >Macedonia</option>
-
-                            <option value="my"
-                            >Malaysia</option>
-
-                            <option value="mt"
-                            >Malta</option>
-
-                            <option value="mx"
-                            >Mexico</option>
-
-                            <option value="nl"
-                            >Netherlands</option>
-
-                            <option value="nz"
-                            >New Zealand</option>
-
-                            <option value="no"
-                            >Norway</option>
-
-                            <option value="pe"
-                            >Peru</option>
-
-                            <option value="ph"
-                            >Philippines</option>
-
-                            <option value="pl"
-                            >Poland</option>
-
-                            <option value="pt"
-                            >Portugal</option>
-
-                            <option value="pr"
-                            >Puerto Rico</option>
-
-                            <option value="ro"
-                            >Romania</option>
-
-                            <option value="rs"
-                            >Serbia</option>
-
-                            <option value="sg"
-                            >Singapore</option>
-
-                            <option value="si"
-                            >Slovenia</option>
-
-                            <option value="za"
-                            >South Africa</option>
-
-                            <option value="kr"
-                            >South Korea</option>
-
-                            <option value="es"
-                            >Spain</option>
-
-                            <option value="se"
-                            >Sweden</option>
-
-                            <option value="ch"
-                            >Switzerland</option>
-
-                            <option value="tw"
-                            >Taiwan</option>
-
-                            <option value="th"
-                            >Thailand</option>
-
-                            <option value="uk"
-                            >UK: England &amp; Wales</option>
-
-                            <option value="scotland"
-                            >UK: Scotland</option>
-
-                            <option value="ug"
-                            >Uganda</option>
-
-                            <option value="us"
-                            >United States</option>
-
-                            <option value="vn"
-                            >Vietnam</option>
-
-                            </select>
+                            <label for="field_jurisdiction">In what jurisdiction is this agreement to be valid?</label>
+                            <input type="text" name="field_jurisdiction" id="field_jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s).">
 
 					    </div>
 
 					    <div class="tab-pane" id="tab2">
 
-    <label for="agreement_grant">Which style of contributor agreement would you like?</label><br />
-    <select id="agreement_grant" name="agreement[grant]"><option value="cla">copyright license (CLA)</option>
-<option value="caa">copyright assignment (CAA)</option></select>
+<ul class="thumbnails">
+  <li class="span12">
+  <div class="thumbnail">
+      <img data-src="holder.js/300x200" alt="">
+      <div class="caption">
+      <h3>Copyright Information</h3>
+      <p>Copyright is a legal concept, enacted by most governments, giving the creator of an original work exclusive rights to it, usually for a limited time, with the intention of enabling the creator of intellectual wealth (e.g. the photographer of a photograph or the author of a book) to get compensated for their work and be able to financially support themselves. <a href="http://en.wikipedia.org/wiki/Copyright">Wikipedia</a></p>
+      </div>
+  </div>
+  </li>
+</ul>
 
-    <label for="agreement_option">Choose an outbound license option:</label><br />
-    <select id="agreement_option" name="agreement[option]"><option value="1">current license</option>
+    <label for="agreement_grant">Which style of contributor agreement would you like?</label> 
+    <select id="agreement_grant" name="agreement[grant]" class="input-block-level"><option value="exclusive">Exclusive License</option>
+<option value="nonexclusive">NON Exclusive License</option></select>
+
+    <label for="agreement_option">Would you like to add an outbound license obligation?</label>
+    <select id="agreement_option" name="agreement[option]" class="input-block-level"><option value="1">current license</option>
 <option value="2">list of licenses (choose below)</option>
 <option value="3">any OSI approved license</option>
 <option value="4">any FSF recommended copyleft license</option>
 <option value="5">any license</option></select>
 
-    <select multiple size=3 id="outboundlist" name="outboundlist[]">
+    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist[]" 
+    class="input-block-level">
       <option value="Apache-2.0">Apache License 2.0</option>
       <option value="Artistic-1.0">Artistic License 1.0</option>
       <option value="Artistic-2.0">Artistic License 2.0</option>
@@ -310,8 +148,10 @@
       <option value="MPL-1.1">Mozilla Public License 1.1</option>
     </select>
 
-    <label for="agreement_media">Would you like to add a media license?</label><br />
-    <select multiple size=3 id="medialist" name="medialist[]">
+
+    <br />
+    <label for="agreement_media">Would you like to add a content license?</label>
+    <select multiple size=3 id="medialist" name="medialist[]" class="input-block-level">
       <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
       <option value="GFDL-1.2">GNU Free Documentation License v1.2</option>
       <option value="GFDL-1.3">GNU Free Documentation License v1.3</option>
@@ -345,20 +185,158 @@
 					    </div>
 
 						<div class="tab-pane" id="tab3">
-                            <label for="agreement_media">What type of Patent License do you want in your agreement?</label><br />
-                            <select size="3" id="patenttype" name="patenttype[]">
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+                              <h3>Patent Information</h3>
+                              <p>Patents are a set of exclusive rights granted by a sovereign state to an inventor or their assignee for a limited period of time, in exchange for the public disclosure of the invention. <a href="http://en.wikipedia.org/wiki/Patent">Wikipedia</a></p>
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
+                            <label for="agreement_media">What type of Patent License do you want in your agreement?</label>
+                            <select id="patenttype" name="patenttype[]" class="input-block-level">
                             <option value="GFDL-1.1">Traditional Patent License</option>
-                            <option value="GFDL-1.2">Patent Pledge</option>
-                            </select>					    
+                            <option value="GFDL-1.2">Identified Patent Pledge</option>
+                            </select>					  
+
+
+
+                        <ul class="thumbnails" id="patent-option-2-options">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+<h4>Optional Patent Pledge Fields<h4>
+<label for="patent-title">Title</label>
+<input type="text" class="input-block-level" name="patent-title" id="patent-title">
+<label for="patent-title">Application Office</label>
+<input type="text" class="input-block-level" name="application-office" id="pplication-office">
+<label for="patent-title">Application Number</label>
+<input type="text" class="input-block-level" name="application-number" id="application-number">
+<label for="patent-title">Date</label>
+<input type="text" class="input-block-level" name="patent-date" id="patent-date">
+<label for="patent-title">Priority Number</label>
+<input type="text" class="input-block-level" name="patent-priority-number" id="patent-priority-number">                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
+  
                         </div>
 
+
 						<div class="tab-pane" id="tab4">
-                        <section id="review">
-                        </section>
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+                              <h3>Your Choices</h3>
+                              
+                        <table class="table table-striped">
+                        <tr>
+                        <th>Option</th><th>Choice</th>
+                        </tr>
+                        <tr>
+                        <td>Individual/Entity</td>
+                        <td>Individual</td>
+                        </tr>
+
+                        <tr>
+                        <td>Exclusive/Nonexclusive</td>
+                        <td>Exclusive</td>
+                        </tr>
+
+                        <tr>
+                        <td>patent license/patent pledge agreement</td>
+                        <td>Patent license</td>
+                        </tr>
+
+
+                        <tr>
+                        <td>outbound copyright license</td>
+                        <td>CC</td>
+                        </tr>
+
+
+                        </table>
+
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption" id="review">
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
 
 					    </div>
 						<div class="tab-pane" id="tab5">
-                        <h3>Apply</h3>
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+                              <h3>Your Final Contributor License Agreement</h3>
+                              <p>Below are packaged versions of your agreement for an individual or
+                              entity that you may use.</p>
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
+                        <table class="table table-striped">
+                        <tr>
+                        <th>Agreement</th><th>Version</th><th>Format</th>
+                        </tr>
+                        <tr>
+                        <td>Combined Individual Contributor License Agreement</td>
+                        <td>Contributor Agreements 1.1</td>
+                        <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
+                        </tr>
+
+                        <tr>
+                        <td>Combined Entity Contributor License Agreement</td>
+                        <td>Contributor Agreements 1.1</td>
+                        <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
+                        </tr>
+
+                        </table>
+
+
+                        <!-- Modal -->
+                        <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel">Combined Individual Contributor License Agreement</h3>
+
+                          </div>
+                          <div class="modal-body">
+                            <caption>Click the box below. Then, copy and paste the agreement where you would like.</caption><br /><br />
+                        <textarea id="embed-agreement" class="input-block-level" onclick="this.select();" rows="14" readonly>
+                        </textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                          </div>
+                        </div>
+
+
 
 					    </div>
 
@@ -370,7 +348,7 @@
 						</ul>
 					</div>	
 				
-    <footer id="sponsor">Brought to you by <a href="http://contributoragreements.org/wordpress"><img id="calogo" onerror="this.onerror=null; this.src='http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.png'" src="http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.svg" alt="Contributor Agreements" /></a></footer>
+    <footer id="sponsor">Brought to you by <a href="http://contributoragreements.org/"><img id="calogo" onerror="this.onerror=null; this.src='http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.png'" src="http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.svg" alt="Contributor Agreements" /></a></footer>
 
 			</section>
  		</div>
@@ -378,14 +356,15 @@
 
 
 
+
     <script src="//code.jquery.com/jquery-latest.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- <script src="/bootstrap3/js/bootstrap.min.js"></script> -->
 
-    <script src="/js/showdown.js"></script>
+    <script src="js/showdown.js"></script>
 
-	<script src="/jquery.bootstrap.wizard.js"></script>
-	<script src="/prettify.js"></script>
+	<script src="jquery.bootstrap.wizard.js"></script>
+	<script src="prettify.js"></script>
 	<script>
 	$(document).ready(function() {
 	  	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
@@ -412,6 +391,6 @@
 		window.prettyPrint && prettyPrint()
 	});	
 	</script>
-    <script src="/js/footer.js"></script>
+    <script src="js/footer.js"></script>
   </body>
 </html>
