@@ -1,5 +1,5 @@
 
-var doDebug = true;
+    var doDebug = false;
 
     var generalPageIndex    = 0;
     var isGeneralPageOk     = false;
