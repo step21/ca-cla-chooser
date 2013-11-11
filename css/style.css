@@ -20,6 +20,7 @@
 
 }
 
+select.cla-alert,
 input.cla-alert {
     border: 1px solid red;
 }

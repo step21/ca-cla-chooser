@@ -1,4 +1,5 @@
 
+var doDebug = true;
 
     var generalPageIndex    = 0;
     var isGeneralPageOk     = false;
@@ -15,7 +16,24 @@
     var applyPageIndex      = 4;
     var isApplyPageOk       = false;
 
+    var outboundCopyrightLicenses = '';
+    var mediaLicenses       = '';
 
+
+function setFakeData ()
+{
+    $('#project-family-name').val('Fabricatorz');
+    $('#project-name').val('Archive Software');
+    $('#project-website').val('http://archive.fabricatorz.com');
+    $('#project-email').val('jon@fabricatorz.com');
+    $('#contributor-process-url').val('http://archive.fabricatorz.com/signing');
+    $('#project-jurisdiction').val('United States, Hong Kong, and China Mainland.');
+}
+
+function ucFirst(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function validateEmail(email) 
 {
@@ -43,12 +61,13 @@ function oinspect (obj)
 
 function testGeneralPage ()
 {
+            isGeneralPageOk = true;
+
             if ( !$('#project-family-name').val() ) {
                 $('#project-family-name').addClass("cla-alert");
                 isGeneralPageOk = false;
             } else {
                 $('#project-family-name').removeClass("cla-alert");
-                isGeneralPageOk = true;
             }
 
             if ( !$('#project-name').val() ) {
@@ -56,7 +75,6 @@ function testGeneralPage ()
                 isGeneralPageOk = false;
             } else {
                 $('#project-name').removeClass("cla-alert");
-                isGeneralPageOk = true;
 		    }
 
             if ( !$('#project-website').val() || 
@@ -65,7 +83,6 @@ function testGeneralPage ()
                 isGeneralPageOk = false;
             } else {
                 $('#project-website').removeClass("cla-alert");
-                isGeneralPageOk = true;
             }
 
             if ( !$('#project-email').val() ||
@@ -75,16 +92,14 @@ function testGeneralPage ()
                 isGeneralPageOk = false;
             } else {
                 $('#project-email').removeClass("cla-alert");
-                isGeneralPageOk = true;
             }
 
-            if ( !$('#contributor-signing-process').val() ||
-                 !validateURL( $('#contributor-signing-process').val()  ) ) {
-                $('#contributor-signing-process').addClass("cla-alert");
+            if ( !$('#contributor-process-url').val() ||
+                 !validateURL( $('#contributor-process-url').val()  ) ) {
+                $('#contributor-process-url').addClass("cla-alert");
                 isGeneralPageOk = false;
             } else {
-                $('#contributor-signing-process').removeClass("cla-alert");
-                isGeneralPageOk = true;
+                $('#contributor-process-url').removeClass("cla-alert");
             }
 
             if ( !$('#project-jurisdiction').val() ) {
@@ -92,13 +107,260 @@ function testGeneralPage ()
                 isGeneralPageOk = false;
             } else {
                 $('#project-jurisdiction').removeClass("cla-alert");
-                isGeneralPageOk = true;
             }
+
+    testReviewPage();
 
     return isGeneralPageOk;
 }
 
+function testCopyrightPage ()
+{
+            isCopyrightPageOk = true;
+
+            var outboundChoices = $( "#outboundlist" ).val() || [];
+            var mediaChoices    = $( "#medialist" ).val() || [];
+
+            if ( !$('#outboundlist').val() ) {
+                $('#outboundlist').addClass("cla-alert");
+                isCopyrightPageOk = false;
+            } else {
+                outboundCopyrightLicenses = outboundChoices.join(", ");
+                console.log("outboundCopyrightLicenses: " +
+                            outboundCopyrightLicenses);
+
+                $('#outboundlist').removeClass("cla-alert");
+            }
+
+            if ( !$('#medialist').val() ) {
+                $('#medialist').addClass("cla-alert");
+                isCopyrightPageOk = false;
+            } else {
+                mediaLicenses = mediaChoices.join(", ");
+                console.log("mediaLicenses: " +
+                            mediaLicenses);
+
+                $('#medialist').removeClass("cla-alert");
+            }
+
+    testReviewPage();
+
+    return isCopyrightPageOk;
+}
+
+function testPatentPage ()
+{
+            isPatentPageOk = true;
+
+            testReviewPage();
+
+            return isPatentPageOk;
+}
+
+function testReviewPage ()
+{
+            isReviewPageOk = true;
+
+            console.log("At testReviewPage");
+
+            if ( $("#contributor-option-entity").prop("checked") )
+            {
+                $("#review-agreement-type").text(
+                    ucFirst( $("#contributor-option-entity").val() ) )  ; 
+                $("#modal-agreement-type").html( 
+                    ucFirst( $("#contributor-option-entity").val() ) );
+                $("#tmp-contributor-type").html( 
+                    ucFirst( $("#contributor-option-entity").val() ) );
+
+                $("#definition-option-1").show();
+                $("#definition-option-1").removeClass("nuke");
+                $("#definition-option-2").hide();
+                $("#definition-option-2").addClass("nuke");
+            } else {
+                $("#review-agreement-type").text(
+                    ucFirst( $("#contributor-option-individual").val()))  ; 
+
+                $("#modal-agreement-type").html( 
+                    ucFirst( $("#contributor-option-individual").val() ) );
+
+                $("#tmp-contributor-type").html( 
+                    ucFirst( $("#contributor-option-individual").val() ) );
+
+                $("#definition-option-1").hide();
+                $("#definition-option-1").addClass("nuke");
+                $("#definition-option-2").show();
+                $("#definition-option-1").removeClass("nuke");
+            }
+
+            $("#review-project-family-name").html(
+                $("#project-family-name").val() );
+
+            $("#review-project-name").html(
+                $("#project-name").val() );
+
+            $("#tmp-project-name").html(
+                $("#project-name").val() );
+
+            $("#review-project-website").html(
+                $("#project-website").val() );
+
+            $("#review-project-email").html(
+                $("#project-email").val() );
+
+            $("#review-contributor-process-url").html(
+                $("#contributor-process-url").val() );
+
+            $("#tmp-submission-instructions").html(
+                $("#contributor-process-url").val() );
+
+            $("#review-project-jurisdiction").html(
+                $("#project-jurisdiction").val() );
+
+            $("#review-agreement-exclusivity").html(
+                ucFirst( $("#agreement-exclusivity").val() ) );
+
+            $("#tmp-contributor-exclusivity").html(
+                ucFirst( $("#agreement-exclusivity").val() ) );
+
+            if ( $("#agreement-exclusivity").val() == 'exclusive' )
+            {
+                $("#license-option-1").show();
+                $("#license-option-1").removeClass("nuke");
+                $("#license-option-2").hide();
+                $("#license-option-2").addClass("nuke");
+            } else {
+                $("#license-option-1").hide();
+                $("#license-option-1").addClass("nuke");
+                $("#license-option-2").show();
+                $("#license-option-2").removeClass("nuke");
+            }
+            
+
+            $("#review-outbound-licenses").html(
+                outboundCopyrightLicenses );
+
+            $("#tmp-licenses").html(
+                outboundCopyrightLicenses );
+
+            if ( $("#outbound-option-same").prop("checked") )
+            {
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-same").val() );
+
+                $("#outbound-option-1").show();
+                $("#outbound-option-1").removeClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+            }
+
+            if ( $("#outbound-option-same-licenses").prop("checked") )
+            {
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-same-licenses").val() );
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").show();
+                $("#outbound-option-2").removeClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+            }
+
+            if ( $("#outbound-option-fsf").prop("checked") )
+            {
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-fsf").val() );
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").show();
+                $("#outbound-option-3").removeClass("nuke");
+            }
+
+            $("#review-outbound-license-other").html(
+                $("#outboundlist-custom").val() );
+
+            $("#review-media-licenses").html(
+                mediaLicenses );
+
+            if ( mediaLicenses == "" )
+                $("#tmp-media-licenses").html(
+                    "NONE");
+            else
+                $("#tmp-media-licenses").html(
+                    mediaLicenses );
+
+            $("#review-patent-type").html(
+                $("#patent-type").val() );
+
+            if ( $("#patent-type").val() == 'traditional' )
+            {
+                $("#patent-option-1").show();
+                $("#patent-option-1").removeClass("nuke");
+                $("#patent-option-2").hide();
+                $("#patent-option-2").addClass("nuke");
+            } else {
+                $("#patent-option-1").hide();
+                $("#patent-option-1").addClass("nuke");
+                $("#patent-option-2").show();
+                $("#patent-option-2").removeClass("nuke");
+
+                $("#tmp-patent-more-url").html(
+                    $("#patent-more-url").val() );
+
+            }
+
+            $("#review-patent-more-url").html(
+                $("#patent-more-url").val() );
+
+            testApplyPage();
+
+            return isReviewPageOk;
+}
+
+function testApplyPage ()
+{
+            console.log("at testApplyPage");
+
+            isApplyPageOk = true;
+
+            
+            if ( $("#contributor-option-entity").prop("checked") )
+            {
+                $("#apply-individual").hide();
+                $("#apply-entity").show();
+            }
+            else
+            {
+                $("#apply-individual").show();
+                $("#apply-entity").hide();
+            }
+       
+            $("#embed-offscreen").html( $( "#review-text" ).html() );
+            $("#embed-offscreen .nuke").remove();
+            /*
+            $("#embed-offscreen .nuke").each(function() {
+                console.log("this remove: " + $(this).html());
+                $(this).remove();
+            }); */
+
+            $("#embed-agreement").html( $("#embed-offscreen").html() );
+
+            return isApplyPageOk;
+}
+
+
 $(document).ready(function() {
+
+    if ( doDebug )
+        setFakeData();
+
+    $("#outboundlist-custom").hide();
+    $("#patent-option-2-options").hide();
     //$("#wizard").steps();
 
 
@@ -106,14 +368,71 @@ $(document).ready(function() {
     //
     // var Showdown = require('showdown');
     var converter = new Showdown.converter();
-    $( "#review" ).load( "agreement-template.html", function() {
+    $( "#review-text" ).load( "agreement-template.html", function() {
           // $( "#review" ).html( converter.makeHtml( $( "#review" ).html() ));
         // replace variables here
         //
-        $("#embed-agreement").html( $( "#review" ).html() );
+        // $("#embed-agreement").html( $( "#review-text" ).html() );
     });
 
 
+    $( "#project-family-name" ).change(function() {
+        return testGeneralPage();
+    });
+
+    $( "#project-name" ).change(function() {
+        return testGeneralPage();
+    });
+
+    $( "#project-website" ).change(function() {
+        return testGeneralPage();
+    });
+
+    $( "#project-email" ).change(function() {
+        return testGeneralPage();
+    });
+
+    $( "#contributor-process-url" ).change(function() {
+        return testGeneralPage();
+    });
+
+    $( "#project-jurisdiction" ).change(function() {
+        return testGeneralPage();
+    });
+
+
+    $( "#outboundlist" ).change(function() {
+        return testCopyrightPage();
+    });
+
+    $( "#medialist" ).change(function() {
+        return testCopyrightPage();
+    });
+
+    $( "#outbound-option-same-licenses" ).change(function() {
+        if ( $("#outbound-option-same-licenses").prop( "checked" ) )
+            $("#outboundlist-custom").show();
+        // return testGeneralPage();
+    });
+
+    $( "#outbound-option-same" ).change(function() {
+        $("#outboundlist-custom").hide();
+        // return testGeneralPage();
+    });
+
+    $( "#outbound-option-fsf" ).change(function() {
+        $("#outboundlist-custom").hide();
+        // return testGeneralPage();
+    });
+
+
+    $( "#patent-type" ).change(function() {
+        if ( $( "#patent-type" ).val() == 'patent-pledge' )
+            $("#patent-option-2-options").show();
+        else
+            $("#patent-option-2-options").hide();
+
+    });
 
 	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index)
     {
@@ -124,10 +443,24 @@ $(document).ready(function() {
         switch( index )
         {
             case generalPageIndex + 1:
+                console.log("At SWITCH general: " + (generalPageIndex+1) );
                 return testGeneralPage();
                 break;
-            case 2:
+            case copyrightPageIndex + 1:
+                console.log("At SWITCH copyright: " + (copyrightPageIndex+1) );
                 return testCopyrightPage();
+                break;
+            case patentPageIndex + 1:
+                console.log("At SWITCH patent: " + (patentPageIndex+1) );
+                return testPatentPage();
+                break;
+            case reviewPageIndex + 1:
+                console.log("At SWITCH review: " + (reviewPageIndex+1) );
+                return testReviewPage();
+                break;
+            case applyPageIndex + 1:
+                console.log("At SWITCH apply: " + (applyPageIndex+1) );
+                return testApplyPage();
                 break;
         }
 

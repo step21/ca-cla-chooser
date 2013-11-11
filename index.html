@@ -66,6 +66,18 @@
                           </li>
                         </ul>
 
+
+                            <label class="radio">
+                            <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
+                            This is an Entity Contributor Agreement.
+                            </label>
+                            <label class="radio">
+                            <input type="radio" name="contributor-options" id="contributor-option-individual" value="individual">
+                            This is an Individual Contributor Agreement.
+                            </label>
+
+                            <hr />
+
                             <label for="project-family-name">
                             Project family Name</label>
 						    <input type='text' name='project-family-name' 
@@ -91,16 +103,22 @@
                             placeholder='The primary email address that your project uses to receive email.' 
                             class="input-block-level">
 
-                            <label for="contributor-signing-process">
+                            <label for="contributor-process-url">
                             Contributor Signing Process Website Address</label>
 						    <input type='text' 
-                            name='contributor-signing-process' 
-                            id='contributor-signing-process' 
+                            name='contributor-process-url' 
+                            id='contributor-process-url' 
                             placeholder='A website address where instructions exist or people may sign your agreement.' 
                             class="input-block-level">
 
                             <label for="project-jurisdiction">In what jurisdiction is this agreement to be valid?</label>
                             <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s).">
+
+
+
+
+
+
 
 					    </div>
 
@@ -118,10 +136,15 @@
   </li>
 </ul>
 
-    <label for="agreement_grant">Which style of contributor agreement would you like?</label> 
-    <select id="agreement_grant" name="agreement[grant]" class="input-block-level"><option value="exclusive">Exclusive License</option>
-<option value="nonexclusive">NON Exclusive License</option></select>
+    <label for="agreement-exclusivity">Which style of contributor agreement would you like?</label> 
+    <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
+<option value="exclusive">Exclusive License</option>
+<option value="nonexclusive">NON Exclusive License</option>
+</select>
 
+
+
+<!--
     <label for="agreement_option">Would you like to add an outbound license obligation?</label>
     <select id="agreement_option" name="agreement[option]" class="input-block-level"><option value="1">current license</option>
 <option value="2">list of licenses (choose below)</option>
@@ -181,7 +204,90 @@
       <option value="CC-BY-SA-3.0">Creative Commons Attribution Share Alike 3.0</option>
       <option value="CC0-1.0">Creative Commons Zero v1.0 Universal</option>
 
+    </select> -->
+
+
+    <label for="outboundlist">Which licenses is your project using?</label>
+    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist" 
+    class="input-block-level">
+      <option value="Apache-2.0">Apache License 2.0</option>
+      <option value="Artistic-1.0">Artistic License 1.0</option>
+      <option value="Artistic-2.0">Artistic License 2.0</option>
+      <option value="BSD-2-Clause">BSD "Simplified" License</option>
+      <option value="BSD-3-Clause">BSD "Revised" License</option>
+      <option value="CDDL-1.0">Common Development and Distribution License 1.0</option>
+      <option value="EPL-1.0">Eclipse Public License 1.0</option>
+      <option value="GPL-2.0">GNU General Public License v2.0</option>
+      <option value="GPL-3.0">GNU General Public License v3.0</option>
+      <option value="LGPL-2.0">GNU Lesser General Public License v2.0</option>
+      <option value="LGPL-2.1">GNU Lesser General Public License v2.1</option>
+      <option value="LGPL-3.0">GNU Lesser General Public License v3.0</option>
+      <option value="AGPL-3.0">GNU Affero General Public License v3.0</option>
+      <option value="MIT">MIT License</option>
+      <option value="MPL-1.1">Mozilla Public License 1.1</option>
     </select>
+
+<hr />
+
+<label for="outbound-options">Please select an outbound license option path:</label>
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
+We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
+</label>
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="same with licenses">
+We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material or the following additional licenses (including any right to adopt any future version of a license if permitted):
+</label>
+
+<input type="text" name="outboundlist-custom" id="outboundlist-custom" 
+class="input-block-level" placeholder="Please list other licenses here.">
+
+
+
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-fsf" value="same with fsf">
+We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material or any licenses on the Free Software Foundation's list of "Recommended copyleft licenses" or approved by the Open Source Initiative on or after the Submission Date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+</label>
+
+<hr />
+
+
+<label for="outbound-media-licenses">
+<label for="medialist">Would you like to add a documentation license?</label>
+    <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
+      <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
+      <option value="GFDL-1.2">GNU Free Documentation License v1.2</option>
+      <option value="GFDL-1.3">GNU Free Documentation License v1.3</option>
+      <option value="CC-BY-1.0">Creative Commons Attribution 1.0</option>
+      <option value="CC-BY-2.0">Creative Commons Attribution 2.0</option>
+      <option value="CC-BY-2.5">Creative Commons Attribution 2.5</option>
+      <option value="CC-BY-3.0">Creative Commons Attribution 3.0</option>
+      <option value="CC-BY-ND-1.0">Creative Commons Attribution No Derivatives 1.0</option>
+      <option value="CC-BY-ND-2.0">Creative Commons Attribution No Derivatives 2.0</option>
+      <option value="CC-BY-ND-2.5">Creative Commons Attribution No Derivatives 2.5</option>
+      <option value="CC-BY-ND-3.0">Creative Commons Attribution No Derivatives 3.0</option>
+      <option value="CC-BY-NC-1.0">Creative Commons Attribution Non Commercial 1.0</option>
+      <option value="CC-BY-NC-2.0">Creative Commons Attribution Non Commercial 2.0</option>
+      <option value="CC-BY-NC-2.5">Creative Commons Attribution Non Commercial 2.5</option>
+      <option value="CC-BY-NC-3.0">Creative Commons Attribution Non Commercial 3.0</option>
+      <option value="CC-BY-NC-ND-1.0">Creative Commons Attribution Non Commercial No Derivatives 1.0</option>
+      <option value="CC-BY-NC-ND-2.0">Creative Commons Attribution Non Commercial No Derivatives 2.0</option>
+      <option value="CC-BY-NC-ND-2.5">Creative Commons Attribution Non Commercial No Derivatives 2.5</option>
+      <option value="CC-BY-NC-ND-3.0">Creative Commons Attribution Non Commercial No Derivatives 3.0</option>
+      <option value="CC-BY-NC-SA-1.0">Creative Commons Attribution Non Commercial Share Alike 1.0</option>
+      <option value="CC-BY-NC-SA-2.0">Creative Commons Attribution Non Commercial Share Alike 2.0</option>
+      <option value="CC-BY-NC-SA-2.5">Creative Commons Attribution Non Commercial Share Alike 2.5</option>
+      <option value="CC-BY-NC-SA-3.0">Creative Commons Attribution Non Commercial Share Alike 3.0</option>
+      <option value="CC-BY-SA-1.0">Creative Commons Attribution Share Alike 1.0</option>
+      <option value="CC-BY-SA-2.0">Creative Commons Attribution Share Alike 2.0</option>
+      <option value="CC-BY-SA-2.5">Creative Commons Attribution Share Alike 2.5</option>
+      <option value="CC-BY-SA-3.0">Creative Commons Attribution Share Alike 3.0</option>
+      <option value="CC0-1.0">Creative Commons Zero v1.0 Universal</option>
+
+    </select>
+
+
+
 					    </div>
 
 						<div class="tab-pane" id="patents">
@@ -198,10 +304,10 @@
                           </li>
                         </ul>
 
-                            <label for="agreement_media">What type of Patent License do you want in your agreement?</label>
-                            <select id="patenttype" name="patenttype[]" class="input-block-level">
-                            <option value="GFDL-1.1">Traditional Patent License</option>
-                            <option value="GFDL-1.2">Identified Patent Pledge</option>
+                            <label for="patent-type">What type of Patent License do you want in your agreement?</label>
+                            <select id="patent-type" name="patent-type" class="input-block-level">
+                            <option value="traditional">Traditional Patent License</option>
+                            <option value="patent-pledge">Identified Patent Pledge</option>
                             </select>					  
 
 
@@ -211,17 +317,13 @@
                           <div class="thumbnail">
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
-<h4>Optional Patent Pledge Fields<h4>
-<label for="patent-title">Title</label>
-<input type="text" class="input-block-level" name="patent-title" id="patent-title">
-<label for="patent-title">Application Office</label>
-<input type="text" class="input-block-level" name="application-office" id="pplication-office">
-<label for="patent-title">Application Number</label>
-<input type="text" class="input-block-level" name="application-number" id="application-number">
-<label for="patent-title">Date</label>
-<input type="text" class="input-block-level" name="patent-date" id="patent-date">
-<label for="patent-title">Priority Number</label>
-<input type="text" class="input-block-level" name="patent-priority-number" id="patent-priority-number">                              </div>
+<p>Optional Patent Pledge More Information<p>
+
+<p><em>NOTE: Title, Application Office, Application Number, Date and Priority Number for patents is important when listing on your external more inoformation source.</em></p>
+
+<label for="patent-more-url">Website Address (URL) to more information on your patent(s)</label>
+<input type="text" class="input-block-level" name="patent-more-url" id="patent-more-url">
+                              </div>
                           </div>
                           </li>
                         </ul>
@@ -243,26 +345,81 @@
                         <tr>
                         <th>Option</th><th>Choice</th>
                         </tr>
+
                         <tr>
-                        <td>Individual/Entity</td>
-                        <td>Individual</td>
+                        <td>Agreement Type</td>
+                        <td id="review-agreement-type"></td>
                         </tr>
 
                         <tr>
-                        <td>Exclusive/Nonexclusive</td>
-                        <td>Exclusive</td>
+                        <td>Project Family Name</td>
+                        <td id="review-project-family-name"></td>
                         </tr>
 
                         <tr>
-                        <td>patent license/patent pledge agreement</td>
-                        <td>Patent license</td>
+                        <td>Project Name</td>
+                        <td id="review-project-name"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Project Website</td>
+                        <td id="review-project-website"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Contributor Signing Process Address</td>
+                        <td id="review-contributor-process-url"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Project Jurisdiction</td>
+                        <td id="review-project-jurisdiction"></td>
+                        </tr>
+
+
+
+
+
+                        <tr>
+                        <td>Agreement Exclusivity</td>
+                        <td id="review-agreement-exclusivity"></td>
                         </tr>
 
 
                         <tr>
-                        <td>outbound copyright license</td>
-                        <td>CC</td>
+                        <td>Outbound License(s)</td>
+                        <td id="review-outbound-licenses"></td>
                         </tr>
+
+                        <tr>
+                        <td>Outbound License Options</td>
+                        <td id="review-outbound-license-options"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Other Agreements?</td>
+                        <td id="review-outbound-license-other"></td>
+                        </tr>
+
+
+                        <tr>
+                        <td>Media License(s)</td>
+                        <td id="review-media-licenses"></td>
+                        </tr>
+
+
+                        <tr>
+                        <td>Patent Type</td>
+                        <td id="review-patent-type"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Patent Optional Information Address</td>
+                        <td id="review-patent-more-url"></td>
+                        </tr>
+
+
+
 
 
                         </table>
@@ -277,7 +434,7 @@
                           <li class="span12">
                           <div class="thumbnail">
                               <img data-src="holder.js/300x200" alt="">
-                              <div class="caption" id="review">
+                              <div class="caption" id="review-text">
                               </div>
                           </div>
                           </li>
@@ -304,13 +461,13 @@
                         <tr>
                         <th>Agreement</th><th>Version</th><th>Format</th>
                         </tr>
-                        <tr>
+                        <tr id="apply-individual">
                         <td>Combined Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
                         </tr>
 
-                        <tr>
+                        <tr id="apply-entity">
                         <td>Combined Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
@@ -323,7 +480,7 @@
                         <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Combined Individual Contributor License Agreement</h3>
+                            <h3 id="myModalLabel">Combined <span id="modal-agreement-type"></span> Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
@@ -354,7 +511,7 @@
  		</div>
 	</div>
 
-
+    <div id="embed-offscreen" style="display: none;"></div>
 
 
     <script src="//code.jquery.com/jquery-latest.js"></script>
