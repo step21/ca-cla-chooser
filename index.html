@@ -10,7 +10,7 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
-	    <link href="prettify.css" rel="stylesheet">
+	    <link href="css/prettify.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet"> 
     </head>
 
@@ -32,16 +32,16 @@
 					    <div class="navbar-inner">
 					        <div class="container">
 					            <ul class="bullets">
-					  	            <li><a href="#tab1" 
+					  	            <li><a href="#general" 
                                            data-toggle="tab">1. General</a></li>
-						            <li><a href="#tab2" 
+						            <li><a href="#copyright" 
                                            data-toggle="tab">2. Copyright</a>
                                            </li>
-						            <li><a href="#tab3" 
+						            <li><a href="#patents" 
                                            data-toggle="tab">3. Patents</a></li>
-						            <li><a href="#tab4" 
+						            <li><a href="#review" 
                                            data-toggle="tab">4. Review</a></li>
-						            <li><a href="#tab5" 
+						            <li><a href="#apply" 
                                            data-toggle="tab">5. Apply</a></li>
 					            </ul>
 					        </div>
@@ -52,7 +52,7 @@
 					</div>
 
 					<div class="tab-content">
-					    <div class="tab-pane" id="tab1">
+					    <div class="tab-pane" id="general">
 
                         <ul class="thumbnails">
                           <li class="span12">
@@ -99,12 +99,12 @@
                             placeholder='A website address where instructions exist or people may sign your agreement.' 
                             class="input-block-level">
 
-                            <label for="field_jurisdiction">In what jurisdiction is this agreement to be valid?</label>
-                            <input type="text" name="field_jurisdiction" id="field_jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s).">
+                            <label for="project-jurisdiction">In what jurisdiction is this agreement to be valid?</label>
+                            <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s).">
 
 					    </div>
 
-					    <div class="tab-pane" id="tab2">
+					    <div class="tab-pane" id="copyright">
 
 <ul class="thumbnails">
   <li class="span12">
@@ -184,7 +184,7 @@
     </select>
 					    </div>
 
-						<div class="tab-pane" id="tab3">
+						<div class="tab-pane" id="patents">
 
                         <ul class="thumbnails">
                           <li class="span12">
@@ -230,7 +230,7 @@
                         </div>
 
 
-						<div class="tab-pane" id="tab4">
+						<div class="tab-pane" id="review">
 
                         <ul class="thumbnails">
                           <li class="span12">
@@ -285,7 +285,7 @@
 
 
 					    </div>
-						<div class="tab-pane" id="tab5">
+						<div class="tab-pane" id="apply">
 
                         <ul class="thumbnails">
                           <li class="span12">
@@ -363,34 +363,8 @@
 
     <script src="js/showdown.js"></script>
 
-	<script src="jquery.bootstrap.wizard.js"></script>
-	<script src="prettify.js"></script>
-	<script>
-	$(document).ready(function() {
-	  	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index) {
-                /*
-				if(index==2) {
-					// Make sure we entered the name
-					if(!$('#name').val()) {
-						alert('You must enter your name');
-						$('#name').focus();
-						return false;
-					}
-				}
-                */
-				
-				// Set the name for the next tab
-				// $('#tab3').html('Hello, ' + $('#name').val());
-				
-			}, onTabShow: function(tab, navigation, index) {
-				var $total = navigation.find('li').length;
-				var $current = index+1;
-				var $percent = ($current/$total) * 100;
-				$('#rootwizard').find('.bar').css({width:$percent+'%'});
-			}});	
-		window.prettyPrint && prettyPrint()
-	});	
-	</script>
+	<script src="js/jquery.bootstrap.wizard.js"></script>
+	<script src="js/prettify.js"></script>
     <script src="js/footer.js"></script>
   </body>
 </html>
