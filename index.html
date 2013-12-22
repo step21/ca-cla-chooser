@@ -60,7 +60,7 @@
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Your Contributor License Agreement</h3>
-                              <p>Enter in the information requested and at the end your completed agreement will be ready for use.</p>
+                              <p>Enter the information requested below to build your own contributor license agreement.</p>
                               </div>
                           </div>
                           </li>
@@ -94,7 +94,7 @@
                             <label for="project-website">Project Website</label>
 						    <input type='text' name='project-website' 
                             id='project-website' 
-                            placeholder='Your fully qualified website name' 
+                            placeholder='Enter your website name (URL)' 
                             class="input-block-level">
 
                             <label for="project-email">Project Email</label>
@@ -104,15 +104,15 @@
                             class="input-block-level">
 
                             <label for="contributor-process-url">
-                            Contributor Signing Process Website Address</label>
+                            Contributor Signing Process Website</label>
 						    <input type='text' 
                             name='contributor-process-url' 
                             id='contributor-process-url' 
-                            placeholder='A website address where instructions exist or people may sign your agreement.' 
+                            placeholder='A Website address where instructions exist and your contributors will go to sign the agreement.' 
                             class="input-block-level">
 
                             <label for="project-jurisdiction">In what jurisdiction is this agreement to be valid?</label>
-                            <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s).">
+                            <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s), e.g. Germany.">
 
 
 
@@ -136,7 +136,7 @@
   </li>
 </ul>
 
-    <label for="agreement-exclusivity">Which style of contributor agreement would you like?</label> 
+    <label for="agreement-exclusivity">Which style of contributor (inbound licensing) agreement would you like?</label> 
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
 <option value="nonexclusive">NON Exclusive License</option>
@@ -144,70 +144,12 @@
 
 
 
-<!--
-    <label for="agreement_option">Would you like to add an outbound license obligation?</label>
-    <select id="agreement_option" name="agreement[option]" class="input-block-level"><option value="1">current license</option>
-<option value="2">list of licenses (choose below)</option>
-<option value="3">any OSI approved license</option>
-<option value="4">any FSF recommended copyleft license</option>
-<option value="5">any license</option></select>
+<label for="outbound-options">Please select an outbound license option path:</label>
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
+<strong>Option 1</strong> - Yes, we agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
+</label>
 
-    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist[]" 
-    class="input-block-level">
-      <option value="Apache-2.0">Apache License 2.0</option>
-      <option value="Artistic-1.0">Artistic License 1.0</option>
-      <option value="Artistic-2.0">Artistic License 2.0</option>
-      <option value="BSD-2-Clause">BSD "Simplified" License</option>
-      <option value="BSD-3-Clause">BSD "Revised" License</option>
-      <option value="CDDL-1.0">Common Development and Distribution License 1.0</option>
-      <option value="EPL-1.0">Eclipse Public License 1.0</option>
-      <option value="GPL-2.0">GNU General Public License v2.0</option>
-      <option value="GPL-3.0">GNU General Public License v3.0</option>
-      <option value="LGPL-2.0">GNU Lesser General Public License v2.0</option>
-      <option value="LGPL-2.1">GNU Lesser General Public License v2.1</option>
-      <option value="LGPL-3.0">GNU Lesser General Public License v3.0</option>
-      <option value="AGPL-3.0">GNU Affero General Public License v3.0</option>
-      <option value="MIT">MIT License</option>
-      <option value="MPL-1.1">Mozilla Public License 1.1</option>
-    </select>
-
-
-    <br />
-    <label for="agreement_media">Would you like to add a content license?</label>
-    <select multiple size=3 id="medialist" name="medialist[]" class="input-block-level">
-      <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
-      <option value="GFDL-1.2">GNU Free Documentation License v1.2</option>
-      <option value="GFDL-1.3">GNU Free Documentation License v1.3</option>
-      <option value="CC-BY-1.0">Creative Commons Attribution 1.0</option>
-      <option value="CC-BY-2.0">Creative Commons Attribution 2.0</option>
-      <option value="CC-BY-2.5">Creative Commons Attribution 2.5</option>
-      <option value="CC-BY-3.0">Creative Commons Attribution 3.0</option>
-      <option value="CC-BY-ND-1.0">Creative Commons Attribution No Derivatives 1.0</option>
-      <option value="CC-BY-ND-2.0">Creative Commons Attribution No Derivatives 2.0</option>
-      <option value="CC-BY-ND-2.5">Creative Commons Attribution No Derivatives 2.5</option>
-      <option value="CC-BY-ND-3.0">Creative Commons Attribution No Derivatives 3.0</option>
-      <option value="CC-BY-NC-1.0">Creative Commons Attribution Non Commercial 1.0</option>
-      <option value="CC-BY-NC-2.0">Creative Commons Attribution Non Commercial 2.0</option>
-      <option value="CC-BY-NC-2.5">Creative Commons Attribution Non Commercial 2.5</option>
-      <option value="CC-BY-NC-3.0">Creative Commons Attribution Non Commercial 3.0</option>
-      <option value="CC-BY-NC-ND-1.0">Creative Commons Attribution Non Commercial No Derivatives 1.0</option>
-      <option value="CC-BY-NC-ND-2.0">Creative Commons Attribution Non Commercial No Derivatives 2.0</option>
-      <option value="CC-BY-NC-ND-2.5">Creative Commons Attribution Non Commercial No Derivatives 2.5</option>
-      <option value="CC-BY-NC-ND-3.0">Creative Commons Attribution Non Commercial No Derivatives 3.0</option>
-      <option value="CC-BY-NC-SA-1.0">Creative Commons Attribution Non Commercial Share Alike 1.0</option>
-      <option value="CC-BY-NC-SA-2.0">Creative Commons Attribution Non Commercial Share Alike 2.0</option>
-      <option value="CC-BY-NC-SA-2.5">Creative Commons Attribution Non Commercial Share Alike 2.5</option>
-      <option value="CC-BY-NC-SA-3.0">Creative Commons Attribution Non Commercial Share Alike 3.0</option>
-      <option value="CC-BY-SA-1.0">Creative Commons Attribution Share Alike 1.0</option>
-      <option value="CC-BY-SA-2.0">Creative Commons Attribution Share Alike 2.0</option>
-      <option value="CC-BY-SA-2.5">Creative Commons Attribution Share Alike 2.5</option>
-      <option value="CC-BY-SA-3.0">Creative Commons Attribution Share Alike 3.0</option>
-      <option value="CC0-1.0">Creative Commons Zero v1.0 Universal</option>
-
-    </select> -->
-
-
-    <label for="outboundlist">Which licenses is your project using?</label>
     <select multiple="multiple" size=3 id="outboundlist" name="outboundlist" 
     class="input-block-level">
       <option value="Apache-2.0">Apache License 2.0</option>
@@ -227,17 +169,33 @@
       <option value="MPL-1.1">Mozilla Public License 1.1</option>
     </select>
 
-<hr />
 
-<label for="outbound-options">Please select an outbound license option path:</label>
-<label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
-We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
-</label>
+
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="same with licenses">
-We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material or the following additional licenses (including any right to adopt any future version of a license if permitted):
+<strong>Option 2</strong> - Yes, we agree to license the Contribution only under the terms of the following license (including any right to adopt any future version of a license if permitted):
 </label>
+
+    <select multiple="multiple" size=3 id="outboundlist-2" name="outboundlist" 
+    class="input-block-level">
+      <option value="Apache-2.0">Apache License 2.0</option>
+      <option value="Artistic-1.0">Artistic License 1.0</option>
+      <option value="Artistic-2.0">Artistic License 2.0</option>
+      <option value="BSD-2-Clause">BSD "Simplified" License</option>
+      <option value="BSD-3-Clause">BSD "Revised" License</option>
+      <option value="CDDL-1.0">Common Development and Distribution License 1.0</option>
+      <option value="EPL-1.0">Eclipse Public License 1.0</option>
+      <option value="GPL-2.0">GNU General Public License v2.0</option>
+      <option value="GPL-3.0">GNU General Public License v3.0</option>
+      <option value="LGPL-2.0">GNU Lesser General Public License v2.0</option>
+      <option value="LGPL-2.1">GNU Lesser General Public License v2.1</option>
+      <option value="LGPL-3.0">GNU Lesser General Public License v3.0</option>
+      <option value="AGPL-3.0">GNU Affero General Public License v3.0</option>
+      <option value="MIT">MIT License</option>
+      <option value="MPL-1.1">Mozilla Public License 1.1</option>
+    </select>
+
+
 
 <input type="text" name="outboundlist-custom" id="outboundlist-custom" 
 class="input-block-level" placeholder="Please list other licenses here.">
@@ -246,15 +204,21 @@ class="input-block-level" placeholder="Please list other licenses here.">
 
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-fsf" value="same with fsf">
-We agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material or any licenses on the Free Software Foundation's list of "Recommended copyleft licenses" or approved by the Open Source Initiative on or after the Submission Date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+<strong>Option 3</strong> - Yes, we agree to license the Contribution only under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">Recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the Submission Date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+</label>
+
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-no-commitment" value="No commitment to any specific outbound license">
+<strong>Option 4</strong> - No, we will not commit to any specific outbound license.
 </label>
 
 <hr />
 
 
 <label for="outbound-media-licenses">
-<label for="medialist">Would you like to add a documentation license?</label>
+<label for="medialist">Would you like to add a documentation license for materials other than code to be contributed to your project?</label>
     <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
+      <option value="No" selected="selected">No</option>
       <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
       <option value="GFDL-1.2">GNU Free Documentation License v1.2</option>
       <option value="GFDL-1.3">GNU Free Documentation License v1.3</option>
@@ -262,26 +226,32 @@ We agree to license the Contribution only under the terms of the license or lice
       <option value="CC-BY-2.0">Creative Commons Attribution 2.0</option>
       <option value="CC-BY-2.5">Creative Commons Attribution 2.5</option>
       <option value="CC-BY-3.0">Creative Commons Attribution 3.0</option>
+      <option value="CC-BY-4.0">Creative Commons Attribution 4.0</option>
       <option value="CC-BY-ND-1.0">Creative Commons Attribution No Derivatives 1.0</option>
       <option value="CC-BY-ND-2.0">Creative Commons Attribution No Derivatives 2.0</option>
       <option value="CC-BY-ND-2.5">Creative Commons Attribution No Derivatives 2.5</option>
       <option value="CC-BY-ND-3.0">Creative Commons Attribution No Derivatives 3.0</option>
+      <option value="CC-BY-ND-4.0">Creative Commons Attribution No Derivatives 4.0</option>
       <option value="CC-BY-NC-1.0">Creative Commons Attribution Non Commercial 1.0</option>
       <option value="CC-BY-NC-2.0">Creative Commons Attribution Non Commercial 2.0</option>
       <option value="CC-BY-NC-2.5">Creative Commons Attribution Non Commercial 2.5</option>
       <option value="CC-BY-NC-3.0">Creative Commons Attribution Non Commercial 3.0</option>
+      <option value="CC-BY-NC-4.0">Creative Commons Attribution Non Commercial 4.0</option>
       <option value="CC-BY-NC-ND-1.0">Creative Commons Attribution Non Commercial No Derivatives 1.0</option>
       <option value="CC-BY-NC-ND-2.0">Creative Commons Attribution Non Commercial No Derivatives 2.0</option>
       <option value="CC-BY-NC-ND-2.5">Creative Commons Attribution Non Commercial No Derivatives 2.5</option>
       <option value="CC-BY-NC-ND-3.0">Creative Commons Attribution Non Commercial No Derivatives 3.0</option>
+      <option value="CC-BY-NC-ND-4.0">Creative Commons Attribution Non Commercial No Derivatives 4.0</option>
       <option value="CC-BY-NC-SA-1.0">Creative Commons Attribution Non Commercial Share Alike 1.0</option>
       <option value="CC-BY-NC-SA-2.0">Creative Commons Attribution Non Commercial Share Alike 2.0</option>
       <option value="CC-BY-NC-SA-2.5">Creative Commons Attribution Non Commercial Share Alike 2.5</option>
       <option value="CC-BY-NC-SA-3.0">Creative Commons Attribution Non Commercial Share Alike 3.0</option>
+      <option value="CC-BY-NC-SA-4.0">Creative Commons Attribution Non Commercial Share Alike 4.0</option>
       <option value="CC-BY-SA-1.0">Creative Commons Attribution Share Alike 1.0</option>
       <option value="CC-BY-SA-2.0">Creative Commons Attribution Share Alike 2.0</option>
       <option value="CC-BY-SA-2.5">Creative Commons Attribution Share Alike 2.5</option>
       <option value="CC-BY-SA-3.0">Creative Commons Attribution Share Alike 3.0</option>
+      <option value="CC-BY-SA-4.0">Creative Commons Attribution Share Alike 4.0</option>
       <option value="CC0-1.0">Creative Commons Zero v1.0 Universal</option>
 
     </select>
@@ -339,7 +309,19 @@ We agree to license the Contribution only under the terms of the license or lice
                           <div class="thumbnail">
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
-                              <h3>Your Choices</h3>
+                              <h3>Information Below</h3>
+                              <p>This chooser allows you to skip ahead to this point in the process. If you did not enter all information in the previous sections, then the final output will provide blanks in the final generated agreement.</p>
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <img data-src="holder.js/300x200" alt="">
+                              <div class="caption">
+                              <h3>Please review the choices that you selected.</h3>
                               
                         <table class="table table-striped">
                         <tr>
@@ -364,6 +346,11 @@ We agree to license the Contribution only under the terms of the license or lice
                         <tr>
                         <td>Project Website</td>
                         <td id="review-project-website"></td>
+                        </tr>
+
+                        <tr>
+                        <td>Project Email</td>
+                        <td id="review-project-email"></td>
                         </tr>
 
                         <tr>
@@ -459,18 +446,18 @@ We agree to license the Contribution only under the terms of the license or lice
 
                         <table class="table table-striped">
                         <tr>
-                        <th>Agreement</th><th>Version</th><th>Format</th>
+                        <th>Agreement</th><th>Version</th><th id="apply-format">Format</th>
                         </tr>
                         <tr id="apply-individual">
-                        <td>Combined Individual Contributor License Agreement</td>
+                        <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
+                        <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" class="htmlstore" id="htmlstore-individual" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
                         </tr>
 
                         <tr id="apply-entity">
-                        <td>Combined Entity Contributor License Agreement</td>
+                        <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#myHTML" role="button" class="btn btn-primary" data-toggle="modal">HTML</a></td>
+                        <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" class="htmlstore" id="htmlstore-entity" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
                         </tr>
 
                         </table>
@@ -480,7 +467,7 @@ We agree to license the Contribution only under the terms of the license or lice
                         <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Combined <span id="modal-agreement-type"></span> Contributor License Agreement</h3>
+                            <h3 id="myModalLabel"><span id="modal-agreement-type"></span> Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
@@ -522,6 +509,6 @@ We agree to license the Contribution only under the terms of the license or lice
 
 	<script src="js/jquery.bootstrap.wizard.js"></script>
 	<script src="js/prettify.js"></script>
-    <script src="js/footer.js"></script>
+    <script src="js/chooser.js"></script>
   </body>
 </html>

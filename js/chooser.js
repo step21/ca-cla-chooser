@@ -1,23 +1,28 @@
+/** cla chooser main javascript by Fabricatorz **/
 
-    var doDebug = false;
 
-    var generalPageIndex    = 0;
-    var isGeneralPageOk     = false;
+var doDebug = true;
+
+var generalPageIndex    = 0;
+var isGeneralPageOk     = false;
     
-    var copyrightPageIndex  = 1;
-    var isCopyrightPageOk   = false;
+var copyrightPageIndex  = 1;
+var isCopyrightPageOk   = false;
+   
+var patentPageIndex     = 2;
+var isPatentPageOk      = false;
     
-    var patentPageIndex     = 2;
-    var isPatentPageOk      = false;
-    
-    var reviewPageIndex     = 3;
-    var isReviewPageOk      = false;
+var reviewPageIndex     = 3;
+var isReviewPageOk      = false;
 
-    var applyPageIndex      = 4;
-    var isApplyPageOk       = false;
+var applyPageIndex      = 4;
+var isApplyPageOk       = false;
 
-    var outboundCopyrightLicenses = '';
-    var mediaLicenses       = '';
+var outboundCopyrightLicenses = '';
+var mediaLicenses       = '';
+
+
+var emptyField          = '____________________';
 
 
 function setFakeData ()
@@ -192,35 +197,71 @@ function testReviewPage ()
                 $("#definition-option-1").removeClass("nuke");
             }
 
-            $("#review-project-family-name").html(
-                $("#project-family-name").val() );
+            if ( !$("#project-family-name").val() )
+                $("#review-project-family-name").html( emptyField );
+            else
+                $("#review-project-family-name").html(
+                    $("#project-family-name").val() );
 
-            $("#review-project-name").html(
-                $("#project-name").val() );
+            if ( !$("#project-name").val() ) {
+                $("#review-project-name").html( emptyField );
+                $("#tmp-project-name").html( emptyField );
+                $("#tmp-project-name-2").html( emptyField );
+            } else {
+                $("#review-project-name").html(
+                    $("#project-name").val() );
+                $("#tmp-project-name").html(
+                    $("#project-name").val() );
+                $("#tmp-project-name-2").html(
+                    $("#project-name").val() );
+            }
 
-            $("#tmp-project-name").html(
-                $("#project-name").val() );
+            if ( !$("#project-website").val() ) {
+                $("#review-project-website").html( emptyField );
+            } else {
+                $("#review-project-website").html(
+                    $("#project-website").val() );
+            }
 
-            $("#review-project-website").html(
-                $("#project-website").val() );
+            if ( !$("#project-email").val() ) {
+                $("#review-project-email").html( emptyField );
+            } else {
+                $("#review-project-email").html(
+                    $("#project-email").val() );
+            }
 
-            $("#review-project-email").html(
-                $("#project-email").val() );
+            if ( !$("#contributor-process-url").val() ) {
+                $("#review-contributor-process-url").html( emptyField );
+                $("#tmp-submission-instructions").html( emptyField );
+            } else {
+                $("#review-contributor-process-url").html(
+                    $("#contributor-process-url").val() );
+                $("#tmp-submission-instructions").html(
+                    $("#contributor-process-url").val() );
+            }
 
-            $("#review-contributor-process-url").html(
-                $("#contributor-process-url").val() );
+            if ( !$("#project-jurisdiction").val() ) {
+                $("#review-project-jurisdiction").html( emptyField );
+                $("#tmp-project-jurisdiction").html( emptyField );
+            } else{
+                $("#review-project-jurisdiction").html(
+                    $("#project-jurisdiction").val() );
+                $("#tmp-project-jurisdiction").html(
+                    $("#project-jurisdiction").val() );
 
-            $("#tmp-submission-instructions").html(
-                $("#contributor-process-url").val() );
+            }
 
-            $("#review-project-jurisdiction").html(
-                $("#project-jurisdiction").val() );
+            if ( !$("#agreement-exclusivity").val() ) {
+                $("#review-agreement-exclusivity").html( emptyField );
+                $("#tmp-contributor-exclusivity").html( emptyField );
+            } else{
+                $("#review-agreement-exclusivity").html(
+                    ucFirst( $("#agreement-exclusivity").val() ) );
 
-            $("#review-agreement-exclusivity").html(
-                ucFirst( $("#agreement-exclusivity").val() ) );
+                $("#tmp-contributor-exclusivity").html(
+                    ucFirst( $("#agreement-exclusivity").val() ) );
+            }
 
-            $("#tmp-contributor-exclusivity").html(
-                ucFirst( $("#agreement-exclusivity").val() ) );
 
             if ( $("#agreement-exclusivity").val() == 'exclusive' )
             {
@@ -236,11 +277,16 @@ function testReviewPage ()
             }
             
 
-            $("#review-outbound-licenses").html(
-                outboundCopyrightLicenses );
+            if ( !outboundCopyrightLicenses ) {
+                $("#review-outbound-licenses").html( emptyField );
+                $("#tmp-licenses").html( emptyField );
+            } else {
+                $("#review-outbound-licenses").html(
+                    outboundCopyrightLicenses );
+                $("#tmp-licenses").html(
+                    outboundCopyrightLicenses );
+            }
 
-            $("#tmp-licenses").html(
-                outboundCopyrightLicenses );
 
             if ( $("#outbound-option-same").prop("checked") )
             {
@@ -341,6 +387,8 @@ function testApplyPage ()
             }
        
             $("#embed-offscreen").html( $( "#review-text" ).html() );
+            $(".htmlstore").val( $( "#review-text" ).html() );
+            // $("#htmlstore-entity").val( $( "#review-text" ).html() );
             $("#embed-offscreen .nuke").remove();
             /*
             $("#embed-offscreen .nuke").each(function() {
@@ -353,15 +401,35 @@ function testApplyPage ()
             return isApplyPageOk;
 }
 
+function testAllPages() 
+{
+    testGeneralPage();
+    testCopyrightPage();
+    testPatentPage();
+    testReviewPage();
+    testApplyPage();
+}
+
 
 $(document).ready(function() {
 
-    if ( doDebug )
-        setFakeData();
+    //if ( doDebug )
+    //    setFakeData();
 
+    $("#outboundlist").show();
+    $("#outboundlist-2").hide();
     $("#outboundlist-custom").hide();
     $("#patent-option-2-options").hide();
     //$("#wizard").steps();
+
+
+    $("#html2pdf-individual").click(function() {
+        $('#html2pdf-form-individual').submit();
+    });
+
+    $("#html2pdf-entity").click(function() {
+        $('#html2pdf-form-entity').submit();
+    });
 
 
     // $('#myWizard').wizard()
@@ -409,19 +477,34 @@ $(document).ready(function() {
         return testCopyrightPage();
     });
 
-    $( "#outbound-option-same-licenses" ).change(function() {
-        if ( $("#outbound-option-same-licenses").prop( "checked" ) )
-            $("#outboundlist-custom").show();
+
+    $( "#outbound-option-same" ).change(function() {
+        $("#outboundlist").show();
+        $("#outboundlist-2").hide();
+        $("#outboundlist-custom").hide();
         // return testGeneralPage();
     });
 
-    $( "#outbound-option-same" ).change(function() {
-        $("#outboundlist-custom").hide();
+    $( "#outbound-option-same-licenses" ).change(function() {
+        if ( $("#outbound-option-same-licenses").prop( "checked" ) ) {
+            $("#outboundlist").hide();
+            $("#outboundlist-2").show();
+            $("#outboundlist-custom").show();
+        }
         // return testGeneralPage();
     });
 
     $( "#outbound-option-fsf" ).change(function() {
+        $("#outboundlist").hide();
+        $("#outboundlist-2").hide();
         $("#outboundlist-custom").hide();
+        // return testGeneralPage();
+    });
+
+    $( "#outbound-option-no-commitment" ).change(function() {
+        $("#outboundlist").hide();
+        $("#outboundlist-custom").hide();
+        $("#outboundlist-2").hide();
         // return testGeneralPage();
     });
 
@@ -444,29 +527,31 @@ $(document).ready(function() {
         {
             case generalPageIndex + 1:
                 console.log("At SWITCH general: " + (generalPageIndex+1) );
-                return testGeneralPage();
+                testGeneralPage();
+                return true;
                 break;
             case copyrightPageIndex + 1:
                 console.log("At SWITCH copyright: " + (copyrightPageIndex+1) );
-                return testCopyrightPage();
+                testCopyrightPage();
+                return true;
                 break;
             case patentPageIndex + 1:
                 console.log("At SWITCH patent: " + (patentPageIndex+1) );
-                return testPatentPage();
+                testPatentPage();
+                return true;
                 break;
             case reviewPageIndex + 1:
                 console.log("At SWITCH review: " + (reviewPageIndex+1) );
-                return testReviewPage();
+                testReviewPage();
+                return true;
                 break;
             case applyPageIndex + 1:
                 console.log("At SWITCH apply: " + (applyPageIndex+1) );
-                return testApplyPage();
+                testApplyPage();
+                return true;
                 break;
         }
 
-
-				
-				
     }, onTabShow: function(tab, navigation, index) {
         var $total = navigation.find('li').length;
         var $current = index+1;
@@ -484,6 +569,7 @@ $(document).ready(function() {
         // alert('on tab click disabled');
         //
 
+        testAllPages();
         /*
         if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk ) 
             return true;
@@ -500,7 +586,8 @@ $(document).ready(function() {
         if ( index == ( applyPageIndex + 1 ) && isApplyPageOk ) 
             return true;
         */
-        return false;
+        // return false;
+        return true;
     } }
     
     );	

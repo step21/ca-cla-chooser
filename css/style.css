@@ -24,3 +24,12 @@ select.cla-alert,
 input.cla-alert {
     border: 1px solid red;
 }
+
+/* #apply-format {
+    width: 200px;
+} */
+
+.btn-html {
+    float: left;
+    margin-right: 4px;
+}
