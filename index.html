@@ -11,7 +11,8 @@
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
 	    <link href="css/prettify.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet"> 
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/tooltip.css" rel="stylesheet"> 
     </head>
 
     <body>
@@ -21,9 +22,9 @@
 		    <section id="wizard">
 			    <div class="page-header">
 	            <h1>Contributor License Agreement Chooser</h1>
-                <p>Please enter information below in order to build your
+                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Please contact us for additional information and support! We look forward to hear from you.">Please enter information below in order to build your
                    Contributor License Agreement. 
-                   <a href="mailto:info@contributoragreements.org">
+                   <a href="mailto:info@contributoragreements.org" title="Please feel free to contact us if you have any questions!">
                    info@contributoragreements.org</a></p>
                 </div>
 	
@@ -67,7 +68,7 @@
                         </ul>
 
 
-                            <label class="radio">
+                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Please only choose this option if you have an entity that you can fill in here. Otherwise please look into setting up an entity or finding a trustee such as the FSFE">
                             <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
                             This is an Entity Contributor Agreement.
                             </label>
@@ -502,13 +503,14 @@ class="input-block-level" placeholder="Please list other licenses here.">
 
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="/bootstrap3/js/bootstrap.min.js"></script> -->
+    <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="bootstrap3/js/bootstrap.min.js"></script>
 
     <script src="js/showdown.js"></script>
 
 	<script src="js/jquery.bootstrap.wizard.js"></script>
 	<script src="js/prettify.js"></script>
     <script src="js/chooser.js"></script>
+    <script src="js/tooltip.js"></script>
   </body>
 </html>
