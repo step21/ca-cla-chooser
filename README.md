@@ -13,4 +13,4 @@ https://github.com/Fabricatorz/ca-cla-chooser
 Support
 =======
 
-* info@contributoragreements.org
+* team@contributoragreements.org
