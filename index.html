@@ -4,45 +4,46 @@
         <meta charset="utf-8">
         <title>Contributor License Agreement Chooser</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="An experimental Contributor License Agreement Chooser built upon the past, to make a stronger chooser.">
-        <meta name="author" content="http://ContributorAgreements.org">
+        <meta name="description" content="The Contributor License Agreement Chooser for contributoragreements.org.">
+        <meta name="description" content="Your automated licensing assistance">
+        <meta name="author" content="http://www.contributorAgreements.org">
         <!-- <link rel="shortcut icon" href="/favicon.png"> -->
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
 	    <link href="css/prettify.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/tooltip.css" rel="stylesheet"> 
+        <link href="css/tooltip.css" rel="stylesheet">
     </head>
 
     <body>
     <div class='container'>
-		
+
 		<div class="span12">
 		    <section id="wizard">
 			    <div class="page-header">
 	            <h1>Contributor License Agreement Chooser</h1>
-                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Contact us!" data-title="Please feel free to contact us if you have any questions regarding the form @ assistance@peerpractice.org!">Please enter information below in order to build your
-                   Contributor License Agreement. 
+                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Contatct Us!" data-content="Please feel free to contact us if you have any questions regarding the form at team@peerpractice.org!">Please enter information below in order to build your
+                   Contributor License Agreement.
                    <a href="mailto:info@contributoragreements.org" >
                    info@contributoragreements.org</a></p>
                 </div>
-	
+
 				<div id="rootwizard">
 					<div class="navbar">
 					    <div class="navbar-inner">
 					        <div class="container">
 					            <ul class="bullets">
-					  	            <li><a href="#general" 
+					  	            <li><a href="#general"
                                            data-toggle="tab">1. General</a></li>
-						            <li><a href="#copyright" 
+						            <li><a href="#copyright"
                                            data-toggle="tab">2. Copyright</a>
                                            </li>
-						            <li><a href="#patents" 
+						            <li><a href="#patents"
                                            data-toggle="tab">3. Patents</a></li>
-						            <li><a href="#review" 
+						            <li><a href="#review"
                                            data-toggle="tab">4. Review</a></li>
-						            <li><a href="#apply" 
+						            <li><a href="#apply"
                                            data-toggle="tab">5. Apply</a></li>
 					            </ul>
 					        </div>
@@ -61,58 +62,59 @@
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Your Contributor License Agreement</h3>
-                              <p>Enter the information requested below to build your own contributor license agreement.</p>
+                              <p id="top_explanation" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="">Enter the information requested below to build your own contributor license agreement.</p>
                               </div>
                           </div>
                           </li>
                         </ul>
 
-
-                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Please only choose this option if you are contributing as or for an entity.">
+<!-- DOES NOT MAKE ANY SENSE - BOTH SHOULD BECREATED, WHEN SIGNING PEOPLE CHOOSE ONE OR THE OTHER
+HERE, WE COULD ASK IF THE BENEFICIARY IS INDIVIDUAL OR ENTITY
+                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="This option is appropriate if you are contributing on behalf of an entity, such as your employer or you need permission from your employer to contribute.">
                             <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
                             This is an Entity Contributor Agreement.
                             </label>
-                            <label class="radio" id="indv_select" data-toggle="popover" data-trigger="hover" data-title="Please choose this option if you are contributing as an individual.">
+                            <label class="radio" id="indv_select" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="Please choose this option if you are contributing as an individual.">
                             <input type="radio" name="contributor-options" id="contributor-option-individual" value="individual">
                             This is an Individual Contributor Agreement.
-                            </label>
+                          </label> -->
 
                             <hr />
 
-                            <label for="project-family-name" id="entity_name" data-toggle="popover" data-trigger="hover" data-title="Please input the company name of the your entity here.">
+                            <label for="beneficiary-name" id="beneficiary_name" data-toggle="popover" data-trigger="hover" data-title="Beneficiary" data-content="This describes the entity or individual which is appointed with managing contributions and that is the supposed to be the beneficiary under the contributor agreement.">
                             Project family Name</label>
-						    <input type='text' name='project-family-name' 
-                            id='project-family-name' 
-                            placeholder='Mozilla, Google, Apache...' 
+						    <input type='text' name='project-family-name'
+                            id='project-family-name'
+                            placeholder='Entity or Individual that benefits from the agreement goes here'
                             class="input-block-level">
 
-                            <label for="project-name">Project Name</label>
-						    <input type='text' name='project-name' 
-                            id='project-name' 
+                            <label for="project-name" id="project_name" data-toggle="popover" data-trigger="hover" title="Project Name" data-content="Please provide an identifiable project name here.">Project Name</label>
+						    <input type='text' name='project-name'
+                            id='project-name'
                             placeholder='Your widely identifiable project name.'
                             class="input-block-level">
 
-                            <label for="project-website">Project Website</label>
-						    <input type='text' name='project-website' 
-                            id='project-website' 
-                            placeholder='Enter your website name (URL)' 
+                            <label for="project-website" id="project_website" data-toggle="popover" data-trigger="hover" title="The project website" data-content="Please provide the respective website of your project here. This helps with identification of the project as well">Project Website</label>
+						    <input type='text' name='project-website'
+                            id='project-website'
+                            placeholder='Enter your website name (URL)'
                             class="input-block-level">
 
-                            <label for="project-email">Project Email</label>
-						    <input type='text' name='project-email' 
-                            id='project-email' 
-                            placeholder='The primary email address that your project uses to receive email.' 
+                            <label for="project-email" id="project_email" data-toggle="popover" data-trigger="hover" title="Contact E-Mail Address" data-content="This should be an E-Mailaddress that is checked frequently by the project maintainers or a person dealing administrative or legal issues.">Project Email</label>
+						    <input type='text' name='project-email'
+                            id='project-email'
+                            placeholder='The primary email address that your project uses to receive email.'
                             class="input-block-level">
 
-                            <label for="contributor-process-url">
+                            <label for="contributor-process-url" id="process_url" data-toggle="popover" data-trigger="hover" title="Contributor Page" data-content="If you have a web page where you explain your process for contributions (such as managing CLAs through clahub or similar) or a page where contributions can be digitally signed or certified (or tracked), please put it here.">
                             Contributor Signing Process Website</label>
-						    <input type='text' 
-                            name='contributor-process-url' 
-                            id='contributor-process-url' 
-                            placeholder='A Website address where instructions exist and your contributors will go to sign the agreement.' 
+						    <input type='text'
+                            name='contributor-process-url'
+                            id='contributor-process-url'
+                            placeholder='A Website address where instructions exist and your contributors will go to sign the agreement.'
                             class="input-block-level">
 
-                            <label for="project-jurisdiction">In what jurisdiction is this agreement to be valid?</label>
+                            <label for="project-jurisdiction" id="project_jurisdiction" data-toggle="popover" data-trigger="hover" title="Jurisdiction" data-content="Here you can specify if you would like the law of (a) specific jurisdiction(s) to apply. Typically this would be the jurisdiction of your place of residence.">Which jurisdiction should be mentioned in the agreement?</label>
                             <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s), e.g. Germany.">
 
 
@@ -137,7 +139,7 @@
   </li>
 </ul>
 
-    <label for="agreement-exclusivity">Which style of contributor (inbound licensing) agreement would you like?</label> 
+    <label for="agreement-exclusivity">Which style of contributor (inbound licensing) agreement would you like?</label>
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
 <option value="nonexclusive">NON Exclusive License</option>
@@ -151,7 +153,7 @@
 <strong>Option 1</strong> - Yes, we agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
 </label>
 
-    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist" 
+    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
     class="input-block-level">
       <option value="Apache-2.0">Apache License 2.0</option>
       <option value="Artistic-1.0">Artistic License 1.0</option>
@@ -177,7 +179,7 @@
 <strong>Option 2</strong> - Yes, we agree to license the Contribution only under the terms of the following license (including any right to adopt any future version of a license if permitted):
 </label>
 
-    <select multiple="multiple" size=3 id="outboundlist-2" name="outboundlist" 
+    <select multiple="multiple" size=3 id="outboundlist-2" name="outboundlist"
     class="input-block-level">
       <option value="Apache-2.0">Apache License 2.0</option>
       <option value="Artistic-1.0">Artistic License 1.0</option>
@@ -198,7 +200,7 @@
 
 
 
-<input type="text" name="outboundlist-custom" id="outboundlist-custom" 
+<input type="text" name="outboundlist-custom" id="outboundlist-custom"
 class="input-block-level" placeholder="Please list other licenses here.">
 
 
@@ -279,7 +281,7 @@ class="input-block-level" placeholder="Please list other licenses here.">
                             <select id="patent-type" name="patent-type" class="input-block-level">
                             <option value="traditional">Traditional Patent License</option>
                             <option value="patent-pledge">Identified Patent Pledge</option>
-                            </select>					  
+                            </select>
 
 
 
@@ -299,7 +301,7 @@ class="input-block-level" placeholder="Please list other licenses here.">
                           </li>
                         </ul>
 
-  
+
                         </div>
 
 
@@ -323,7 +325,7 @@ class="input-block-level" placeholder="Please list other licenses here.">
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Please review the choices that you selected.</h3>
-                              
+
                         <table class="table table-striped">
                         <tr>
                         <th>Option</th><th>Choice</th>
@@ -491,8 +493,8 @@ class="input-block-level" placeholder="Please list other licenses here.">
 							<li class="next last" style="display:none;"><a href="#">Last</a></li>
 						  	<li class="next"><a href="#">Next</a></li>
 						</ul>
-					</div>	
-				
+					</div>
+
     <footer id="sponsor">Brought to you by <a href="http://contributoragreements.org/"><img id="calogo" onerror="this.onerror=null; this.src='http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.png'" src="http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.svg" alt="Contributor Agreements" /></a></footer>
 
 			</section>
