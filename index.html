@@ -22,9 +22,9 @@
 		    <section id="wizard">
 			    <div class="page-header">
 	            <h1>Contributor License Agreement Chooser</h1>
-                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Please contact us for additional information and support! We look forward to hear from you.">Please enter information below in order to build your
+                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Contact us!" data-title="Please feel free to contact us if you have any questions regarding the form @ assistance@peerpractice.org!">Please enter information below in order to build your
                    Contributor License Agreement. 
-                   <a href="mailto:info@contributoragreements.org" title="Please feel free to contact us if you have any questions!">
+                   <a href="mailto:info@contributoragreements.org" >
                    info@contributoragreements.org</a></p>
                 </div>
 	
@@ -68,18 +68,18 @@
                         </ul>
 
 
-                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Please only choose this option if you have an entity that you can fill in here. Otherwise please look into setting up an entity or finding a trustee such as the FSFE">
+                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Please only choose this option if you are contributing as or for an entity.">
                             <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
                             This is an Entity Contributor Agreement.
                             </label>
-                            <label class="radio">
+                            <label class="radio" id="indv_select" data-toggle="popover" data-trigger="hover" data-title="Please choose this option if you are contributing as an individual.">
                             <input type="radio" name="contributor-options" id="contributor-option-individual" value="individual">
                             This is an Individual Contributor Agreement.
                             </label>
 
                             <hr />
 
-                            <label for="project-family-name">
+                            <label for="project-family-name" id="entity_name" data-toggle="popover" data-trigger="hover" data-title="Please input the company name of the your entity here.">
                             Project family Name</label>
 						    <input type='text' name='project-family-name' 
                             id='project-family-name' 
