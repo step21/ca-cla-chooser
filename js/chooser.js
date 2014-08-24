@@ -5,13 +5,13 @@ var doDebug = true;
 
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
-    
+
 var copyrightPageIndex  = 1;
 var isCopyrightPageOk   = false;
-   
+
 var patentPageIndex     = 2;
 var isPatentPageOk      = false;
-    
+
 var reviewPageIndex     = 3;
 var isReviewPageOk      = false;
 
@@ -40,7 +40,7 @@ function ucFirst(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function validateEmail(email) 
+function validateEmail(email)
 {
         var re = /\S+@\S+\.\S+/;
             return re.test(email);
@@ -57,9 +57,9 @@ function oinspect (obj)
 {
     var str = "";
     for(var k in obj)
-        if (obj.hasOwnProperty(k)) 
+        if (obj.hasOwnProperty(k))
             str += k + " = " + obj[k] + "\n";
-    
+
     alert(str);
 }
 
@@ -82,7 +82,7 @@ function testGeneralPage ()
                 $('#project-name').removeClass("cla-alert");
 		    }
 
-            if ( !$('#project-website').val() || 
+            if ( !$('#project-website').val() ||
                  !validateURL( $('#project-website').val() ) ) {
                 $('#project-website').addClass("cla-alert");
                 isGeneralPageOk = false;
@@ -91,7 +91,7 @@ function testGeneralPage ()
             }
 
             if ( !$('#project-email').val() ||
-                 !validateEmail($('#project-email').val()) ) 
+                 !validateEmail($('#project-email').val()) )
             {
                 $('#project-email').addClass("cla-alert");
                 isGeneralPageOk = false;
@@ -171,10 +171,10 @@ function testReviewPage ()
             if ( $("#contributor-option-entity").prop("checked") )
             {
                 $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-entity").val() ) )  ; 
-                $("#modal-agreement-type").html( 
+                    ucFirst( $("#contributor-option-entity").val() ) )  ;
+                $("#modal-agreement-type").html(
                     ucFirst( $("#contributor-option-entity").val() ) );
-                $("#tmp-contributor-type").html( 
+                $("#tmp-contributor-type").html(
                     ucFirst( $("#contributor-option-entity").val() ) );
 
                 $("#definition-option-1").show();
@@ -183,12 +183,12 @@ function testReviewPage ()
                 $("#definition-option-2").addClass("nuke");
             } else {
                 $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-individual").val()))  ; 
+                    ucFirst( $("#contributor-option-individual").val()))  ;
 
-                $("#modal-agreement-type").html( 
+                $("#modal-agreement-type").html(
                     ucFirst( $("#contributor-option-individual").val() ) );
 
-                $("#tmp-contributor-type").html( 
+                $("#tmp-contributor-type").html(
                     ucFirst( $("#contributor-option-individual").val() ) );
 
                 $("#definition-option-1").hide();
@@ -275,7 +275,7 @@ function testReviewPage ()
                 $("#license-option-2").show();
                 $("#license-option-2").removeClass("nuke");
             }
-            
+
 
             if ( !outboundCopyrightLicenses ) {
                 $("#review-outbound-licenses").html( emptyField );
@@ -374,18 +374,11 @@ function testApplyPage ()
 
             isApplyPageOk = true;
 
-            
-            if ( $("#contributor-option-entity").prop("checked") )
-            {
-                $("#apply-individual").hide();
-                $("#apply-entity").show();
-            }
-            else
-            {
-                $("#apply-individual").show();
-                $("#apply-entity").hide();
-            }
-       
+            <!-- both entity and individual agreements should always be generated -->
+            $("#apply-entity").show();
+
+            $("#apply-individual").show();
+
             $("#embed-offscreen").html( $( "#review-text" ).html() );
             $(".htmlstore").val( $( "#review-text" ).html() );
             // $("#htmlstore-entity").val( $( "#review-text" ).html() );
@@ -401,7 +394,7 @@ function testApplyPage ()
             return isApplyPageOk;
 }
 
-function testAllPages() 
+function testAllPages()
 {
     testGeneralPage();
     testCopyrightPage();
@@ -571,27 +564,27 @@ $(document).ready(function() {
 
         testAllPages();
         /*
-        if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk ) 
+        if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk )
             return true;
 
-        if ( index == ( copyrightPageIndex + 1 ) && isCopyrightPageOk ) 
-            return true;
-        
-        if ( index == ( patentPageIndex + 1 ) && isPatentPageOk ) 
+        if ( index == ( copyrightPageIndex + 1 ) && isCopyrightPageOk )
             return true;
 
-        if ( index == ( reviewPageIndex + 1 ) && isReviewPageOk ) 
+        if ( index == ( patentPageIndex + 1 ) && isPatentPageOk )
             return true;
 
-        if ( index == ( applyPageIndex + 1 ) && isApplyPageOk ) 
+        if ( index == ( reviewPageIndex + 1 ) && isReviewPageOk )
+            return true;
+
+        if ( index == ( applyPageIndex + 1 ) && isApplyPageOk )
             return true;
         */
         // return false;
         return true;
     } }
-    
-    );	
-    
+
+    );
+
     window.prettyPrint && prettyPrint()
 
     // console.log("myTest: " + myTest);
