@@ -1,13 +1,13 @@
-// tooltip.js
+// popover/tooltip.js
 $(document).ready(function() {
- 	$('#popover_head').popover();
- 	$('#entity_select').popover();
- 	$('#indv_select').popover();
- 	$('#beneficiary_name').popover();
-  $('#project_name').popover();
-  $('#project_website').popover();
-  $('#project_email').popover();
-  $('#process_url').popover();
-  $('#project_jurisdiction').popover();
+ 	$('#popover_head').popover({ placement: 'auto' });
+ 	$('#entity_select').popover({ placement: 'auto' });
+ 	$('#indv_select').popover({ placement: 'auto' });
+ 	$('#beneficiary_name').popover({ placement: 'auto' });
+  $('#project_name').popover({ placement: 'auto' });
+  $('#project_website').popover({ placement: 'auto' });
+  $('#project_email').popover({ placement: 'auto' });
+  $('#process_url').popover({ placement: 'auto' });
+  $('#project_jurisdiction').popover({ placement: 'auto' });
 
  });
