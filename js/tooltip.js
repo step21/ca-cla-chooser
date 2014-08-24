@@ -11,4 +11,10 @@ $(document).ready(function() {
   $('#process_url').popover({ placement: 'auto' });
   $('#project_jurisdiction').popover({ placement: 'auto' });
 
+  $('#agreement_exclusivity').popover({ placement: 'auto' });
+  $('#outbound_options').popover({ placement: 'auto' });
+  $('#outbound_option_1').popover({ placement: 'auto' });
+  $('#outbound_option_2').popover({ placement: 'auto' });
+  $('#outbound_option_3').popover({ placement: 'auto' });
+  $('#outbound_option_4').popover({ placement: 'auto' });
  });

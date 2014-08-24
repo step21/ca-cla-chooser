@@ -139,7 +139,7 @@ id="" data-toggle="popover" data-trigger="hover" title="" data-content=""
   </li>
 </ul>
 
-    <label for="agreement-exclusivity" id="" data-toggle="popover" data-trigger="hover" title="" data-content="">Which style of contributor (inbound licensing) agreement would you like?</label>
+    <label for="agreement-exclusivity" id="agreement_exclusivity" data-toggle="popover" data-trigger="hover" title="Type of inbound license" data-content="You can choose between a non-exclusive or an exclusive license. You should choose depending on which suits you better. If you preference is towards the possibility of commercial uses and easier legal enforcement, an exclusive license can help. However, if you preferences are community-oriented and you (for example) just want easier management of contributions, better possibility for enforcement and the rights to publish to an app store, a non-exclusive license could be the right choice.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
 <option value="nonexclusive">NON-Exclusive License</option>
@@ -147,11 +147,12 @@ id="" data-toggle="popover" data-trigger="hover" title="" data-content=""
 
 
 
-<label for="outbound-options" id="" data-toggle="popover" data-trigger="hover" title="" data-content="">Please select an outbound license option path:</label>
+<label for="outbound-options" id="outbound_options" data-toggle="popover" data-trigger="hover" title="Outbound License" data-content="Here, the license or licenses under which the project is licensed currently or can potentially be licensed in the future are defined.">Please select an outbound license option path:</label>
+<div id="outbound_option_1" data-toggle="popover" data-trigger="hover" title="Acceptable Licenses" data-content="This option can be chosen to define specific licenses that are deemed accaptable under the terms of the contributor agreement. This means that if the benficiary sees fit to re-license oder dual-license under those chosen, he can easily do so.">
 <label class="radio"> <!--more information on the various licenses can be found .... -->
 <input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
-<strong>Option 1</strong> - Yes, we agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
-</label>
+<strong>Option 1</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the Material (including any rights to adopt any future version of a license).
+</label></div>
 
     <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
     class="input-block-level">
@@ -173,11 +174,11 @@ id="" data-toggle="popover" data-trigger="hover" title="" data-content=""
     </select>
 
 
-
+<div id="outbound_option_2" id="" data-toggle="popover" data-trigger="hover" title="" data-content="">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="same with licenses">
-<strong>Option 2</strong> - Yes, we agree to license the Contribution only under the terms of the following license (including any right to adopt any future version of a license if permitted):
-</label>
+<strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
+</label></div>
 
     <select multiple="multiple" size=3 id="outboundlist-2" name="outboundlist"
     class="input-block-level">
@@ -201,25 +202,28 @@ id="" data-toggle="popover" data-trigger="hover" title="" data-content=""
 
 
 <input type="text" name="outboundlist-custom" id="outboundlist-custom"
-class="input-block-level" placeholder="Please list other licenses here.">
+class="input-block-level" placeholder="If one or more of your preferred licenses were not listed, please list other licenses here.">
 
 
-
+<div id="outbound_option_3" data-toggle="popover" data-trigger="hover" title="FSF Licenses" data-content="This limits the possibility of the beneficiary to (re)license to the list of licenses by the FSF and OSI. If you are not familiar with the organizations or their lists of licenses, please visit their website."> <!-- make either/or possible? -->
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-fsf" value="same with fsf">
-<strong>Option 3</strong> - Yes, we agree to license the Contribution only under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">Recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the Submission Date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+<strong>Option 3</strong> - The contributions can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
 </label>
+</div>
 
+<div id="outbound_option_4" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="This option does not restrict in a future choice of licence in any way. Either one or more public licenses or even a proprietary license could be chosen at a later date as seen fit by the beneficiary. For this reason, larger projects that are committed to the free and open software set up additional institutional and organizational safeguards.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-no-commitment" value="No commitment to any specific outbound license">
-<strong>Option 4</strong> - No, we will not commit to any specific outbound license.
+<strong>Option 4</strong> - No commitment to any specific outbound license.
 </label>
+</div>
 
 <hr />
 
 
-<label for="outbound-media-licenses">
-<label for="medialist">Would you like to add a documentation license for materials other than code to be contributed to your project?</label>
+<label for="outbound-media-licenses"> <!-- id="" data-toggle="popover" data-trigger="hover" title="" data-content="" -->
+<label for="medialist">Would you like to add a documentation license for materials other than code to be contributed to your project? This can for example include texts such as documentation, images, video or sounds. This depends on the type of you project and your specific needs, it can either be be included with the contributor agreement but it can also be managed separately or just not be included in the contributor agreement, f.e. if documentation is all on a public wiki anyway and not part your software as such.</label>
     <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
       <option value="No" selected="selected">No</option>
       <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
@@ -277,7 +281,7 @@ class="input-block-level" placeholder="Please list other licenses here.">
                           </li>
                         </ul>
 
-                            <label for="patent-type" id="" data-toggle="popover" data-trigger="hover" title="" data-content="">What type of Patent License do you want in your agreement?</label>
+                            <label for="patent-type" id="patent_type" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="Here you can choose a patent license to be included in the generated contributor agreement. A traditional patent license means that the contributor signing the agreement gives a license to all patents related to their contributions. An identified patent pledge means that the contributor is asked to explicitly disclose patents they may hold pertaining to the contribution and agrees not to assert those agrees users of the program to which the contribution was made. It can be revoked against a certain user of the contribution on agression (meaing a suit for patent infringement is filed or similar)">What type of Patent License do you want in your agreement?</label>
                             <select id="patent-type" name="patent-type" class="input-block-level">
                             <option value="traditional">Traditional Patent License</option>
                             <option value="patent-pledge">Identified Patent Pledge</option>
