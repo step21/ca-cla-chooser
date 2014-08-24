@@ -1,6 +1,7 @@
 // popover/tooltip.js
 $(document).ready(function() {
  	$('#popover_head').popover({ placement: 'auto' });
+  // maybe change all  below to bottom placement?
  	$('#entity_select').popover({ placement: 'auto' });
  	$('#indv_select').popover({ placement: 'auto' });
  	$('#beneficiary_name').popover({ placement: 'auto' });
