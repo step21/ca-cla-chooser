@@ -17,4 +17,5 @@ $(document).ready(function() {
   $('#outbound_option_2').popover({ placement: 'auto' });
   $('#outbound_option_3').popover({ placement: 'auto' });
   $('#outbound_option_4').popover({ placement: 'auto' });
+  $('#patent_type').popover({ placement: 'auto' });
  });
