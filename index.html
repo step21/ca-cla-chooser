@@ -143,7 +143,7 @@ HERE, WE COULD ASK IF THE BENEFICIARY IS INDIVIDUAL OR ENTITY
 
 
 
-<label for="outbound-options" id="outbound_options" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license. You commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</label>
+<label for="outbound-options" id="outbound_options" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</label>
 <div id="outbound_option_1" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
 <label class="radio"> <!--more information on the various licenses can be found .... -->
 <input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
@@ -170,7 +170,7 @@ HERE, WE COULD ASK IF THE BENEFICIARY IS INDIVIDUAL OR ENTITY
     </select> -->
 
 
-<div id="outbound_option_2" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or enter an additional license.">
+<div id="outbound_option_2" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="same with licenses">
 <strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
@@ -277,7 +277,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                           </li>
                         </ul>
 
-                            <label for="patent-type" id="patent_type" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="Here you can choose a patent license to be included in the generated contributor agreement. A traditional patent license means that the contributor signing the agreement gives a license to all patents related to their contributions. An identified patent pledge means that the contributor is asked to explicitly disclose patents they may hold pertaining to the contribution and agrees not to assert those agrees users of the program to which the contribution was made. It can be revoked against a certain user of the contribution on agression (meaing a suit for patent infringement is filed or similar)">What type of Patent License do you want in your agreement?</label>
+                            <label for="patent-type" id="patent_type" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="You can choose between the traditional patent license and the identified patent pledge. The patent pledge option requires for the contributor to identify specific patents and list them in the agreement.">What type of Patent License do you want in your agreement?</label>
                             <select id="patent-type" name="patent-type" class="input-block-level">
                             <option value="traditional">Traditional Patent License</option>
                             <option value="patent-pledge">Identified Patent Pledge</option>
@@ -285,7 +285,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
 
 
 
-                        <ul class="thumbnails" id="patent-option-2-options">
+<!-- move to embedding ...                        <ul class="thumbnails" id="patent-option-2-options">
                           <li class="span12">
                           <div class="thumbnail">
                               <img data-src="holder.js/300x200" alt="">
@@ -295,7 +295,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
 <p><em>NOTE: Title, Application Office, Application Number, Date and Priority Number for patents is important when listing information about your patents your external information source.</em></p>
 
 <label for="patent-more-url">Website Address (URL) to more information on your patent(s)</label>
-<input type="text" class="input-block-level" name="patent-more-url" id="patent-more-url">
+<input type="text" class="input-block-level" name="patent-more-url" id="patent-more-url"> -->
                               </div>
                           </div>
                           </li>
@@ -432,8 +432,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                               <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Your Final Contributor License Agreement</h3> <!-- Explain under which terms they may be used, where to put -->
-                              <p>Below are packaged versions of your agreement for a contributing individual or
-                              entity.</p>
+                              <p>Below is a packaged version of your generated agreement.</p>
                               </div>
                           </div>
                           </li>
@@ -443,16 +442,18 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <tr>
                         <th>Agreement</th><th>Version</th><th id="apply-format">Format</th>
                         </tr>
+                        <!--
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" class="htmlstore" id="htmlstore-individual" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
-                        </tr>
+                      </tr> -->
 
                         <tr id="apply-entity">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" class="htmlstore" id="htmlstore-entity" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        <td>Generate code to embedd signing on your website or on clahub.</td> <!-- include field for patent identification here -->
                         </tr>
 
                         </table>
