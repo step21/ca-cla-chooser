@@ -5,13 +5,13 @@ var doDebug = true;
 
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
-    
+
 var copyrightPageIndex  = 1;
 var isCopyrightPageOk   = false;
-   
+
 var patentPageIndex     = 2;
 var isPatentPageOk      = false;
-    
+
 var reviewPageIndex     = 3;
 var isReviewPageOk      = false;
 
@@ -27,7 +27,7 @@ var emptyField          = '____________________';
 
 function setFakeData ()
 {
-    $('#project-family-name').val('Fabricatorz');
+    $('#beneficiary-name').val('Fabricatorz');
     $('#project-name').val('Archive Software');
     $('#project-website').val('http://archive.fabricatorz.com');
     $('#project-email').val('jon@fabricatorz.com');
@@ -40,7 +40,7 @@ function ucFirst(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function validateEmail(email) 
+function validateEmail(email)
 {
         var re = /\S+@\S+\.\S+/;
             return re.test(email);
@@ -57,9 +57,9 @@ function oinspect (obj)
 {
     var str = "";
     for(var k in obj)
-        if (obj.hasOwnProperty(k)) 
+        if (obj.hasOwnProperty(k))
             str += k + " = " + obj[k] + "\n";
-    
+
     alert(str);
 }
 
@@ -68,11 +68,11 @@ function testGeneralPage ()
 {
             isGeneralPageOk = true;
 
-            if ( !$('#project-family-name').val() ) {
-                $('#project-family-name').addClass("cla-alert");
+            if ( !$('#beneficiary-name').val() ) {
+                $('#beneficiary-name').addClass("cla-alert");
                 isGeneralPageOk = false;
             } else {
-                $('#project-family-name').removeClass("cla-alert");
+                $('#beneficiary-name').removeClass("cla-alert");
             }
 
             if ( !$('#project-name').val() ) {
@@ -82,7 +82,7 @@ function testGeneralPage ()
                 $('#project-name').removeClass("cla-alert");
 		    }
 
-            if ( !$('#project-website').val() || 
+            if ( !$('#project-website').val() ||
                  !validateURL( $('#project-website').val() ) ) {
                 $('#project-website').addClass("cla-alert");
                 isGeneralPageOk = false;
@@ -91,7 +91,7 @@ function testGeneralPage ()
             }
 
             if ( !$('#project-email').val() ||
-                 !validateEmail($('#project-email').val()) ) 
+                 !validateEmail($('#project-email').val()) )
             {
                 $('#project-email').addClass("cla-alert");
                 isGeneralPageOk = false;
@@ -171,10 +171,10 @@ function testReviewPage ()
             if ( $("#contributor-option-entity").prop("checked") )
             {
                 $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-entity").val() ) )  ; 
-                $("#modal-agreement-type").html( 
+                    ucFirst( $("#contributor-option-entity").val() ) )  ;
+                $("#modal-agreement-type").html(
                     ucFirst( $("#contributor-option-entity").val() ) );
-                $("#tmp-contributor-type").html( 
+                $("#tmp-contributor-type").html(
                     ucFirst( $("#contributor-option-entity").val() ) );
 
                 $("#definition-option-1").show();
@@ -183,12 +183,12 @@ function testReviewPage ()
                 $("#definition-option-2").addClass("nuke");
             } else {
                 $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-individual").val()))  ; 
+                    ucFirst( $("#contributor-option-individual").val()))  ;
 
-                $("#modal-agreement-type").html( 
+                $("#modal-agreement-type").html(
                     ucFirst( $("#contributor-option-individual").val() ) );
 
-                $("#tmp-contributor-type").html( 
+                $("#tmp-contributor-type").html(
                     ucFirst( $("#contributor-option-individual").val() ) );
 
                 $("#definition-option-1").hide();
@@ -197,11 +197,11 @@ function testReviewPage ()
                 $("#definition-option-1").removeClass("nuke");
             }
 
-            if ( !$("#project-family-name").val() )
-                $("#review-project-family-name").html( emptyField );
+            if ( !$("#beneficiary-name").val() )
+                $("#review-beneficiary-name").html( emptyField );
             else
-                $("#review-project-family-name").html(
-                    $("#project-family-name").val() );
+                $("#review-beneficiary-name").html(
+                    $("#beneficiary-name").val() );
 
             if ( !$("#project-name").val() ) {
                 $("#review-project-name").html( emptyField );
@@ -275,7 +275,7 @@ function testReviewPage ()
                 $("#license-option-2").show();
                 $("#license-option-2").removeClass("nuke");
             }
-            
+
 
             if ( !outboundCopyrightLicenses ) {
                 $("#review-outbound-licenses").html( emptyField );
@@ -374,7 +374,7 @@ function testApplyPage ()
 
             isApplyPageOk = true;
 
-            
+            /* NEED TO REVIEW AFTER DECISIONS */
             if ( $("#contributor-option-entity").prop("checked") )
             {
                 $("#apply-individual").hide();
@@ -401,7 +401,7 @@ function testApplyPage ()
             return isApplyPageOk;
 }
 
-function testAllPages() 
+function testAllPages()
 {
     testGeneralPage();
     testCopyrightPage();
@@ -444,7 +444,7 @@ $(document).ready(function() {
     });
 
 
-    $( "#project-family-name" ).change(function() {
+    $( "#beneficiary-name" ).change(function() {
         return testGeneralPage();
     });
 
@@ -571,27 +571,27 @@ $(document).ready(function() {
 
         testAllPages();
         /*
-        if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk ) 
+        if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk )
             return true;
 
-        if ( index == ( copyrightPageIndex + 1 ) && isCopyrightPageOk ) 
-            return true;
-        
-        if ( index == ( patentPageIndex + 1 ) && isPatentPageOk ) 
+        if ( index == ( copyrightPageIndex + 1 ) && isCopyrightPageOk )
             return true;
 
-        if ( index == ( reviewPageIndex + 1 ) && isReviewPageOk ) 
+        if ( index == ( patentPageIndex + 1 ) && isPatentPageOk )
             return true;
 
-        if ( index == ( applyPageIndex + 1 ) && isApplyPageOk ) 
+        if ( index == ( reviewPageIndex + 1 ) && isReviewPageOk )
+            return true;
+
+        if ( index == ( applyPageIndex + 1 ) && isApplyPageOk )
             return true;
         */
         // return false;
         return true;
     } }
-    
-    );	
-    
+
+    );
+
     window.prettyPrint && prettyPrint()
 
     // console.log("myTest: " + myTest);
