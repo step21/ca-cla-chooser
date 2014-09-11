@@ -228,6 +228,10 @@ function testReviewPage ()
             } else {
                 $("#review-project-email").html(
                     $("#project-email").val() );
+                $("#tmp-project-email-1").html(
+                    $("#project-email").val() );
+                $("#tmp-project-email-2").html(
+                    $("#project-email").val() );
             }
 
             if ( !$("#contributor-process-url").val() ) {
@@ -280,10 +284,14 @@ function testReviewPage ()
             if ( !outboundCopyrightLicenses ) {
                 $("#review-outbound-licenses").html( emptyField );
                 $("#tmp-licenses").html( emptyField );
+                $("#tmp-licenses-2").html( emptyField );
+
             } else {
                 $("#review-outbound-licenses").html(
                     outboundCopyrightLicenses );
                 $("#tmp-licenses").html(
+                    outboundCopyrightLicenses );
+                $("#tmp-licenses-2").html(
                     outboundCopyrightLicenses );
             }
 
@@ -292,6 +300,16 @@ function testReviewPage ()
             {
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-same").val() );
+
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").hide();
+                $("#tmp-licenses-2").addClass("nuke");
+
 
                 $("#outbound-option-1").show();
                 $("#outbound-option-1").removeClass("nuke");
@@ -306,6 +324,19 @@ function testReviewPage ()
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-same-licenses").val() );
 
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").show();
+                $("#tmp-licenses-2").removeClass("nuke");
+
+                /* @TODO: make sure licenses showing in section four in
+                 * both places, and also add custom license too */
+
+
                 $("#outbound-option-1").hide();
                 $("#outbound-option-1").addClass("nuke");
                 $("#outbound-option-2").show();
@@ -318,6 +349,18 @@ function testReviewPage ()
             {
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-fsf").val() );
+
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").hide();
+                $("#tmp-licenses-2").addClass("nuke");
+
+                /* @TODO: reorder sections now that section 4 gone */
+
 
                 $("#outbound-option-1").hide();
                 $("#outbound-option-1").addClass("nuke");
@@ -339,6 +382,30 @@ function testReviewPage ()
             else
                 $("#tmp-media-licenses").html(
                     mediaLicenses );
+
+// outbound-option-no-commitment
+            if ( $("#outbound-option-no-commitment").prop("checked") )
+            {
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-fsf").val() );
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+
+                $("#outbound-section-all").hide();
+                $("#outbound-section-all").addClass("nuke");
+
+                $("#tmp-term-special").hide();
+                $("#tmp-term-special").addClass("nuke");
+
+            }
+
+
+
 
             $("#review-patent-type").html(
                 $("#patent-type").val() );
@@ -413,8 +480,8 @@ function testAllPages()
 
 $(document).ready(function() {
 
-    //if ( doDebug )
-    //    setFakeData();
+    if ( doDebug )
+        setFakeData();
 
     $("#outboundlist").show();
     $("#outboundlist-2").hide();
