@@ -1,3 +1,9 @@
+label {
+    display: inline-block;
+}
+label.radio {
+    display: block;
+}
 #result {
 
 }
