@@ -4,6 +4,14 @@ label {
 label.radio {
     display: block;
 }
+
+th.version {
+    width: 25%;
+}
+th.apply-format {
+    width: 20%;
+}
+
 #result {
 
 }
