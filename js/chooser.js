@@ -22,6 +22,7 @@ var outboundCopyrightLicenses = '';
 var mediaLicenses       = '';
 
 
+var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
 
@@ -127,26 +128,43 @@ function testCopyrightPage ()
             var mediaChoices    = $( "#medialist" ).val() || [];
 
             if ( !$('#outboundlist').val() ) {
-                $('#outboundlist').addClass("cla-alert");
-                isCopyrightPageOk = false;
+                outboundCopyrightLicenses = "";
+                // $('#outboundlist').addClass("cla-alert");
+                // isCopyrightPageOk = false;
             } else {
                 outboundCopyrightLicenses = outboundChoices.join(", ");
                 console.log("outboundCopyrightLicenses: " +
                             outboundCopyrightLicenses);
 
-                $('#outboundlist').removeClass("cla-alert");
+                // $('#outboundlist').removeClass("cla-alert");
             }
 
+            if ( $('#outboundlist-custom').val() ) {
+                
+                if ( !$('#outboundlist').val() ) {
+                    outboundCopyrightLicenses = 
+                        $('#outboundlist-custom').val();
+                } else {
+                    outboundCopyrightLicenses += 
+                        ", " + $('#outboundlist-custom').val();
+                }
+                console.log("outboundCopyrightLicenses: " +
+                    outboundCopyrightLicenses);
+            }
+
+
+            /*
             if ( !$('#medialist').val() ) {
                 $('#medialist').addClass("cla-alert");
                 isCopyrightPageOk = false;
             } else {
+                */
                 mediaLicenses = mediaChoices.join(", ");
                 console.log("mediaLicenses: " +
                             mediaLicenses);
 
-                $('#medialist').removeClass("cla-alert");
-            }
+                // $('#medialist').removeClass("cla-alert");
+            // }
 
     testReviewPage();
 
@@ -298,11 +316,31 @@ function testReviewPage ()
 
             if ( $("#outbound-option-same").prop("checked") )
             {
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-same").val() );
 
                 $("#outbound-section-all").show();
                 $("#outbound-section-all").removeClass("nuke");
+
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
 
                 $("#tmp-term-special").show();
                 $("#tmp-term-special").removeClass("nuke");
@@ -327,6 +365,23 @@ function testReviewPage ()
                 $("#outbound-section-all").show();
                 $("#outbound-section-all").removeClass("nuke");
 
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
+
                 $("#tmp-term-special").show();
                 $("#tmp-term-special").removeClass("nuke");
 
@@ -347,19 +402,38 @@ function testReviewPage ()
 
             if ( $("#outbound-option-fsf").prop("checked") )
             {
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-fsf").val() );
 
                 $("#outbound-section-all").show();
                 $("#outbound-section-all").removeClass("nuke");
 
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
+
+
                 $("#tmp-term-special").show();
                 $("#tmp-term-special").removeClass("nuke");
 
                 $("#tmp-licenses-2").hide();
                 $("#tmp-licenses-2").addClass("nuke");
-
-                /* @TODO: reorder sections now that section 4 gone */
 
 
                 $("#outbound-option-1").hide();
@@ -376,18 +450,24 @@ function testReviewPage ()
             $("#review-media-licenses").html(
                 mediaLicenses );
 
-            if ( mediaLicenses == "" )
-                $("#tmp-media-licenses").html(
-                    "NONE");
-            else
+            if ( mediaLicenses == "" || mediaLicenses == "None" ) {
+                $("#outbound-media-license").hide();
+                $("#outbound-media-license").addClass("nuke");
+            } else {
                 $("#tmp-media-licenses").html(
                     mediaLicenses );
+                $("#outbound-media-license").show();
+                $("#outbound-media-license").removeClass("nuke");
+            }
 
-// outbound-option-no-commitment
+            // outbound-option-no-commitment
             if ( $("#outbound-option-no-commitment").prop("checked") )
             {
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
                 $("#review-outbound-license-options").html(
-                    $("#outbound-option-fsf").val() );
+                    $("#outbound-option-no-commitment").val() );
 
                 $("#outbound-option-1").hide();
                 $("#outbound-option-1").addClass("nuke");
@@ -395,9 +475,28 @@ function testReviewPage ()
                 $("#outbound-option-2").addClass("nuke");
                 $("#outbound-option-3").hide();
                 $("#outbound-option-3").addClass("nuke");
-
+                
+                /* remove entire section 4 */
                 $("#outbound-section-all").hide();
                 $("#outbound-section-all").addClass("nuke");
+
+                /* reorder sections now that section 4 gone */
+                $("#tmp-digit-disclaimer").html( '4' );
+                $("#tmp-digit-waiver").html( '5' );
+                $("#tmp-digit-approx-waiver").html( '6' );
+                $("#tmp-digit-waiver-2").html( '5' );
+                $("#tmp-digit-approx-waiver-2").html( '6' );
+                $("#tmp-digit-term").html( '7' );
+                $("#tmp-digit-term-1").html( '7.1' );
+                /** undisplayed  $("#tmp-digit-term-2").html( '7.2' ); */
+                $("#tmp-digit-term-3").html( '7.2' );
+                $("#tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+                $("#tmp-digit-misc").html( '8' );
+                $("#tmp-digit-misc-1").html( '8.1' );
+                $("#tmp-digit-misc-2").html( '8.2' );
+                $("#tmp-digit-misc-3").html( '8.3' );
+                $("#tmp-digit-misc-4").html( '8.4' );
+
 
                 $("#tmp-term-special").hide();
                 $("#tmp-term-special").addClass("nuke");
@@ -410,25 +509,31 @@ function testReviewPage ()
             $("#review-patent-type").html(
                 $("#patent-type").val() );
 
-            if ( $("#patent-type").val() == 'traditional' )
+            if ( $("#patent-type").val() == 'Traditional' )
             {
                 $("#patent-option-1").show();
                 $("#patent-option-1").removeClass("nuke");
                 $("#patent-option-2").hide();
                 $("#patent-option-2").addClass("nuke");
+
+                $("#outbound-special").show();
+                $("#outbound-special").removeClass("nuke");
             } else {
                 $("#patent-option-1").hide();
                 $("#patent-option-1").addClass("nuke");
                 $("#patent-option-2").show();
                 $("#patent-option-2").removeClass("nuke");
 
-                $("#tmp-patent-more-url").html(
-                    $("#patent-more-url").val() );
+                $("#outbound-special").hide();
+                $("#outbound-special").addClass("nuke");
+
+                // $("#tmp-patent-more-url").html(
+                //    $("#patent-more-url").val() );
 
             }
 
-            $("#review-patent-more-url").html(
-                $("#patent-more-url").val() );
+            // $("#review-patent-more-url").html(
+            //    $("#patent-more-url").val() );
 
             testApplyPage();
 
@@ -483,8 +588,7 @@ $(document).ready(function() {
     if ( doDebug )
         setFakeData();
 
-    $("#outboundlist").show();
-    $("#outboundlist-2").hide();
+    $("#outboundlist").hide();
     $("#outboundlist-custom").hide();
     $("#patent-option-2-options").hide();
     //$("#wizard").steps();
@@ -540,22 +644,24 @@ $(document).ready(function() {
         return testCopyrightPage();
     });
 
+    $( "#outboundlist-custom" ).change(function() {
+        return testCopyrightPage();
+    });
+
     $( "#medialist" ).change(function() {
         return testCopyrightPage();
     });
 
 
     $( "#outbound-option-same" ).change(function() {
-        $("#outboundlist").show();
-        $("#outboundlist-2").hide();
+        $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
         // return testGeneralPage();
     });
 
     $( "#outbound-option-same-licenses" ).change(function() {
         if ( $("#outbound-option-same-licenses").prop( "checked" ) ) {
-            $("#outboundlist").hide();
-            $("#outboundlist-2").show();
+            $("#outboundlist").show();
             $("#outboundlist-custom").show();
         }
         // return testGeneralPage();
@@ -563,7 +669,6 @@ $(document).ready(function() {
 
     $( "#outbound-option-fsf" ).change(function() {
         $("#outboundlist").hide();
-        $("#outboundlist-2").hide();
         $("#outboundlist-custom").hide();
         // return testGeneralPage();
     });
@@ -571,13 +676,12 @@ $(document).ready(function() {
     $( "#outbound-option-no-commitment" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
-        $("#outboundlist-2").hide();
         // return testGeneralPage();
     });
 
 
     $( "#patent-type" ).change(function() {
-        if ( $( "#patent-type" ).val() == 'patent-pledge' )
+        if ( $( "#patent-type" ).val() == 'Patent Pledge' )
             $("#patent-option-2-options").show();
         else
             $("#patent-option-2-options").hide();
