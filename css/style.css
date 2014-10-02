@@ -47,3 +47,35 @@ input.cla-alert {
     float: left;
     margin-right: 4px;
 }
+
+
+h2#tmp-title,
+h2#tmp-subtitle,
+h2#tmp-subtitle-patent
+{
+        text-align: center;
+}
+h2#tmp-subtitle-patent {
+        margin-bottom: 1em;
+}
+
+#tmp-patent-option { 
+    text-transform: uppercase;
+}
+
+
+span.underline {
+}
+table.signing {
+        width: 60%;
+}
+table.signing .head {
+        width: 20%
+
+}
+table.signing .underline {
+        border-bottom: 1px solid black;
+            width: 80%;
+                display: inline-block;
+
+}

@@ -388,9 +388,6 @@ function testReviewPage ()
                 $("#tmp-licenses-2").show();
                 $("#tmp-licenses-2").removeClass("nuke");
 
-                /* @TODO: make sure licenses showing in section four in
-                 * both places, and also add custom license too */
-
 
                 $("#outbound-option-1").hide();
                 $("#outbound-option-1").addClass("nuke");
@@ -509,6 +506,9 @@ function testReviewPage ()
             $("#review-patent-type").html(
                 $("#patent-type").val() );
 
+            $("#tmp-patent-option").html(
+                $("#patent-type").val() );
+
             if ( $("#patent-type").val() == 'Traditional' )
             {
                 $("#patent-option-1").show();
@@ -559,14 +559,11 @@ function testApplyPage ()
             }
        
             $("#embed-offscreen").html( $( "#review-text" ).html() );
-            $(".htmlstore").val( $( "#review-text" ).html() );
-            // $("#htmlstore-entity").val( $( "#review-text" ).html() );
+            $(".htmlstore").val( $( "#review-text-style" ).html() + 
+                                 $( "#review-text" ).html() );
             $("#embed-offscreen .nuke").remove();
-            /*
-            $("#embed-offscreen .nuke").each(function() {
-                console.log("this remove: " + $(this).html());
-                $(this).remove();
-            }); */
+
+            /* console.log("EMBEDDING: " + $("#embed-offscreen").html() ); */
 
             $("#embed-agreement").html( $("#embed-offscreen").html() );
 
@@ -603,16 +600,10 @@ $(document).ready(function() {
     });
 
 
-    // $('#myWizard').wizard()
-    //
-    // var Showdown = require('showdown');
     var converter = new Showdown.converter();
-    $( "#review-text" ).load( "agreement-template.html", function() {
-          // $( "#review" ).html( converter.makeHtml( $( "#review" ).html() ));
-        // replace variables here
-        //
-        // $("#embed-agreement").html( $( "#review-text" ).html() );
-    });
+    $( "#review-text" ).load( "agreement-template.html", function() { });
+
+    $( "#review-text-style" ).load( "agreement-style.html", function() { });
 
 
     $( "#beneficiary-name" ).change(function() {
@@ -741,32 +732,13 @@ $(document).ready(function() {
         //
 
         testAllPages();
-        /*
-        if ( index == ( generalPageIndex + 1 ) && isGeneralPageOk )
-            return true;
 
-        if ( index == ( copyrightPageIndex + 1 ) && isCopyrightPageOk )
-            return true;
-
-        if ( index == ( patentPageIndex + 1 ) && isPatentPageOk )
-            return true;
-
-        if ( index == ( reviewPageIndex + 1 ) && isReviewPageOk )
-            return true;
-
-        if ( index == ( applyPageIndex + 1 ) && isApplyPageOk )
-            return true;
-        */
-        // return false;
         return true;
     } }
 
     );
 
     window.prettyPrint && prettyPrint()
-
-    // console.log("myTest: " + myTest);
-
 
 
 });
