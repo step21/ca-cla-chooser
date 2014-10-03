@@ -79,3 +79,7 @@ table.signing .underline {
                 display: inline-block;
 
 }
+
+section {
+    display: block;
+}

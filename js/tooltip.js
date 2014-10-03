@@ -2,7 +2,7 @@
 $(document).ready(function() {
  	$('#popover_head').popover({ placement: 'auto' });
   // maybe change all  below to bottom placement?
- 	// $('#entity_select').popover({ placement: 'auto' });
+ 	$('#entity_select').popover({ placement: 'auto' });
  	$('#indv_select').popover({ placement: 'auto' });
 	$('#beneficiary-name-label').popover({ placement: 'auto' });
   $('#project-name-label').popover({ placement: 'auto' });
