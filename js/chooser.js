@@ -25,8 +25,7 @@ var mediaLicenses       = '';
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
-/*
-
+// gives us $.QueryString["parameter-name"] function
 (function ($) {
     $.QueryString = (function (a) {
     if (a == "") return {};
@@ -40,22 +39,142 @@ var emptyField          = '____________________';
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
 
-*/
+/**
+ * Cleanup of the query string data and setting it.
+ * @usage: http://cla.localhost/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
+ *
+ * contributor-option-entity=entity|individual
+ * agreement-exclusivity=exclusive|nonexclusive
+ * outbound-option=same|same-licenses|fsf|no-commitment
+ * outboundlist=Artistic-1.0,Apache-2.0
+ * outboundlist-custom=AnythingAtAll
+ * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3
+ * patent-option=Traditional|Patent Pledge
+ */
 function setQueryStringData ()
 {
 
+    /* general */
 
-/*
+    if ( $.QueryString["contributor-option-entity"] == 'individual' )
+        $("#contributor-option-individual").prop('checked', true );
+    else
+        $("#contributor-option-entity").prop('checked', true );
+
+    console.log("contributor-option-entity: " + 
+        $.QueryString["contributor-option-entity"]);
+
+    console.log("#contributor-option-entity: " + 
+        $('#contributor-option-entity').val() );
+
+
     if ( $.QueryString["beneficiary-name"] )
         $('#beneficiary-name').val( $.QueryString["beneficiary-name"] );
-
-
-
     console.log("beneficiary-name: " + $.QueryString["beneficiary-name"]);
-*/
+
+    if ( $.QueryString["project-name"] )
+        $('#project-name').val( $.QueryString["project-name"] );
+    console.log("project-name: " + $.QueryString["project-name"]);
+
+    if ( $.QueryString["project-website"] )
+        $('#project-website').val( $.QueryString["project-website"] );
+    console.log("project-website: " + $.QueryString["project-website"]);
+
+    if ( $.QueryString["project-email"] )
+        $('#project-email').val( $.QueryString["project-email"] );
+    console.log("project-email: " + $.QueryString["project-email"]);
+
+    if ( $.QueryString["contributor-process-url"] )
+        $('#contributor-process-url').val( 
+            $.QueryString["contributor-process-url"] );
+    console.log("contributor-process-url: " + 
+        $.QueryString["contributor-process-url"]);
+
+    if ( $.QueryString["project-jurisdiction"] )
+        $('#project-jurisdiction').val( $.QueryString["project-jurisdiction"] );
+    console.log("project-jurisdiction: " + 
+        $.QueryString["project-jurisdiction"]);
+
+
+    /* copyright */
+    if ( $.QueryString["agreement-exclusivity"] == 'exclusive' )
+        $("#agreement-exclusivity").val( 'exclusive' );
+    else
+        $("#agreement-exclusivity").val( 'nonexclusive' );
+    console.log("agreement-exclusivity: " + 
+        $.QueryString["agreement-exclusivity"]);
+
+
+    if ( $.QueryString["outbound-option"] == 'same' )
+        $("#contributor-option-individual").prop('checked', true );
+
+    // hide by default
+    $("#outboundlist").hide();
+    $("#outboundlist-custom").hide();
+
+    switch ( $.QueryString["outbound-option"] ) {
+        case 'same-licenses':
+            $("#outbound-option-same-licenses").prop('checked', true );
+            $("#outbound-option-same-licenses" ).change();
+            // @todo delete later if no need
+            // setOutboundOptionSameLicenses();
+            $("#outboundlist").show();
+            $("#outboundlist-custom").show();
+            break;
+        case 'fsf':
+            $("#outbound-option-fsf").prop('checked', true );
+            $("#outbound-option-fsf" ).trigger( 'change' );
+            // @todo delete later if no need
+            // setOutboundOptionFsf();
+            break;
+        case 'no-commitment':
+            $("#outbound-option-no-commitment").prop('checked', true );
+            $("#outbound-option-no-commitment" ).trigger( 'change' );
+            // @todo delete later if no need
+            // setOutboundOptionNoCommitment();
+            break;
+        case 'same':
+        default:
+            $("#outbound-option-same").prop('checked', true );
+            $("#outbound-option-same" ).trigger( 'change' );
+            // @todo delete later if no need
+            // setOutboundOptionSame();
+    }
+    console.log("outbound-option: " + $.QueryString["outbound-option"]);
+
+
+    if ( $.QueryString["outboundlist"] )
+    {
+        $.each($.QueryString["outboundlist"].split(","), function(i,e){
+            $("#outboundlist option[value='" + e + "']").prop("selected", true);
+        });
+    }
+    console.log("outboundlist: " + 
+        $.QueryString["outboundlist"]);
+
+    if ( $.QueryString["outboundlist-custom"] )
+        $("#outboundlist-custom" ).val( $.QueryString["outboundlist-custom"] );
+    console.log("outboundlist-custom: " + 
+        $.QueryString["outboundlist-custom"]);
+
+    $("#medialist option[value='None']").prop("selected", false);
+    if ( $.QueryString["medialist"] )
+    {
+        $.each($.QueryString["medialist"].split(","), function(i,e){
+            $("#medialist option[value='" + e + "']").prop("selected", true);
+        });
+    } 
+    console.log("medialist: " + $.QueryString["medialist"]);
+
+    /* patent page */
+    if ( $.QueryString["patent-option"] == 'Traditional' )
+        $("#patent-type").val( 'Traditional' );
+    else
+        $("#patent-type").val( 'Patent Pledge' );
+    console.log("patent-option: " + $.QueryString["patent-option"] );
+
+
 }
-
-
 
 
 function setFakeData ()
@@ -95,6 +214,177 @@ function oinspect (obj)
 
     alert(str);
 }
+
+function setOutboundOptionSame () 
+{
+
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-same").val() );
+
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").hide();
+                $("#tmp-licenses-2").addClass("nuke");
+
+
+                $("#outbound-option-1").show();
+                $("#outbound-option-1").removeClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+}
+
+function setOutboundOptionSameLicenses ()
+{
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-same-licenses").val() );
+
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").show();
+                $("#tmp-licenses-2").removeClass("nuke");
+
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").show();
+                $("#outbound-option-2").removeClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+}
+
+function setOutboundOptionFsf ()
+{
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-fsf").val() );
+
+                $("#outbound-section-all").show();
+                $("#outbound-section-all").removeClass("nuke");
+
+                /* put back order of sections after section 4 */
+                $("#tmp-digit-disclaimer").html( '5' );
+                $("#tmp-digit-waiver").html( '6' );
+                $("#tmp-digit-approx-waiver").html( '7' );
+                $("#tmp-digit-waiver-2").html( '6' );
+                $("#tmp-digit-approx-waiver-2").html( '7' );
+                $("#tmp-digit-term").html( '8' );
+                $("#tmp-digit-term-1").html( '8.1' );
+                $("#tmp-digit-term-2").html( '8.2' );
+                $("#tmp-digit-term-3").html( '8.3' );
+                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+                $("#tmp-digit-misc").html( '9' );
+                $("#tmp-digit-misc-1").html( '9.1' );
+                $("#tmp-digit-misc-2").html( '9.2' );
+                $("#tmp-digit-misc-3").html( '9.3' );
+                $("#tmp-digit-misc-4").html( '9.4' );
+
+
+                $("#tmp-term-special").show();
+                $("#tmp-term-special").removeClass("nuke");
+
+                $("#tmp-licenses-2").hide();
+                $("#tmp-licenses-2").addClass("nuke");
+
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").show();
+                $("#outbound-option-3").removeClass("nuke");
+}
+
+function setOutboundOptionNoCommitment ()
+{
+                /* remove the outbound-option in review */
+                $("#review-outbound-licenses").html( naField );
+
+                $("#review-outbound-license-options").html(
+                    $("#outbound-option-no-commitment").val() );
+
+                $("#outbound-option-1").hide();
+                $("#outbound-option-1").addClass("nuke");
+                $("#outbound-option-2").hide();
+                $("#outbound-option-2").addClass("nuke");
+                $("#outbound-option-3").hide();
+                $("#outbound-option-3").addClass("nuke");
+                
+                /* remove entire section 4 */
+                $("#outbound-section-all").hide();
+                $("#outbound-section-all").addClass("nuke");
+
+                /* reorder sections now that section 4 gone */
+                $("#tmp-digit-disclaimer").html( '4' );
+                $("#tmp-digit-waiver").html( '5' );
+                $("#tmp-digit-approx-waiver").html( '6' );
+                $("#tmp-digit-waiver-2").html( '5' );
+                $("#tmp-digit-approx-waiver-2").html( '6' );
+                $("#tmp-digit-term").html( '7' );
+                $("#tmp-digit-term-1").html( '7.1' );
+                /** undisplayed  $("#tmp-digit-term-2").html( '7.2' ); */
+                $("#tmp-digit-term-3").html( '7.2' );
+                $("#tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+                $("#tmp-digit-misc").html( '8' );
+                $("#tmp-digit-misc-1").html( '8.1' );
+                $("#tmp-digit-misc-2").html( '8.2' );
+                $("#tmp-digit-misc-3").html( '8.3' );
+                $("#tmp-digit-misc-4").html( '8.4' );
+
+
+                $("#tmp-term-special").hide();
+                $("#tmp-term-special").addClass("nuke");
+}
+
+
 
 
 function testGeneralPage ()
@@ -345,133 +635,15 @@ function testReviewPage ()
                     outboundCopyrightLicenses );
             }
 
-
             if ( $("#outbound-option-same").prop("checked") )
-            {
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
-
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-same").val() );
-
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
-
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
-
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
-
-                $("#tmp-licenses-2").hide();
-                $("#tmp-licenses-2").addClass("nuke");
-
-
-                $("#outbound-option-1").show();
-                $("#outbound-option-1").removeClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
-            }
+                setOutboundOptionSame();
 
             if ( $("#outbound-option-same-licenses").prop("checked") )
-            {
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-same-licenses").val() );
-
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
-
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
-
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
-
-                $("#tmp-licenses-2").show();
-                $("#tmp-licenses-2").removeClass("nuke");
-
-
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").show();
-                $("#outbound-option-2").removeClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
-            }
+                setOutboundOptionSameLicenses();
 
             if ( $("#outbound-option-fsf").prop("checked") )
-            {
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
+                setOutboundOptionFsf();
 
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-fsf").val() );
-
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
-
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
-
-
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
-
-                $("#tmp-licenses-2").hide();
-                $("#tmp-licenses-2").addClass("nuke");
-
-
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").show();
-                $("#outbound-option-3").removeClass("nuke");
-            }
 
             $("#review-outbound-license-other").html(
                 $("#outboundlist-custom").val() );
@@ -491,46 +663,7 @@ function testReviewPage ()
 
             // outbound-option-no-commitment
             if ( $("#outbound-option-no-commitment").prop("checked") )
-            {
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
-
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-no-commitment").val() );
-
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
-                
-                /* remove entire section 4 */
-                $("#outbound-section-all").hide();
-                $("#outbound-section-all").addClass("nuke");
-
-                /* reorder sections now that section 4 gone */
-                $("#tmp-digit-disclaimer").html( '4' );
-                $("#tmp-digit-waiver").html( '5' );
-                $("#tmp-digit-approx-waiver").html( '6' );
-                $("#tmp-digit-waiver-2").html( '5' );
-                $("#tmp-digit-approx-waiver-2").html( '6' );
-                $("#tmp-digit-term").html( '7' );
-                $("#tmp-digit-term-1").html( '7.1' );
-                /** undisplayed  $("#tmp-digit-term-2").html( '7.2' ); */
-                $("#tmp-digit-term-3").html( '7.2' );
-                $("#tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-                $("#tmp-digit-misc").html( '8' );
-                $("#tmp-digit-misc-1").html( '8.1' );
-                $("#tmp-digit-misc-2").html( '8.2' );
-                $("#tmp-digit-misc-3").html( '8.3' );
-                $("#tmp-digit-misc-4").html( '8.4' );
-
-
-                $("#tmp-term-special").hide();
-                $("#tmp-term-special").addClass("nuke");
-
-            }
+                setOutboundOptionNoCommitment();
 
 
 
@@ -614,16 +747,12 @@ function testAllPages()
 
 $(document).ready(function() {
 
+    // if ( doDebug )
+    //    setFakeData();
     
-    // setQueryStringData();
+    setQueryStringData();
 
-    if ( doDebug )
-        setFakeData();
-
-    $("#outboundlist").hide();
-    $("#outboundlist-custom").hide();
     $("#patent-option-2-options").hide();
-    //$("#wizard").steps();
 
 
     $("#html2pdf-individual").click(function() {
