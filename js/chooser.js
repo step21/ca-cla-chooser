@@ -1,7 +1,21 @@
 /** cla chooser main javascript by Fabricatorz **/
 
+/**
+ * @TODO Need to make compact the config setting code and the review/apply
+ * because lots of duplicated code.
+ * @TODO the final configs are currently not set from user interface changes
+ * @TODO test the default configs, make sure set here in the code
+ * @TODO possibly reset some variable names if not consistent
+ * @TODO reduce some code complexity
+ *
+ * @TODO need to finish the query2form and query2email to interface changes
+ * @TODO replace the github and google options with this custom option
+ * @TODO make simple flatfile backed query2updatelist (list of updates
+ */
 
-var doDebug = true;
+
+var doDebug             = false;
+var debugNeedle          = 1337;
 
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
@@ -25,6 +39,53 @@ var mediaLicenses       = '';
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
+/** could even set defaults here
+ * 
+ * Query String Possible Parameters:
+ *
+ * beneficiary-name=STRING
+ * project-name=STRING
+ * project-website=URL
+ * project-email=EMAIL
+ * contributor-process-url=URL
+ * project-jurisdiction=STRING
+ *
+ * contributor-option-entity=entity|individual
+ * agreement-exclusivity=exclusive|nonexclusive
+ * outbound-option=same|same-licenses|fsf|no-commitment
+ * outboundlist=Artistic-1.0,Apache-2.0,LIST
+ * outboundlist-custom=STRING
+ * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3,LIST
+ * patent-option=Traditional|Patent-Pledge
+ *
+ * pos=general|copyright|patents|review|apply
+ */
+var configs = {
+    'beneficiary-name':           '',
+    'project-name':               '',
+    'project-website':            '',
+    'project-email':              '',
+    'contributor-process-url':    '',
+    'project-jurisdiction':       '',
+    'contributor-option-entity':  '',
+    'agreement-exclusivity':      '',
+    'outbound-option':            '',
+    'outboundlist':               '',
+    'outboundlist-custom':        '',
+    'medialist':                  '',
+    'patent-option':              '',
+    'post':                       ''
+};
+
+
+function printConfigs ()
+{
+    // make query string url
+    $.each( configs, function(p,v){
+        console.log("configs(p,v): " + p + ": \t\t\t\t\t\t\t " + v);
+    });
+}
+
 // gives us $.QueryString["parameter-name"] function
 (function ($) {
     $.QueryString = (function (a) {
@@ -43,76 +104,94 @@ var emptyField          = '____________________';
  * Cleanup of the query string data and setting it.
  * @usage: http://cla.localhost/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
  *
- * contributor-option-entity=entity|individual
- * agreement-exclusivity=exclusive|nonexclusive
- * outbound-option=same|same-licenses|fsf|no-commitment
- * outboundlist=Artistic-1.0,Apache-2.0
- * outboundlist-custom=AnythingAtAll
- * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3
- * patent-option=Traditional|Patent Pledge
  */
-function setQueryStringData ()
+function queryStringToConfigs ()
+{
+    $.each( $.QueryString, function(p,v) {
+        configs[p] = v;
+        // console.log("configs[p]=v: " + configs[p] + ": " + p + ": " + v);
+    });
+
+}
+
+/**
+ * @todo can combine this with review code and save code, but will need
+ * to abstract the following more thanlikely into functions.
+ * Then, that will allow creating a querystring easier
+ */
+function updateConfigs ()
 {
 
     /* general */
 
-    if ( $.QueryString["contributor-option-entity"] == 'individual' )
+    if ( configs["contributor-option-entity"] == 'individual' )
+    {
         $("#contributor-option-individual").prop('checked', true );
-    else
+    } else {
         $("#contributor-option-entity").prop('checked', true );
+    }
 
-    console.log("contributor-option-entity: " + 
-        $.QueryString["contributor-option-entity"]);
+    if ( doDebug)
+        console.log("contributor-option-entity: " + 
+            configs["contributor-option-entity"]);
 
-    console.log("#contributor-option-entity: " + 
-        $('#contributor-option-entity').val() );
+    if ( doDebug)
+        console.log("#contributor-option-entity: " + 
+            $('#contributor-option-entity').val() );
 
 
-    if ( $.QueryString["beneficiary-name"] )
-        $('#beneficiary-name').val( $.QueryString["beneficiary-name"] );
-    console.log("beneficiary-name: " + $.QueryString["beneficiary-name"]);
+    if ( configs["beneficiary-name"] )
+        $('#beneficiary-name').val( configs["beneficiary-name"] );
+    if ( doDebug)
+        console.log("beneficiary-name: " + configs["beneficiary-name"]);
 
-    if ( $.QueryString["project-name"] )
-        $('#project-name').val( $.QueryString["project-name"] );
-    console.log("project-name: " + $.QueryString["project-name"]);
+    if ( configs["project-name"] )
+        $('#project-name').val( configs["project-name"] );
+    if ( doDebug)
+        console.log("project-name: " + configs["project-name"]);
 
-    if ( $.QueryString["project-website"] )
-        $('#project-website').val( $.QueryString["project-website"] );
-    console.log("project-website: " + $.QueryString["project-website"]);
+    if ( configs["project-website"] )
+        $('#project-website').val( configs["project-website"] );
+    if ( doDebug)
+        console.log("project-website: " + configs["project-website"]);
 
-    if ( $.QueryString["project-email"] )
-        $('#project-email').val( $.QueryString["project-email"] );
-    console.log("project-email: " + $.QueryString["project-email"]);
+    if ( configs["project-email"] )
+        $('#project-email').val( configs["project-email"] );
+    if ( doDebug)
+        console.log("project-email: " + configs["project-email"]);
 
-    if ( $.QueryString["contributor-process-url"] )
+    if ( configs["contributor-process-url"] )
         $('#contributor-process-url').val( 
-            $.QueryString["contributor-process-url"] );
-    console.log("contributor-process-url: " + 
-        $.QueryString["contributor-process-url"]);
+            configs["contributor-process-url"] );
+    if ( doDebug)
+        console.log("contributor-process-url: " + 
+            configs["contributor-process-url"]);
 
-    if ( $.QueryString["project-jurisdiction"] )
-        $('#project-jurisdiction').val( $.QueryString["project-jurisdiction"] );
-    console.log("project-jurisdiction: " + 
-        $.QueryString["project-jurisdiction"]);
+    if ( configs["project-jurisdiction"] )
+        $('#project-jurisdiction').val( configs["project-jurisdiction"] );
+    if ( doDebug)
+        console.log("project-jurisdiction: " + 
+            configs["project-jurisdiction"]);
 
 
     /* copyright */
-    if ( $.QueryString["agreement-exclusivity"] == 'exclusive' )
+    if ( configs["agreement-exclusivity"] == 'exclusive' )
         $("#agreement-exclusivity").val( 'exclusive' );
     else
         $("#agreement-exclusivity").val( 'nonexclusive' );
-    console.log("agreement-exclusivity: " + 
-        $.QueryString["agreement-exclusivity"]);
+    if ( doDebug)
+        console.log("agreement-exclusivity: " + 
+            configs["agreement-exclusivity"]);
 
 
-    if ( $.QueryString["outbound-option"] == 'same' )
+    if ( configs["outbound-option"] == 'same' )
         $("#contributor-option-individual").prop('checked', true );
 
     // hide by default
     $("#outboundlist").hide();
     $("#outboundlist-custom").hide();
 
-    switch ( $.QueryString["outbound-option"] ) {
+    switch ( configs["outbound-option"] ) {
         case 'same-licenses':
             $("#outbound-option-same-licenses").prop('checked', true );
             $("#outbound-option-same-licenses" ).change();
@@ -140,51 +219,64 @@ function setQueryStringData ()
             // @todo delete later if no need
             // setOutboundOptionSame();
     }
-    console.log("outbound-option: " + $.QueryString["outbound-option"]);
+
+    if ( doDebug)
+        console.log("outbound-option: " + configs["outbound-option"]);
 
 
-    if ( $.QueryString["outboundlist"] )
+    if ( configs["outboundlist"] )
     {
-        $.each($.QueryString["outboundlist"].split(","), function(i,e){
+        $.each( configs["outboundlist"].split(","), function(i,e) {
             $("#outboundlist option[value='" + e + "']").prop("selected", true);
         });
     }
-    console.log("outboundlist: " + 
-        $.QueryString["outboundlist"]);
+    if ( doDebug)
+        console.log("outboundlist: " + 
+            configs["outboundlist"]);
 
-    if ( $.QueryString["outboundlist-custom"] )
-        $("#outboundlist-custom" ).val( $.QueryString["outboundlist-custom"] );
-    console.log("outboundlist-custom: " + 
-        $.QueryString["outboundlist-custom"]);
+    if ( configs["outboundlist-custom"] )
+        $("#outboundlist-custom" ).val( configs["outboundlist-custom"] );
+    if ( doDebug)
+        console.log("outboundlist-custom: " + 
+            configs["outboundlist-custom"]);
 
     $("#medialist option[value='None']").prop("selected", false);
-    if ( $.QueryString["medialist"] )
+    if ( configs["medialist"] )
     {
-        $.each($.QueryString["medialist"].split(","), function(i,e){
+        $.each( configs["medialist"].split(","), function(i,e){
             $("#medialist option[value='" + e + "']").prop("selected", true);
         });
     } 
-    console.log("medialist: " + $.QueryString["medialist"]);
+    if ( doDebug)
+        console.log("medialist: " + configs["medialist"]);
 
     /* patent page */
-    if ( $.QueryString["patent-option"] == 'Traditional' )
+    if ( configs["patent-option"] == 'Traditional' )
         $("#patent-type").val( 'Traditional' );
     else
-        $("#patent-type").val( 'Patent Pledge' );
-    console.log("patent-option: " + $.QueryString["patent-option"] );
+        $("#patent-type").val( 'Patent-Pledge' );
+    if ( doDebug)
+        console.log("patent-option: " + configs["patent-option"] );
 
+
+    printConfigs();
 
 }
 
-
+/**
+ * A better test now:
+ * http://cla.localhost/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&contributor-option-entity=&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
+ */
 function setFakeData ()
 {
-    $('#beneficiary-name').val('Fabricatorz');
-    $('#project-name').val('Archive Software');
-    $('#project-website').val('http://archive.fabricatorz.com');
-    $('#project-email').val('jon@fabricatorz.com');
-    $('#contributor-process-url').val('http://archive.fabricatorz.com/signing');
-    $('#project-jurisdiction').val('United States, Hong Kong, and China Mainland.');
+    configs['beneficiary-name']         = 'Fabricatorz';
+    configs['project-name']             = 'Archive Software';
+    configs['project-website']           = 'http://archive.fabricatorz.com';
+    configs['project-email']             = 'jon@fabricatorz.com';
+    configs['contributor-process-url']   = 
+        'http://archive.fabricatorz.com/signing';
+    configs['project-jurisdiction']      = 
+        'United States, Hong Kong, and China Mainland.';
 }
 
 function ucFirst(string)
@@ -385,6 +477,30 @@ function setOutboundOptionNoCommitment ()
 }
 
 
+function updatePosition ()
+{
+    switch ( $.QueryString["pos"] ) {
+        case 'general':
+            $('#rootwizard').bootstrapWizard('show','general');
+            break;
+        case 'copyright':
+            $('#rootwizard').bootstrapWizard('show',1);
+            break;
+        case 'patents':
+            $('#rootwizard').bootstrapWizard('show',2);
+            break;
+        case 'review':
+            $('#rootwizard').bootstrapWizard('show',3);
+            break;
+        case 'apply':
+            $('#rootwizard').bootstrapWizard('last');
+            break;
+    } 
+    testAllPages();
+    if ( doDebug)
+        console.log("pos: " + $.QueryString["pos"] );
+}
+
 
 
 function testGeneralPage ()
@@ -455,7 +571,8 @@ function testCopyrightPage ()
                 // isCopyrightPageOk = false;
             } else {
                 outboundCopyrightLicenses = outboundChoices.join(", ");
-                console.log("outboundCopyrightLicenses: " +
+                if ( doDebug)
+                    console.log("outboundCopyrightLicenses: " +
                             outboundCopyrightLicenses);
 
                 // $('#outboundlist').removeClass("cla-alert");
@@ -470,8 +587,9 @@ function testCopyrightPage ()
                     outboundCopyrightLicenses += 
                         ", " + $('#outboundlist-custom').val();
                 }
-                console.log("outboundCopyrightLicenses: " +
-                    outboundCopyrightLicenses);
+                if ( doDebug)
+                    console.log("outboundCopyrightLicenses: " +
+                        outboundCopyrightLicenses);
             }
 
 
@@ -482,7 +600,8 @@ function testCopyrightPage ()
             } else {
                 */
                 mediaLicenses = mediaChoices.join(", ");
-                console.log("mediaLicenses: " +
+                if ( doDebug)
+                    console.log("mediaLicenses: " +
                             mediaLicenses);
 
                 // $('#medialist').removeClass("cla-alert");
@@ -506,7 +625,8 @@ function testReviewPage ()
 {
             isReviewPageOk = true;
 
-            console.log("At testReviewPage");
+            if ( doDebug)
+                console.log("At testReviewPage");
 
             if ( $("#contributor-option-entity").prop("checked") )
             {
@@ -707,32 +827,41 @@ function testReviewPage ()
 
 function testApplyPage ()
 {
-            console.log("at testApplyPage");
+    if ( doDebug)
+        console.log("at testApplyPage");
 
-            isApplyPageOk = true;
+    isApplyPageOk = true;
 
-            /* NEED TO REVIEW AFTER DECISIONS */
-            if ( $("#contributor-option-entity").prop("checked") )
-            {
-                $("#apply-individual").hide();
-                $("#apply-entity").show();
-            }
-            else
-            {
-                $("#apply-individual").show();
-                $("#apply-entity").hide();
-            }
-       
-            $("#embed-offscreen").html( $( "#review-text" ).html() );
-            $(".htmlstore").val( $( "#review-text-style" ).html() + 
-                                 $( "#review-text" ).html() );
-            $("#embed-offscreen .nuke").remove();
+    /* NEED TO REVIEW AFTER DECISIONS */
+    if ( $("#contributor-option-entity").prop("checked") )
+    {
+        $("#apply-individual").hide();
+        $("#apply-entity").show();
+    }
+    else
+    {
+        $("#apply-individual").show();
+        $("#apply-entity").hide();
+    }
 
-            /* console.log("EMBEDDING: " + $("#embed-offscreen").html() ); */
+    // creates the querystring to recreate current wizard state
+    finalQueryString = $.param(configs);
+    console.log("finalQueryString: " + finalQueryString);
+    // set final linkto be used in the interface
+    $(".final-link").attr("href", "?" + finalQueryString);
 
-            $("#embed-agreement").html( $("#embed-offscreen").html() );
 
-            return isApplyPageOk;
+    $("#embed-offscreen").html( $( "#review-text" ).html() );
+    $(".htmlstore").val( $( "#review-text-style" ).html() + 
+                         $( "#review-text" ).html() );
+    $("#embed-offscreen .nuke").remove();
+
+    // if ( doDebug)
+    /* console.log("EMBEDDING: " + $("#embed-offscreen").html() ); */
+
+    $("#embed-agreement").html( $("#embed-offscreen").html() );
+
+    return isApplyPageOk;
 }
 
 function testAllPages()
@@ -747,10 +876,11 @@ function testAllPages()
 
 $(document).ready(function() {
 
-    // if ( doDebug )
-    //    setFakeData();
     
-    setQueryStringData();
+    queryStringToConfigs();
+    //  if ( doDebug )
+    //    setFakeData();
+    updateConfigs();
 
     $("#patent-option-2-options").hide();
 
@@ -836,7 +966,7 @@ $(document).ready(function() {
 
 
     $( "#patent-type" ).change(function() {
-        if ( $( "#patent-type" ).val() == 'Patent Pledge' )
+        if ( $( "#patent-type" ).val() == 'Patent-Pledge' )
             $("#patent-option-2-options").show();
         else
             $("#patent-option-2-options").hide();
@@ -845,34 +975,43 @@ $(document).ready(function() {
 
 	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index)
     {
-        console.log("tab: " + tab);
-        console.log("navigation: " + navigation);
-        console.log("index: " + index);
+        if ( doDebug)
+        {
+            console.log("tab: " + tab);
+            console.log("navigation: " + navigation);
+            console.log("index: " + index);
+        }
 
         switch( index )
         {
             case generalPageIndex + 1:
-                console.log("At SWITCH general: " + (generalPageIndex+1) );
+                if ( doDebug)
+                    console.log("At SWITCH general: " + (generalPageIndex+1) );
                 testGeneralPage();
                 return true;
                 break;
             case copyrightPageIndex + 1:
-                console.log("At SWITCH copyright: " + (copyrightPageIndex+1) );
+                if ( doDebug)
+                    console.log("At SWITCH copyright: " + 
+                        (copyrightPageIndex+1) );
                 testCopyrightPage();
                 return true;
                 break;
             case patentPageIndex + 1:
-                console.log("At SWITCH patent: " + (patentPageIndex+1) );
+                if ( doDebug)
+                    console.log("At SWITCH patent: " + (patentPageIndex+1) );
                 testPatentPage();
                 return true;
                 break;
             case reviewPageIndex + 1:
-                console.log("At SWITCH review: " + (reviewPageIndex+1) );
+                if ( doDebug)
+                    console.log("At SWITCH review: " + (reviewPageIndex+1) );
                 testReviewPage();
                 return true;
                 break;
             case applyPageIndex + 1:
-                console.log("At SWITCH apply: " + (applyPageIndex+1) );
+                if ( doDebug)
+                    console.log("At SWITCH apply: " + (applyPageIndex+1) );
                 testApplyPage();
                 return true;
                 break;
@@ -885,13 +1024,16 @@ $(document).ready(function() {
         $('#rootwizard').find('.bar').css({width:$percent+'%'});
 	},
     onTabClick: function(tab, navigation, index) {
-        console.log("tab: " + tab);
+        if ( doDebug)
+            console.log("tab: " + tab);
         // oinspect(tab);
 
-        console.log("navigation: " + navigation);
+        if ( doDebug)
+            console.log("navigation: " + navigation);
         // oinspect(navigation);
 
-        console.log("index: " + index);
+        if ( doDebug)
+            console.log("index: " + index);
         // alert('on tab click disabled');
         //
 
@@ -901,6 +1043,7 @@ $(document).ready(function() {
     } }
 
     );
+    updatePosition();
 
     window.prettyPrint && prettyPrint()
 
