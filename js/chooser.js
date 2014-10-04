@@ -10,6 +10,10 @@
  *
  * @TODO need to finish the query2form and query2email to interface changes
  * @TODO replace the github and google options with this custom option
+ * @TODO fix that visual jump on patents tab
+ * @TODO insert the link to the CLA Chooser formula in the HTML license and
+ * also in the PDF, so they aren't just nondestructive
+ * @TODO add some procedure in the signing process for our new esigning process
  * @TODO make simple flatfile backed query2updatelist (list of updates
  */
 
