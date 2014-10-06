@@ -17,6 +17,7 @@
  * @TODO make simple flatfile backed query2updatelist (list of updates
  * @TODO add cdn jquery and bootstrap and then have the local fallbacks
  * @TODO add other scaffolding for html5, standard sites
+ * @TODO fix testGeneralPage() to be functionized so that each input tested
  */
 
 
@@ -502,7 +503,7 @@ function updatePosition ()
             $('#rootwizard').bootstrapWizard('last');
             break;
     } 
-    testAllPages();
+    // testAllPages();
     if ( doDebug)
         console.log("pos: " + $.QueryString["pos"] );
 }
@@ -906,28 +907,29 @@ $(document).ready(function() {
     $( "#review-text-style" ).load( "agreement-style.html", function() { });
 
 
+    // @TODO need to make these each test each input, not ALL inputs
     $( "#beneficiary-name" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
     $( "#project-name" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
     $( "#project-website" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
     $( "#project-email" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
     $( "#contributor-process-url" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
     $( "#project-jurisdiction" ).change(function() {
-        return testGeneralPage();
+        // return testGeneralPage();
     });
 
 
