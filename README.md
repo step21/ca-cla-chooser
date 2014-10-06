@@ -9,6 +9,14 @@ contributor license agreement chooser.
 
 https://github.com/Fabricatorz/ca-cla-chooser
 
+Installation
+============
+
+ git clone https://github.com/Fabricatorz/ca-cla-chooser
+ cd ca-cla-chooser
+ git submodule init
+ git submodule update
+
 
 Support
 =======
