@@ -15,6 +15,8 @@
  * also in the PDF, so they aren't just nondestructive
  * @TODO add some procedure in the signing process for our new esigning process
  * @TODO make simple flatfile backed query2updatelist (list of updates
+ * @TODO add cdn jquery and bootstrap and then have the local fallbacks
+ * @TODO add other scaffolding for html5, standard sites
  */
 
 
