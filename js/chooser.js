@@ -109,7 +109,7 @@ function printConfigs ()
 
 /**
  * Cleanup of the query string data and setting it.
- * @usage: http://cla.localhost/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
+ * @usage: http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
  *
  */
 function queryStringToConfigs ()
@@ -272,7 +272,7 @@ function updateConfigs ()
 
 /**
  * A better test now:
- * http://cla.localhost/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&contributor-option-entity=&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
+ * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&contributor-option-entity=&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
  */
 function setFakeData ()
 {
@@ -858,6 +858,36 @@ function testApplyPage ()
     $(".final-link").attr("href", "?" + finalQueryString);
 
 
+    // EXAMPLE: 
+    // http://service.fabricatorz.com/query2form/?_replyto=project@rejon.org&_subject=Contributor%20License%20Agreement%20E-Signing%20Process&_body=Fill%20out%20the%20following%20form,%20then%20sign%20your%20initials%20to%20complete%20the%20Contributor%20License%20Agreement.&fullname=&Title=&Company=&email-address=&Physical-address=&Sign-with-your-initials=&_submit=sign
+
+
+    var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
+
+    var query4form = 'http://service.fabricatorz.com/query2form/?' + 
+        '_replyto=' + projectemail + '&' +
+        '_subject=Contributor License Agreement E-Signing Form' + '&' +
+        '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
+        'fullname=&' +
+        'title=&' +
+        'company=&' +
+        'email-address=&' +
+        'physical-address=&' +
+        'your-initials=&' +
+        '_action=http://service.fabricatorz.com/query2email/&' +
+        '_submit=sign';
+
+    if ( "" != configs["project-email"] )
+    {
+    $("#link-esign").attr("href", query4form);
+    } else {
+        $("#link-esign").html( 'Need Project Email' );
+        $("#link-esign").removeClass('btn-success');
+        $("#link-esign").addClass('btn-danger');
+    }
+
+
+
     $("#embed-offscreen").html( $( "#review-text" ).html() );
     $(".htmlstore").val( $( "#review-text-style" ).html() + 
                          $( "#review-text" ).html() );
@@ -921,6 +951,8 @@ $(document).ready(function() {
     });
 
     $( "#project-email" ).change(function() {
+        configs["project-email"] = $( "#project-email" ).val();
+
         // return testGeneralPage();
     });
 
@@ -980,6 +1012,25 @@ $(document).ready(function() {
             $("#patent-option-2-options").hide();
 
     });
+
+    $( "#link-esign" ).click(function() {
+        if ( "" == configs["project-email"] )
+        {
+            $("#link-esign").removeAttr("href");
+            $("#link-esign").removeClass('btn-success');
+            $("#link-esign").addClass('btn-danger');
+            $('#rootwizard').bootstrapWizard('show','general');
+        }
+    });
+
+    $( "#link-esign" ).change(function() {
+            $("#link-esign").attr("href", query4form);
+            $("#link-esign").addClass('btn-success');
+            $("#link-esign").removeClass('btn-danger');
+            $("#link-esign").html("Link to E-Signing Form");
+        
+    });
+
 
 	$('#rootwizard').bootstrapWizard({onNext: function(tab, navigation, index)
     {
