@@ -24,8 +24,8 @@
 var doDebug             = false;
 var debugNeedle          = 1338;
 
-// var serviceUrl          = 'http://service.fabricatorz.com';
-var serviceUrl          = 'http://service.localhost';
+var serviceUrl          = 'http://service.fabricatorz.com';
+// var serviceUrl          = 'http://service.localhost';
 
 
 
