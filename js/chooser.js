@@ -24,6 +24,9 @@
 var doDebug             = false;
 var debugNeedle          = 1337;
 
+// var serviceUrl          = 'http://service.fabricatorz.com';
+var serviceUrl          = 'http://service.localhost';
+
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
 
@@ -635,6 +638,7 @@ function testReviewPage ()
             if ( doDebug)
                 console.log("At testReviewPage");
 
+            /*
             if ( $("#contributor-option-entity").prop("checked") )
             {
                 $("#review-agreement-type").text(
@@ -663,6 +667,7 @@ function testReviewPage ()
                 $("#definition-option-2").show();
                 $("#definition-option-1").removeClass("nuke");
             }
+            */
 
             if ( !$("#beneficiary-name").val() )
                 $("#review-beneficiary-name").html( emptyField );
@@ -840,6 +845,7 @@ function testApplyPage ()
     isApplyPageOk = true;
 
     /* NEED TO REVIEW AFTER DECISIONS */
+    /*
     if ( $("#contributor-option-entity").prop("checked") )
     {
         $("#apply-individual").hide();
@@ -850,6 +856,9 @@ function testApplyPage ()
         $("#apply-individual").show();
         $("#apply-entity").hide();
     }
+    */
+    $("#apply-individual").show();
+    $("#apply-entity").show();
 
     // creates the querystring to recreate current wizard state
     finalQueryString = $.param(configs);
@@ -864,9 +873,9 @@ function testApplyPage ()
 
     var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
 
-    var query4form = 'http://service.fabricatorz.com/query2form/?' + 
+    var query4form = serviceUrl + '/query2form/?' + 
         '_replyto=' + projectemail + '&' +
-        '_subject=Contributor License Agreement E-Signing Form' + '&' +
+        '_subject=Contributor License Agreement E-Signing' + '&' +
         '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
         'fullname=&' +
         'title=&' +
@@ -874,12 +883,17 @@ function testApplyPage ()
         'email-address=&' +
         'physical-address=&' +
         'your-initials=&' +
-        '_action=http://service.fabricatorz.com/query2email/&' +
-        '_submit=sign';
+        '_action[0]=' + serviceUrl + '/query2email/&' +
+        '_action[1]=' + serviceUrl + '/query2update/&' +
+        '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
+        '_submit=Sign Your Contributor License Agreement.';
 
     if ( "" != configs["project-email"] )
     {
-    $("#link-esign").attr("href", query4form);
+        $("#link-esign").attr("href", query4form);
+            $("#link-esign").addClass('btn-success');
+            $("#link-esign").removeClass('btn-danger');
+            $("#link-esign").html("Link to E-Signing Form");
     } else {
         $("#link-esign").html( 'Need Project Email' );
         $("#link-esign").removeClass('btn-success');
