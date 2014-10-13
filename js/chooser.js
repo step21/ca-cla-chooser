@@ -22,10 +22,12 @@
 
 
 var doDebug             = false;
-var debugNeedle          = 1337;
+var debugNeedle          = 1338;
 
 // var serviceUrl          = 'http://service.fabricatorz.com';
 var serviceUrl          = 'http://service.localhost';
+
+
 
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
@@ -77,7 +79,6 @@ var configs = {
     'project-email':              '',
     'contributor-process-url':    '',
     'project-jurisdiction':       '',
-    'contributor-option-entity':  '',
     'agreement-exclusivity':      '',
     'outbound-option':            '',
     'outboundlist':               '',
@@ -134,22 +135,6 @@ function updateConfigs ()
 
     /* general */
 
-    if ( configs["contributor-option-entity"] == 'individual' )
-    {
-        $("#contributor-option-individual").prop('checked', true );
-    } else {
-        $("#contributor-option-entity").prop('checked', true );
-    }
-
-    if ( doDebug)
-        console.log("contributor-option-entity: " + 
-            configs["contributor-option-entity"]);
-
-    if ( doDebug)
-        console.log("#contributor-option-entity: " + 
-            $('#contributor-option-entity').val() );
-
-
     if ( configs["beneficiary-name"] )
         $('#beneficiary-name').val( configs["beneficiary-name"] );
     if ( doDebug)
@@ -202,6 +187,7 @@ function updateConfigs ()
     $("#outboundlist-custom").hide();
 
     switch ( configs["outbound-option"] ) {
+        // option-2
         case 'same-licenses':
             $("#outbound-option-same-licenses").prop('checked', true );
             $("#outbound-option-same-licenses" ).change();
@@ -210,18 +196,21 @@ function updateConfigs ()
             $("#outboundlist").show();
             $("#outboundlist-custom").show();
             break;
+        // option-3
         case 'fsf':
             $("#outbound-option-fsf").prop('checked', true );
             $("#outbound-option-fsf" ).trigger( 'change' );
             // @todo delete later if no need
             // setOutboundOptionFsf();
             break;
+        // option-4
         case 'no-commitment':
             $("#outbound-option-no-commitment").prop('checked', true );
             $("#outbound-option-no-commitment" ).trigger( 'change' );
             // @todo delete later if no need
             // setOutboundOptionNoCommitment();
             break;
+        // option-1
         case 'same':
         default:
             $("#outbound-option-same").prop('checked', true );
@@ -273,9 +262,21 @@ function updateConfigs ()
 
 }
 
+function loadTemplates ()
+{
+    var converter = new Showdown.converter();
+    $( "#review-text" ).load( 
+        "agreement-template-individual.html", function() { });
+    $( "#review-text-entity" ).load( 
+        "agreement-template-entity.html", function() { });
+
+    $( "#review-text-style" ).load( "agreement-style.html", function() { });
+
+}
+
 /**
  * A better test now:
- * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&contributor-option-entity=&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
+ * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
  */
 function setFakeData ()
 {
@@ -320,129 +321,200 @@ function oinspect (obj)
 function setOutboundOptionSame () 
 {
 
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
+    /* remove the outbound-option in review */
+    $("#review-outbound-licenses").html( 
+        $("#outbound-option-same").val() );
+    configs['outbound-option'] = 'same';
 
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-same").val() );
+    /*
+    $("#review-outbound-license-options").html(
+        $("#outbound-option-same").val() );
+    */
 
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
+    $("#outbound-section-all").show();
+    $("#outbound-section-all").removeClass("nuke");
 
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
+    /* put back order of sections after section 4 */
+    $("#i-tmp-digit-disclaimer").html( '5' );
+    $("#e-tmp-digit-disclaimer").html( '5' );
+    $("#i-tmp-digit-waiver").html( '6' );
+    $("#e-tmp-digit-waiver").html( '6' );
+    $("#i-tmp-digit-approx-waiver").html( '7' );
+    $("#e-tmp-digit-approx-waiver").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '6' );
+    $("#e-tmp-digit-waiver-2").html( '6' );
+    $("#i-tmp-digit-approx-waiver-2").html( '7' );
+    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-term").html( '8' );
+    $("#e-tmp-digit-term").html( '8' );
+    $("#i-tmp-digit-term-1").html( '8.1' );
+    $("#e-tmp-digit-term-1").html( '8.1' );
+    $("#i-tmp-digit-term-2").html( '8.2' );
+    $("#e-tmp-digit-term-2").html( '8.2' );
+    $("#i-tmp-digit-term-3").html( '8.3' );
+    $("#e-tmp-digit-term-3").html( '8.3' );
+    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#i-tmp-digit-misc").html( '9' );
+    $("#e-tmp-digit-misc").html( '9' );
+    $("#i-tmp-digit-misc-1").html( '9.1' );
+    $("#e-tmp-digit-misc-1").html( '9.1' );
+    $("#i-tmp-digit-misc-2").html( '9.2' );
+    $("#e-tmp-digit-misc-2").html( '9.2' );
+    $("#i-tmp-digit-misc-3").html( '9.3' );
+    $("#e-tmp-digit-misc-3").html( '9.3' );
+    $("#i-tmp-digit-misc-4").html( '9.4' );
+    $("#e-tmp-digit-misc-4").html( '9.4' );
 
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
+    $("#i-tmp-term-special").show();
+    $("#e-tmp-term-special").show();
+    $("#i-tmp-term-special").removeClass("nuke");
+    $("#e-tmp-term-special").removeClass("nuke");
 
-                $("#tmp-licenses-2").hide();
-                $("#tmp-licenses-2").addClass("nuke");
+    $("#i-tmp-licenses-2").hide();
+    $("#e-tmp-licenses-2").hide();
+    $("#i-tmp-licenses-2").addClass("nuke");
+    $("#e-tmp-licenses-2").addClass("nuke");
 
 
-                $("#outbound-option-1").show();
-                $("#outbound-option-1").removeClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
+    $("#outbound-option-1").show();
+    $("#outbound-option-1").removeClass("nuke");
+    $("#outbound-option-2").hide();
+    $("#outbound-option-2").addClass("nuke");
+    $("#outbound-option-3").hide();
+    $("#outbound-option-3").addClass("nuke");
 }
 
 function setOutboundOptionSameLicenses ()
 {
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-same-licenses").val() );
+    /*
+    $("#review-outbound-license-options").html(
+        $("#outbound-option-same-licenses").val() );
+    */
 
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
+    configs['outbound-option'] = 'same-licenses';
 
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
+    $("#outbound-section-all").show();
+    $("#outbound-section-all").removeClass("nuke");
 
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
+    /* put back order of sections after section 4 */
+    $("#i-tmp-digit-disclaimer").html( '5' );
+    $("#e-tmp-digit-disclaimer").html( '5' );
+    $("#i-tmp-digit-waiver").html( '6' );
+    $("#e-tmp-digit-waiver").html( '6' );
+    $("#i-tmp-digit-approx-waiver").html( '7' );
+    $("#e-tmp-digit-approx-waiver").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '6' );
+    $("#e-tmp-digit-waiver-2").html( '6' );
+    $("#i-tmp-digit-approx-waiver-2").html( '7' );
+    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-term").html( '8' );
+    $("#e-tmp-digit-term").html( '8' );
+    $("#i-tmp-digit-term-1").html( '8.1' );
+    $("#e-tmp-digit-term-1").html( '8.1' );
+    $("#i-tmp-digit-term-2").html( '8.2' );
+    $("#e-tmp-digit-term-2").html( '8.2' );
+    $("#i-tmp-digit-term-3").html( '8.3' );
+    $("#e-tmp-digit-term-3").html( '8.3' );
+    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#i-tmp-digit-misc").html( '9' );
+    $("#e-tmp-digit-misc").html( '9' );
+    $("#i-tmp-digit-misc-1").html( '9.1' );
+    $("#e-tmp-digit-misc-1").html( '9.1' );
+    $("#i-tmp-digit-misc-2").html( '9.2' );
+    $("#e-tmp-digit-misc-2").html( '9.2' );
+    $("#i-tmp-digit-misc-3").html( '9.3' );
+    $("#e-tmp-digit-misc-3").html( '9.3' );
+    $("#i-tmp-digit-misc-4").html( '9.4' );
+    $("#e-tmp-digit-misc-4").html( '9.4' );
 
-                $("#tmp-licenses-2").show();
-                $("#tmp-licenses-2").removeClass("nuke");
+    $("#i-tmp-term-special").show();
+    $("#e-tmp-term-special").show();
+    $("#i-tmp-term-special").removeClass("nuke");
+    $("#e-tmp-term-special").removeClass("nuke");
+
+    $("#i-tmp-licenses-2").show();
+    $("#e-tmp-licenses-2").show();
+    $("#i-tmp-licenses-2").removeClass("nuke");
+    $("#e-tmp-licenses-2").removeClass("nuke");
 
 
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").show();
-                $("#outbound-option-2").removeClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
+    $("#outbound-option-1").hide();
+    $("#outbound-option-1").addClass("nuke");
+    $("#outbound-option-2").show();
+    $("#outbound-option-2").removeClass("nuke");
+    $("#outbound-option-3").hide();
+    $("#outbound-option-3").addClass("nuke");
 }
 
 function setOutboundOptionFsf ()
 {
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
+    /* remove the outbound-option in review */
+    // $("#review-outbound-licenses").html( naField );
+    $("#review-outbound-licenses").html( 
+        $("#outbound-option-fsf").val() );
 
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-fsf").val() );
+    configs['outbound-option'] = 'fsf' ;
 
-                $("#outbound-section-all").show();
-                $("#outbound-section-all").removeClass("nuke");
+    /*
+    $("#review-outbound-license-options").html(
+        $("#outbound-option-fsf").val() );
+    */
 
-                /* put back order of sections after section 4 */
-                $("#tmp-digit-disclaimer").html( '5' );
-                $("#tmp-digit-waiver").html( '6' );
-                $("#tmp-digit-approx-waiver").html( '7' );
-                $("#tmp-digit-waiver-2").html( '6' );
-                $("#tmp-digit-approx-waiver-2").html( '7' );
-                $("#tmp-digit-term").html( '8' );
-                $("#tmp-digit-term-1").html( '8.1' );
-                $("#tmp-digit-term-2").html( '8.2' );
-                $("#tmp-digit-term-3").html( '8.3' );
-                $("#tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-                $("#tmp-digit-misc").html( '9' );
-                $("#tmp-digit-misc-1").html( '9.1' );
-                $("#tmp-digit-misc-2").html( '9.2' );
-                $("#tmp-digit-misc-3").html( '9.3' );
-                $("#tmp-digit-misc-4").html( '9.4' );
+    $("#outbound-section-all").show();
+    $("#outbound-section-all").removeClass("nuke");
+
+    /* put back order of sections after section 4 */
+    $("#i-tmp-digit-disclaimer").html( '5' );
+    $("#e-tmp-digit-disclaimer").html( '5' );
+    $("#i-tmp-digit-waiver").html( '6' );
+    $("#e-tmp-digit-waiver").html( '6' );
+    $("#i-tmp-digit-approx-waiver").html( '7' );
+    $("#e-tmp-digit-approx-waiver").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '6' );
+    $("#e-tmp-digit-waiver-2").html( '6' );
+    $("#i-tmp-digit-approx-waiver-2").html( '7' );
+    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-term").html( '8' );
+    $("#e-tmp-digit-term").html( '8' );
+    $("#i-tmp-digit-term-1").html( '8.1' );
+    $("#e-tmp-digit-term-1").html( '8.1' );
+    $("#i-tmp-digit-term-2").html( '8.2' );
+    $("#e-tmp-digit-term-2").html( '8.2' );
+    $("#i-tmp-digit-term-3").html( '8.3' );
+    $("#e-tmp-digit-term-3").html( '8.3' );
+    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
+    $("#i-tmp-digit-misc").html( '9' );
+    $("#e-tmp-digit-misc").html( '9' );
+    $("#i-tmp-digit-misc-1").html( '9.1' );
+    $("#e-tmp-digit-misc-1").html( '9.1' );
+    $("#i-tmp-digit-misc-2").html( '9.2' );
+    $("#e-tmp-digit-misc-2").html( '9.2' );
+    $("#i-tmp-digit-misc-3").html( '9.3' );
+    $("#e-tmp-digit-misc-3").html( '9.3' );
+    $("#i-tmp-digit-misc-4").html( '9.4' );
+    $("#e-tmp-digit-misc-4").html( '9.4' );
 
 
-                $("#tmp-term-special").show();
-                $("#tmp-term-special").removeClass("nuke");
+    $("#i-tmp-term-special").show();
+    $("#e-tmp-term-special").show();
+    $("#i-tmp-term-special").removeClass("nuke");
+    $("#e-tmp-term-special").removeClass("nuke");
 
-                $("#tmp-licenses-2").hide();
-                $("#tmp-licenses-2").addClass("nuke");
+    $("#i-tmp-licenses-2").hide();
+    $("#e-tmp-licenses-2").hide();
+    $("#i-tmp-licenses-2").addClass("nuke");
+    $("#e-tmp-licenses-2").addClass("nuke");
 
 
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").show();
-                $("#outbound-option-3").removeClass("nuke");
+    $("#outbound-option-1").hide();
+    $("#outbound-option-1").addClass("nuke");
+    $("#outbound-option-2").hide();
+    $("#outbound-option-2").addClass("nuke");
+    $("#outbound-option-3").show();
+    $("#outbound-option-3").removeClass("nuke");
 }
 
 function setOutboundOptionNoCommitment ()
@@ -450,8 +522,12 @@ function setOutboundOptionNoCommitment ()
                 /* remove the outbound-option in review */
                 $("#review-outbound-licenses").html( naField );
 
+                configs['outbound-option'] = 'no-commitment'; 
+
+                /*
                 $("#review-outbound-license-options").html(
                     $("#outbound-option-no-commitment").val() );
+                */
 
                 $("#outbound-option-1").hide();
                 $("#outbound-option-1").addClass("nuke");
@@ -465,25 +541,41 @@ function setOutboundOptionNoCommitment ()
                 $("#outbound-section-all").addClass("nuke");
 
                 /* reorder sections now that section 4 gone */
-                $("#tmp-digit-disclaimer").html( '4' );
-                $("#tmp-digit-waiver").html( '5' );
-                $("#tmp-digit-approx-waiver").html( '6' );
-                $("#tmp-digit-waiver-2").html( '5' );
-                $("#tmp-digit-approx-waiver-2").html( '6' );
-                $("#tmp-digit-term").html( '7' );
-                $("#tmp-digit-term-1").html( '7.1' );
-                /** undisplayed  $("#tmp-digit-term-2").html( '7.2' ); */
-                $("#tmp-digit-term-3").html( '7.2' );
-                $("#tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-                $("#tmp-digit-misc").html( '8' );
-                $("#tmp-digit-misc-1").html( '8.1' );
-                $("#tmp-digit-misc-2").html( '8.2' );
-                $("#tmp-digit-misc-3").html( '8.3' );
-                $("#tmp-digit-misc-4").html( '8.4' );
+                $("#i-tmp-digit-disclaimer").html( '4' );
+                $("#e-tmp-digit-disclaimer").html( '4' );
+                $("#i-tmp-digit-waiver").html( '5' );
+                $("#e-tmp-digit-waiver").html( '5' );
+                $("#i-tmp-digit-approx-waiver").html( '6' );
+                $("#e-tmp-digit-approx-waiver").html( '6' );
+                $("#i-tmp-digit-waiver-2").html( '5' );
+                $("#e-tmp-digit-waiver-2").html( '5' );
+                $("#i-tmp-digit-approx-waiver-2").html( '6' );
+                $("#e-tmp-digit-approx-waiver-2").html( '6' );
+                $("#i-tmp-digit-term").html( '7' );
+                $("#e-tmp-digit-term").html( '7' );
+                $("#i-tmp-digit-term-1").html( '7.1' );
+                $("#e-tmp-digit-term-1").html( '7.1' );
+                /** undisplayed  $("#i-tmp-digit-term-2").html( '7.2' ); */
+                $("#i-tmp-digit-term-3").html( '7.2' );
+                $("#e-tmp-digit-term-3").html( '7.2' );
+                $("#i-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+                $("#e-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+                $("#i-tmp-digit-misc").html( '8' );
+                $("#e-tmp-digit-misc").html( '8' );
+                $("#i-tmp-digit-misc-1").html( '8.1' );
+                $("#e-tmp-digit-misc-1").html( '8.1' );
+                $("#i-tmp-digit-misc-2").html( '8.2' );
+                $("#e-tmp-digit-misc-2").html( '8.2' );
+                $("#i-tmp-digit-misc-3").html( '8.3' );
+                $("#e-tmp-digit-misc-3").html( '8.3' );
+                $("#i-tmp-digit-misc-4").html( '8.4' );
+                $("#e-tmp-digit-misc-4").html( '8.4' );
 
 
-                $("#tmp-term-special").hide();
-                $("#tmp-term-special").addClass("nuke");
+                $("#i-tmp-term-special").hide();
+                $("#e-tmp-term-special").hide();
+                $("#i-tmp-term-special").addClass("nuke");
+                $("#e-tmp-term-special").addClass("nuke");
 }
 
 
@@ -494,15 +586,20 @@ function updatePosition ()
             $('#rootwizard').bootstrapWizard('show','general');
             break;
         case 'copyright':
+            testCopyrightPage();
             $('#rootwizard').bootstrapWizard('show',1);
             break;
         case 'patents':
+            testPatentPage();
             $('#rootwizard').bootstrapWizard('show',2);
             break;
         case 'review':
+            testReviewPage();
             $('#rootwizard').bootstrapWizard('show',3);
             break;
         case 'apply':
+            // loadTemplates();
+            testAllPages();
             $('#rootwizard').bootstrapWizard('last');
             break;
     } 
@@ -548,6 +645,7 @@ function testGeneralPage ()
                 $('#project-email').removeClass("cla-alert");
             }
 
+            /*
             if ( !$('#contributor-process-url').val() ||
                  !validateURL( $('#contributor-process-url').val()  ) ) {
                 $('#contributor-process-url').addClass("cla-alert");
@@ -555,6 +653,7 @@ function testGeneralPage ()
             } else {
                 $('#contributor-process-url').removeClass("cla-alert");
             }
+            */
 
             if ( !$('#project-jurisdiction').val() ) {
                 $('#project-jurisdiction').addClass("cla-alert");
@@ -638,104 +737,118 @@ function testReviewPage ()
             if ( doDebug)
                 console.log("At testReviewPage");
 
-            /*
-            if ( $("#contributor-option-entity").prop("checked") )
-            {
-                $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-entity").val() ) )  ;
-                $("#modal-agreement-type").html(
-                    ucFirst( $("#contributor-option-entity").val() ) );
-                $("#tmp-contributor-type").html(
-                    ucFirst( $("#contributor-option-entity").val() ) );
-
-                $("#definition-option-1").show();
-                $("#definition-option-1").removeClass("nuke");
-                $("#definition-option-2").hide();
-                $("#definition-option-2").addClass("nuke");
-            } else {
-                $("#review-agreement-type").text(
-                    ucFirst( $("#contributor-option-individual").val()))  ;
-
-                $("#modal-agreement-type").html(
-                    ucFirst( $("#contributor-option-individual").val() ) );
-
-                $("#tmp-contributor-type").html(
-                    ucFirst( $("#contributor-option-individual").val() ) );
-
-                $("#definition-option-1").hide();
-                $("#definition-option-1").addClass("nuke");
-                $("#definition-option-2").show();
-                $("#definition-option-1").removeClass("nuke");
-            }
-            */
-
             if ( !$("#beneficiary-name").val() )
+            {
                 $("#review-beneficiary-name").html( emptyField );
-            else
+                configs['beneficiary-name'] = '';
+            } else {
                 $("#review-beneficiary-name").html(
                     $("#beneficiary-name").val() );
+                configs['beneficiary-name'] = $("#beneficiary-name").val();
+            }
 
-            if ( !$("#project-name").val() ) {
+            if ( !$("#project-name").val() ) 
+            {
                 $("#review-project-name").html( emptyField );
-                $("#tmp-project-name").html( emptyField );
-                $("#tmp-project-name-2").html( emptyField );
+                $("#i-tmp-project-name").html( emptyField );
+                $("#e-tmp-project-name").html( emptyField );
+                $("#i-tmp-project-name-2").html( emptyField );
+                $("#e-tmp-project-name-2").html( emptyField );
+                configs['project-name'] = '';
             } else {
                 $("#review-project-name").html(
                     $("#project-name").val() );
-                $("#tmp-project-name").html(
+                $("#i-tmp-project-name").html(
                     $("#project-name").val() );
-                $("#tmp-project-name-2").html(
+                $("#e-tmp-project-name").html(
                     $("#project-name").val() );
+                $("#i-tmp-project-name-2").html(
+                    $("#project-name").val() );
+                $("#e-tmp-project-name-2").html(
+                    $("#project-name").val() );
+                configs['project-name'] = $("#project-name").val();
             }
 
-            if ( !$("#project-website").val() ) {
+            if ( !$("#project-website").val() ) 
+            {
                 $("#review-project-website").html( emptyField );
-            } else {
+                configs['project-website'] = '';
+            } else 
+            {
                 $("#review-project-website").html(
                     $("#project-website").val() );
+                configs['project-website'] = $("#project-website").val();
             }
 
-            if ( !$("#project-email").val() ) {
+            if ( !$("#project-email").val() ) 
+            {
                 $("#review-project-email").html( emptyField );
-            } else {
+                configs['project-email'] = '';
+            } else 
+            {
                 $("#review-project-email").html(
                     $("#project-email").val() );
-                $("#tmp-project-email-1").html(
+                $("#i-tmp-project-email-1").html(
                     $("#project-email").val() );
-                $("#tmp-project-email-2").html(
+                $("#e-tmp-project-email-1").html(
                     $("#project-email").val() );
+                $("#i-tmp-project-email-2").html(
+                    $("#project-email").val() );
+                $("#e-tmp-project-email-2").html(
+                    $("#project-email").val() );
+                configs['project-email'] = $("#project-email").val();
             }
 
-            if ( !$("#contributor-process-url").val() ) {
+            if ( !$("#contributor-process-url").val() ) 
+            {
                 $("#review-contributor-process-url").html( emptyField );
-                $("#tmp-submission-instructions").html( emptyField );
+                $("#i-tmp-submission-instructions").html( emptyField );
+                $("#e-tmp-submission-instructions").html( emptyField );
+                configs['contributor-process-url'] = '';
             } else {
                 $("#review-contributor-process-url").html(
                     $("#contributor-process-url").val() );
-                $("#tmp-submission-instructions").html(
+                $("#i-tmp-submission-instructions").html(
                     $("#contributor-process-url").val() );
+                $("#e-tmp-submission-instructions").html(
+                    $("#contributor-process-url").val() );
+                configs['contributor-process-url'] = 
+                    $("#contributor-process-url").val();
             }
 
-            if ( !$("#project-jurisdiction").val() ) {
+            if ( !$("#project-jurisdiction").val() ) 
+            {
                 $("#review-project-jurisdiction").html( emptyField );
-                $("#tmp-project-jurisdiction").html( emptyField );
+                $("#i-tmp-project-jurisdiction").html( emptyField );
+                $("#e-tmp-project-jurisdiction").html( emptyField );
+                configs['project-jurisdiction'] = '';
             } else{
                 $("#review-project-jurisdiction").html(
                     $("#project-jurisdiction").val() );
-                $("#tmp-project-jurisdiction").html(
+                $("#i-tmp-project-jurisdiction").html(
                     $("#project-jurisdiction").val() );
-
+                $("#e-tmp-project-jurisdiction").html(
+                    $("#project-jurisdiction").val() );
+                configs['project-jurisdiction'] = 
+                    $("#project-jurisdiction").val();
             }
 
-            if ( !$("#agreement-exclusivity").val() ) {
+            if ( !$("#agreement-exclusivity").val() ) 
+            {
                 $("#review-agreement-exclusivity").html( emptyField );
-                $("#tmp-contributor-exclusivity").html( emptyField );
+                $("#i-tmp-contributor-exclusivity").html( emptyField );
+                $("#e-tmp-contributor-exclusivity").html( emptyField );
+                configs['agreement-exclusivity'] = '';
             } else{
                 $("#review-agreement-exclusivity").html(
                     ucFirst( $("#agreement-exclusivity").val() ) );
 
-                $("#tmp-contributor-exclusivity").html(
+                $("#i-tmp-contributor-exclusivity").html(
                     ucFirst( $("#agreement-exclusivity").val() ) );
+                $("#e-tmp-contributor-exclusivity").html(
+                    ucFirst( $("#agreement-exclusivity").val() ) );
+                configs['agreement-exclusivity'] = 
+                    $("#agreement-exclusivity").val();
             }
 
 
@@ -755,16 +868,24 @@ function testReviewPage ()
 
             if ( !outboundCopyrightLicenses ) {
                 $("#review-outbound-licenses").html( emptyField );
-                $("#tmp-licenses").html( emptyField );
-                $("#tmp-licenses-2").html( emptyField );
+                $("#i-tmp-licenses").html( emptyField );
+                $("#e-tmp-licenses").html( emptyField );
+                $("#i-tmp-licenses-2").html( emptyField );
+                $("#e-tmp-licenses-2").html( emptyField );
+                configs['outboundlist'] = '';
 
             } else {
                 $("#review-outbound-licenses").html(
                     outboundCopyrightLicenses );
-                $("#tmp-licenses").html(
+                $("#i-tmp-licenses").html(
                     outboundCopyrightLicenses );
-                $("#tmp-licenses-2").html(
+                $("#e-tmp-licenses").html(
                     outboundCopyrightLicenses );
+                $("#i-tmp-licenses-2").html(
+                    outboundCopyrightLicenses );
+                $("#e-tmp-licenses-2").html(
+                    outboundCopyrightLicenses );
+                configs['outboundlist'] = outboundCopyrightLicenses;
             }
 
             if ( $("#outbound-option-same").prop("checked") )
@@ -779,15 +900,21 @@ function testReviewPage ()
 
             $("#review-outbound-license-other").html(
                 $("#outboundlist-custom").val() );
+            configs['outboundlist-custom'] = $("#outboundlist-custom").val();
 
             $("#review-media-licenses").html(
                 mediaLicenses );
+            configs['medialist'] = mediaLicenses;
 
-            if ( mediaLicenses == "" || mediaLicenses == "None" ) {
+            if ( mediaLicenses == "None" ) {
                 $("#outbound-media-license").hide();
                 $("#outbound-media-license").addClass("nuke");
             } else {
-                $("#tmp-media-licenses").html(
+                if ( mediaLicenses == "" )
+                    mediaLicenses = emptyField;
+                $("#i-tmp-media-licenses").html(
+                    mediaLicenses );
+                $("#e-tmp-media-licenses").html(
                     mediaLicenses );
                 $("#outbound-media-license").show();
                 $("#outbound-media-license").removeClass("nuke");
@@ -802,8 +929,11 @@ function testReviewPage ()
 
             $("#review-patent-type").html(
                 $("#patent-type").val() );
+            configs['patent-option'] = $("#patent-type").val();
 
-            $("#tmp-patent-option").html(
+            $("#i-tmp-patent-option").html(
+                $("#patent-type").val() );
+            $("#e-tmp-patent-option").html(
                 $("#patent-type").val() );
 
             if ( $("#patent-type").val() == 'Traditional' )
@@ -824,13 +954,8 @@ function testReviewPage ()
                 $("#outbound-special").hide();
                 $("#outbound-special").addClass("nuke");
 
-                // $("#tmp-patent-more-url").html(
-                //    $("#patent-more-url").val() );
-
             }
 
-            // $("#review-patent-more-url").html(
-            //    $("#patent-more-url").val() );
 
             testApplyPage();
 
@@ -888,29 +1013,64 @@ function testApplyPage ()
         '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
         '_submit=Sign Your Contributor License Agreement.';
 
-    if ( "" != configs["project-email"] )
+
+    if ( ! $('#contributor-process-url').val() )
     {
-        $("#link-esign").attr("href", query4form);
-            $("#link-esign").addClass('btn-success');
-            $("#link-esign").removeClass('btn-danger');
-            $("#link-esign").html("Link to E-Signing Form");
+        if ( "" != configs["project-email"] )
+        {
+            $("#link-esign").attr("href", query4form);
+                $("#link-esign").addClass('btn-success');
+                $("#link-esign").removeClass('btn-danger');
+                $("#link-esign").html("Link to E-Signing Form");
+                $("#signing-service").html('<b>Contributor Agreements</b>: ' +
+                    'Share the link with your contributors.');
+        } else {
+            $("#link-esign").html( 'Need Project Email' );
+            $("#link-esign").removeClass('btn-success');
+            $("#link-esign").addClass('btn-danger');
+            $("#signing-service").html('<b>Contributor Agreements</b>: ' +
+                'Share the link with your contributors.');
+        }
     } else {
-        $("#link-esign").html( 'Need Project Email' );
-        $("#link-esign").removeClass('btn-success');
-        $("#link-esign").addClass('btn-danger');
+        $("#link-esign").attr("href", $('#contributor-process-url').val());
+        $("#link-esign").addClass('btn-success');
+        $("#link-esign").removeClass('btn-danger');
+        $("#link-esign").html("Contributor Signing Website");
+        $("#signing-service").html('<b>Your Contributor Process</b>: ' + 
+                                   'Share with your contributors.');
+
     }
 
+    var finalLink = "http://" + window.location.host + "/?" + 
+                    finalQueryString;
+    // console.log("finalLink: " + finalLink);
 
+    var finalBrew = 
+        "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
+        '<p><a href="' + finalLink + '">' + finalLink + '</p>' + "\n" + 
+        "</section>\n";
+    // console.log("finalBrew: " + finalBrew);
 
-    $("#embed-offscreen").html( $( "#review-text" ).html() );
-    $(".htmlstore").val( $( "#review-text-style" ).html() + 
-                         $( "#review-text" ).html() );
+    $("#embed-offscreen").html( $( "#review-text" ).html() + finalBrew );
+    $(".htmlstore-individual").val( $( "#review-text-style" ).html() + 
+                         $( "#review-text" ).html() +
+                         finalBrew );
     $("#embed-offscreen .nuke").remove();
+
+
+    $("#embed-offscreen-entity").html( 
+        $( "#review-text-entity" ).html() + finalBrew );
+    $(".htmlstore-entity").val( $( "#review-text-style" ).html() + 
+                         $( "#review-text-entity" ).html() +
+                         finalBrew );
+    $("#embed-offscreen-entity .nuke").remove();
+
 
     // if ( doDebug)
     /* console.log("EMBEDDING: " + $("#embed-offscreen").html() ); */
 
     $("#embed-agreement").html( $("#embed-offscreen").html() );
+    $("#embed-agreement-entity").html( $("#embed-offscreen-entity").html() );
 
     return isApplyPageOk;
 }
@@ -933,6 +1093,17 @@ $(document).ready(function() {
     //    setFakeData();
     updateConfigs();
 
+
+    if ( debugNeedle == '1337' )
+    {
+        $("#html2pdf-form-individual").attr('action', 
+            serviceUrl + '/html2pdf');
+        $("#html2pdf-form-entity").attr('action', 
+        serviceUrl + '/html2pdf');
+    }
+
+
+
     $("#patent-option-2-options").hide();
 
 
@@ -944,12 +1115,7 @@ $(document).ready(function() {
         $('#html2pdf-form-entity').submit();
     });
 
-
-    var converter = new Showdown.converter();
-    $( "#review-text" ).load( "agreement-template.html", function() { });
-
-    $( "#review-text-style" ).load( "agreement-style.html", function() { });
-
+    loadTemplates();
 
     // @TODO need to make these each test each input, not ALL inputs
     $( "#beneficiary-name" ).change(function() {

@@ -347,11 +347,6 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         </tr>
 
                         <tr>
-                        <td>Outbound License Option</td>
-                        <td id="review-outbound-license-options"></td>
-                        </tr>
-
-                        <tr>
                         <td>Outbound License(s)</td>
                         <td id="review-outbound-licenses"></td>
                         </tr>
@@ -394,6 +389,14 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                           </li>
                         </ul>
 
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <div class="caption" id="review-text-entity">
+                              </div>
+                          </div>
+                          </li>
+
 
 					    </div>
 						<div class="tab-pane" id="apply">
@@ -423,13 +426,13 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" class="htmlstore" id="htmlstore-individual" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
                       	</tr>
 
                         <tr id="apply-entity">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" class="htmlstore" id="htmlstore-entity" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
 
                         </tr>
                         </table>
@@ -444,7 +447,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         </tr>
 
 						<tr>
-                        <td><b>Contributor Agreements</b>: Share the link with your contributors.</td>
+                        <td id="signing-service"><b>Contributor Agreements</b>: Share the link with your contributors.</td>
 						<td> </td>
 						<td><a role="button" class="btn btn-success" id="link-esign" data-inline="true" href="//service.fabricatorz.com/query2form/">Link to E-Signing Form</a></td>
 						</tr>
@@ -457,11 +460,11 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         </ul>
 
 
-                        <!-- Modal -->
+                        <!-- Modal INDIVIDUAL START-->
                         <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel"><span id="modal-agreement-type"></span> Contributor License Agreement</h3>
+                            <h3 id="myModalLabel">Individual Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
@@ -473,6 +476,28 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                           </div>
                         </div>
+                        <!-- Modal INDIVIDUAL END -->
+
+
+                        <!-- Modal ENTITY START -->
+                        <div id="myHTML-entity" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel">Entity Contributor License Agreement</h3>
+
+                          </div>
+                          <div class="modal-body">
+                            <span>Click the box below. Then, copy and paste the agreement where you would like.</span><br /><br />
+                        <textarea id="embed-agreement-entity" class="input-block-level" onclick="this.select();" rows="14" readonly>
+                        </textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                          </div>
+                        </div>
+                        <!-- Modal ENTITY END -->
+
+
 
                         <div id="review-text-style" style="display: none"></div>
 
@@ -496,6 +521,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
     </div>
 
     <div id="embed-offscreen" style="display: none;">&nbsp;</div>
+    <div id="embed-offscreen-entity" style="display: none;">&nbsp;</div>
 
 
     <script src="//code.jquery.com/jquery-1.11.1.js"></script>
