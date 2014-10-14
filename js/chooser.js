@@ -1007,6 +1007,8 @@ function testApplyPage ()
         'company=&' +
         'email-address=&' +
         'physical-address=&' +
+        ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ? 
+            'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') + 
         'your-initials=&' +
         '_action[0]=' + serviceUrl + '/query2email/&' +
         '_action[1]=' + serviceUrl + '/query2update/&' +
