@@ -257,8 +257,8 @@ function updateConfigs ()
     if ( doDebug)
         console.log("patent-option: " + configs["patent-option"] );
 
-
-    printConfigs();
+    if ( doDebug)
+        printConfigs();
 
 }
 
@@ -987,7 +987,8 @@ function testApplyPage ()
 
     // creates the querystring to recreate current wizard state
     finalQueryString = $.param(configs);
-    console.log("finalQueryString: " + finalQueryString);
+    if ( doDebug)
+        console.log("finalQueryString: " + finalQueryString);
     // set final linkto be used in the interface
     $(".final-link").attr("href", "?" + finalQueryString);
 
