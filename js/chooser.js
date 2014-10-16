@@ -51,6 +51,15 @@ var mediaLicenses       = '';
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
+
+var dictionary = {
+    'traditional':              'Traditional Patent License',
+    'Traditional':              'Traditional Patent License',
+    'patent-pledge':            'Patent Pledge',
+    'Patent-Pledge':            'Patent Pledge',
+    'non-exclusive':            'Non-Exclusive'
+};
+
 /** could even set defaults here
  * 
  * Query String Possible Parameters:
@@ -295,6 +304,14 @@ function ucFirst(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function ucWords(string) {
+    return (string + '').
+        replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, 
+            function($1) {
+                return $1.toUpperCase();
+            });
+}
+
 function validateEmail(email)
 {
         var re = /\S+@\S+\.\S+/;
@@ -331,8 +348,10 @@ function setOutboundOptionSame ()
         $("#outbound-option-same").val() );
     */
 
-    $("#outbound-section-all").show();
-    $("#outbound-section-all").removeClass("nuke");
+    $("#i-tmp-outbound-section-all").show();
+    $("#i-tmp-outbound-section-all").removeClass("nuke");
+    $("#e-tmp-outbound-section-all").show();
+    $("#e-tmp-outbound-section-all").removeClass("nuke");
 
     /* put back order of sections after section 4 */
     $("#i-tmp-digit-disclaimer").html( '5' );
@@ -377,12 +396,18 @@ function setOutboundOptionSame ()
     $("#e-tmp-licenses-2").addClass("nuke");
 
 
-    $("#outbound-option-1").show();
-    $("#outbound-option-1").removeClass("nuke");
-    $("#outbound-option-2").hide();
-    $("#outbound-option-2").addClass("nuke");
-    $("#outbound-option-3").hide();
-    $("#outbound-option-3").addClass("nuke");
+    $("#i-tmp-outbound-option-1").show();
+    $("#i-tmp-outbound-option-1").removeClass("nuke");
+    $("#i-tmp-outbound-option-2").hide();
+    $("#i-tmp-outbound-option-2").addClass("nuke");
+    $("#i-tmp-outbound-option-3").hide();
+    $("#i-tmp-outbound-option-3").addClass("nuke");
+    $("#e-tmp-outbound-option-1").show();
+    $("#e-tmp-outbound-option-1").removeClass("nuke");
+    $("#e-tmp-outbound-option-2").hide();
+    $("#e-tmp-outbound-option-2").addClass("nuke");
+    $("#e-tmp-outbound-option-3").hide();
+    $("#e-tmp-outbound-option-3").addClass("nuke");
 }
 
 function setOutboundOptionSameLicenses ()
@@ -394,8 +419,10 @@ function setOutboundOptionSameLicenses ()
 
     configs['outbound-option'] = 'same-licenses';
 
-    $("#outbound-section-all").show();
-    $("#outbound-section-all").removeClass("nuke");
+    $("#i-tmp-outbound-section-all").show();
+    $("#i-tmp-outbound-section-all").removeClass("nuke");
+    $("#e-tmp-outbound-section-all").show();
+    $("#e-tmp-outbound-section-all").removeClass("nuke");
 
     /* put back order of sections after section 4 */
     $("#i-tmp-digit-disclaimer").html( '5' );
@@ -440,12 +467,18 @@ function setOutboundOptionSameLicenses ()
     $("#e-tmp-licenses-2").removeClass("nuke");
 
 
-    $("#outbound-option-1").hide();
-    $("#outbound-option-1").addClass("nuke");
-    $("#outbound-option-2").show();
-    $("#outbound-option-2").removeClass("nuke");
-    $("#outbound-option-3").hide();
-    $("#outbound-option-3").addClass("nuke");
+    $("#i-tmp-outbound-option-1").hide();
+    $("#i-tmp-outbound-option-1").addClass("nuke");
+    $("#i-tmp-outbound-option-2").show();
+    $("#i-tmp-outbound-option-2").removeClass("nuke");
+    $("#i-tmp-outbound-option-3").hide();
+    $("#i-tmp-outbound-option-3").addClass("nuke");
+    $("#e-tmp-outbound-option-1").hide();
+    $("#e-tmp-outbound-option-1").addClass("nuke");
+    $("#e-tmp-outbound-option-2").show();
+    $("#e-tmp-outbound-option-2").removeClass("nuke");
+    $("#e-tmp-outbound-option-3").hide();
+    $("#e-tmp-outbound-option-3").addClass("nuke");
 }
 
 function setOutboundOptionFsf ()
@@ -462,8 +495,10 @@ function setOutboundOptionFsf ()
         $("#outbound-option-fsf").val() );
     */
 
-    $("#outbound-section-all").show();
-    $("#outbound-section-all").removeClass("nuke");
+    $("#i-tmp-outbound-section-all").show();
+    $("#i-tmp-outbound-section-all").removeClass("nuke");
+    $("#e-tmp-outbound-section-all").show();
+    $("#e-tmp-outbound-section-all").removeClass("nuke");
 
     /* put back order of sections after section 4 */
     $("#i-tmp-digit-disclaimer").html( '5' );
@@ -509,12 +544,18 @@ function setOutboundOptionFsf ()
     $("#e-tmp-licenses-2").addClass("nuke");
 
 
-    $("#outbound-option-1").hide();
-    $("#outbound-option-1").addClass("nuke");
-    $("#outbound-option-2").hide();
-    $("#outbound-option-2").addClass("nuke");
-    $("#outbound-option-3").show();
-    $("#outbound-option-3").removeClass("nuke");
+    $("#i-tmp-outbound-option-1").hide();
+    $("#i-tmp-outbound-option-1").addClass("nuke");
+    $("#i-tmp-outbound-option-2").hide();
+    $("#i-tmp-outbound-option-2").addClass("nuke");
+    $("#i-tmp-outbound-option-3").show();
+    $("#i-tmp-outbound-option-3").removeClass("nuke");
+    $("#e-tmp-outbound-option-1").hide();
+    $("#e-tmp-outbound-option-1").addClass("nuke");
+    $("#e-tmp-outbound-option-2").hide();
+    $("#e-tmp-outbound-option-2").addClass("nuke");
+    $("#e-tmp-outbound-option-3").show();
+    $("#e-tmp-outbound-option-3").removeClass("nuke");
 }
 
 function setOutboundOptionNoCommitment ()
@@ -529,16 +570,24 @@ function setOutboundOptionNoCommitment ()
                     $("#outbound-option-no-commitment").val() );
                 */
 
-                $("#outbound-option-1").hide();
-                $("#outbound-option-1").addClass("nuke");
-                $("#outbound-option-2").hide();
-                $("#outbound-option-2").addClass("nuke");
-                $("#outbound-option-3").hide();
-                $("#outbound-option-3").addClass("nuke");
+                $("#i-tmp-outbound-option-1").hide();
+                $("#i-tmp-outbound-option-1").addClass("nuke");
+                $("#i-tmp-outbound-option-2").hide();
+                $("#i-tmp-outbound-option-2").addClass("nuke");
+                $("#i-tmp-outbound-option-3").hide();
+                $("#i-tmp-outbound-option-3").addClass("nuke");
+                $("#e-tmp-outbound-option-1").hide();
+                $("#e-tmp-outbound-option-1").addClass("nuke");
+                $("#e-tmp-outbound-option-2").hide();
+                $("#e-tmp-outbound-option-2").addClass("nuke");
+                $("#e-tmp-outbound-option-3").hide();
+                $("#e-tmp-outbound-option-3").addClass("nuke");
                 
                 /* remove entire section 4 */
-                $("#outbound-section-all").hide();
-                $("#outbound-section-all").addClass("nuke");
+                $("#i-tmp-outbound-section-all").hide();
+                $("#i-tmp-outbound-section-all").addClass("nuke");
+                $("#e-tmp-outbound-section-all").hide();
+                $("#e-tmp-outbound-section-all").addClass("nuke");
 
                 /* reorder sections now that section 4 gone */
                 $("#i-tmp-digit-disclaimer").html( '4' );
@@ -840,13 +889,23 @@ function testReviewPage ()
                 $("#e-tmp-contributor-exclusivity").html( emptyField );
                 configs['agreement-exclusivity'] = '';
             } else{
+                var cleanVersion = '';
+                if ( $("#agreement-exclusivity").val() in dictionary )
+                {
+                    cleanVersion = 
+                        dictionary[$("#agreement-exclusivity").val()];
+                } else {
+                    cleanVersion = $("#agreement-exclusivity").val();
+                }
+
                 $("#review-agreement-exclusivity").html(
-                    ucFirst( $("#agreement-exclusivity").val() ) );
+                    cleanVersion );
 
                 $("#i-tmp-contributor-exclusivity").html(
-                    ucFirst( $("#agreement-exclusivity").val() ) );
+                    cleanVersion );
                 $("#e-tmp-contributor-exclusivity").html(
-                    ucFirst( $("#agreement-exclusivity").val() ) );
+                    cleanVersion );
+
                 configs['agreement-exclusivity'] = 
                     $("#agreement-exclusivity").val();
             }
@@ -854,15 +913,25 @@ function testReviewPage ()
 
             if ( $("#agreement-exclusivity").val() == 'exclusive' )
             {
-                $("#license-option-1").show();
-                $("#license-option-1").removeClass("nuke");
-                $("#license-option-2").hide();
-                $("#license-option-2").addClass("nuke");
+                $("#i-tmp-license-option-1").show();
+                $("#i-tmp-license-option-1").removeClass("nuke");
+                $("#i-tmp-license-option-2").hide();
+                $("#i-tmp-license-option-2").addClass("nuke");
+                $("#e-tmp-license-option-1").show();
+                $("#e-tmp-license-option-1").removeClass("nuke");
+                $("#e-tmp-license-option-2").hide();
+                $("#e-tmp-license-option-2").addClass("nuke");
+
             } else {
-                $("#license-option-1").hide();
-                $("#license-option-1").addClass("nuke");
-                $("#license-option-2").show();
-                $("#license-option-2").removeClass("nuke");
+                $("#i-tmp-license-option-1").hide();
+                $("#i-tmp-license-option-1").addClass("nuke");
+                $("#i-tmp-license-option-2").show();
+                $("#i-tmp-license-option-2").removeClass("nuke");
+                $("#e-tmp-license-option-1").hide();
+                $("#e-tmp-license-option-1").addClass("nuke");
+                $("#e-tmp-license-option-2").show();
+                $("#e-tmp-license-option-2").removeClass("nuke");
+
             }
 
 
@@ -925,31 +994,47 @@ function testReviewPage ()
                 setOutboundOptionNoCommitment();
 
 
+            var cleanVersion = '';
+            if ( $("#patent-type").val() in dictionary )
+            {
+                cleanVersion = 
+                    dictionary[$("#patent-type").val()];
+            } else {
+                cleanVersion = $("#patent-type").val();
+            }
 
 
             $("#review-patent-type").html(
-                $("#patent-type").val() );
-            configs['patent-option'] = $("#patent-type").val();
-
+                cleanVersion );
             $("#i-tmp-patent-option").html(
-                $("#patent-type").val() );
+                cleanVersion );
             $("#e-tmp-patent-option").html(
-                $("#patent-type").val() );
+                cleanVersion );
+
+            configs['patent-option'] = $("#patent-type").val();
 
             if ( $("#patent-type").val() == 'Traditional' )
             {
-                $("#patent-option-1").show();
-                $("#patent-option-1").removeClass("nuke");
-                $("#patent-option-2").hide();
-                $("#patent-option-2").addClass("nuke");
+                $("#i-tmp-patent-option-1").show();
+                $("#i-tmp-patent-option-1").removeClass("nuke");
+                $("#i-tmp-patent-option-2").hide();
+                $("#i-tmp-patent-option-2").addClass("nuke");
+                $("#e-tmp-patent-option-1").show();
+                $("#e-tmp-patent-option-1").removeClass("nuke");
+                $("#e-tmp-patent-option-2").hide();
+                $("#e-tmp-patent-option-2").addClass("nuke");
 
                 $("#outbound-special").show();
                 $("#outbound-special").removeClass("nuke");
             } else {
-                $("#patent-option-1").hide();
-                $("#patent-option-1").addClass("nuke");
-                $("#patent-option-2").show();
-                $("#patent-option-2").removeClass("nuke");
+                $("#i-tmp-patent-option-1").hide();
+                $("#i-tmp-patent-option-1").addClass("nuke");
+                $("#i-tmp-patent-option-2").show();
+                $("#i-tmp-patent-option-2").removeClass("nuke");
+                $("#e-tmp-patent-option-1").hide();
+                $("#e-tmp-patent-option-1").addClass("nuke");
+                $("#e-tmp-patent-option-2").show();
+                $("#e-tmp-patent-option-2").removeClass("nuke");
 
                 $("#outbound-special").hide();
                 $("#outbound-special").addClass("nuke");
@@ -1014,6 +1099,7 @@ function testApplyPage ()
         '_action[0]=' + serviceUrl + '/query2email/&' +
         '_action[1]=' + serviceUrl + '/query2update/&' +
         '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
+        '_success=Thank you for using contributoragreements.org. The agreement has been signed and sent via E-Mail and will not be stored.&' +
         '_submit=Sign Your Contributor License Agreement.';
 
 
