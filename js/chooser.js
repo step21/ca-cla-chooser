@@ -173,7 +173,7 @@ function updateConfigs ()
     if ( configs["agreement-exclusivity"] == 'exclusive' )
         $("#agreement-exclusivity").val( 'exclusive' );
     else
-        $("#agreement-exclusivity").val( 'nonexclusive' );
+        $("#agreement-exclusivity").val( 'non-exclusive' );
     if ( doDebug)
         console.log("agreement-exclusivity: " + 
             configs["agreement-exclusivity"]);

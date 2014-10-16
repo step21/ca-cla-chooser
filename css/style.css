@@ -83,3 +83,7 @@ table.signing .underline {
 section {
     display: block;
 }
+
+ul ul {
+    margin-bottom: 12px;
+}
