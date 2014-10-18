@@ -27,6 +27,9 @@ var debugNeedle          = 1338;
 var serviceUrl          = 'http://service.fabricatorz.com';
 // var serviceUrl          = 'http://service.localhost';
 
+// var urlShortener        = 'http://contributoragreements.org/u2s';
+// var urlShortener        = serviceUrl + '/u2s';
+var urlShortener        = 'http://service.localhost' + '/u2s';
 
 
 var generalPageIndex    = 0;
@@ -51,6 +54,7 @@ var mediaLicenses       = '';
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
+var shortUrl            = '';
 
 var dictionary = {
     'traditional':              'Traditional Patent License',
@@ -297,6 +301,24 @@ function setFakeData ()
         'http://archive.fabricatorz.com/signing';
     configs['project-jurisdiction']      = 
         'United States, Hong Kong, and China Mainland.';
+}
+
+/*
+function setShortUrl (data)
+{
+    shortUrl = data;
+}
+*/
+
+function getShortUrl(uri)
+{
+    var result = '';
+    $.ajax({ 
+        url: urlShortener + '/set/?l=' + uri,
+        async: false,
+        success: function(data) { result = data; }
+    });
+    return result;
 }
 
 function ucFirst(string)
@@ -1078,11 +1100,27 @@ function testApplyPage ()
     $(".final-link").attr("href", "?" + finalQueryString);
 
 
+
+
     // EXAMPLE: 
     // http://service.fabricatorz.com/query2form/?_replyto=project@rejon.org&_subject=Contributor%20License%20Agreement%20E-Signing%20Process&_body=Fill%20out%20the%20following%20form,%20then%20sign%20your%20initials%20to%20complete%20the%20Contributor%20License%20Agreement.&fullname=&Title=&Company=&email-address=&Physical-address=&Sign-with-your-initials=&_submit=sign
 
 
     var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
+
+
+    var finalLink = "http://" + window.location.host + "/?" + 
+                    finalQueryString;
+    // console.log("finalLink: " + finalLink);
+
+    if ( "" != configs["project-email"] )
+    {
+        var encoded_uri = encodeURIComponent(finalLink);
+        shortUrl = getShortUrl(encoded_uri);
+    } else {
+        shortUrl = '';
+    }
+
 
     var query4form = serviceUrl + '/query2form/?' + 
         '_replyto=' + projectemail + '&' +
@@ -1096,6 +1134,7 @@ function testApplyPage ()
         ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ? 
             'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') + 
         'your-initials=&' +
+        ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) + 
         '_action[0]=' + serviceUrl + '/query2email/&' +
         '_action[1]=' + serviceUrl + '/query2update/&' +
         '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
@@ -1130,9 +1169,12 @@ function testApplyPage ()
 
     }
 
-    var finalLink = "http://" + window.location.host + "/?" + 
-                    finalQueryString;
-    // console.log("finalLink: " + finalLink);
+
+    // make sure short file parameter shows up in emails, and form
+    //
+    // and then also update page
+    // a final step will be to make sure that has SIGNED a doc
+    // that the final PDF and HTML will be signed and attached to email
 
     var finalBrew = 
         "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
