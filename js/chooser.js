@@ -3,29 +3,28 @@
 /**
  * @TODO Need to make compact the config setting code and the review/apply
  * because lots of duplicated code.
- * @TODO the final configs are currently not set from user interface changes
- * @TODO test the default configs, make sure set here in the code
- * @TODO possibly reset some variable names if not consistent
- * @TODO reduce some code complexity
- *
- * @TODO need to finish the query2form and query2email to interface changes
- * @TODO replace the github and google options with this custom option
  * @TODO fix that visual jump on patents tab
- * @TODO insert the link to the CLA Chooser formula in the HTML license and
- * also in the PDF, so they aren't just nondestructive
- * @TODO add some procedure in the signing process for our new esigning process
- * @TODO make simple flatfile backed query2updatelist (list of updates
  * @TODO add cdn jquery and bootstrap and then have the local fallbacks
- * @TODO add other scaffolding for html5, standard sites
+ * @TODO add other scaffolding for html5, standard sites, async
  * @TODO fix testGeneralPage() to be functionized so that each input tested
+ * @TODO need to have some kind of timeout on the shorturl service, its blocking when service down
+ *
+ * # urgent
+ *
+ * @TODO introduced problem between query2email and query2form
+ * @TODO need to add ability to select if signer is individual or entity, think field[0]=something, field[1]=another 
+ * @TODO make sure u2s can handle a short url passed with query string, to add
+ *       to end and not just clobber it
+ *
+ * @TODO finish making u2s work on catharina's server, with apache (server down right now)
  */
 
 
 var doDebug             = false;
-var debugNeedle          = 1338;
+var debugNeedle         = 1337;
 
-var serviceUrl          = 'http://service.fabricatorz.com';
-// var serviceUrl          = 'http://service.localhost';
+// var serviceUrl          = 'http://service.fabricatorz.com';
+var serviceUrl          = 'http://service.localhost';
 
 // var urlShortener        = 'http://contributoragreements.org/u2s';
 // var urlShortener        = serviceUrl + '/u2s';
@@ -55,6 +54,8 @@ var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
 var shortUrl            = '';
+var query4form          = '';
+var query4form_short    = '';
 
 var dictionary = {
     'traditional':              'Traditional Patent License',
@@ -83,6 +84,11 @@ var dictionary = {
  * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3,LIST
  * patent-option=Traditional|Patent-Pledge
  *
+ * your-name=STRING
+ * your-date=STRING
+ * your-title=STRING
+ * your-address=STRING
+ *
  * pos=general|copyright|patents|review|apply
  */
 var configs = {
@@ -98,7 +104,12 @@ var configs = {
     'outboundlist-custom':        '',
     'medialist':                  '',
     'patent-option':              '',
-    'post':                       ''
+    'your-date':                  '',
+    'your-name':                  '',
+    'your-title':                 '',
+    'your-address':               '',
+    'pos':                        'apply',
+    'action':                     ''
 };
 
 
@@ -133,7 +144,8 @@ function queryStringToConfigs ()
 {
     $.each( $.QueryString, function(p,v) {
         configs[p] = v;
-        // console.log("configs[p]=v: " + configs[p] + ": " + p + ": " + v);
+        if ( doDebug )
+            console.log("configs[p]=v: " + configs[p] + ": " + p + ": " + v);
     });
 
 }
@@ -270,6 +282,33 @@ function updateConfigs ()
     if ( doDebug)
         console.log("patent-option: " + configs["patent-option"] );
 
+    /* signer assignment */
+    if ( configs["your-date"] )
+    {
+       // @TODO fix the formatting
+       // var ourDate = new Date('Y m d', configs["your-date"] );
+       // console.log('date: ' + ourDate);
+
+       $("#i-tmp-signing-you-date").html( configs["your-date"] );  
+       $("#e-tmp-signing-you-date").html( configs["your-date"] );  
+    }
+    if ( configs["your-name"] )
+    {
+       $("#i-tmp-signing-you-name").html( configs["your-name"] );  
+       $("#e-tmp-signing-you-name").html( configs["your-name"] );  
+    }
+    if ( configs["your-title"] )
+    {
+       $("#i-tmp-signing-you-title").html( configs["your-title"] );  
+       $("#e-tmp-signing-you-title").html( configs["your-title"] );  
+    }
+    if ( configs["your-address"] )
+    {
+       $("#i-tmp-signing-you-address").html( configs["your-address"] );  
+       $("#e-tmp-signing-you-address").html( configs["your-address"] );  
+    }
+
+
     if ( doDebug)
         printConfigs();
 
@@ -277,19 +316,54 @@ function updateConfigs ()
 
 function loadTemplates ()
 {
-    var converter = new Showdown.converter();
+    // var converter = new Showdown.converter();
+    /*
     $( "#review-text" ).load( 
-        "agreement-template-individual.html", function() { });
+        "agreement-template-individual.html", function() { 
+            console.log("f-sign-indy: " +  $("#review-text").html() );
+        });
     $( "#review-text-entity" ).load( 
-        "agreement-template-entity.html", function() { });
+        "agreement-template-entity.html", function() { 
+            console.log("f-sign-entity: " +  $("#review-text-entity").html() );
+        });
 
     $( "#review-text-style" ).load( "agreement-style.html", function() { });
+    */
+    
+    $.ajax('agreement-template-individual.html', {
+        timeout: 1000,
+        async: false,
+        success: function(resp) {
+            $('#review-text').html(resp);
+            if ( doDebug )
+                console.log("f-sign-indy: " +  $("#review-text").html() );
+        }
+    });
+    $.ajax('agreement-template-entity.html', {
+        timeout: 1000,
+        async: false,
+        success: function(resp) {
+            $('#review-text-entity').html(resp);
+            if ( doDebug )
+                console.log("f-sign-entity: " +  $("#review-text-entity").html() );
+        }
+    });
+    $.ajax('agreement-style.html', {
+        timeout: 1000,
+        async: false,
+        success: function(resp) {
+            $('#review-text-style').html(resp);
+            if ( doDebug )
+                console.log("f-review-text-style: " +  
+                    $("#review-text-style").html() );
+        }
+    });
 
 }
 
 /**
  * A better test now:
- * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&post=
+ * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&pos=
  */
 function setFakeData ()
 {
@@ -319,6 +393,40 @@ function getShortUrl(uri)
         success: function(data) { result = data; }
     });
     return result;
+}
+
+function updateQuery4Form ()
+{
+    var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
+    // if need to debug, remove the '&@u2s' which converts to short url
+    var signerFmt    = encodeURIComponent(shortUrl + 
+        '?your-date=@_time&your-name=@fullname&your-title=@title&' + 
+        'your-address=@email-address&action=sign-@agreement-type&@u2s');
+    // console.log('signerFmt: ' + signerFmt);
+
+    query4form = serviceUrl + '/query2form/?' + 
+        '_replyto=' + projectemail + '&' +
+        '_subject=Contributor License Agreement E-Signing' + '&' +
+        '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
+        'fullname=&' +
+        'title=&' +
+        'company=&' +
+        'email-address=&' +
+        'physical-address=&' +
+        ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ? 
+            'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') + 
+        'your-initials=&' +
+        ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) + 
+        'signed-agreement_s=' + signerFmt + '&' +
+        '_action[0]=' + serviceUrl + '/query2email/&' +
+        '_action[1]=' + serviceUrl + '/query2update/&' +
+        '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
+        '_success=Thank you for using contributoragreements.org. The agreement has been signed and sent via E-Mail and will not be stored.&' +
+        '_submit=Sign Your Contributor License Agreement.';
+
+        var encoded_query_form_uri = encodeURIComponent(query4form);
+        query4form_short = getShortUrl(encoded_query_form_uri);
+
 }
 
 function ucFirst(string)
@@ -1097,7 +1205,6 @@ function testApplyPage ()
     if ( doDebug)
         console.log("finalQueryString: " + finalQueryString);
     // set final linkto be used in the interface
-    $(".final-link").attr("href", "?" + finalQueryString);
 
 
 
@@ -1106,7 +1213,6 @@ function testApplyPage ()
     // http://service.fabricatorz.com/query2form/?_replyto=project@rejon.org&_subject=Contributor%20License%20Agreement%20E-Signing%20Process&_body=Fill%20out%20the%20following%20form,%20then%20sign%20your%20initials%20to%20complete%20the%20Contributor%20License%20Agreement.&fullname=&Title=&Company=&email-address=&Physical-address=&Sign-with-your-initials=&_submit=sign
 
 
-    var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
 
 
     var finalLink = "http://" + window.location.host + "/?" + 
@@ -1121,37 +1227,22 @@ function testApplyPage ()
         shortUrl = '';
     }
 
-
-    var query4form = serviceUrl + '/query2form/?' + 
-        '_replyto=' + projectemail + '&' +
-        '_subject=Contributor License Agreement E-Signing' + '&' +
-        '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
-        'fullname=&' +
-        'title=&' +
-        'company=&' +
-        'email-address=&' +
-        'physical-address=&' +
-        ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ? 
-            'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') + 
-        'your-initials=&' +
-        ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) + 
-        '_action[0]=' + serviceUrl + '/query2email/&' +
-        '_action[1]=' + serviceUrl + '/query2update/&' +
-        '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
-        '_success=Thank you for using contributoragreements.org. The agreement has been signed and sent via E-Mail and will not be stored.&' +
-        '_submit=Sign Your Contributor License Agreement.';
-
+    updateQuery4Form();
 
     if ( ! $('#contributor-process-url').val() )
     {
         if ( "" != configs["project-email"] )
         {
-            $("#link-esign").attr("href", query4form);
-                $("#link-esign").addClass('btn-success');
-                $("#link-esign").removeClass('btn-danger');
-                $("#link-esign").html("Link to E-Signing Form");
-                $("#signing-service").html('<b>Contributor Agreements</b>: ' +
-                    'Share the link with your contributors.');
+            if ( '1337' == debugNeedle )
+                updateTestUrls();
+
+            $("#link-esign").attr("href", 
+                ( "" != query4form_short ) ? query4form_short : query4form );
+            $("#link-esign").addClass('btn-success');
+            $("#link-esign").removeClass('btn-danger');
+            $("#link-esign").html("Link to E-Signing Form");
+            $("#signing-service").html('<b>Contributor Agreements</b>: ' +
+                'Share the link with your contributors.');
         } else {
             $("#link-esign").html( 'Need Project Email' );
             $("#link-esign").removeClass('btn-success');
@@ -1176,9 +1267,17 @@ function testApplyPage ()
     // a final step will be to make sure that has SIGNED a doc
     // that the final PDF and HTML will be signed and attached to email
 
+    var tmpFinalLink = '';
+    if ( "" == shortUrl )
+        tmpFinalLink = finalLink;
+    else
+        tmpFinalLink = shortUrl;
+
+    $(".final-link").attr("href", '?' + finalLink );
+
     var finalBrew = 
         "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
-        '<p><a href="' + finalLink + '">' + finalLink + '</p>' + "\n" + 
+        '<p><a href="' + tmpFinalLink + '">' + tmpFinalLink + '</p>' + "\n" + 
         "</section>\n";
     // console.log("finalBrew: " + finalBrew);
 
@@ -1197,9 +1296,6 @@ function testApplyPage ()
     $("#embed-offscreen-entity .nuke").remove();
 
 
-    // if ( doDebug)
-    /* console.log("EMBEDDING: " + $("#embed-offscreen").html() ); */
-
     $("#embed-agreement").html( $("#embed-offscreen").html() );
     $("#embed-agreement-entity").html( $("#embed-offscreen-entity").html() );
 
@@ -1215,23 +1311,36 @@ function testAllPages()
     testApplyPage();
 }
 
+function updateTestUrls ()
+{
+    /* 
+     * @TODO not working now, changed to localhost in index.html for now
+     *
+    $("#html2pdf-form-individual").attr("action", serviceUrl + 
+        '/html2pdf');
+    $("#html2pdf-form-entity").attr("action", serviceUrl + 
+        '/html2pdf');
+    */
+    if ( configs['project-email'] )
+        $("#link-esign").attr("href", serviceUrl + '/query2form');
+    else
+        $("#link-esign").attr("href", '#');
+
+}
+
 
 $(document).ready(function() {
 
+    loadTemplates();
     
     queryStringToConfigs();
     //  if ( doDebug )
     //    setFakeData();
     updateConfigs();
 
+    if ( '1337' == debugNeedle )
+        updateTestUrls();
 
-    if ( debugNeedle == '1337' )
-    {
-        $("#html2pdf-form-individual").attr('action', 
-            serviceUrl + '/html2pdf');
-        $("#html2pdf-form-entity").attr('action', 
-        serviceUrl + '/html2pdf');
-    }
 
 
 
@@ -1246,7 +1355,6 @@ $(document).ready(function() {
         $('#html2pdf-form-entity').submit();
     });
 
-    loadTemplates();
 
     // @TODO need to make these each test each input, not ALL inputs
     $( "#beneficiary-name" ).change(function() {
@@ -1335,7 +1443,9 @@ $(document).ready(function() {
     });
 
     $( "#link-esign" ).change(function() {
-            $("#link-esign").attr("href", query4form);
+            updateQuery4Form();
+            $("#link-esign").attr("href", 
+                ( "" != query4form_short ) ? query4form_short : query4form );
             $("#link-esign").addClass('btn-success');
             $("#link-esign").removeClass('btn-danger');
             $("#link-esign").html("Link to E-Signing Form");
@@ -1393,27 +1503,41 @@ $(document).ready(function() {
         var $percent = ($current/$total) * 100;
         $('#rootwizard').find('.bar').css({width:$percent+'%'});
 	},
-    onTabClick: function(tab, navigation, index) {
-        if ( doDebug)
-            console.log("tab: " + tab);
-        // oinspect(tab);
-
-        if ( doDebug)
-            console.log("navigation: " + navigation);
-        // oinspect(navigation);
-
-        if ( doDebug)
-            console.log("index: " + index);
-        // alert('on tab click disabled');
-        //
-
+    onTabClick: function(tab, navigation, index) 
+    {
         testAllPages();
-
         return true;
-    } }
+    } 
+    }
 
     );
+
     updatePosition();
+    if ( $.QueryString["action"] )
+    {
+        console.log( "action: " + $.QueryString["action"] );
+        switch ( $.QueryString["action"] ) 
+        {
+            case 'sign-entity':
+                if ( doDebug) 
+                    console.log( "Sign entity" );
+                $('#rootwizard').bootstrapWizard('last');
+                testReviewPage();
+                testApplyPage();
+                // console.log( 'sign-entity: ' + $('#review-text-entity').html() );
+                $('#html2pdf-form-entity').submit();
+                break;
+            case 'sign-individual':
+                if ( doDebug) 
+                    console.log( "Sign individual" );
+                $('#rootwizard').bootstrapWizard('last');
+                testReviewPage();
+                testApplyPage();
+                // console.log("sign-indy: " +  $('#review-text').html() );
+                $('#html2pdf-form-individual').submit();
+                break;
+        }
+    }
 
     window.prettyPrint && prettyPrint()
 
