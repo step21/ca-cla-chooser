@@ -285,12 +285,10 @@ function updateConfigs ()
     /* signer assignment */
     if ( configs["your-date"] )
     {
-       // @TODO fix the formatting
-       // var ourDate = new Date('Y m d', configs["your-date"] );
-       // console.log('date: ' + ourDate);
+       var ourDate = new Date(configs["your-date"]*1000 );
 
-       $("#i-tmp-signing-you-date").html( configs["your-date"] );  
-       $("#e-tmp-signing-you-date").html( configs["your-date"] );  
+       $("#i-tmp-signing-you-date").html( ourDate );  
+       $("#e-tmp-signing-you-date").html( ourDate );  
     }
     if ( configs["your-name"] )
     {
@@ -402,12 +400,12 @@ function updateQuery4Form ()
     var signerFmt    = encodeURIComponent(shortUrl + 
         '?your-date=@_time&your-name=@fullname&your-title=@title&' + 
         'your-address=@email-address&action=sign-@agreement-type&@u2s');
-    // console.log('signerFmt: ' + signerFmt);
 
     query4form = serviceUrl + '/query2form/?' + 
         '_replyto=' + projectemail + '&' +
         '_subject=Contributor License Agreement E-Signing' + '&' +
         '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
+        'agreement-type[]=individual&agreement-type[]=entity&' +
         'fullname=&' +
         'title=&' +
         'company=&' +
