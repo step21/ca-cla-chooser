@@ -9,13 +9,6 @@
  * @TODO fix testGeneralPage() to be functionized so that each input tested
  * @TODO need to have some kind of timeout on the shorturl service, its blocking when service down
  *
- * # urgent
- *
- * @TODO introduced problem between query2email and query2form
- * @TODO need to add ability to select if signer is individual or entity, think field[0]=something, field[1]=another 
- * @TODO make sure u2s can handle a short url passed with query string, to add
- *       to end and not just clobber it
- *
  * @TODO finish making u2s work on catharina's server, with apache (server down right now)
  */
 
