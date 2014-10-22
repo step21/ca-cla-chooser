@@ -19,8 +19,8 @@ var debugNeedle         = 1337;
 var serviceUrl          = 'http://service.fabricatorz.com';
 // var serviceUrl          = 'http://service.localhost';
 
-var urlShortener        = 'http://contributoragreements.org/u2s';
-// var urlShortener        = serviceUrl + '/u2s';
+// var urlShortener        = 'http://contributoragreements.org/u2s';
+var urlShortener        = serviceUrl + '/u2s';
 // var urlShortener        = 'http://service.localhost' + '/u2s';
 
 
