@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Example Embedding of Contributor License Agreement 
+        E-Signing form</title>
+        <meta name="description" content="The Contributor License Agreement Chooser E-Signing Embed Process from contributoragreements.org.">
+        <meta name="author" content="http://www.contributorAgreements.org">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="css/prettify.css" rel="stylesheet">
+	    <link href="css/style.css" rel="stylesheet">
+        <style type="text/css">
+            /* An example of how to style the embedded esign form */
+            #e-sign-process {
+                margin: 0 auto;
+                display: block;
+            }   
+        </style>
+    </head>
+<body>
+<div class="container">
+
+<h2>Embed Your E-Signing Process</h2>
+
+<p>This is an embed of a Contributor License Agreement E-Signing Form. Copy this html and make sure to change the <code>iframe.src</code>, 
+<code>iframe.width</code>, and <code>iframe.height</code> to suit your 
+customized process.</p>
+<p>If you want to style the embed, then you may style the customized id,
+<code>#e-sign-process</code> or set the <code>iframe.id</code> variable in
+the javascript to an id of your choice and style that customized id with CSS.</p>
+<pre>
+&lt;script type=&#39;text/javascript&#39;&gt;     
+    var iframe = document.createElement(&#39;iframe&#39;);       
+    document.body.appendChild(iframe);
+
+    iframe.src      = &#39;http://service.localhost/u2s/46ufwa17e&#39;;
+    iframe.id       = &#39;e-sign-process&#39;;
+    iframe.width    = &#39;100%&#39;;
+    iframe.height   = &#39;100%&#39;;
+&lt;/script&gt;
+</pre>
+
+<br /><br />
+</div>
+<script type='text/javascript'>     
+    var iframe = document.createElement('iframe');       
+    document.body.appendChild(iframe);
+
+    iframe.src      = 'http://service.localhost/u2s/46ufwa17e';
+    iframe.id       = 'e-sign-process';
+    iframe.width    = '650px';
+    iframe.height   = '300px';
+</script>
+
+
+    <script src="bootstrap/js/bootstrap.min.js"></script> 
+	<script src="js/prettify.js"></script>
+
+</body>
+</html>
