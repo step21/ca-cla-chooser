@@ -46,6 +46,13 @@ var mediaLicenses       = '';
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
 
+var outBeforeField      = 'the following';
+var outAfterField       = 'license(s)';
+var fsfField            = 'any licenses on the Free Software ' + 
+                          'Foundation\'s list of "Recommended copyleft ' + 
+                          'licenses" or approved by the Open Source ' + 
+                          'Initiative.';
+
 var shortUrl            = '';
 var query4form          = '';
 var query4form_short    = '';
@@ -456,6 +463,17 @@ function oinspect (obj)
     alert(str);
 }
 
+function fixPatentParagraph( message )
+{
+    if ( typeof message == 'undefined' )
+        message = outBeforeField + " " + 
+                  $("#i-tmp-licenses-2").html() + " " + 
+                  outAfterField;
+
+    $("#i-tmp-licenses-2").html( message );
+    $("#e-tmp-licenses-2").html( message );
+}
+
 function setOutboundOptionSame () 
 {
 
@@ -481,10 +499,10 @@ function setOutboundOptionSame ()
     $("#e-tmp-digit-waiver").html( '6' );
     $("#i-tmp-digit-approx-waiver").html( '7' );
     $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '6' );
-    $("#e-tmp-digit-waiver-2").html( '6' );
-    $("#i-tmp-digit-approx-waiver-2").html( '7' );
-    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '5' );
+    $("#e-tmp-digit-waiver-2").html( '5' );
+    $("#i-tmp-digit-approx-waiver-2").html( '6' );
+    $("#e-tmp-digit-approx-waiver-2").html( '6' );
     $("#i-tmp-digit-term").html( '8' );
     $("#e-tmp-digit-term").html( '8' );
     $("#i-tmp-digit-term-1").html( '8.1' );
@@ -511,10 +529,14 @@ function setOutboundOptionSame ()
     $("#i-tmp-term-special").removeClass("nuke");
     $("#e-tmp-term-special").removeClass("nuke");
 
+    /*
     $("#i-tmp-licenses-2").hide();
     $("#e-tmp-licenses-2").hide();
     $("#i-tmp-licenses-2").addClass("nuke");
     $("#e-tmp-licenses-2").addClass("nuke");
+    */
+    fixPatentParagraph( 'the license or licenses that We ' +
+                        'are using on the Submission Date' );
 
 
     $("#i-tmp-outbound-option-1").show();
@@ -533,11 +555,6 @@ function setOutboundOptionSame ()
 
 function setOutboundOptionSameLicenses ()
 {
-    /*
-    $("#review-outbound-license-options").html(
-        $("#outbound-option-same-licenses").val() );
-    */
-
     configs['outbound-option'] = 'same-licenses';
 
     $("#i-tmp-outbound-section-all").show();
@@ -552,10 +569,10 @@ function setOutboundOptionSameLicenses ()
     $("#e-tmp-digit-waiver").html( '6' );
     $("#i-tmp-digit-approx-waiver").html( '7' );
     $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '6' );
-    $("#e-tmp-digit-waiver-2").html( '6' );
-    $("#i-tmp-digit-approx-waiver-2").html( '7' );
-    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '5' );
+    $("#e-tmp-digit-waiver-2").html( '5' );
+    $("#i-tmp-digit-approx-waiver-2").html( '6' );
+    $("#e-tmp-digit-approx-waiver-2").html( '6' );
     $("#i-tmp-digit-term").html( '8' );
     $("#e-tmp-digit-term").html( '8' );
     $("#i-tmp-digit-term-1").html( '8.1' );
@@ -582,10 +599,20 @@ function setOutboundOptionSameLicenses ()
     $("#i-tmp-term-special").removeClass("nuke");
     $("#e-tmp-term-special").removeClass("nuke");
 
+    /*
     $("#i-tmp-licenses-2").show();
     $("#e-tmp-licenses-2").show();
     $("#i-tmp-licenses-2").removeClass("nuke");
     $("#e-tmp-licenses-2").removeClass("nuke");
+    */
+
+    if ( !outboundCopyrightLicenses ) 
+    {
+        fixPatentParagraph( outBeforeField + " " + 
+                            outAfterField + " " + emptyField );
+    } else {
+        fixPatentParagraph();
+    }
 
 
     $("#i-tmp-outbound-option-1").hide();
@@ -611,11 +638,6 @@ function setOutboundOptionFsf ()
 
     configs['outbound-option'] = 'fsf' ;
 
-    /*
-    $("#review-outbound-license-options").html(
-        $("#outbound-option-fsf").val() );
-    */
-
     $("#i-tmp-outbound-section-all").show();
     $("#i-tmp-outbound-section-all").removeClass("nuke");
     $("#e-tmp-outbound-section-all").show();
@@ -628,10 +650,10 @@ function setOutboundOptionFsf ()
     $("#e-tmp-digit-waiver").html( '6' );
     $("#i-tmp-digit-approx-waiver").html( '7' );
     $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '6' );
-    $("#e-tmp-digit-waiver-2").html( '6' );
-    $("#i-tmp-digit-approx-waiver-2").html( '7' );
-    $("#e-tmp-digit-approx-waiver-2").html( '7' );
+    $("#i-tmp-digit-waiver-2").html( '5' );
+    $("#e-tmp-digit-waiver-2").html( '5' );
+    $("#i-tmp-digit-approx-waiver-2").html( '6' );
+    $("#e-tmp-digit-approx-waiver-2").html( '6' );
     $("#i-tmp-digit-term").html( '8' );
     $("#e-tmp-digit-term").html( '8' );
     $("#i-tmp-digit-term-1").html( '8.1' );
@@ -659,11 +681,15 @@ function setOutboundOptionFsf ()
     $("#i-tmp-term-special").removeClass("nuke");
     $("#e-tmp-term-special").removeClass("nuke");
 
+    /*
     $("#i-tmp-licenses-2").hide();
     $("#e-tmp-licenses-2").hide();
     $("#i-tmp-licenses-2").addClass("nuke");
     $("#e-tmp-licenses-2").addClass("nuke");
+    */
 
+    $("#i-tmp-licenses-2").html( fsfField );
+    $("#e-tmp-licenses-2").html( fsfField );
 
     $("#i-tmp-outbound-option-1").hide();
     $("#i-tmp-outbound-option-1").addClass("nuke");
@@ -677,75 +703,80 @@ function setOutboundOptionFsf ()
     $("#e-tmp-outbound-option-2").addClass("nuke");
     $("#e-tmp-outbound-option-3").show();
     $("#e-tmp-outbound-option-3").removeClass("nuke");
+
+
 }
 
 function setOutboundOptionNoCommitment ()
 {
-                /* remove the outbound-option in review */
-                $("#review-outbound-licenses").html( naField );
+    /* remove the outbound-option in review */
+    $("#review-outbound-licenses").html( naField );
+    $("#review-media-licenses").html( naField );
 
-                configs['outbound-option'] = 'no-commitment'; 
+    configs['outbound-option'] = 'no-commitment'; 
 
-                /*
-                $("#review-outbound-license-options").html(
-                    $("#outbound-option-no-commitment").val() );
-                */
+    /*
+    $("#review-outbound-license-options").html(
+        $("#outbound-option-no-commitment").val() );
+    */
 
-                $("#i-tmp-outbound-option-1").hide();
-                $("#i-tmp-outbound-option-1").addClass("nuke");
-                $("#i-tmp-outbound-option-2").hide();
-                $("#i-tmp-outbound-option-2").addClass("nuke");
-                $("#i-tmp-outbound-option-3").hide();
-                $("#i-tmp-outbound-option-3").addClass("nuke");
-                $("#e-tmp-outbound-option-1").hide();
-                $("#e-tmp-outbound-option-1").addClass("nuke");
-                $("#e-tmp-outbound-option-2").hide();
-                $("#e-tmp-outbound-option-2").addClass("nuke");
-                $("#e-tmp-outbound-option-3").hide();
-                $("#e-tmp-outbound-option-3").addClass("nuke");
-                
-                /* remove entire section 4 */
-                $("#i-tmp-outbound-section-all").hide();
-                $("#i-tmp-outbound-section-all").addClass("nuke");
-                $("#e-tmp-outbound-section-all").hide();
-                $("#e-tmp-outbound-section-all").addClass("nuke");
+    $("#i-tmp-outbound-option-1").hide();
+    $("#i-tmp-outbound-option-1").addClass("nuke");
+    $("#i-tmp-outbound-option-2").hide();
+    $("#i-tmp-outbound-option-2").addClass("nuke");
+    $("#i-tmp-outbound-option-3").hide();
+    $("#i-tmp-outbound-option-3").addClass("nuke");
+    $("#e-tmp-outbound-option-1").hide();
+    $("#e-tmp-outbound-option-1").addClass("nuke");
+    $("#e-tmp-outbound-option-2").hide();
+    $("#e-tmp-outbound-option-2").addClass("nuke");
+    $("#e-tmp-outbound-option-3").hide();
+    $("#e-tmp-outbound-option-3").addClass("nuke");
 
-                /* reorder sections now that section 4 gone */
-                $("#i-tmp-digit-disclaimer").html( '4' );
-                $("#e-tmp-digit-disclaimer").html( '4' );
-                $("#i-tmp-digit-waiver").html( '5' );
-                $("#e-tmp-digit-waiver").html( '5' );
-                $("#i-tmp-digit-approx-waiver").html( '6' );
-                $("#e-tmp-digit-approx-waiver").html( '6' );
-                $("#i-tmp-digit-waiver-2").html( '5' );
-                $("#e-tmp-digit-waiver-2").html( '5' );
-                $("#i-tmp-digit-approx-waiver-2").html( '6' );
-                $("#e-tmp-digit-approx-waiver-2").html( '6' );
-                $("#i-tmp-digit-term").html( '7' );
-                $("#e-tmp-digit-term").html( '7' );
-                $("#i-tmp-digit-term-1").html( '7.1' );
-                $("#e-tmp-digit-term-1").html( '7.1' );
-                /** undisplayed  $("#i-tmp-digit-term-2").html( '7.2' ); */
-                $("#i-tmp-digit-term-3").html( '7.2' );
-                $("#e-tmp-digit-term-3").html( '7.2' );
-                $("#i-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-                $("#e-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-                $("#i-tmp-digit-misc").html( '8' );
-                $("#e-tmp-digit-misc").html( '8' );
-                $("#i-tmp-digit-misc-1").html( '8.1' );
-                $("#e-tmp-digit-misc-1").html( '8.1' );
-                $("#i-tmp-digit-misc-2").html( '8.2' );
-                $("#e-tmp-digit-misc-2").html( '8.2' );
-                $("#i-tmp-digit-misc-3").html( '8.3' );
-                $("#e-tmp-digit-misc-3").html( '8.3' );
-                $("#i-tmp-digit-misc-4").html( '8.4' );
-                $("#e-tmp-digit-misc-4").html( '8.4' );
+    
+    /* remove entire section 4 */
+    $("#i-tmp-outbound-section-all").hide();
+    $("#i-tmp-outbound-section-all").addClass("nuke");
+    $("#e-tmp-outbound-section-all").hide();
+    $("#e-tmp-outbound-section-all").addClass("nuke");
+    // entire section hidden: fixPatentParagraph();
+
+    /* reorder sections now that section 4 gone */
+    $("#i-tmp-digit-disclaimer").html( '4' );
+    $("#e-tmp-digit-disclaimer").html( '4' );
+    $("#i-tmp-digit-waiver").html( '5' );
+    $("#e-tmp-digit-waiver").html( '5' );
+    $("#i-tmp-digit-approx-waiver").html( '6' );
+    $("#e-tmp-digit-approx-waiver").html( '6' );
+    $("#i-tmp-digit-waiver-2").html( '4' );
+    $("#e-tmp-digit-waiver-2").html( '4' );
+    $("#i-tmp-digit-approx-waiver-2").html( '5' );
+    $("#e-tmp-digit-approx-waiver-2").html( '5' );
+    $("#i-tmp-digit-term").html( '7' );
+    $("#e-tmp-digit-term").html( '7' );
+    $("#i-tmp-digit-term-1").html( '7.1' );
+    $("#e-tmp-digit-term-1").html( '7.1' );
+    /** undisplayed  $("#i-tmp-digit-term-2").html( '7.2' ); */
+    $("#i-tmp-digit-term-3").html( '7.2' );
+    $("#e-tmp-digit-term-3").html( '7.2' );
+    $("#i-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+    $("#e-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
+    $("#i-tmp-digit-misc").html( '8' );
+    $("#e-tmp-digit-misc").html( '8' );
+    $("#i-tmp-digit-misc-1").html( '8.1' );
+    $("#e-tmp-digit-misc-1").html( '8.1' );
+    $("#i-tmp-digit-misc-2").html( '8.2' );
+    $("#e-tmp-digit-misc-2").html( '8.2' );
+    $("#i-tmp-digit-misc-3").html( '8.3' );
+    $("#e-tmp-digit-misc-3").html( '8.3' );
+    $("#i-tmp-digit-misc-4").html( '8.4' );
+    $("#e-tmp-digit-misc-4").html( '8.4' );
 
 
-                $("#i-tmp-term-special").hide();
-                $("#e-tmp-term-special").hide();
-                $("#i-tmp-term-special").addClass("nuke");
-                $("#e-tmp-term-special").addClass("nuke");
+    $("#i-tmp-term-special").hide();
+    $("#e-tmp-term-special").hide();
+    $("#i-tmp-term-special").addClass("nuke");
+    $("#e-tmp-term-special").addClass("nuke");
 }
 
 
@@ -1097,8 +1128,10 @@ function testReviewPage ()
             configs['medialist'] = mediaLicenses;
 
             if ( mediaLicenses == "None" ) {
-                $("#outbound-media-license").hide();
-                $("#outbound-media-license").addClass("nuke");
+                $("#e-tmp-outbound-media-license").hide();
+                $("#i-tmp-outbound-media-license").hide();
+                $("#e-tmp-outbound-media-license").addClass("nuke");
+                $("#i-tmp-outbound-media-license").addClass("nuke");
             } else {
                 if ( mediaLicenses == "" )
                     mediaLicenses = emptyField;
@@ -1106,8 +1139,10 @@ function testReviewPage ()
                     mediaLicenses );
                 $("#e-tmp-media-licenses").html(
                     mediaLicenses );
-                $("#outbound-media-license").show();
-                $("#outbound-media-license").removeClass("nuke");
+                $("#i-tmp-outbound-media-license").show();
+                $("#e-tmp-outbound-media-license").show();
+                $("#i-tmp-outbound-media-license").removeClass("nuke");
+                $("#e-tmp-outbound-media-license").removeClass("nuke");
             }
 
             // outbound-option-no-commitment
@@ -1391,6 +1426,8 @@ $(document).ready(function() {
     $( "#outbound-option-same" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
+        $("#medialist-label").show();
+        $("#medialist").show();
         // return testGeneralPage();
     });
 
@@ -1399,18 +1436,24 @@ $(document).ready(function() {
             $("#outboundlist").show();
             $("#outboundlist-custom").show();
         }
+        $("#medialist-label").show();
+        $("#medialist").show();
         // return testGeneralPage();
     });
 
     $( "#outbound-option-fsf" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
+        $("#medialist-label").show();
+        $("#medialist").show();
         // return testGeneralPage();
     });
 
     $( "#outbound-option-no-commitment" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
+        $("#medialist-label").hide();
+        $("#medialist").hide();
         // return testGeneralPage();
     });
 
