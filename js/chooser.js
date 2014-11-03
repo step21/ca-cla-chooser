@@ -135,6 +135,17 @@ function printConfigs ()
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
 
+
+function htmlEscape(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+
 /**
  * Cleanup of the query string data and setting it.
  * @usage: http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
@@ -1262,19 +1273,38 @@ function testApplyPage ()
             if ( '1337' == debugNeedle )
                 updateTestUrls();
 
-            $("#link-esign").attr("href", 
-                ( "" != query4form_short ) ? query4form_short : query4form );
+            var queryReady = 
+                (( "" != query4form_short ) ? query4form_short : query4form );
+
+            $("#link-esign").attr("href", queryReady);
             $("#link-esign").addClass('btn-success');
             $("#link-esign").removeClass('btn-danger');
             $("#link-esign").html("Link to E-Signing Form");
             $("#signing-service").html('<b>Contributor Agreements</b>: ' +
                 'Share the link with your contributors.');
+
+            $("#embed-esign").html(
+                htmlEscape('<script type="text/javascript">' + "\n" +
+                'var iframe = document.createElement(\'iframe\');' + "\n" +
+                'document.body.appendChild(iframe);' + "\n" +
+                'iframe.src = \'' + queryReady + '\';' + "\n" +
+                'iframe.id = \'e-sign-process\';' + "\n" +
+                'iframe.width = \'100%\';' +  "\n" +
+                'iframe.height = \'100%\';' + "\n" +
+                '</script>')
+
+            );
+            $("#embedding-service-all").show();
+
+
         } else {
             $("#link-esign").html( 'Need Project Email' );
             $("#link-esign").removeClass('btn-success');
             $("#link-esign").addClass('btn-danger');
             $("#signing-service").html('<b>Contributor Agreements</b>: ' +
                 'Share the link with your contributors.');
+
+            $("#embedding-service-all").hide();
         }
     } else {
         $("#link-esign").attr("href", $('#contributor-process-url').val());
