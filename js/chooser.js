@@ -16,12 +16,30 @@
 var doDebug             = false;
 var debugNeedle         = 1337;
 
-var serviceUrl          = 'http://service.fabricatorz.com';
-// var serviceUrl          = 'http://service.localhost';
+var services;
 
-// var urlShortener        = 'http://contributoragreements.org/u2s';
-var urlShortener        = serviceUrl + '/u2s';
-// var urlShortener        = 'http://service.localhost' + '/u2s';
+// @TODO really should make this configs and convert code below
+$.ajax({
+    timeout: 1000,
+    async: false,
+    url: 'js/config.json',
+    dataType: "text",
+    success: function(data) {
+        services = $.parseJSON(data);
+    }
+});
+
+var serviceUrl, urlShortener;
+
+if ( ! services || typeof services.serviceUrl === 'undefined' )
+    serviceUrl          = 'http://service.fabricatorz.com';
+else
+    serviceUrl          = services["serviceUrl"];
+
+if ( ! services || typeof services.urlShortener === 'undefined' )
+    urlShortener        = 'http://service.fabricatorz.com/u2s';
+else
+    urlShortener        = services["urlShortener"];
 
 
 var generalPageIndex    = 0;
