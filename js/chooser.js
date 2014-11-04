@@ -1252,7 +1252,8 @@ function testApplyPage ()
 
 
 
-    var finalLink = "http://" + window.location.host + "/?" + 
+    var finalLink = document.URL.substr(0,document.URL.lastIndexOf('/')) + 
+                    "/?" + 
                     finalQueryString;
     // console.log("finalLink: " + finalLink);
 
@@ -1329,7 +1330,7 @@ function testApplyPage ()
     else
         tmpFinalLink = shortUrl;
 
-    $(".final-link").attr("href", '?' + finalLink );
+    $(".final-link").attr("href", finalLink );
 
     var finalBrew = 
         "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
