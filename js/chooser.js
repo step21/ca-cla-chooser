@@ -63,6 +63,7 @@ var mediaLicenses       = '';
 
 var naField             = 'Not Applicable';
 var emptyField          = '____________________';
+var noneField           = 'None.'
 
 var outBeforeField      = 'the following';
 var outAfterField       = 'license(s)';
@@ -126,6 +127,7 @@ var configs = {
     'your-name':                  '',
     'your-title':                 '',
     'your-address':               '',
+    'your-patents':               '',
     'pos':                        'apply',
     'action':                     ''
 };
@@ -334,6 +336,17 @@ function updateConfigs ()
        $("#i-tmp-signing-you-address").html( configs["your-address"] );  
        $("#e-tmp-signing-you-address").html( configs["your-address"] );  
     }
+    if ( configs["your-patents"] )
+    {
+       $("#i-tmp-patent-more").html( nl2br( configs["your-patents"],true) );  
+       $("#e-tmp-patent-more").html( nl2br( configs["your-patents"],true) );  
+    }
+    // let's assume one signed this, but didn't input any patents
+    if ( configs["your-name"] && ! configs["your-patents"] )
+    {
+       $("#i-tmp-patent-more").html( noneField );  
+       $("#e-tmp-patent-more").html( noneField );  
+    }
 
 
     if ( doDebug)
@@ -404,12 +417,14 @@ function setFakeData ()
         'United States, Hong Kong, and China Mainland.';
 }
 
-/*
-function setShortUrl (data)
+function nl2br (str, is_xhtml) 
 {
-    shortUrl = data;
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? 
+    '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + 
+        breakTag + '$2');
 }
-*/
+
 
 function getShortUrl(uri)
 {
@@ -428,7 +443,8 @@ function updateQuery4Form ()
     // if need to debug, remove the '&@u2s' which converts to short url
     var signerFmt    = encodeURIComponent(shortUrl + 
         '?your-date=@_time&your-name=@fullname&your-title=@title&' + 
-        'your-address=@email-address&action=sign-@agreement-type&@u2s');
+        'your-address=@email-address&your-patents=@Patent-IDs-and-Country_t&'+
+        'action=sign-@agreement-type&@u2s');
 
     query4form = serviceUrl + '/query2form/?' + 
         '_replyto=' + projectemail + '&' +
@@ -558,12 +574,6 @@ function setOutboundOptionSame ()
     $("#i-tmp-term-special").removeClass("nuke");
     $("#e-tmp-term-special").removeClass("nuke");
 
-    /*
-    $("#i-tmp-licenses-2").hide();
-    $("#e-tmp-licenses-2").hide();
-    $("#i-tmp-licenses-2").addClass("nuke");
-    $("#e-tmp-licenses-2").addClass("nuke");
-    */
     fixPatentParagraph( 'the license or licenses that We ' +
                         'are using on the Submission Date' );
 
@@ -1209,8 +1219,10 @@ function testReviewPage ()
                 $("#e-tmp-patent-option-2").hide();
                 $("#e-tmp-patent-option-2").addClass("nuke");
 
-                $("#outbound-special").show();
-                $("#outbound-special").removeClass("nuke");
+                $("#i-tmp-outbound-special").show();
+                $("#i-tmp-outbound-special").removeClass("nuke");
+                $("#e-tmp-outbound-special").show();
+                $("#e-tmp-outbound-special").removeClass("nuke");
             } else {
                 $("#i-tmp-patent-option-1").hide();
                 $("#i-tmp-patent-option-1").addClass("nuke");
@@ -1221,8 +1233,10 @@ function testReviewPage ()
                 $("#e-tmp-patent-option-2").show();
                 $("#e-tmp-patent-option-2").removeClass("nuke");
 
-                $("#outbound-special").hide();
-                $("#outbound-special").addClass("nuke");
+                $("#i-tmp-outbound-special").hide();
+                $("#i-tmp-outbound-special").addClass("nuke");
+                $("#e-tmp-outbound-special").hide();
+                $("#e-tmp-outbound-special").addClass("nuke");
 
             }
 
