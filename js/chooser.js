@@ -92,7 +92,7 @@ var dictionary = {
  * project-name=STRING
  * project-website=URL
  * project-email=EMAIL
- * contributor-process-url=URL
+ * process-url=URL
  * project-jurisdiction=STRING
  *
  * contributor-option-entity=entity|individual
@@ -115,7 +115,7 @@ var configs = {
     'project-name':               '',
     'project-website':            '',
     'project-email':              '',
-    'contributor-process-url':    '',
+    'process-url':                '',
     'project-jurisdiction':       '',
     'agreement-exclusivity':      '',
     'outbound-option':            '',
@@ -168,7 +168,7 @@ function htmlEscape(str) {
 
 /**
  * Cleanup of the query string data and setting it.
- * @usage: http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&contributor-process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
+ * @usage: http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive%20Software&project-website=http://archive.fabricatorz.com&project-email=jon@fabricatorz.com&process-url=http://archive.fabricatorz.com/signing&project-jurisdiction=United%20States,%20Hong%20Kong,%20and%20China%20Mainland
  *
  */
 function queryStringToConfigs ()
@@ -210,13 +210,6 @@ function updateConfigs ()
         $('#project-email').val( configs["project-email"] );
     if ( doDebug)
         console.log("project-email: " + configs["project-email"]);
-
-    if ( configs["contributor-process-url"] )
-        $('#contributor-process-url').val( 
-            configs["contributor-process-url"] );
-    if ( doDebug)
-        console.log("contributor-process-url: " + 
-            configs["contributor-process-url"]);
 
     if ( configs["project-jurisdiction"] )
         $('#project-jurisdiction').val( configs["project-jurisdiction"] );
@@ -348,6 +341,15 @@ function updateConfigs ()
        $("#e-tmp-patent-more").html( noneField );  
     }
 
+    // e-tmp-submission-instructions
+    if ( configs["process-url"] )
+    {
+       console.log( configs["process-url"] );
+       $("#contributor-process-url").val( configs["process-url"] );
+       $("#i-tmp-submission-instructions").html( configs["process-url"] );  
+       $("#e-tmp-submission-instructions").html( configs["process-url"] );  
+    }
+
 
     if ( doDebug)
         printConfigs();
@@ -403,7 +405,7 @@ function loadTemplates ()
 
 /**
  * A better test now:
- * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&contributor-process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&pos=
+ * http://cla.fabricatorz.com/?beneficiary-name=Fabricatorz&project-name=Archive+Software&project-website=http%3A%2F%2Farchive.fabricatorz.com&project-email=jon%40fabricatorz.com&process-url=http%3A%2F%2Farchive.fabricatorz.com%2Fsigning&project-jurisdiction=United+States%2C+Hong+Kong%2C+and+China+Mainland.&agreement-exclusivity=&outbound-option=&outboundlist=&outboundlist-custom=&medialist=&patent-option=&pos=
  */
 function setFakeData ()
 {
@@ -411,7 +413,7 @@ function setFakeData ()
     configs['project-name']             = 'Archive Software';
     configs['project-website']           = 'http://archive.fabricatorz.com';
     configs['project-email']             = 'jon@fabricatorz.com';
-    configs['contributor-process-url']   = 
+    configs['process-url']   = 
         'http://archive.fabricatorz.com/signing';
     configs['project-jurisdiction']      = 
         'United States, Hong Kong, and China Mainland.';
@@ -444,6 +446,7 @@ function updateQuery4Form ()
     var signerFmt    = encodeURIComponent(shortUrl + 
         '?your-date=@_time&your-name=@fullname&your-title=@title&' + 
         'your-address=@email-address&your-patents=@Patent-IDs-and-Country_t&'+
+        'process-url=@_processurl&' +
         'action=sign-@agreement-type&@u2s');
 
     query4form = serviceUrl + '/query2form/?' + 
@@ -461,6 +464,7 @@ function updateQuery4Form ()
         'your-initials=&' +
         ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) + 
         'signed-agreement_s=' + signerFmt + '&' +
+        '_processurl=@processurl&' +
         '_action[0]=' + serviceUrl + '/query2email/&' +
         '_action[1]=' + serviceUrl + '/query2update/&' +
         '_next=View%20More%20Contributor%20License%20Agreement%20Signers.&' +
@@ -517,6 +521,18 @@ function fixPatentParagraph( message )
 
     $("#i-tmp-licenses-2").html( message );
     $("#e-tmp-licenses-2").html( message );
+}
+
+function getEmbedCode ( ourQuery )
+{
+    return htmlEscape('<script type="text/javascript">' + "\n" +
+    'var iframe = document.createElement(\'iframe\');' + "\n" +
+    'document.body.appendChild(iframe);' + "\n" +
+    'iframe.src = \'' + ourQuery + '\';' + "\n" +
+    'iframe.id = \'e-sign-process\';' + "\n" +
+    'iframe.width = \'100%\';' +  "\n" +
+    'iframe.height = \'100%\';' + "\n" +
+    '</script>');
 }
 
 function setOutboundOptionSame () 
@@ -885,15 +901,6 @@ function testGeneralPage ()
                 $('#project-email').removeClass("cla-alert");
             }
 
-            /*
-            if ( !$('#contributor-process-url').val() ||
-                 !validateURL( $('#contributor-process-url').val()  ) ) {
-                $('#contributor-process-url').addClass("cla-alert");
-                isGeneralPageOk = false;
-            } else {
-                $('#contributor-process-url').removeClass("cla-alert");
-            }
-            */
 
             if ( !$('#project-jurisdiction').val() ) {
                 $('#project-jurisdiction').addClass("cla-alert");
@@ -1044,7 +1051,7 @@ function testReviewPage ()
                 $("#review-contributor-process-url").html( emptyField );
                 $("#i-tmp-submission-instructions").html( emptyField );
                 $("#e-tmp-submission-instructions").html( emptyField );
-                configs['contributor-process-url'] = '';
+                configs['process-url'] = '';
             } else {
                 $("#review-contributor-process-url").html(
                     $("#contributor-process-url").val() );
@@ -1052,7 +1059,7 @@ function testReviewPage ()
                     $("#contributor-process-url").val() );
                 $("#e-tmp-submission-instructions").html(
                     $("#contributor-process-url").val() );
-                configs['contributor-process-url'] = 
+                configs['process-url'] = 
                     $("#contributor-process-url").val();
             }
 
@@ -1316,17 +1323,7 @@ function testApplyPage ()
             $("#signing-service").html('<b>Contributor Agreements</b>: ' +
                 'Share the link with your contributors.');
 
-            $("#embed-esign").html(
-                htmlEscape('<script type="text/javascript">' + "\n" +
-                'var iframe = document.createElement(\'iframe\');' + "\n" +
-                'document.body.appendChild(iframe);' + "\n" +
-                'iframe.src = \'' + queryReady + '\';' + "\n" +
-                'iframe.id = \'e-sign-process\';' + "\n" +
-                'iframe.width = \'100%\';' +  "\n" +
-                'iframe.height = \'100%\';' + "\n" +
-                '</script>')
-
-            );
+            $("#embed-esign").html( getEmbedCode( queryReady ) );
             $("#embedding-service-all").show();
 
 
@@ -1346,6 +1343,9 @@ function testApplyPage ()
         $("#link-esign").html("Contributor Signing Website");
         $("#signing-service").html('<b>Your Contributor Process</b>: ' + 
                                    'Share with your contributors.');
+        $("#embed-esign").html( getEmbedCode( 
+            $('#contributor-process-url').val() ) );
+        $("#embedding-service-all").show();
 
     }
 
