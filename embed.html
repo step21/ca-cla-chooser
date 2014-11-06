@@ -22,36 +22,19 @@
 
 <h2>Embed Your E-Signing Process</h2>
 
-<p>This is an embed of a Contributor License Agreement E-Signing Form. Copy this html and make sure to change the <code>iframe.src</code>, 
-<code>iframe.width</code>, and <code>iframe.height</code> to suit your 
+<p>This is an embed of a Contributor License Agreement E-Signing Form. Copy this html and make sure to change the <code>src</code>, 
+<code>width</code>, and <code>height</code> to suit your 
 customized process.</p>
 <p>If you want to style the embed, then you may style the customized id,
-<code>#e-sign-process</code> or set the <code>iframe.id</code> variable in
-the javascript to an id of your choice and style that customized id with CSS.</p>
+<code>#e-sign-process</code> or set the <code>id</code> attribute  
+to an id of your choice and style that customized id with CSS.</p>
 <pre>
-&lt;script type=&#39;text/javascript&#39;&gt;     
-    var iframe = document.createElement(&#39;iframe&#39;);       
-    document.body.appendChild(iframe);
-
-    iframe.src      = &#39;http://service.fabricatorz.com/u2s/46ufwa17e&#39;;
-    iframe.id       = &#39;e-sign-process&#39;;
-    iframe.width    = &#39;100%&#39;;
-    iframe.height   = &#39;100%&#39;;
-&lt;/script&gt;
+&lt;iframe id=&quot;e-sign-process&quot; src=&quot;http://contributoragreements.org/u2s/2l6wz6rv&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;/iframe&gt;
 </pre>
 
 <br /><br />
 </div>
-<script type='text/javascript'>     
-    var iframe = document.createElement('iframe');       
-    document.body.appendChild(iframe);
-
-    iframe.src      = 'http://service.fabricatorz.com/u2s/46ufwa17e';
-    iframe.id       = 'e-sign-process';
-    iframe.width    = '650px';
-    iframe.height   = '300px';
-</script>
-
+<iframe id="e-sign-process" src="http://contributoragreements.org/u2s/2l6wz6rv" width="650px" height="300px"></iframe>
 
     <script src="bootstrap/js/bootstrap.min.js"></script> 
 	<script src="js/prettify.js"></script>

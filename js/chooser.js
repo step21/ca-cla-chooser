@@ -525,6 +525,7 @@ function fixPatentParagraph( message )
 
 function getEmbedCode ( ourQuery )
 {
+    /*
     return htmlEscape('<script type="text/javascript">' + "\n" +
     'var iframe = document.createElement(\'iframe\');' + "\n" +
     'document.body.appendChild(iframe);' + "\n" +
@@ -533,6 +534,11 @@ function getEmbedCode ( ourQuery )
     'iframe.width = \'100%\';' +  "\n" +
     'iframe.height = \'100%\';' + "\n" +
     '</script>');
+    */
+    return htmlEscape(
+    '<iframe id="e-sign-process" src="' + ourQuery + 
+    '" width="100%" height="100%"></iframe>'
+    );
 }
 
 function setOutboundOptionSame () 
