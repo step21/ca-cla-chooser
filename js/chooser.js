@@ -20,6 +20,7 @@ var isApplyPageOk       = false;
 
 var outboundCopyrightLicenses = '';
 var mediaLicenses       = '';
+var fsfe_preamble       = 'FSFE preamble goes here';
 
 
 var emptyField          = '____________________';
@@ -113,7 +114,12 @@ function testGeneralPage ()
             } else {
                 $('#project-jurisdiction').removeClass("cla-alert");
             }
-
+            if ( !$('#fsfe-compliance').val() ) {
+                $('#fsfe-compliance').addClass("cla-alert");
+                isGeneralPageOk = false;
+            } else {
+                $('#fsfe-compliance').removeClass("cla-alert");
+        }
     testReviewPage();
 
     return isGeneralPageOk;
