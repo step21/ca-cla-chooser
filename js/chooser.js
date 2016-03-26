@@ -1,7 +1,7 @@
 /** cla chooser main javascript by Fabricatorz **/
 
 
-var doDebug = true;
+var doDebug = false;
 
 var generalPageIndex    = 0;
 var isGeneralPageOk     = false;
@@ -20,7 +20,7 @@ var isApplyPageOk       = false;
 
 var outboundCopyrightLicenses = '';
 var mediaLicenses       = '';
-var fsfe_preamble       = 'FSFE preamble goes here';
+var fsfe_compliance       = 'FSFE preamble goes here';
 
 
 var emptyField          = '____________________';
@@ -34,11 +34,16 @@ function setFakeData ()
     $('#project-email').val('jon@fabricatorz.com');
     $('#contributor-process-url').val('http://archive.fabricatorz.com/signing');
     $('#project-jurisdiction').val('United States, Hong Kong, and China Mainland.');
+    $('#fsfe-compliance').val('No-fsfe-compliance');
 }
 
 function ucFirst(string)
 {
+    if(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
+    else {
+      console.log("string is not defined, something did not load");
+    }
 }
 
 function validateEmail(email)
@@ -81,7 +86,7 @@ function testGeneralPage ()
                 isGeneralPageOk = false;
             } else {
                 $('#project-name').removeClass("cla-alert");
-		    }
+		            }
 
             if ( !$('#project-website').val() ||
                  !validateURL( $('#project-website').val() ) ) {
@@ -114,12 +119,7 @@ function testGeneralPage ()
             } else {
                 $('#project-jurisdiction').removeClass("cla-alert");
             }
-            if ( !$('#fsfe-compliance').val() ) {
-                $('#fsfe-compliance').addClass("cla-alert");
-                isGeneralPageOk = false;
-            } else {
-                $('#fsfe-compliance').removeClass("cla-alert");
-        }
+
     testReviewPage();
 
     return isGeneralPageOk;
@@ -254,8 +254,36 @@ function testReviewPage ()
                     $("#project-jurisdiction").val() );
                 $("#tmp-project-jurisdiction").html(
                     $("#project-jurisdiction").val() );
+                  }
 
+            if( !$("#fsfe-compliance").val() ) {
+              $("#review-fsfe-compliance").html( "no-fsfe-compliance" );
+              $("#tmp-fsfe-compliance").html( "no-fsfe-compliance" );
+              /* if fsfe compliance, keep fsfe span and replace with preamble, if not, nuke fsfe span */
+              if ( $("#fsfe-compliance").val() == 'fsfe-compliance') {
+                console.log('replacing ')
+                $("#review-fsfe-compliance").html(
+                    ucFirst( $("#fsfe-compliance").val() ) );
+                $("#tmp-fsfe-compliance").show();
+                $("#tmp-fsfe-compliance").removeClass("nuke");
+                $("#tmp-fsfe-compliance").html( fsfe_compliance );
+
+              } else {
+                /* nuking works */
+                console.log('nuking...')
+                $("#tmp-fsfe-compliance").hide();
+                $("#tmp-fsfe-compliance").addClass("nuke");
+              }
             }
+
+            /*  $("#review-fsfe-compliance").html(
+                ucFirst( $("#fsfe-compliance").val() ) );
+
+              $("#tmp-fsfe-compliance").html(
+                ucFirst( $("#fsfe-compliance").val() ) );
+
+            } */
+
 
             if ( !$("#agreement-exclusivity").val() ) {
                 $("#review-agreement-exclusivity").html( emptyField );
@@ -412,8 +440,8 @@ function testAllPages()
 
 $(document).ready(function() {
 
-    //if ( doDebug )
-    //    setFakeData();
+    if ( doDebug )
+        setFakeData();
 
     $("#outboundlist").show();
     $("#outboundlist-2").hide();
