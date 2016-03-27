@@ -4,44 +4,43 @@
         <meta charset="utf-8">
         <title>Contributor License Agreement Chooser</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="An experimental Contributor License Agreement Chooser built upon the past, to make a stronger chooser.">
-        <meta name="author" content="http://ContributorAgreements.org">
-        <!-- <link rel="shortcut icon" href="/favicon.png"> -->
-        <!-- Bootstrap -->
+        <meta name="description" content="The Contributor License Agreement Chooser from contributoragreements.org.">
+        <meta name="author" content="http://www.contributorAgreements.org">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
 	    <link href="css/prettify.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet"> 
+        <link href="css/tooltip.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
     </head>
 
     <body>
-    <div class='container'>
-		
+    <div class="loader"></div>
+    <div class="container">
+
 		<div class="span12">
-		    <section id="wizard">
+		    <div id="wizard">
 			    <div class="page-header">
 	            <h1>Contributor License Agreement Chooser</h1>
-                <p>Please enter information below in order to build your
-                   Contributor License Agreement. 
-                   <a href="mailto:info@contributoragreements.org">
-                   info@contributoragreements.org</a></p>
+                <p  id="popover_head" data-toggle="popover" data-trigger="hover" title="Contatct Us!" data-content="Please feel free to contact us if you have any questions regarding the form at team@contributoragreements.org!">Please enter information below in order to build your
+                   Contributor License Agreement.
+                   <a href="mailto:team@contributoragreements.org" >
+                   team@contributoragreements.org</a></p>
                 </div>
-	
+
 				<div id="rootwizard">
 					<div class="navbar">
 					    <div class="navbar-inner">
 					        <div class="container">
 					            <ul class="bullets">
-					  	            <li><a href="#general" 
+					  	            <li><a href="#general"
                                            data-toggle="tab">1. General</a></li>
-						            <li><a href="#copyright" 
+						            <li><a href="#copyright"
                                            data-toggle="tab">2. Copyright</a>
                                            </li>
-						            <li><a href="#patents" 
+						            <li><a href="#patents"
                                            data-toggle="tab">3. Patents</a></li>
-						            <li><a href="#review" 
+						            <li><a href="#review"
                                            data-toggle="tab">4. Review</a></li>
-						            <li><a href="#apply" 
+						            <li><a href="#apply"
                                            data-toggle="tab">5. Apply</a></li>
 					            </ul>
 					        </div>
@@ -57,16 +56,16 @@
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Your Contributor License Agreement</h3>
-                              <p>Enter the information requested below to build your own contributor license agreement.</p>
+                              <p id="top_explanation" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="">Enter the information requested below to build your own contributor license agreement.</p>
                               </div>
                           </div>
                           </li>
                         </ul>
 
 
+                            <!--
                             <label class="radio">
                             <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
                             This is an Entity Contributor Agreement.
@@ -76,42 +75,42 @@
                             This is an Individual Contributor Agreement.
                             </label>
 
-                            <hr />
+                            <hr /> -->
 
-                            <label for="project-family-name">
-                            Project family Name</label>
-						    <input type='text' name='project-family-name' 
-                            id='project-family-name' 
-                            placeholder='Mozilla, Google, Apache...' 
+                            <label for="beneficiary-name" id="beneficiary-name-label" data-toggle="popover" data-trigger="hover" data-title="Entity" data-content="Enter the name of the entity hosting your project. If you don't have an entity that can be listed here, try to set up an entity or find a trustee.">
+                            Entity</label>
+						    <input type='text' name='beneficiary-name'
+                            id='beneficiary-name'
+                            placeholder='Enter your entity name.'
                             class="input-block-level">
 
-                            <label for="project-name">Project Name</label>
-						    <input type='text' name='project-name' 
-                            id='project-name' 
+                            <label for="project-name" id="project-name-label" data-toggle="popover" data-trigger="hover" title="Project Name" data-content="Please provide an identifiable project name here.">Project Name</label>
+						    <input type='text' name='project-name'
+                            id='project-name'
                             placeholder='Your widely identifiable project name.'
                             class="input-block-level">
 
-                            <label for="project-website">Project Website</label>
-						    <input type='text' name='project-website' 
-                            id='project-website' 
-                            placeholder='Enter your website name (URL)' 
+                            <label for="project-website" id="project-website-label" data-toggle="popover" data-trigger="hover" title="Project Website" data-content="Please provide the link to your project website.">Project Website</label>
+						    <input type='text' name='project-website'
+                            id='project-website'
+                            placeholder='Enter your website name (URL).'
                             class="input-block-level">
 
-                            <label for="project-email">Project Email</label>
-						    <input type='text' name='project-email' 
-                            id='project-email' 
-                            placeholder='The primary email address that your project uses to receive email.' 
+                            <label for="project-email" id="project-email-label" data-toggle="popover" data-trigger="hover" title="Contact E-Mail address" data-content="Please provide an E-Mail Address that can be used for regular communication.">Project Email</label>
+						    <input type='text' name='project-email'
+                            id='project-email'
+                            placeholder='The primary email address that your project uses to receive email.'
                             class="input-block-level">
 
-                            <label for="contributor-process-url">
+                            <label for="contributor-process-url" id="contributor-process-url-label" data-toggle="popover" data-trigger="hover" title="Contributor Page" data-content="If you have a website where you explain the signing process for contributor agreements please put it here.">
                             Contributor Signing Process Website</label>
-						    <input type='text' 
-                            name='contributor-process-url' 
-                            id='contributor-process-url' 
-                            placeholder='A Website address where instructions exist and your contributors will go to sign the agreement.' 
+						    <input type='text'
+                            name='contributor-process-url'
+                            id='contributor-process-url'
+                            placeholder='A Website address where instructions exist and your contributors will go to sign the agreement.'
                             class="input-block-level">
 
-                            <label for="project-jurisdiction">In what jurisdiction is this agreement to be valid?</label>
+                            <label for="project-jurisdiction" id="project-jurisdiction-label" data-toggle="popover" data-trigger="hover" title="Jurisdiction" data-content="Please specify what legal jurisdiction the agreement will be governed in. Typically, this would be the jurisdiction where your entity is registered.">Which jurisdiction should be mentioned in the agreement?</label>
                             <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s), e.g. Germany.">
 
 
@@ -127,7 +126,6 @@
 <ul class="thumbnails">
   <li class="span12">
   <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="">
       <div class="caption">
       <h3>Copyright Information</h3>
       <p>Copyright is a legal concept, enacted by most governments, giving the creator of an original work exclusive rights to it, usually for a limited time, with the intention of enabling the creator of intellectual wealth (e.g. the photographer of a photograph or the author of a book) to get compensated for their work and be able to financially support themselves. <a href="http://en.wikipedia.org/wiki/Copyright">Wikipedia</a></p>
@@ -136,21 +134,28 @@
   </li>
 </ul>
 
-    <label for="agreement-exclusivity">Which style of contributor (inbound licensing) agreement would you like?</label> 
+    <label for="agreement-exclusivity" id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="You can choose between an exclusive license and a non-exclusive license. A non-exclusive license is the right to use the contribution on a non-exclusive basis, meaning that the contributor can also grant a license to someone else to use the same contribution. An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclsuive license back to the contributor to allow him to exploit his contribution.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
-<option value="nonexclusive">NON Exclusive License</option>
+<option value="non-exclusive">Non-Exclusive License</option>
 </select>
 
 
 
-<label for="outbound-options">Please select an outbound license option path:</label>
+<p id="outbound-options-label" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</p>
+<div id="outbound_option_1" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-same" value="same" checked>
-<strong>Option 1</strong> - Yes, we agree to license the Contribution only under the terms of the license or licenses which We are using on the Submission Date for the Material (including any rights to adopt any future version of a license).
-</label>
+<input type="radio" name="outbound-options" id="outbound-option-same" value="Use Same License" checked>
+<strong>Option 1</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the material (including any rights to adopt any future version of a license).
+</label></div>
 
-    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist" 
+<div id="outbound-option-2-label" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license.">
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="Use Same with Licenses">
+<strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
+</label></div>
+
+    <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
     class="input-block-level">
       <option value="Apache-2.0">Apache License 2.0</option>
       <option value="Artistic-1.0">Artistic License 1.0</option>
@@ -171,54 +176,32 @@
 
 
 
+<input type="text" name="outboundlist-custom" id="outboundlist-custom"
+class="input-block-level" placeholder="If one or more of your preferred licenses were not listed, please list other licenses here.">
+
+
+<div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="same with licenses">
-<strong>Option 2</strong> - Yes, we agree to license the Contribution only under the terms of the following license (including any right to adopt any future version of a license if permitted):
+<input type="radio" name="outbound-options" id="outbound-option-fsf" value="Use FSF or OSI Approved Licenses">
+<strong>Option 3</strong> - The contributions can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
 </label>
+</div>
 
-    <select multiple="multiple" size=3 id="outboundlist-2" name="outboundlist" 
-    class="input-block-level">
-      <option value="Apache-2.0">Apache License 2.0</option>
-      <option value="Artistic-1.0">Artistic License 1.0</option>
-      <option value="Artistic-2.0">Artistic License 2.0</option>
-      <option value="BSD-2-Clause">BSD "Simplified" License</option>
-      <option value="BSD-3-Clause">BSD "Revised" License</option>
-      <option value="CDDL-1.0">Common Development and Distribution License 1.0</option>
-      <option value="EPL-1.0">Eclipse Public License 1.0</option>
-      <option value="GPL-2.0">GNU General Public License v2.0</option>
-      <option value="GPL-3.0">GNU General Public License v3.0</option>
-      <option value="LGPL-2.0">GNU Lesser General Public License v2.0</option>
-      <option value="LGPL-2.1">GNU Lesser General Public License v2.1</option>
-      <option value="LGPL-3.0">GNU Lesser General Public License v3.0</option>
-      <option value="AGPL-3.0">GNU Affero General Public License v3.0</option>
-      <option value="MIT">MIT License</option>
-      <option value="MPL-1.1">Mozilla Public License 1.1</option>
-    </select>
-
-
-
-<input type="text" name="outboundlist-custom" id="outboundlist-custom" 
-class="input-block-level" placeholder="Please list other licenses here.">
-
-
-
-<label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-fsf" value="same with fsf">
-<strong>Option 3</strong> - Yes, we agree to license the Contribution only under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">Recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the Submission Date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
-</label>
-
+<div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="Gives you the flexibility to choose any license now or in the future.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-no-commitment" value="No commitment to any specific outbound license">
-<strong>Option 4</strong> - No, we will not commit to any specific outbound license.
+<strong>Option 4</strong> - No commitment to any specific outbound license.
 </label>
+</div>
 
 <hr />
 
 
-<label for="outbound-media-licenses">
-<label for="medialist">Would you like to add a documentation license for materials other than code to be contributed to your project?</label>
+<div id="outbound-media-label" data-toggle="popover" data-trigger="hover" title="Documentation License" data-content="The documentation license can cover any material that is not code but still part of the contribution.">
+<label id="medialist-label" for="medialist">Would you like to add a documentation license for materials other than code?</label>
+</div>
     <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
-      <option value="No" selected="selected">No</option>
+      <option value="None" selected="selected">None</option>
       <option value="GFDL-1.1">GNU Free Documentation License v1.1</option>
       <option value="GFDL-1.2">GNU Free Documentation License v1.2</option>
       <option value="GFDL-1.3">GNU Free Documentation License v1.3</option>
@@ -260,12 +243,11 @@ class="input-block-level" placeholder="Please list other licenses here.">
 
 					    </div>
 
-						<div class="tab-pane" id="patents">
+						<div class="tab-pane" id="patents" data-toggle="popover" data-trigger="hover" title="" data-content="">
 
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Patent Information</h3>
                               <p>Patents are a set of exclusive rights granted by a sovereign state to an inventor or their assignee for a limited period of time, in exchange for the public disclosure of the invention. <a href="http://en.wikipedia.org/wiki/Patent">Wikipedia</a></p>
@@ -274,42 +256,41 @@ class="input-block-level" placeholder="Please list other licenses here.">
                           </li>
                         </ul>
 
-                            <label for="patent-type">What type of Patent License do you want in your agreement?</label>
+                            <label for="patent-type" id="patent-type-label" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="You can choose between a patent license and an identified patent pledge. The patent pledge is an alternative tailored for contributors who are reluctant to sign the patent license and looking for an alternative to control their patents. The patent pledge requires for the pledging contributor to identify the pledged patents and list them in the agreement.">What type of Patent License do you want in your agreement?</label>
                             <select id="patent-type" name="patent-type" class="input-block-level">
-                            <option value="traditional">Traditional Patent License</option>
-                            <option value="patent-pledge">Identified Patent Pledge</option>
-                            </select>					  
+                            <option value="Traditional">Traditional Patent License</option>
+                            <option value="Patent-Pledge">Identified Patent Pledge</option>
+                            </select>
 
 
 
-                        <ul class="thumbnails" id="patent-option-2-options">
+<!-- move to embedding ...  -->               <!--        <ul class="thumbnails" id="patent-option-2-options">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
-                              <div class="caption">
+                             <div class="caption">
+
 <p>Optional Patent Pledge More Information<p>
 
-<p><em>NOTE: Title, Application Office, Application Number, Date and Priority Number for patents is important when listing on your external more inoformation source.</em></p>
+<p><em>NOTE: Title, Application Office, Application Number, Date and Priority Number for patents is important when listing information about your patents your external information source.</em></p>
 
 <label for="patent-more-url">Website Address (URL) to more information on your patent(s)</label>
 <input type="text" class="input-block-level" name="patent-more-url" id="patent-more-url">
                               </div>
                           </div>
                           </li>
-                        </ul>
+                        </ul>  -->
 
-  
+
                         </div>
 
 
-						<div class="tab-pane" id="review">
+						<div class="tab-pane" id="review" data-toggle="popover" data-trigger="hover" title="" data-content="">
 
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
-                              <h3>Information Below</h3>
+                              <h3>Review Information Below</h3>
                               <p>This chooser allows you to skip ahead to this point in the process. If you did not enter all information in the previous sections, then the final output will provide blanks in the final generated agreement.</p>
                               </div>
                           </div>
@@ -319,23 +300,17 @@ class="input-block-level" placeholder="Please list other licenses here.">
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
                               <h3>Please review the choices that you selected.</h3>
-                              
+
                         <table class="table table-striped">
                         <tr>
                         <th>Option</th><th>Choice</th>
                         </tr>
 
                         <tr>
-                        <td>Agreement Type</td>
-                        <td id="review-agreement-type"></td>
-                        </tr>
-
-                        <tr>
-                        <td>Project Family Name</td>
-                        <td id="review-project-family-name"></td>
+                        <td>Entity Name</td>
+                        <td id="review-beneficiary-name"></td>
                         </tr>
 
                         <tr>
@@ -372,38 +347,27 @@ class="input-block-level" placeholder="Please list other licenses here.">
                         <td id="review-agreement-exclusivity"></td>
                         </tr>
 
-
                         <tr>
                         <td>Outbound License(s)</td>
                         <td id="review-outbound-licenses"></td>
                         </tr>
 
-                        <tr>
-                        <td>Outbound License Options</td>
-                        <td id="review-outbound-license-options"></td>
-                        </tr>
 
                         <tr>
-                        <td>Other Agreements?</td>
-                        <td id="review-outbound-license-other"></td>
-                        </tr>
-
-
-                        <tr>
-                        <td>Media License(s)</td>
+                        <td>Documentation License(s)</td>
                         <td id="review-media-licenses"></td>
                         </tr>
 
 
                         <tr>
-                        <td>Patent Type</td>
+                        <td>Patents</td>
                         <td id="review-patent-type"></td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                         <td>Patent Optional Information Address</td>
                         <td id="review-patent-more-url"></td>
-                        </tr>
+                        </tr> -->
 
 
 
@@ -420,12 +384,19 @@ class="input-block-level" placeholder="Please list other licenses here.">
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption" id="review-text">
                               </div>
                           </div>
                           </li>
                         </ul>
+
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <div class="caption" id="review-text-entity">
+                              </div>
+                          </div>
+                          </li>
 
 
 					    </div>
@@ -434,44 +405,80 @@ class="input-block-level" placeholder="Please list other licenses here.">
                         <ul class="thumbnails">
                           <li class="span12">
                           <div class="thumbnail">
-                              <img data-src="holder.js/300x200" alt="">
                               <div class="caption">
-                              <h3>Your Final Contributor License Agreement</h3>
-                              <p>Below are packaged versions of your agreement for an individual or
-                              entity that you may use.</p>
+                              <h3>Your Final Contributor License Agreement</h3> <!-- Explain under which terms they may be used, where to put -->
+                              <p>Below is a packaged version of your generated agreement and a way to build an e-signing process for your contributors.</p>
                               </div>
                           </div>
                           </li>
                         </ul>
 
+                        <ul class="thumbnails">
+                        <li class="span12">
+                        <div class="thumbnail">
+                        <div class="caption">
+                        <h3>You are done.</h3>
+                        <p><strong>Agreement for Print, Mail and Signing.</strong></p>
+
                         <table class="table table-striped">
                         <tr>
-                        <th>Agreement</th><th>Version</th><th id="apply-format">Format</th>
+                        <th>Agreement</th><th class="version">Version</th><th class="apply-format">Format</th>
                         </tr>
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" class="htmlstore" id="htmlstore-individual" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
-                        </tr>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
+                      	</tr>
 
                         <tr id="apply-entity">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" class="htmlstore" id="htmlstore-entity" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+
                         </tr>
+                        </table>
+
+                        <p><strong>Build E-Signing Process for Your Contributors</strong></p>
+
+                        <table class="table table-striped">
+                        <tr>
+                        <th>Service</th>
+                        <th class="version"> </th>
+                        <th class="apply-format">Action</th>
+                        </tr>
+
+						<tr>
+                        <td id="signing-service"><b>Contributor Agreements</b>: Share the link with your contributors.</td>
+						<td> </td>
+						<td><a role="button" class="btn btn-success" id="link-esign" data-inline="true" href="//service.fabricatorz.com/query2form/">Link to E-Signing Form</a></td>
+						</tr>
+
+						<tr id="embedding-service-all">
+                        <td id="embedding-service"><b>Embed Your E-Sign Form</b>: Select text and copy. (<a href="embed.html" title="Developer Details">Need help?</a>)</td>
+						<td> </td>
+						<td><textarea class="form-control" rows="5" 
+                            id="embed-esign" rows="3"
+                            onfocus="this.select();" 
+                            onmouseup="return false;"></textarea></td>
+						</tr>
 
                         </table>
 
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
 
-                        <!-- Modal -->
+
+                        <!-- Modal INDIVIDUAL START-->
                         <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel"><span id="modal-agreement-type"></span> Contributor License Agreement</h3>
+                            <h3 id="myModalLabel">Individual Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
-                            <caption>Click the box below. Then, copy and paste the agreement where you would like.</caption><br /><br />
+                            <span>Click the box below. Then, copy and paste the agreement where you would like.</span><br /><br />
                         <textarea id="embed-agreement" class="input-block-level" onclick="this.select();" rows="14" readonly>
                         </textarea>
                           </div>
@@ -479,6 +486,30 @@ class="input-block-level" placeholder="Please list other licenses here.">
                             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                           </div>
                         </div>
+                        <!-- Modal INDIVIDUAL END -->
+
+
+                        <!-- Modal ENTITY START -->
+                        <div id="myHTML-entity" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel">Entity Contributor License Agreement</h3>
+
+                          </div>
+                          <div class="modal-body">
+                            <span>Click the box below. Then, copy and paste the agreement where you would like.</span><br /><br />
+                        <textarea id="embed-agreement-entity" class="input-block-level" onclick="this.select();" rows="14" readonly>
+                        </textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                          </div>
+                        </div>
+                        <!-- Modal ENTITY END -->
+
+
+
+                        <div id="review-text-style" style="display: none"></div>
 
 
 
@@ -490,25 +521,32 @@ class="input-block-level" placeholder="Please list other licenses here.">
 							<li class="next last" style="display:none;"><a href="#">Last</a></li>
 						  	<li class="next"><a href="#">Next</a></li>
 						</ul>
-					</div>	
-				
+					</div>
+
     <footer id="sponsor">Brought to you by <a href="http://contributoragreements.org/"><img id="calogo" onerror="this.onerror=null; this.src='http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.png'" src="http://contributoragreements.org/wp-content/themes/bones/images/ca_logo.svg" alt="Contributor Agreements" /></a></footer>
 
-			</section>
+			</div>
  		</div>
 	</div>
+    </div>
 
-    <div id="embed-offscreen" style="display: none;"></div>
+    <div id="embed-offscreen" style="display: none;">&nbsp;</div>
+    <div id="embed-offscreen-entity" style="display: none;">&nbsp;</div>
 
 
-    <script src="//code.jquery.com/jquery-latest.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="/bootstrap3/js/bootstrap.min.js"></script> -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js">\x3C/script>')</script>
+    <script type="text/javascript">
+    $(window).load(function() {
+            $(".loader").fadeOut("slow");
+    })
+    </script>
 
-    <script src="js/showdown.js"></script>
-
-	<script src="js/jquery.bootstrap.wizard.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script> 
+    <!-- <script src="js/showdown.js"></script> -->
+    <script src="js/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
 	<script src="js/prettify.js"></script>
+    <script src="js/tooltip.js"></script>
     <script src="js/chooser.js"></script>
   </body>
 </html>
