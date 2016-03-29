@@ -6,7 +6,7 @@ Thank you for your interest in contributing to [PROJECT_NAME / Software] ("We" o
 
 The purpose of this contributor agreement ("Agreement") is to clarify and document the rights granted by contributors to Us. To make this document effective, please follow the instructions at [SUBMISSION_INSTRUCTIONS].
 
-[FSFE_COMPLIANCE]
+[FSFE_PREAMBLE]
 
 1. DEFINITIONS
 --------------
