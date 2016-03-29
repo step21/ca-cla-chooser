@@ -67,10 +67,12 @@ var noneField           = 'None.'
 
 var outBeforeField      = 'the following';
 var outAfterField       = 'license(s)';
-var fsfField            = 'any licenses on the Free Software ' + 
-                          'Foundation\'s list of "Recommended copyleft ' + 
-                          'licenses" or approved by the Open Source ' + 
+var fsfField            = 'any licenses on the Free Software ' +
+                          'Foundation\'s list of "Recommended copyleft ' +
+                          'licenses" or approved by the Open Source ' +
                           'Initiative.';
+
+var fsfePreamble        = 'This is a test preamble';
 
 var shortUrl            = '';
 var query4form          = '';
@@ -85,7 +87,7 @@ var dictionary = {
 };
 
 /** could even set defaults here
- * 
+ *
  * Query String Possible Parameters:
  *
  * beneficiary-name=STRING
@@ -118,6 +120,7 @@ var configs = {
     'process-url':                '',
     'project-jurisdiction':       '',
     'agreement-exclusivity':      '',
+    'fsfe-compliance':            '',
     'outbound-option':            '',
     'outboundlist':               '',
     'outboundlist-custom':        '',
@@ -183,7 +186,7 @@ function queryStringToConfigs ()
 
 /**
  * @todo can combine this with review code and save code, but will need
- * to abstract the following more thanlikely into functions.
+ * to abstract the following more than likely into functions.
  * Then, that will allow creating a querystring easier
  */
 function updateConfigs ()
@@ -193,38 +196,44 @@ function updateConfigs ()
 
     if ( configs["beneficiary-name"] )
         $('#beneficiary-name').val( configs["beneficiary-name"] );
-    if ( doDebug)
+    if ( doDebug )
         console.log("beneficiary-name: " + configs["beneficiary-name"]);
 
     if ( configs["project-name"] )
         $('#project-name').val( configs["project-name"] );
-    if ( doDebug)
+    if ( doDebug )
         console.log("project-name: " + configs["project-name"]);
 
     if ( configs["project-website"] )
         $('#project-website').val( configs["project-website"] );
-    if ( doDebug)
+    if ( doDebug )
         console.log("project-website: " + configs["project-website"]);
 
     if ( configs["project-email"] )
         $('#project-email').val( configs["project-email"] );
-    if ( doDebug)
+    if ( doDebug )
         console.log("project-email: " + configs["project-email"]);
 
     if ( configs["project-jurisdiction"] )
         $('#project-jurisdiction').val( configs["project-jurisdiction"] );
-    if ( doDebug)
-        console.log("project-jurisdiction: " + 
+    if ( doDebug )
+        console.log("project-jurisdiction: " +
             configs["project-jurisdiction"]);
 
+    /* fsfe compliance changes */
+    if ( configs["fsfe-compliance"] )
+      $('#fsfe-compliance').val(configs["fsfe-compliance"] );
+    if ( doDebug )
+        console.log("fsfe-compliance: " +
+            configs["fsfe-compliance"]);
 
     /* copyright */
     if ( configs["agreement-exclusivity"] == 'exclusive' )
         $("#agreement-exclusivity").val( 'exclusive' );
     else
         $("#agreement-exclusivity").val( 'non-exclusive' );
-    if ( doDebug)
-        console.log("agreement-exclusivity: " + 
+    if ( doDebug )
+        console.log("agreement-exclusivity: " +
             configs["agreement-exclusivity"]);
 
 
@@ -234,6 +243,7 @@ function updateConfigs ()
     // hide by default
     $("#outboundlist").hide();
     $("#outboundlist-custom").hide();
+
 
     switch ( configs["outbound-option"] ) {
         // option-2
@@ -268,7 +278,7 @@ function updateConfigs ()
             // setOutboundOptionSame();
     }
 
-    if ( doDebug)
+    if ( doDebug )
         console.log("outbound-option: " + configs["outbound-option"]);
 
 
@@ -278,14 +288,14 @@ function updateConfigs ()
             $("#outboundlist option[value='" + e + "']").prop("selected", true);
         });
     }
-    if ( doDebug)
-        console.log("outboundlist: " + 
+    if ( doDebug )
+        console.log("outboundlist: " +
             configs["outboundlist"]);
 
     if ( configs["outboundlist-custom"] )
         $("#outboundlist-custom" ).val( configs["outboundlist-custom"] );
-    if ( doDebug)
-        console.log("outboundlist-custom: " + 
+    if ( doDebug )
+        console.log("outboundlist-custom: " +
             configs["outboundlist-custom"]);
 
     $("#medialist option[value='None']").prop("selected", false);
@@ -294,8 +304,8 @@ function updateConfigs ()
         $.each( configs["medialist"].split(","), function(i,e){
             $("#medialist option[value='" + e + "']").prop("selected", true);
         });
-    } 
-    if ( doDebug)
+    }
+    if ( doDebug )
         console.log("medialist: " + configs["medialist"]);
 
     /* patent page */
@@ -303,7 +313,7 @@ function updateConfigs ()
         $("#patent-type").val( 'Traditional' );
     else
         $("#patent-type").val( 'Patent-Pledge' );
-    if ( doDebug)
+    if ( doDebug )
         console.log("patent-option: " + configs["patent-option"] );
 
     /* signer assignment */
@@ -311,34 +321,34 @@ function updateConfigs ()
     {
        var ourDate = new Date(configs["your-date"]*1000 );
 
-       $("#i-tmp-signing-you-date").html( ourDate );  
-       $("#e-tmp-signing-you-date").html( ourDate );  
+       $("#i-tmp-signing-you-date").html( ourDate );
+       $("#e-tmp-signing-you-date").html( ourDate );
     }
     if ( configs["your-name"] )
     {
-       $("#i-tmp-signing-you-name").html( configs["your-name"] );  
-       $("#e-tmp-signing-you-name").html( configs["your-name"] );  
+       $("#i-tmp-signing-you-name").html( configs["your-name"] );
+       $("#e-tmp-signing-you-name").html( configs["your-name"] );
     }
     if ( configs["your-title"] )
     {
-       $("#i-tmp-signing-you-title").html( configs["your-title"] );  
-       $("#e-tmp-signing-you-title").html( configs["your-title"] );  
+       $("#i-tmp-signing-you-title").html( configs["your-title"] );
+       $("#e-tmp-signing-you-title").html( configs["your-title"] );
     }
     if ( configs["your-address"] )
     {
-       $("#i-tmp-signing-you-address").html( configs["your-address"] );  
-       $("#e-tmp-signing-you-address").html( configs["your-address"] );  
+       $("#i-tmp-signing-you-address").html( configs["your-address"] );
+       $("#e-tmp-signing-you-address").html( configs["your-address"] );
     }
     if ( configs["your-patents"] )
     {
-       $("#i-tmp-patent-more").html( nl2br( configs["your-patents"],true) );  
-       $("#e-tmp-patent-more").html( nl2br( configs["your-patents"],true) );  
+       $("#i-tmp-patent-more").html( nl2br( configs["your-patents"],true) );
+       $("#e-tmp-patent-more").html( nl2br( configs["your-patents"],true) );
     }
     // let's assume one signed this, but didn't input any patents
     if ( configs["your-name"] && ! configs["your-patents"] )
     {
-       $("#i-tmp-patent-more").html( noneField );  
-       $("#e-tmp-patent-more").html( noneField );  
+       $("#i-tmp-patent-more").html( noneField );
+       $("#e-tmp-patent-more").html( noneField );
     }
 
     // e-tmp-submission-instructions
@@ -346,12 +356,12 @@ function updateConfigs ()
     {
        console.log( configs["process-url"] );
        $("#contributor-process-url").val( configs["process-url"] );
-       $("#i-tmp-submission-instructions").html( configs["process-url"] );  
-       $("#e-tmp-submission-instructions").html( configs["process-url"] );  
+       $("#i-tmp-submission-instructions").html( configs["process-url"] );
+       $("#e-tmp-submission-instructions").html( configs["process-url"] );
     }
 
 
-    if ( doDebug)
+    if ( doDebug )
         printConfigs();
 
 }
@@ -360,18 +370,18 @@ function loadTemplates ()
 {
     // var converter = new Showdown.converter();
     /*
-    $( "#review-text" ).load( 
-        "agreement-template-individual.html", function() { 
+    $( "#review-text" ).load(
+        "agreement-template-individual.html", function() {
             console.log("f-sign-indy: " +  $("#review-text").html() );
         });
-    $( "#review-text-entity" ).load( 
-        "agreement-template-entity.html", function() { 
+    $( "#review-text-entity" ).load(
+        "agreement-template-entity.html", function() {
             console.log("f-sign-entity: " +  $("#review-text-entity").html() );
         });
 
     $( "#review-text-style" ).load( "agreement-style.html", function() { });
     */
-    
+
     $.ajax('agreement-template-individual.html', {
         timeout: 1000,
         async: false,
@@ -396,7 +406,7 @@ function loadTemplates ()
         success: function(resp) {
             $('#review-text-style').html(resp);
             if ( doDebug )
-                console.log("f-review-text-style: " +  
+                console.log("f-review-text-style: " +
                     $("#review-text-style").html() );
         }
     });
@@ -413,17 +423,17 @@ function setFakeData ()
     configs['project-name']             = 'Archive Software';
     configs['project-website']           = 'http://archive.fabricatorz.com';
     configs['project-email']             = 'jon@fabricatorz.com';
-    configs['process-url']   = 
+    configs['process-url']   =
         'http://archive.fabricatorz.com/signing';
-    configs['project-jurisdiction']      = 
+    configs['project-jurisdiction']      =
         'United States, Hong Kong, and China Mainland.';
 }
 
-function nl2br (str, is_xhtml) 
+function nl2br (str, is_xhtml)
 {
-    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? 
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ?
     '<br />' : '<br>';
-    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + 
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' +
         breakTag + '$2');
 }
 
@@ -431,7 +441,7 @@ function nl2br (str, is_xhtml)
 function getShortUrl(uri)
 {
     var result = '';
-    $.ajax({ 
+    $.ajax({
         url: urlShortener + '/set/?l=' + uri,
         async: false,
         success: function(data) { result = data; }
@@ -443,13 +453,13 @@ function updateQuery4Form ()
 {
     var projectemail = ( configs["project-email"] ) ? configs["project-email"] : "";
     // if need to debug, remove the '&@u2s' which converts to short url
-    var signerFmt    = encodeURIComponent(shortUrl + 
-        '?your-date=@_time&your-name=@fullname&your-title=@title&' + 
+    var signerFmt    = encodeURIComponent(shortUrl +
+        '?your-date=@_time&your-name=@fullname&your-title=@title&' +
         'your-address=@email-address&your-patents=@Patent-IDs-and-Country_t&'+
         'process-url=@_processurl&' +
         'action=sign-@agreement-type&@u2s');
 
-    query4form = serviceUrl + '/query2form/?' + 
+    query4form = serviceUrl + '/query2form/?' +
         '_replyto=' + projectemail + '&' +
         '_subject=Contributor License Agreement E-Signing' + '&' +
         '_body=Fill out the following form, then sign your initials to complete the Contributor License Agreement.' + '&' +
@@ -459,10 +469,10 @@ function updateQuery4Form ()
         'company=&' +
         'email-address=&' +
         'physical-address=&' +
-        ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ? 
-            'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') + 
+        ( ( $( "#patent-type" ).val() == 'Patent-Pledge' ) ?
+            'Patent-IDs-and-Country_t=&_id=patent-pledge&' : '') +
         'your-initials=&' +
-        ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) + 
+        ( ( "" != shortUrl ) ? 'original-agreement=' + shortUrl + '&' : '' ) +
         'signed-agreement_s=' + signerFmt + '&' +
         '_processurl=@processurl&' +
         '_action[0]=' + serviceUrl + '/query2email/&' +
@@ -483,7 +493,7 @@ function ucFirst(string)
 
 function ucWords(string) {
     return (string + '').
-        replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, 
+        replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g,
             function($1) {
                 return $1.toUpperCase();
             });
@@ -515,8 +525,8 @@ function oinspect (obj)
 function fixPatentParagraph( message )
 {
     if ( typeof message == 'undefined' )
-        message = outBeforeField + " " + 
-                  $("#i-tmp-licenses-2").html() + " " + 
+        message = outBeforeField + " " +
+                  $("#i-tmp-licenses-2").html() + " " +
                   outAfterField;
 
     $("#i-tmp-licenses-2").html( message );
@@ -536,16 +546,16 @@ function getEmbedCode ( ourQuery )
     '</script>');
     */
     return htmlEscape(
-    '<iframe id="e-sign-process" src="' + ourQuery + 
+    '<iframe id="e-sign-process" src="' + ourQuery +
     '" width="100%" height="100%"></iframe>'
     );
 }
 
-function setOutboundOptionSame () 
+function setOutboundOptionSame ()
 {
 
     /* remove the outbound-option in review */
-    $("#review-outbound-licenses").html( 
+    $("#review-outbound-licenses").html(
         $("#outbound-option-same").val() );
     configs['outbound-option'] = 'same';
 
@@ -667,9 +677,9 @@ function setOutboundOptionSameLicenses ()
     $("#e-tmp-licenses-2").removeClass("nuke");
     */
 
-    if ( !outboundCopyrightLicenses ) 
+    if ( !outboundCopyrightLicenses )
     {
-        fixPatentParagraph( outBeforeField + " " + 
+        fixPatentParagraph( outBeforeField + " " +
                             outAfterField + " " + emptyField );
     } else {
         fixPatentParagraph();
@@ -694,7 +704,7 @@ function setOutboundOptionFsf ()
 {
     /* remove the outbound-option in review */
     // $("#review-outbound-licenses").html( naField );
-    $("#review-outbound-licenses").html( 
+    $("#review-outbound-licenses").html(
         $("#outbound-option-fsf").val() );
 
     configs['outbound-option'] = 'fsf' ;
@@ -774,7 +784,7 @@ function setOutboundOptionNoCommitment ()
     $("#review-outbound-licenses").html( naField );
     $("#review-media-licenses").html( naField );
 
-    configs['outbound-option'] = 'no-commitment'; 
+    configs['outbound-option'] = 'no-commitment';
 
     /*
     $("#review-outbound-license-options").html(
@@ -794,7 +804,7 @@ function setOutboundOptionNoCommitment ()
     $("#e-tmp-outbound-option-3").hide();
     $("#e-tmp-outbound-option-3").addClass("nuke");
 
-    
+
     /* remove entire section 4 */
     $("#i-tmp-outbound-section-all").hide();
     $("#i-tmp-outbound-section-all").addClass("nuke");
@@ -864,7 +874,7 @@ function updatePosition ()
             testAllPages();
             $('#rootwizard').bootstrapWizard('last');
             break;
-    } 
+    }
     // testAllPages();
     if ( doDebug)
         console.log("pos: " + $.QueryString["pos"] );
@@ -875,6 +885,8 @@ function updatePosition ()
 function testGeneralPage ()
 {
             isGeneralPageOk = true;
+
+            var fsfeCompliance    = $( "#fsfe-compliance" ).val();
 
             if ( !$('#beneficiary-name').val() ) {
                 $('#beneficiary-name').addClass("cla-alert");
@@ -915,6 +927,20 @@ function testGeneralPage ()
                 $('#project-jurisdiction').removeClass("cla-alert");
             }
 
+            if ( !$('#fsfe-compliance').val() || $('#fsfe-compliance').val() == "no-fsfe-compliance" ) {
+                fsfeCompliance = "";
+
+            } else {
+                if (fsfeCompliance == "fsfe-compliance") {
+                  if ( doDebug ) {
+                      console.log("fsfe-compliance: " +
+                              "FSFE Compliance Enabled");
+                            }
+                      }
+
+              }
+
+
     testReviewPage();
 
     return isGeneralPageOk;
@@ -941,12 +967,12 @@ function testCopyrightPage ()
             }
 
             if ( $('#outboundlist-custom').val() ) {
-                
+
                 if ( !$('#outboundlist').val() ) {
-                    outboundCopyrightLicenses = 
+                    outboundCopyrightLicenses =
                         $('#outboundlist-custom').val();
                 } else {
-                    outboundCopyrightLicenses += 
+                    outboundCopyrightLicenses +=
                         ", " + $('#outboundlist-custom').val();
                 }
                 if ( doDebug)
@@ -1000,7 +1026,7 @@ function testReviewPage ()
                 configs['beneficiary-name'] = $("#beneficiary-name").val();
             }
 
-            if ( !$("#project-name").val() ) 
+            if ( !$("#project-name").val() )
             {
                 $("#review-project-name").html( emptyField );
                 $("#i-tmp-project-name").html( emptyField );
@@ -1022,22 +1048,22 @@ function testReviewPage ()
                 configs['project-name'] = $("#project-name").val();
             }
 
-            if ( !$("#project-website").val() ) 
+            if ( !$("#project-website").val() )
             {
                 $("#review-project-website").html( emptyField );
                 configs['project-website'] = '';
-            } else 
+            } else
             {
                 $("#review-project-website").html(
                     $("#project-website").val() );
                 configs['project-website'] = $("#project-website").val();
             }
 
-            if ( !$("#project-email").val() ) 
+            if ( !$("#project-email").val() )
             {
                 $("#review-project-email").html( emptyField );
                 configs['project-email'] = '';
-            } else 
+            } else
             {
                 $("#review-project-email").html(
                     $("#project-email").val() );
@@ -1052,7 +1078,7 @@ function testReviewPage ()
                 configs['project-email'] = $("#project-email").val();
             }
 
-            if ( !$("#contributor-process-url").val() ) 
+            if ( !$("#contributor-process-url").val() )
             {
                 $("#review-contributor-process-url").html( emptyField );
                 $("#i-tmp-submission-instructions").html( emptyField );
@@ -1065,11 +1091,11 @@ function testReviewPage ()
                     $("#contributor-process-url").val() );
                 $("#e-tmp-submission-instructions").html(
                     $("#contributor-process-url").val() );
-                configs['process-url'] = 
+                configs['process-url'] =
                     $("#contributor-process-url").val();
             }
 
-            if ( !$("#project-jurisdiction").val() ) 
+            if ( !$("#project-jurisdiction").val() )
             {
                 $("#review-project-jurisdiction").html( emptyField );
                 $("#i-tmp-project-jurisdiction").html( emptyField );
@@ -1082,11 +1108,31 @@ function testReviewPage ()
                     $("#project-jurisdiction").val() );
                 $("#e-tmp-project-jurisdiction").html(
                     $("#project-jurisdiction").val() );
-                configs['project-jurisdiction'] = 
+                configs['project-jurisdiction'] =
                     $("#project-jurisdiction").val();
             }
 
-            if ( !$("#agreement-exclusivity").val() ) 
+            /* FSFE Compliance */
+            if ( !$("#fsfe-compliance").val() || $("#fsfe-compliance").val() == 'No FSFE Compliance' )
+            {
+              $("#review-fsfe-compliance").html( 'No FSFE Compliance' );
+              $("#tmp-fsfe-compliance").html( emptyField );
+              $("#tmp-fsfe-compliance").addClass("nuke");
+              $("#tmp-fsfe-compliance").hide();
+              configs['fsfe-compliance'] = '';
+            } else if ( $("#fsfe-compliance").val() == 'FSFE Compliance')
+            {
+                $("#review-fsfe-compliance").html( 'FSFE Compliance' );
+                $("#tmp-fsfe-compliance").removeClass("nuke");
+                $("#tmp-fsfe-compliance").show();
+                $("#tmp-fsfe-compliance").html(
+                    fsfePreamble );
+                configs['fsfe-compliance'] = "fsfe-compliance";
+            }
+
+            /* Agreement (Non)Exclusivity */
+
+            if ( !$("#agreement-exclusivity").val() )
             {
                 $("#review-agreement-exclusivity").html( emptyField );
                 $("#i-tmp-contributor-exclusivity").html( emptyField );
@@ -1096,7 +1142,7 @@ function testReviewPage ()
                 var cleanVersion = '';
                 if ( $("#agreement-exclusivity").val() in dictionary )
                 {
-                    cleanVersion = 
+                    cleanVersion =
                         dictionary[$("#agreement-exclusivity").val()];
                 } else {
                     cleanVersion = $("#agreement-exclusivity").val();
@@ -1110,7 +1156,7 @@ function testReviewPage ()
                 $("#e-tmp-contributor-exclusivity").html(
                     cleanVersion );
 
-                configs['agreement-exclusivity'] = 
+                configs['agreement-exclusivity'] =
                     $("#agreement-exclusivity").val();
             }
 
@@ -1205,7 +1251,7 @@ function testReviewPage ()
             var cleanVersion = '';
             if ( $("#patent-type").val() in dictionary )
             {
-                cleanVersion = 
+                cleanVersion =
                     dictionary[$("#patent-type").val()];
             } else {
                 cleanVersion = $("#patent-type").val();
@@ -1291,14 +1337,14 @@ function testApplyPage ()
 
 
 
-    // EXAMPLE: 
+    // EXAMPLE:
     // http://service.fabricatorz.com/query2form/?_replyto=project@rejon.org&_subject=Contributor%20License%20Agreement%20E-Signing%20Process&_body=Fill%20out%20the%20following%20form,%20then%20sign%20your%20initials%20to%20complete%20the%20Contributor%20License%20Agreement.&fullname=&Title=&Company=&email-address=&Physical-address=&Sign-with-your-initials=&_submit=sign
 
 
 
 
-    var finalLink = document.URL.substr(0,document.URL.lastIndexOf('/')) + 
-                    "/?" + 
+    var finalLink = document.URL.substr(0,document.URL.lastIndexOf('/')) +
+                    "/?" +
                     finalQueryString;
     // console.log("finalLink: " + finalLink);
 
@@ -1319,7 +1365,7 @@ function testApplyPage ()
             if ( '1337' == debugNeedle )
                 updateTestUrls();
 
-            var queryReady = 
+            var queryReady =
                 (( "" != query4form_short ) ? query4form_short : query4form );
 
             $("#link-esign").attr("href", queryReady);
@@ -1347,9 +1393,9 @@ function testApplyPage ()
         $("#link-esign").addClass('btn-success');
         $("#link-esign").removeClass('btn-danger');
         $("#link-esign").html("Contributor Signing Website");
-        $("#signing-service").html('<b>Your Contributor Process</b>: ' + 
+        $("#signing-service").html('<b>Your Contributor Process</b>: ' +
                                    'Share with your contributors.');
-        $("#embed-esign").html( getEmbedCode( 
+        $("#embed-esign").html( getEmbedCode(
             $('#contributor-process-url').val() ) );
         $("#embedding-service-all").show();
 
@@ -1370,22 +1416,22 @@ function testApplyPage ()
 
     $(".final-link").attr("href", finalLink );
 
-    var finalBrew = 
+    var finalBrew =
         "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
-        '<p><a href="' + tmpFinalLink + '">' + tmpFinalLink + '</p>' + "\n" + 
+        '<p><a href="' + tmpFinalLink + '">' + tmpFinalLink + '</p>' + "\n" +
         "</section>\n";
     // console.log("finalBrew: " + finalBrew);
 
     $("#embed-offscreen").html( $( "#review-text" ).html() + finalBrew );
-    $(".htmlstore-individual").val( $( "#review-text-style" ).html() + 
+    $(".htmlstore-individual").val( $( "#review-text-style" ).html() +
                          $( "#review-text" ).html() +
                          finalBrew );
     $("#embed-offscreen .nuke").remove();
 
 
-    $("#embed-offscreen-entity").html( 
+    $("#embed-offscreen-entity").html(
         $( "#review-text-entity" ).html() + finalBrew );
-    $(".htmlstore-entity").val( $( "#review-text-style" ).html() + 
+    $(".htmlstore-entity").val( $( "#review-text-style" ).html() +
                          $( "#review-text-entity" ).html() +
                          finalBrew );
     $("#embed-offscreen-entity .nuke").remove();
@@ -1408,12 +1454,12 @@ function testAllPages()
 
 function updateTestUrls ()
 {
-    /* 
+    /*
      * @TODO not working now, changed to localhost in index.html for now
      *
-    $("#html2pdf-form-individual").attr("action", serviceUrl + 
+    $("#html2pdf-form-individual").attr("action", serviceUrl +
         '/html2pdf');
-    $("#html2pdf-form-entity").attr("action", serviceUrl + 
+    $("#html2pdf-form-entity").attr("action", serviceUrl +
         '/html2pdf');
     */
     if ( configs['project-email'] )
@@ -1427,10 +1473,10 @@ function updateTestUrls ()
 $(document).ready(function() {
 
     loadTemplates();
-    
+
     queryStringToConfigs();
-    //  if ( doDebug )
-    //    setFakeData();
+      if ( doDebug )
+        setFakeData();
     updateConfigs();
 
     if ( '1337' == debugNeedle )
@@ -1547,12 +1593,12 @@ $(document).ready(function() {
 
     $( "#link-esign" ).change(function() {
             updateQuery4Form();
-            $("#link-esign").attr("href", 
+            $("#link-esign").attr("href",
                 ( "" != query4form_short ) ? query4form_short : query4form );
             $("#link-esign").addClass('btn-success');
             $("#link-esign").removeClass('btn-danger');
             $("#link-esign").html("Link to E-Signing Form");
-        
+
     });
 
 
@@ -1575,7 +1621,7 @@ $(document).ready(function() {
                 break;
             case copyrightPageIndex + 1:
                 if ( doDebug)
-                    console.log("At SWITCH copyright: " + 
+                    console.log("At SWITCH copyright: " +
                         (copyrightPageIndex+1) );
                 testCopyrightPage();
                 return true;
@@ -1606,11 +1652,11 @@ $(document).ready(function() {
         var $percent = ($current/$total) * 100;
         $('#rootwizard').find('.bar').css({width:$percent+'%'});
 	},
-    onTabClick: function(tab, navigation, index) 
+    onTabClick: function(tab, navigation, index)
     {
         testAllPages();
         return true;
-    } 
+    }
     }
 
     );
@@ -1619,10 +1665,10 @@ $(document).ready(function() {
     if ( $.QueryString["action"] )
     {
         console.log( "action: " + $.QueryString["action"] );
-        switch ( $.QueryString["action"] ) 
+        switch ( $.QueryString["action"] )
         {
             case 'sign-entity':
-                if ( doDebug) 
+                if ( doDebug)
                     console.log( "Sign entity" );
                 $('#rootwizard').bootstrapWizard('last');
                 testReviewPage();
@@ -1631,7 +1677,7 @@ $(document).ready(function() {
                 $('#html2pdf-form-entity').submit();
                 break;
             case 'sign-individual':
-                if ( doDebug) 
+                if ( doDebug)
                     console.log( "Sign individual" );
                 $('#rootwizard').bootstrapWizard('last');
                 testReviewPage();
