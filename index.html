@@ -110,10 +110,10 @@
                             <h3>FSFE Compliance</h3>
                             <p></p>
                             </div>
-                <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
-                            <select id="fsfe-compliance" name="fsfe-compliance" class="input-block-level">
-                        <option value="fsfe-compliance">FSFE Compliance</option>
-                        <option value="no-fsfe-compliance">Without FSFE compliance</option>
+                <label for="fsfe-compliance" id="fsfe_compliance" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
+                            <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
+                        <option value="fsfe_compliance">FSFE Compliance</option>
+                        <option value="no_fsfe_compliance">Without FSFE compliance</option>
                         </select>
 
 					    </div>
@@ -440,10 +440,10 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <tr>
                         <th>Agreement</th><th>Version</th><th id="apply-format">Format</th>
                         </tr>
-
+                        <!--
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
-                        <td>Contributor Agreements 1.1</td>
+                        <td>Contributor Agreements 1.1</td> -->
                         <td><a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" class="htmlstore" id="htmlstore-individual" name="htmlstore" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
                       </tr>
 
