@@ -68,6 +68,17 @@
                           </li>
                         </ul>
 
+<!-- DOES NOT MAKE ANY SENSE - BOTH SHOULD BE CREATED, WHEN SIGNING PEOPLE CHOOSE ONE OR THE OTHER
+HERE, WE COULD ASK IF THE BENEFICIARY IS INDIVIDUAL OR ENTITY
+                            <label class="radio" id="entity_select" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="This option is appropriate if you are contributing on behalf of an entity, such as your employer or you need permission from your employer to contribute.">
+                            <input type="radio" name="contributor-options" id="contributor-option-entity" value="entity" checked>
+                            This is an Entity Contributor Agreement.
+                            </label>
+                            <label class="radio" id="indv_select" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="Please choose this option if you are contributing as an individual.">
+                            <input type="radio" name="contributor-options" id="contributor-option-individual" value="individual">
+                            This is an Individual Contributor Agreement.
+                          </label> -->
+
                             <hr />
 
                             <label for="beneficiary-name" id="beneficiary_name" data-toggle="popover" data-trigger="hover" data-title="Entity" data-content="Enter the name of the entity hosting your project. If you don't have an entity that can be listed here, try to set up an entity or find a trustee.">
@@ -106,15 +117,7 @@
                             <label for="project-jurisdiction" id="project_jurisdiction" data-toggle="popover" data-trigger="hover" title="Jurisdiction" data-content="Please specify what legal jurisdiction the agreement will be governed in. Typically, this would be the jurisdiction where your entity is registered.">Which jurisdiction should be mentioned in the agreement?</label>
                             <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s), e.g. Germany.">
 
-                <div class="caption">
-                            <h3>FSFE Compliance</h3>
-                            <p></p>
-                            </div>
-                <label for="fsfe-compliance" id="fsfe_compliance" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
-                            <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
-                        <option value="fsfe_compliance">FSFE Compliance</option>
-                        <option value="no_fsfe_compliance">Without FSFE compliance</option>
-                        </select>
+
 
 					    </div>
 
