@@ -100,14 +100,13 @@
                             <label for="project-jurisdiction" id="project-jurisdiction-label" data-toggle="popover" data-trigger="hover" title="Jurisdiction" data-content="Please specify what legal jurisdiction the agreement will be governed in. Typically, this would be the jurisdiction where your entity is registered.">Which jurisdiction should be mentioned in the agreement?</label>
                             <input type="text" name="project-jurisdiction" id="project-jurisdiction" class="input-block-level" placeholder="Enter your jurisdiction(s), e.g. Germany.">
 
-                <div class="caption">
-                            <h3>FSFE Compliance</h3>
-                            <p></p>
-                            </div>
-                <label for="fsfe-compliance" id="fsfe_compliance" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
-                            <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
-                        <option value="fsfe_compliance">FSFE Compliance</option>
-                        <option value="no_fsfe_compliance">Without FSFE compliance</option>
+                <!-- <div class="caption">
+                            <h3>FSFE Compliance</h3></div>
+                          -->
+                <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
+                            <select id="fsfe-compliance" name="fsfe-compliance" class="input-block-level">
+                            <option value="FSFE Compliance">FSFE Compliance</option>
+                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option>
                         </select>
 
 
@@ -332,6 +331,12 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <td>Project Jurisdiction</td>
                         <td id="review-project-jurisdiction"></td>
                         </tr>
+
+                        <tr>
+                        <td>FSFE Compliance</td>
+                        <td id="review-fsfe-compliance"></td>
+                        </tr>
+
 
 
 
