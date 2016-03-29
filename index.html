@@ -397,6 +397,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                               </div>
                           </div>
                           </li>
+                        </ul>
 
 
 					    </div>
@@ -456,11 +457,11 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
 						<tr id="embedding-service-all">
                         <td id="embedding-service"><b>Embed Your E-Sign Form</b>: Select text and copy. (<a href="embed.html" title="Developer Details">Need help?</a>)</td>
 						<td> </td>
-						<td><textarea class="form-control" rows="5" 
-                            id="embed-esign" rows="3"
-                            onfocus="this.select();" 
+						<td><textarea class="form-control" rows="5"
+                            id="embed-esign"
+                            onfocus="this.select();"
                             onmouseup="return false;"></textarea></td>
-						</tr>
+						</tr>               <!-- rows="3" -->
 
                         </table>
 
@@ -474,7 +475,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <div id="myHTML" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Individual Contributor License Agreement</h3>
+                            <h3 id="myModalLabel" class="myModalLabel">Individual Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
@@ -493,7 +494,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <div id="myHTML-entity" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">Entity Contributor License Agreement</h3>
+                            <h3 id="myModalLabel" class="myModalLabel">Entity Contributor License Agreement</h3>
 
                           </div>
                           <div class="modal-body">
@@ -534,7 +535,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
     <div id="embed-offscreen-entity" style="display: none;">&nbsp;</div>
 
 
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js">\x3C/script>')</script>
     <script type="text/javascript">
     $(window).load(function() {
@@ -542,7 +543,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
     })
     </script>
 
-    <script src="bootstrap/js/bootstrap.min.js"></script> 
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- <script src="js/showdown.js"></script> -->
     <script src="js/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
 	<script src="js/prettify.js"></script>
