@@ -72,7 +72,10 @@ var fsfField            = 'any licenses on the Free Software ' +
                           'licenses" or approved by the Open Source ' +
                           'Initiative.';
 
-var fsfePreamble        = 'This is a test preamble';
+var fsfePreamble        = '<h3>Preamble</h3>\n Access to software determines participation in a digital society. To secure equal participation in the information age, the Free Software Foundation Europe (FSFE) pursues and is dedicated to the furthering of Free Software, defined by the freedoms to use, study, modify and copy. Independent of the issue of commercial exploitation, it is proprietary, freedom-diminishing licensing that works against the interests of people and society at large, which is therefore rejected by FSFE.'
++ 'The purpose of this agreement is to ensure the lasting protection of Free Software by making FSFE the fiduciary of the author\'s interests.\n It empowers FSFE -- and its sister organisations -- to uphold the interests of Free Software authors and protect them in court, if necessary.'
++ 'FSFE is given the right to relicense the software as necessary for the long-term legal maintainability and protection of the software. The agreement also grants the author an unlimited amount of non-exclusive licences by FSFE, which allow using and distributing the program in other projects and under other licences.'
++ 'The contracting parties sign the following agreement in full consciousness that by the grant of exclusive licence to the Free Software Foundation Europe e.V. and by the administration of these rights the FSFE becomes trustee of the author\'s interests for the benefit of Free Software.';
 
 var shortUrl            = '';
 var query4form          = '';
