@@ -11,7 +11,7 @@
  *
  * @TODO finish making u2s work on catharina's server, with apache (server down right now)
  */
-
+// $('#rootwizard').bootstrapWizard('show', 2); // (to skip a tab)
 
 var doDebug             = false;
 var debugNeedle         = 1337;
@@ -124,6 +124,7 @@ var configs = {
     'project-jurisdiction':       '',
     'agreement-exclusivity':      '',
     'fsfe-compliance':            '',
+    'fsfe-fla':                   '', 
     'outbound-option':            '',
     'outboundlist':               '',
     'outboundlist-custom':        '',
@@ -195,6 +196,12 @@ function queryStringToConfigs ()
 function updateConfigs ()
 {
 
+    /* Type of Agreement */
+
+    if ( configs["fsfe-fla"] )
+        $('#typeof-agreement').val( configs["typeof-agreement"]);
+    if ( doDebug )
+        console.log("typeof-agreement: " + configs["typeof-agreement"]);
     /* general */
 
     if ( configs["beneficiary-name"] )
@@ -394,6 +401,7 @@ function loadTemplates ()
                 console.log("f-sign-indy: " +  $("#review-text").html() );
         }
     });
+
     $.ajax('agreement-template-entity.html', {
         timeout: 1000,
         async: false,
@@ -401,6 +409,16 @@ function loadTemplates ()
             $('#review-text-entity').html(resp);
             if ( doDebug )
                 console.log("f-sign-entity: " +  $("#review-text-entity").html() );
+        }
+    });
+    // maybe there should be some code here to only load whatever is wanted?
+    $.ajax('fsfe-agreement-fiduciary-license-template.html', {
+        timeout: 1000,
+        async: false,
+        success: function(resp) {
+            $('#review-text-fla').html(resp);
+            if ( doDebug )
+                console.log("f-sign-fla: " +  $("#review-text-fla").html() );
         }
     });
     $.ajax('agreement-style.html', {
@@ -552,6 +570,20 @@ function getEmbedCode ( ourQuery )
     '<iframe id="e-sign-process" src="' + ourQuery +
     '" width="100%" height="100%"></iframe>'
     );
+}
+
+function setFLACLAChoice ()
+{
+    if($('#fsfe-compliance') === "True") {
+        $("#apply-individual").hide();
+        $("#apply-entity").hide();
+        $("#copyright").addClass('disabled');
+        $("#patents").addClass('disabled');
+
+
+    }
+    
+    //disable tabs / options that are not relevant
 }
 
 function setOutboundOptionSame ()
@@ -888,7 +920,7 @@ function updatePosition ()
 function testGeneralPage ()
 {
             isGeneralPageOk = true;
-
+            if(!$("#fsfe-compliance").val() );
             var fsfeCompliance    = $( "#fsfe-compliance" ).val();
 
             if ( !$('#beneficiary-name').val() ) {
@@ -1116,7 +1148,7 @@ function testReviewPage ()
             }
 
             /* FSFE Compliance */
-            if ( !$("#fsfe-compliance").val() || $("#fsfe-compliance").val() == 'No FSFE Compliance' )
+            /* if ( !$("#fsfe-compliance").val() || $("#fsfe-compliance").val() == 'No FSFE Compliance' )
             {
               $("#review-fsfe-compliance").html( 'No FSFE Compliance' );
               $("#tmp-fsfe-compliance").html( emptyField );
@@ -1131,7 +1163,7 @@ function testReviewPage ()
                 $("#tmp-fsfe-compliance").html(
                     fsfePreamble );
                 configs['fsfe-compliance'] = "fsfe-compliance";
-            }
+            } */
 
             /* Agreement (Non)Exclusivity */
 
@@ -1330,6 +1362,7 @@ function testApplyPage ()
     */
     $("#apply-individual").show();
     $("#apply-entity").show();
+    $("#apply-fla").show();
 
     // creates the querystring to recreate current wizard state
     finalQueryString = $.param(configs);
@@ -1427,7 +1460,7 @@ function testApplyPage ()
 
     $("#embed-offscreen").html( $( "#review-text" ).html() + finalBrew );
     $(".htmlstore-individual").val( $( "#review-text-style" ).html() +
-                         $( "#review-text" ).html() +
+                         $( "#review-text"     ).html() +
                          finalBrew );
     $("#embed-offscreen .nuke").remove();
 
@@ -1439,9 +1472,17 @@ function testApplyPage ()
                          finalBrew );
     $("#embed-offscreen-entity .nuke").remove();
 
+    $("#embed-offscreen-fla").html(
+        $( "#review-text-fla" ).html() + finalBrew );
+    $(".htmlstore-fla").val( $( "#review-text-style" ).html() +
+                         $( "#review-text-fla" ).html() +
+                         finalBrew );
+    $("#embed-offscreen-fla .nuke").remove();
+
 
     $("#embed-agreement").html( $("#embed-offscreen").html() );
     $("#embed-agreement-entity").html( $("#embed-offscreen-entity").html() );
+    $("#embed-agreement-fla").html( $("#embed-offscreen-fla").html() );
 
     return isApplyPageOk;
 }
@@ -1498,7 +1539,9 @@ $(document).ready(function() {
     $("#html2pdf-entity").click(function() {
         $('#html2pdf-form-entity').submit();
     });
-
+    $("#html2pdf-fla").click(function() {
+        $('#html2pdf-form-fla').submit();
+    });
 
     // @TODO need to make these each test each input, not ALL inputs
     $( "#beneficiary-name" ).change(function() {
@@ -1676,7 +1719,7 @@ $(document).ready(function() {
                 $('#rootwizard').bootstrapWizard('last');
                 testReviewPage();
                 testApplyPage();
-                // console.log( 'sign-entity: ' + $('#review-text-entity').html() );
+                console.log( 'sign-entity: ' + $('#review-text-entity').html() );
                 $('#html2pdf-form-entity').submit();
                 break;
             case 'sign-individual':
@@ -1685,8 +1728,17 @@ $(document).ready(function() {
                 $('#rootwizard').bootstrapWizard('last');
                 testReviewPage();
                 testApplyPage();
-                // console.log("sign-indy: " +  $('#review-text').html() );
+                console.log("sign-indy: " +  $('#review-text').html() );
                 $('#html2pdf-form-individual').submit();
+                break;
+            case 'sign-fla':
+                if ( doDebug)
+                    console.log( "Sign FLA" );
+                $('#rootwizard').bootstrapWizard('last');
+                testReviewPage();
+                testApplyPage();
+                console.log("sign-fla: " +  $('#review-text-fla').html() );
+                $('#html2pdf-form-fla').submit();
                 break;
         }
     }

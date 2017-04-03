@@ -7,6 +7,7 @@
         <meta name="description" content="The Contributor License Agreement Chooser from contributoragreements.org.">
         <meta name="author" content="http://www.contributorAgreements.org">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- <link href="bootstrap3/css/bootstrap.min.css" rel="stylesheet"> -->
 	    <link href="css/prettify.css" rel="stylesheet">
         <link href="css/tooltip.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
@@ -31,11 +32,10 @@
 					    <div class="navbar-inner">
 					        <div class="container">
 					            <ul class="bullets">
-					  	            <li><a href="#general"
+					  	          <li><a href="#general"
                                            data-toggle="tab">1. General</a></li>
 						            <li><a href="#copyright"
-                                           data-toggle="tab">2. Copyright</a>
-                                           </li>
+                                           data-toggle="tab">2. Copyright</a></li>
 						            <li><a href="#patents"
                                            data-toggle="tab">3. Patents</a></li>
 						            <li><a href="#review"
@@ -57,13 +57,27 @@
                           <li class="span12">
                           <div class="thumbnail">
                               <div class="caption">
-                              <h3>Your Contributor License Agreement</h3>
-                              <p id="top_explanation" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="">Enter the information requested below to build your own contributor license agreement.</p>
+                              <h3>Your License Agreement</h3>
+                              <p id="top_explanation" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="">Please choose if you would like to create a Fiduciary License Agreement (FLA) with provisions recommended by the Free Software Foundation Europe (FSFE) or build your own custom Contributor License Agreement by choosing your own options.
+                              Either way, some information about you and your project is needed in both cases. None of you data is saved, it is only used inside your browser to create this agreement.</p>
                               </div>
+                              
+                            
                           </div>
+                          
                           </li>
                         </ul>
 
+                        <div class="container">
+
+                        <div class="btn-group" data-toggle="buttons">
+                                  <button for="fsfe-compliance" class="btn btn-success btn-large" type="radio" name="options" id="fsfe-compliance" autocomplete="off">FLA recommended by FSFE</button>
+                                  <button for="non-fsfe-compliance" class="btn btn-danger btn-large" type="radio" name="options" id="non-fsfe-compliance" autocomplete="off">Create Custom CLA</button>
+                                  </div>
+                              </div>
+
+                             
+                              <br />
                             <label for="beneficiary-name" id="beneficiary-name-label" data-toggle="popover" data-trigger="hover" data-title="Entity" data-content="Enter the name of the entity hosting your project. If you don't have an entity that can be listed here, try to set up an entity or find a trustee.">
                             Entity</label>
 						    <input type='text' name='beneficiary-name'
@@ -103,10 +117,10 @@
                 <!-- <div class="caption">
                             <h3>FSFE Compliance</h3></div>
                           -->
-                <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
+                <!-- <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
                             <select id="fsfe-compliance" name="fsfe-compliance" class="input-block-level">
                             <option value="FSFE Compliance">FSFE Compliance</option>
-                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option>
+                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option> -->
                         </select>
 
 
@@ -167,7 +181,6 @@
       <option value="MIT">MIT License</option>
       <option value="MPL-1.1">Mozilla Public License 1.1</option>
     </select>
-
 
 
 <input type="text" name="outboundlist-custom" id="outboundlist-custom"
@@ -332,10 +345,10 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <td id="review-project-jurisdiction"></td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                         <td>FSFE Compliance</td>
                         <td id="review-fsfe-compliance"></td>
-                        </tr>
+                        </tr> -->
 
 
 
@@ -399,6 +412,14 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                           </li>
                         </ul>
 
+                        <ul class="thumbnails">
+                          <li class="span12">
+                          <div class="thumbnail">
+                              <div class="caption" id="review-text-fla">
+                              </div>
+                          </div>
+                          </li>
+                        </ul>
 
 					    </div>
 						<div class="tab-pane" id="apply">
@@ -407,7 +428,9 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                           <li class="span12">
                           <div class="thumbnail">
                               <div class="caption">
+                              <!-- change here between FLA / CLA -->
                               <h3>Your Final Contributor License Agreement</h3> <!-- Explain under which terms they may be used, where to put -->
+
                               <p>Below is a packaged version of your generated agreement and a way to build an e-signing process for your contributors.</p>
                               </div>
                           </div>
@@ -435,7 +458,13 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        </tr>
 
+                        <tr id="apply-fla">
+                        <td>Fiduciary Contributor License Agreement</td>
+                        <td>Fiduciary License Agreement 2.0</td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-fla"><input type="hidden" name="title" value="Fiduciary License License Agreement 2.0" /><input type="hidden" name="type" value="fla" /><input type="hidden" class="htmlstore-fla" id="htmlstore-fla" name="htmlstore-fla" /><a role="button" class="btn btn-primary" id="html2pdf-fla" data-inline="true">PDF</a></form></td>
+                        <!-- make sure that all values from here are actually used -->
                         </tr>
                         </table>
 
@@ -508,6 +537,24 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         </div>
                         <!-- Modal ENTITY END -->
 
+                        <!-- Modal FLA START -->
+                        <div id="myHTML-fla" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 id="myModalLabel" class="myModalLabel">Fiduciary Contributor License Agreement</h3>
+
+                          </div>
+                          <div class="modal-body">
+                            <span>Click the box below. Then, copy and paste the agreement where you would like.</span><br /><br />
+                        <textarea id="embed-agreement-fla" class="input-block-level" onclick="this.select();" rows="14" readonly>
+                        </textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                          </div>
+                        </div>
+                        <!-- Modal FLA END -->
+
 
 
                         <div id="review-text-style" style="display: none"></div>
@@ -533,6 +580,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
 
     <div id="embed-offscreen" style="display: none;">&nbsp;</div>
     <div id="embed-offscreen-entity" style="display: none;">&nbsp;</div>
+    <div id="embed-offscreen-fla" style="display: none;">&nbsp;</div>
 
 
     <script src="js/jquery-1.11.1.min.js"></script>
@@ -544,7 +592,8 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
     </script>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="js/showdown.js"></script> -->
+    <!-- <script src="bootstrap3/js/bootstrap.min.js"></script> -->
+
     <script src="js/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
 	<script src="js/prettify.js"></script>
     <script src="js/tooltip.js"></script>
