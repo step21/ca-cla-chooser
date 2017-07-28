@@ -17,6 +17,11 @@ Installation
  git submodule init
  git submodule update
 
+Local testing
+=============
+
+In root of repo directory run for example simple python http server:
+ python -m SimpleHTTPServer
 
 Support
 =======

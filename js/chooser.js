@@ -124,7 +124,7 @@ var configs = {
     'project-jurisdiction':       '',
     'agreement-exclusivity':      '',
     'fsfe-compliance':            '',
-    'fsfe-fla':                   '', 
+    'fsfe-fla':                   '',
     'outbound-option':            '',
     'outboundlist':               '',
     'outboundlist-custom':        '',
@@ -582,7 +582,7 @@ function setFLACLAChoice ()
 
 
     }
-    
+
     //disable tabs / options that are not relevant
 }
 
@@ -1584,15 +1584,59 @@ $(document).ready(function() {
     });
 
 
-    $( "#outbound-option-same" ).change(function() {
+    function selectFsfeCompliance ()
+    {
+        $('select[name*="agreement-exclusivity"] option[value="exclusive"]').prop('selected', true);
+        $("#non-exclusive").remove();
+        $("#outbound_option_1").hide();
+        $("#outbound-option-4-label").hide();
+        $("#option-2").html("Option 1");
+        $("#option-3").html("Option 2");
+        $("#outbound-option-same-licenses").prop("checked", true);
+        checkOutboundOptionSameLicenses();
+        $("#patent-pledge").remove();
+        $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+    }
+
+    selectFsfeCompliance();
+    $("#fsfe-compliance").button("toggle");
+
+    $( "#fsfe-compliance").click(function() {
+        selectFsfeCompliance();
+    });
+
+    function selectNonFsfeCompliance ()
+    {
+        $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
+        $("#outbound_option_1").show();
+        $("#outbound-option-4-label").show();
+        $("#option-2").html("Option 2");
+        $("#option-3").html("Option 3");
+        $("#outbound-option-same").prop("checked", true);
+        checkOutboundOptionSame();
+        $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
+        $('select[name*="patent-type"] option[value="Patent-Pledge"]').prop('selected', true);
+    }
+
+    $( "#non-fsfe-compliance").click(function () {
+        selectNonFsfeCompliance();
+    });
+
+   function checkOutboundOptionSame ()
+   {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
+    }
+
+    $( "#outbound-option-same" ).change(function() {
+        checkOutboundOptionSame();
     });
 
-    $( "#outbound-option-same-licenses" ).change(function() {
+    function checkOutboundOptionSameLicenses ()
+    {
         if ( $("#outbound-option-same-licenses").prop( "checked" ) ) {
             $("#outboundlist").show();
             $("#outboundlist-custom").show();
@@ -1600,6 +1644,10 @@ $(document).ready(function() {
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
+    }
+
+    $( "#outbound-option-same-licenses" ).change(function() {
+        checkOutboundOptionSameLicenses();
     });
 
     $( "#outbound-option-fsf" ).change(function() {
