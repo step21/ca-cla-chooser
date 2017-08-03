@@ -392,6 +392,7 @@ function loadTemplates ()
     $( "#review-text-style" ).load( "agreement-style.html", function() { });
     */
 
+    /*
     $.ajax('agreement-template-individual.html', {
         timeout: 1000,
         async: false,
@@ -411,11 +412,18 @@ function loadTemplates ()
                 console.log("f-sign-entity: " +  $("#review-text-entity").html() );
         }
     });
+    */
     // maybe there should be some code here to only load whatever is wanted?
-    $.ajax('fsfe-agreement-fiduciary-license-template.html', {
+    $.ajax('agreement-template-unified.html', {
         timeout: 1000,
         async: false,
         success: function(resp) {
+            $('#review-text').html(resp);
+            if ( doDebug )
+                console.log("f-sign-indy: " +  $("#review-text").html() );
+            $('#review-text-entity').html(resp);
+            if ( doDebug )
+                console.log("f-sign-entity: " +  $("#review-text-entity").html() );
             $('#review-text-fla').html(resp);
             if ( doDebug )
                 console.log("f-sign-fla: " +  $("#review-text-fla").html() );
@@ -572,6 +580,7 @@ function getEmbedCode ( ourQuery )
     );
 }
 
+/*
 function setFLACLAChoice ()
 {
     if($('#fsfe-compliance') === "True") {
@@ -585,6 +594,7 @@ function setFLACLAChoice ()
 
     //disable tabs / options that are not relevant
 }
+*/
 
 function setOutboundOptionSame ()
 {
@@ -1361,9 +1371,11 @@ function testApplyPage ()
         $("#apply-entity").hide();
     }
     */
+    /*
     $("#apply-individual").show();
     $("#apply-entity").show();
     $("#apply-fla").show();
+    */
 
     // creates the querystring to recreate current wizard state
     finalQueryString = $.param(configs);
@@ -1602,6 +1614,12 @@ $(document).ready(function() {
         checkOutboundOptionSameLicenses();
         $("#patent-pledge").remove();
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+        $("#review-text").closest( "ul" ).hide();
+        $("#review-text-entity").closest( "ul" ).hide();
+        $("#review-text-fla").closest( "ul" ).show();
+        $("#apply-individual").hide();
+        $("#apply-entity").hide();
+        $("#apply-fla").show();
     }
 
     $( "#non-fsfe-compliance").click(function () {
@@ -1617,6 +1635,12 @@ $(document).ready(function() {
         checkOutboundOptionSame();
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+        $("#review-text").closest( "ul" ).show();
+        $("#review-text-entity").closest( "ul" ).show();
+        $("#review-text-fla").closest( "ul" ).hide();
+        $("#apply-individual").show();
+        $("#apply-entity").show();
+        $("#apply-fla").hide();
     }
 
     $( "#outbound-option-fsf" ).change(function() {
