@@ -256,6 +256,13 @@ function updateConfigs ()
 
 
     switch ( configs["outbound-option"] ) {
+        // option-1
+        case 'fsf':
+          $("#outbound-option-fsf").prop('checked', true );
+          $("#outbound-option-fsf" ).trigger( 'change' );
+          // @todo delete later if no need
+          // setOutboundOptionFsf();
+          break;
         // option-2
         case 'same-licenses':
             $("#outbound-option-same-licenses").prop('checked', true );
@@ -265,21 +272,14 @@ function updateConfigs ()
             $("#outboundlist").show();
             $("#outboundlist-custom").show();
             break;
-        // option-3
-        case 'fsf':
-            $("#outbound-option-fsf").prop('checked', true );
-            $("#outbound-option-fsf" ).trigger( 'change' );
-            // @todo delete later if no need
-            // setOutboundOptionFsf();
-            break;
-        // option-4
+        // option-5
         case 'no-commitment':
             $("#outbound-option-no-commitment").prop('checked', true );
             $("#outbound-option-no-commitment" ).trigger( 'change' );
             // @todo delete later if no need
             // setOutboundOptionNoCommitment();
             break;
-        // option-1
+        // option-4
         case 'same':
         default:
             $("#outbound-option-same").prop('checked', true );
@@ -645,18 +645,19 @@ function setOutboundOptionSame ()
                         'are using on the Submission Date' );
 
 
-    $("#i-tmp-outbound-option-1").show();
-    $("#i-tmp-outbound-option-1").removeClass("nuke");
+
+    $("#i-tmp-outbound-option-1").hide();
+    $("#i-tmp-outbound-option-1").addClass("nuke");
     $("#i-tmp-outbound-option-2").hide();
     $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-3").hide();
-    $("#i-tmp-outbound-option-3").addClass("nuke");
-    $("#e-tmp-outbound-option-1").show();
-    $("#e-tmp-outbound-option-1").removeClass("nuke");
+    $("#i-tmp-outbound-option-4").show();
+    $("#i-tmp-outbound-option-4").removeClass("nuke");
+    $("#e-tmp-outbound-option-1").hide();
+    $("#e-tmp-outbound-option-1").addClass("nuke");
     $("#e-tmp-outbound-option-2").hide();
     $("#e-tmp-outbound-option-2").addClass("nuke");
-    $("#e-tmp-outbound-option-3").hide();
-    $("#e-tmp-outbound-option-3").addClass("nuke");
+    $("#e-tmp-outbound-option-4").show();
+    $("#e-tmp-outbound-option-4").removeClass("nuke");
 }
 
 function setOutboundOptionSameLicenses ()
@@ -721,18 +722,19 @@ function setOutboundOptionSameLicenses ()
     }
 
 
-    $("#i-tmp-outbound-option-1").hide();
-    $("#i-tmp-outbound-option-1").addClass("nuke");
-    $("#i-tmp-outbound-option-2").show();
-    $("#i-tmp-outbound-option-2").removeClass("nuke");
-    $("#i-tmp-outbound-option-3").hide();
-    $("#i-tmp-outbound-option-3").addClass("nuke");
-    $("#e-tmp-outbound-option-1").hide();
-    $("#e-tmp-outbound-option-1").addClass("nuke");
-    $("#e-tmp-outbound-option-2").show();
-    $("#e-tmp-outbound-option-2").removeClass("nuke");
-    $("#e-tmp-outbound-option-3").hide();
-    $("#e-tmp-outbound-option-3").addClass("nuke");
+
+    $("#i-tmp-outbound-option-1").show();
+    $("#i-tmp-outbound-option-1").removeClass("nuke");
+    $("#i-tmp-outbound-option-2").hide();
+    $("#i-tmp-outbound-option-2").addClass("nuke");
+    $("#i-tmp-outbound-option-4").hide();
+    $("#i-tmp-outbound-option-4").addClass("nuke");
+    $("#e-tmp-outbound-option-1").show();
+    $("#e-tmp-outbound-option-1").removeClass("nuke");
+    $("#e-tmp-outbound-option-2").hide();
+    $("#e-tmp-outbound-option-2").addClass("nuke");
+    $("#e-tmp-outbound-option-4").hide();
+    $("#e-tmp-outbound-option-4").addClass("nuke");
 }
 
 function setOutboundOptionFsf ()
@@ -799,17 +801,16 @@ function setOutboundOptionFsf ()
 
     $("#i-tmp-outbound-option-1").hide();
     $("#i-tmp-outbound-option-1").addClass("nuke");
-    $("#i-tmp-outbound-option-2").hide();
-    $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-3").show();
-    $("#i-tmp-outbound-option-3").removeClass("nuke");
+    $("#i-tmp-outbound-option-2").show();
+    $("#i-tmp-outbound-option-2").removeClass("nuke");
+    $("#i-tmp-outbound-option-4").hide();
+    $("#i-tmp-outbound-option-4").addClass("nuke");
     $("#e-tmp-outbound-option-1").hide();
     $("#e-tmp-outbound-option-1").addClass("nuke");
-    $("#e-tmp-outbound-option-2").hide();
-    $("#e-tmp-outbound-option-2").addClass("nuke");
-    $("#e-tmp-outbound-option-3").show();
-    $("#e-tmp-outbound-option-3").removeClass("nuke");
-
+    $("#e-tmp-outbound-option-2").show();
+    $("#e-tmp-outbound-option-2").removeClass("nuke");
+    $("#e-tmp-outbound-option-4").hide();
+    $("#e-tmp-outbound-option-4").addClass("nuke");
 
 }
 
@@ -826,19 +827,19 @@ function setOutboundOptionNoCommitment ()
         $("#outbound-option-no-commitment").val() );
     */
 
+
     $("#i-tmp-outbound-option-1").hide();
     $("#i-tmp-outbound-option-1").addClass("nuke");
     $("#i-tmp-outbound-option-2").hide();
     $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-3").hide();
-    $("#i-tmp-outbound-option-3").addClass("nuke");
+    $("#i-tmp-outbound-option-4").hide();
+    $("#i-tmp-outbound-option-4").addClass("nuke");
     $("#e-tmp-outbound-option-1").hide();
     $("#e-tmp-outbound-option-1").addClass("nuke");
     $("#e-tmp-outbound-option-2").hide();
     $("#e-tmp-outbound-option-2").addClass("nuke");
-    $("#e-tmp-outbound-option-3").hide();
-    $("#e-tmp-outbound-option-3").addClass("nuke");
-
+    $("#e-tmp-outbound-option-4").hide();
+    $("#e-tmp-outbound-option-4").addClass("nuke");
 
     /* remove entire section 4 */
     $("#i-tmp-outbound-section-all").hide();
@@ -1584,20 +1585,6 @@ $(document).ready(function() {
     });
 
 
-    function selectFsfeCompliance ()
-    {
-        $('select[name*="agreement-exclusivity"] option[value="exclusive"]').prop('selected', true);
-        $("#non-exclusive").remove();
-        $("#outbound_option_1").hide();
-        $("#outbound-option-4-label").hide();
-        $("#option-2").html("Option 1");
-        $("#option-3").html("Option 2");
-        $("#outbound-option-same-licenses").prop("checked", true);
-        checkOutboundOptionSameLicenses();
-        $("#patent-pledge").remove();
-        $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
-    }
-
     selectFsfeCompliance();
     $("#fsfe-compliance").button("toggle");
 
@@ -1605,62 +1592,88 @@ $(document).ready(function() {
         selectFsfeCompliance();
     });
 
-    function selectNonFsfeCompliance ()
+    function selectFsfeCompliance ()
     {
-        $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
-        $("#outbound_option_1").show();
-        $("#outbound-option-4-label").show();
-        $("#option-2").html("Option 2");
-        $("#option-3").html("Option 3");
-        $("#outbound-option-same").prop("checked", true);
-        checkOutboundOptionSame();
-        $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
-        $('select[name*="patent-type"] option[value="Patent-Pledge"]').prop('selected', true);
+        $('select[name*="agreement-exclusivity"] option[value="exclusive"]').prop('selected', true);
+        $("#non-exclusive").remove();
+        $("#outbound-option-4-label").hide();
+        $("#outbound-option-5-label").hide();
+        $("#outbound-option-fsf").prop("checked", true);
+        checkOutboundOptionSameLicenses();
+        $("#patent-pledge").remove();
+        $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
     }
 
     $( "#non-fsfe-compliance").click(function () {
         selectNonFsfeCompliance();
     });
 
-   function checkOutboundOptionSame ()
-   {
+    function selectNonFsfeCompliance ()
+    {
+        $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
+        $("#outbound-option-4-label").show();
+        $("#outbound-option-5-label").show();
+        $("#outbound-option-fsf").prop("checked", true);
+        checkOutboundOptionSame();
+        $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
+        $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+    }
+
+    $( "#outbound-option-fsf" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
+        $("#policy-custom").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
-    }
-
-    $( "#outbound-option-same" ).change(function() {
-        checkOutboundOptionSame();
     });
-
-    function checkOutboundOptionSameLicenses ()
-    {
-        if ( $("#outbound-option-same-licenses").prop( "checked" ) ) {
-            $("#outboundlist").show();
-            $("#outboundlist-custom").show();
-        }
-        $("#medialist-label").show();
-        $("#medialist").show();
-        // return testGeneralPage();
-    }
 
     $( "#outbound-option-same-licenses" ).change(function() {
         checkOutboundOptionSameLicenses();
     });
 
-    $( "#outbound-option-fsf" ).change(function() {
-        $("#outboundlist").hide();
-        $("#outboundlist-custom").hide();
+    function checkOutboundOptionSameLicenses ()
+    {
+        if ( $("#fsfe-compliance").hasClass('active') && $("#outbound-option-same-licenses").prop( "checked" ) ) {
+            $("#outboundlist").show();
+            $("#outboundlist-custom").hide();
+        }
+        if ( $("#non-fsfe-compliance").hasClass('active') && $("#outbound-option-same-licenses").prop( "checked" ) ) {
+          $("#outboundlist").show();
+          $("#outboundlist-custom").show();
+        }
+        $("#policy-custom").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
+    }
+
+    $( "#outbound-option-policy-custom" ).change(function() {
+      $("#outboundlist").hide();
+      $("#outboundlist-custom").hide();
+      $("#policy-custom").show();
+      $("#medialist-label").show();
+      $("#medialist").show();
     });
+
+    $( "#outbound-option-same" ).change(function() {
+        checkOutboundOptionSame();
+    });
+
+   function checkOutboundOptionSame ()
+   {
+        $("#outboundlist").hide();
+        $("#outboundlist-custom").hide();
+        $("#policy-custom").hide();
+        $("#medialist-label").show();
+        $("#medialist").show();
+        // return testGeneralPage();
+    }
 
     $( "#outbound-option-no-commitment" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
+        $("#policy-custom").hide();
         $("#medialist-label").hide();
         $("#medialist").hide();
         // return testGeneralPage();

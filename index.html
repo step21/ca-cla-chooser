@@ -151,16 +151,17 @@
 
 
 <p id="outbound-options-label" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</p>
-<div id="outbound_option_1" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
+<div id="outbound-option-1-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-same" value="Use Same License">
-<strong>Option 1</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the material (including any rights to adopt any future version of a license).
-</label></div>
+<input type="radio" name="outbound-options" id="outbound-option-fsf" value="Use FSF or OSI Approved Licenses">
+<strong>Option 1</strong> - The contribution(s) can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+</label>
+</div>
 
 <div id="outbound-option-2-label" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="Use Same with Licenses">
-<strong id="option-2">Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
+<strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
 </label></div>
 
     <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
@@ -186,18 +187,25 @@
 <input type="text" name="outboundlist-custom" id="outboundlist-custom"
 class="input-block-level" placeholder="If one or more of your preferred licenses were not listed, please list other licenses here.">
 
-
-<div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
+<div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="Type in the location of your licensing policy below." data-content="">
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-fsf" value="Use FSF or OSI Approved Licenses">
-<strong id="option-3">Option 3</strong> - The contributions can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
-</label>
-</div>
+<input type="radio" name="outbound-options" id="outbound-option-policy-custom" value="Use Same with Licenses">
+<strong>Option 3</strong> - The contribution(s) should only be licensed in accordance with your licensing policy, which complies with the Free Software and Open Source Licenses approved by FSFE and OSI. It is available at:
+</label></div>
 
-<div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="Gives you the flexibility to choose any license now or in the future.">
+<input type="text" name="policy-custom" id="policy-custom"
+class="input-block-level" placeholder="Location of your licensing policy">
+
+<div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same" value="Use Same License">
+<strong>Option 4</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the material (including any rights to adopt any future version of a license).
+</label></div>
+
+<div id="outbound-option-5-label" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="Gives you the flexibility to choose any license now or in the future.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-no-commitment" value="No commitment to any specific outbound license">
-<strong>Option 4</strong> - No commitment to any specific outbound license.
+<strong>Option 5</strong> - No commitment to any specific outbound license.
 </label>
 </div>
 
