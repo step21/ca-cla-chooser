@@ -58,6 +58,7 @@ var applyPageIndex      = 4;
 var isApplyPageOk       = false;
 
 var outboundCopyrightLicenses = '';
+var LicensePolicyLocation = '';
 var mediaLicenses       = '';
 
 
@@ -67,10 +68,7 @@ var noneField           = 'None.'
 
 var outBeforeField      = 'the following';
 var outAfterField       = 'license(s)';
-var fsfField            = 'any licenses on the Free Software ' +
-                          'Foundation\'s list of "Recommended copyleft ' +
-                          'licenses" or approved by the Open Source ' +
-                          'Initiative.';
+var fsfeField            = 'any licenses the Free Software Foundation classifies as Free Software licenses and which are approved by the Open Source Initiative as Open Source licenses.';
 
 var fsfePreamble        = '<h3>Preamble</h3>\n Access to software determines participation in a digital society. To secure equal participation in the information age, the Free Software Foundation Europe (FSFE) pursues and is dedicated to the furthering of Free Software, defined by the freedoms to use, study, modify and copy. Independent of the issue of commercial exploitation, it is proprietary, freedom-diminishing licensing that works against the interests of people and society at large, which is therefore rejected by FSFE.'
 + 'The purpose of this agreement is to ensure the lasting protection of Free Software by making FSFE the fiduciary of the author\'s interests.\n It empowers FSFE -- and its sister organisations -- to uphold the interests of Free Software authors and protect them in court, if necessary.'
@@ -102,7 +100,7 @@ var dictionary = {
  *
  * contributor-option-entity=entity|individual
  * agreement-exclusivity=exclusive|nonexclusive
- * outbound-option=same|same-licenses|fsf|no-commitment
+ * outbound-option=same|same-licenses|fsfe|no-commitment
  * outboundlist=Artistic-1.0,Apache-2.0,LIST
  * outboundlist-custom=STRING
  * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3,LIST
@@ -257,11 +255,11 @@ function updateConfigs ()
 
     switch ( configs["outbound-option"] ) {
         // option-1
-        case 'fsf':
-          $("#outbound-option-fsf").prop('checked', true );
-          $("#outbound-option-fsf" ).trigger( 'change' );
+        case 'fsfe':
+          $("#outbound-option-fsfe").prop('checked', true );
+          $("#outbound-option-fsfe" ).trigger( 'change' );
           // @todo delete later if no need
-          // setOutboundOptionFsf();
+          // setOutboundOptionFsfe();
           break;
         // option-2
         case 'same-licenses':
@@ -553,12 +551,13 @@ function oinspect (obj)
 function fixPatentParagraph( message )
 {
     if ( typeof message == 'undefined' )
+        /*Probably never invoked until now, because message never "undefined".*/
         message = outBeforeField + " " +
                   $("#i-tmp-licenses-2").html() + " " +
                   outAfterField;
 
-    $("#i-tmp-licenses-2").html( message );
-    $("#e-tmp-licenses-2").html( message );
+    $('#review-text #tmp-licenses-2').html( message );
+    $('#review-text-entity #tmp-licenses-2').html( message );
 }
 
 function getEmbedCode ( ourQuery )
@@ -595,14 +594,56 @@ function setFLACLAChoice ()
 }
 */
 
-function setOutboundOptionFsf ()
+function putBackOrderOfSectionsAfterSection4 ()
+{
+    $('#review-text #tmp-digit-disclaimer').html( '5.' );
+    $('#review-text #tmp-digit-waiver').html( '6.' );
+    $('#review-text #tmp-digit-approx-waiver').html( '7.' );
+    $('#review-text #tmp-digit-disclaimer-2').html( '5.' );
+    $('#review-text #tmp-digit-waiver-2').html( '6.' );
+    $('#review-text #tmp-digit-term').html( '8.' );
+    $('#review-text #tmp-digit-term-1').html( '8.1' );
+    $('#review-text #tmp-digit-term-2').html( '8.2' );
+    $('#review-text #tmp-digit-term-3').html( '8.3' );
+    $('#review-text #tmp-digit-term-special').html( '5, 6, 7, 8 and 9' );
+    $('#review-text #tmp-digit-misc').html( '9' );
+    $('#review-text #tmp-digit-misc-1').html( '9.1' );
+    $('#review-text #tmp-digit-misc-2').html( '9.2' );
+    $('#review-text #tmp-digit-misc-3').html( '9.3' );
+    $('#review-text #tmp-digit-misc-4').html( '9.4' );
+    $('#review-text #tmp-digit-misc-5').html( '9.5' );
+
+    $('#review-text-entity #tmp-digit-disclaimer').html( '5.' );
+    $('#review-text-entity #tmp-digit-waiver').html( '6.' );
+    $('#review-text-entity #tmp-digit-approx-waiver').html( '7.' );
+    $('#review-text-entity #tmp-digit-disclaimer-2').html( '5.' );
+    $('#review-text-entity #tmp-digit-waiver-2').html( '6.' );
+    $('#review-text-entity #tmp-digit-term').html( '8.' );
+    $('#review-text-entity #tmp-digit-term-1').html( '8.1' );
+    $('#review-text-entity #tmp-digit-term-2').html( '8.2' );
+    $('#review-text-entity #tmp-digit-term-3').html( '8.3' );
+    $('#review-text-entity #tmp-digit-term-special').html( '5, 6, 7, 8 and 9' );
+    $('#review-text-entity #tmp-digit-misc').html( '9' );
+    $('#review-text-entity #tmp-digit-misc-1').html( '9.1' );
+    $('#review-text-entity #tmp-digit-misc-2').html( '9.2' );
+    $('#review-text-entity #tmp-digit-misc-3').html( '9.3' );
+    $('#review-text-entity #tmp-digit-misc-4').html( '9.4' );
+    $('#review-text-entity #tmp-digit-misc-5').html( '9.5' );
+
+    $('#review-text #tmp-term-special').show();
+    $('#review-text #tmp-term-special').removeClass("nuke");
+    $('#review-text-entity #tmp-term-special').show();
+    $('#review-text-entity #tmp-term-special').removeClass("nuke");
+}
+
+function setOutboundOptionFsfe ()
 {
     /* remove the outbound-option in review */
     // $("#review-outbound-licenses").html( naField );
     $("#review-outbound-licenses").html(
-        $("#outbound-option-fsf").val() );
+        $("#outbound-option-fsfe").val() );
 
-    configs['outbound-option'] = 'fsf' ;
+    configs['outbound-option'] = 'fsfe' ;
 
     $('#review-text-fla #tmp-outbound-section-all').show();
     $('#review-text-fla #tmp-outbound-section-all').removeClass("nuke");
@@ -611,67 +652,177 @@ function setOutboundOptionFsf ()
     $('#review-text-entity #tmp-outbound-section-all').show();
     $('#review-text-entity #tmp-outbound-section-all').removeClass("nuke");
 
+    $('#review-text #tmp-licenses-2').html( fsfeField );
+    $('#review-text-entity #tmp-licenses-2').html( fsfeField );
+
     /* put back order of sections after section 4 */
-    $("#i-tmp-digit-disclaimer").html( '5' );
-    $("#e-tmp-digit-disclaimer").html( '5' );
-    $("#i-tmp-digit-waiver").html( '6' );
-    $("#e-tmp-digit-waiver").html( '6' );
-    $("#i-tmp-digit-approx-waiver").html( '7' );
-    $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '5' );
-    $("#e-tmp-digit-waiver-2").html( '5' );
-    $("#i-tmp-digit-approx-waiver-2").html( '6' );
-    $("#e-tmp-digit-approx-waiver-2").html( '6' );
-    $("#i-tmp-digit-term").html( '8' );
-    $("#e-tmp-digit-term").html( '8' );
-    $("#i-tmp-digit-term-1").html( '8.1' );
-    $("#e-tmp-digit-term-1").html( '8.1' );
-    $("#i-tmp-digit-term-2").html( '8.2' );
-    $("#e-tmp-digit-term-2").html( '8.2' );
-    $("#i-tmp-digit-term-3").html( '8.3' );
-    $("#e-tmp-digit-term-3").html( '8.3' );
-    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#i-tmp-digit-misc").html( '9' );
-    $("#e-tmp-digit-misc").html( '9' );
-    $("#i-tmp-digit-misc-1").html( '9.1' );
-    $("#e-tmp-digit-misc-1").html( '9.1' );
-    $("#i-tmp-digit-misc-2").html( '9.2' );
-    $("#e-tmp-digit-misc-2").html( '9.2' );
-    $("#i-tmp-digit-misc-3").html( '9.3' );
-    $("#e-tmp-digit-misc-3").html( '9.3' );
-    $("#i-tmp-digit-misc-4").html( '9.4' );
-    $("#e-tmp-digit-misc-4").html( '9.4' );
-
-
-    $("#i-tmp-term-special").show();
-    $("#e-tmp-term-special").show();
-    $("#i-tmp-term-special").removeClass("nuke");
-    $("#e-tmp-term-special").removeClass("nuke");
+    putBackOrderOfSectionsAfterSection4();
 
     /*
-    $("#i-tmp-licenses-2").hide();
-    $("#e-tmp-licenses-2").hide();
-    $("#i-tmp-licenses-2").addClass("nuke");
-    $("#e-tmp-licenses-2").addClass("nuke");
+    $("#tmp-licenses-2").hide();
+    $("#tmp-licenses-2").addClass("nuke");
     */
 
-    $("#i-tmp-licenses-2").html( fsfField );
-    $("#e-tmp-licenses-2").html( fsfField );
+    $('#review-text-fla #tmp-outbound-option-1-fsfe').show();
+    $('#review-text-fla #tmp-outbound-option-1-fsfe').removeClass("nuke");
+    $('#review-text #tmp-outbound-option-1-fsfe').show();
+    $('#review-text #tmp-outbound-option-1-fsfe').removeClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').show();
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').removeClass("nuke");
 
-    $("#i-tmp-outbound-option-1").hide();
-    $("#i-tmp-outbound-option-1").addClass("nuke");
-    $("#i-tmp-outbound-option-2").show();
-    $("#i-tmp-outbound-option-2").removeClass("nuke");
-    $("#i-tmp-outbound-option-4").hide();
-    $("#i-tmp-outbound-option-4").addClass("nuke");
-    $("#e-tmp-outbound-option-1").hide();
-    $("#e-tmp-outbound-option-1").addClass("nuke");
-    $("#e-tmp-outbound-option-2").show();
-    $("#e-tmp-outbound-option-2").removeClass("nuke");
-    $("#e-tmp-outbound-option-4").hide();
-    $("#e-tmp-outbound-option-4").addClass("nuke");
+    $('#review-text-fla #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-2-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').addClass("nuke");
 
+    $('#review-text-fla #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+
+    $('#review-text-fla #tmp-outbound-option-3-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-3-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-3-fsfe').hide();
+    $('#review-text #tmp-outbound-option-3-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').addClass("nuke");
+
+    $('#review-text-fla #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+
+}
+
+function setOutboundOptionSameLicenses ()
+{
+    configs['outbound-option'] = 'same-licenses';
+
+    $("#tmp-outbound-section-all").show();
+    $("#tmp-outbound-section-all").removeClass("nuke");
+
+    $("#review-outbound-licenses").html( outboundCopyrightLicenses );
+
+    $('#review-text #tmp-licenses').html( outboundCopyrightLicenses );
+    $('#review-text #tmp-licenses-2').html( outboundCopyrightLicenses );
+
+    $('#review-text-entity #tmp-licenses').html( outboundCopyrightLicenses );
+    $('#review-text-entity #tmp-licenses-2').html( outboundCopyrightLicenses );
+
+    configs['outboundlist'] = outboundCopyrightLicenses;
+
+    /* put back order of sections after section 4 */
+    putBackOrderOfSectionsAfterSection4();
+
+    /*
+    $("#tmp-licenses-2").show();
+    $("#tmp-licenses-2").removeClass("nuke");
+    */
+
+    if ( !outboundCopyrightLicenses )
+    {
+        fixPatentParagraph( outBeforeField + " " +
+                            outAfterField + " " + emptyField );
+    } else {
+        fixPatentParagraph();
+    }
+
+    if ( $("#fsfe-compliance").hasClass('active') )
+    {
+        $('#review-text-fla #tmp-outbound-option-1-fsfe').show();
+        $('#review-text-fla #tmp-outbound-option-1-fsfe').removeClass("nuke");
+        $('#review-text-fla #tmp-outbound-option-2-fsfe').show();
+        $('#review-text-fla #tmp-outbound-option-2-fsfe').removeClass("nuke");
+        $('#review-text-fla #tmp-outbound-option-2-non-fsfe').hide();
+        $('#review-text-fla #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+        $('#review-text-fla #tmp-outbound-option-3-fsfe').hide();
+        $('#review-text-fla #tmp-outbound-option-3-fsfe').addClass("nuke");
+        $('#review-text-fla #tmp-outbound-option-4-non-fsfe').hide();
+        $('#review-text-fla #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+
+    } else {
+        $('#review-text #tmp-outbound-option-1-fsfe').hide();
+        $('#review-text #tmp-outbound-option-1-fsfe').addClass("nuke");
+        $('#review-text-entity #tmp-outbound-option-1-fsfe').hide();
+        $('#review-text-entity #tmp-outbound-option-1-fsfe').addClass("nuke");
+
+        $('#review-text #tmp-outbound-option-2-fsfe').hide();
+        $('#review-text #tmp-outbound-option-2-fsfe').addClass("nuke");
+        $('#review-text-entity #tmp-outbound-option-2-fsfe').hide();
+        $('#review-text-entity #tmp-outbound-option-2-fsfe').addClass("nuke");
+
+        $('#review-text #tmp-outbound-option-2-non-fsfe').show();
+        $('#review-text #tmp-outbound-option-2-non-fsfe').removeClass("nuke");
+        $('#review-text-entity #tmp-outbound-option-2-non-fsfe').show();
+        $('#review-text-entity #tmp-outbound-option-2-non-fsfe').removeClass("nuke");
+
+        $('#review-text #tmp-outbound-option-3-fsfe').hide();
+        $('#review-text #tmp-outbound-option-3-fsfe').addClass("nuke");
+        $('#review-text-entity #tmp-outbound-option-3-fsfe').hide();
+        $('#review-text-entity #tmp-outbound-option-3-fsfe').addClass("nuke");
+
+        $('#review-text #tmp-outbound-option-4-non-fsfe').hide();
+        $('#review-text #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+        $('#review-text-entity #tmp-outbound-option-4-non-fsfe').hide();
+        $('#review-text-entity #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+    }
+}
+
+  function setOutboundOptionLicensePolicy ()
+{
+    $("#review-outbound-licenses").html(
+      $("#outbound-option-license-policy").val() );
+
+    $('#review-text-fla #tmp-outbound-option-1-fsfe').show();
+    $('#review-text-fla #tmp-outbound-option-1-fsfe').removeClass("nuke");
+    $('#review-text #tmp-outbound-option-1-fsfe').show();
+    $('#review-text #tmp-outbound-option-1-fsfe').removeClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').show();
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').removeClass("nuke");
+
+    $('#review-text-fla #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-2-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').addClass("nuke");
+
+    $('#review-text-fla #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+
+    $('#review-text-fla #tmp-outbound-option-3-fsfe').show();
+    $('#review-text-fla #tmp-outbound-option-3-fsfe').removeClass("nuke");
+    $('#review-text #tmp-outbound-option-3-fsfe').show();
+    $('#review-text #tmp-outbound-option-3-fsfe').removeClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').show();
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').removeClass("nuke");
+
+    $('#review-text-fla #tmp-license-policy-location').html( LicensePolicyLocation );
+    $('#review-text #tmp-license-policy-location').html( LicensePolicyLocation );
+    $('#review-text-entity #tmp-license-policy-location').html( LicensePolicyLocation );
+
+    $('#review-text-fla #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text-fla #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+    $('#review-text #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').addClass("nuke");
+
+    $('#review-text #tmp-licenses-2').html( fsfeField );
+    $('#review-text-entity #tmp-licenses-2').html( fsfeField );
+
+    /* put back order of sections after section 4 */
+    putBackOrderOfSectionsAfterSection4();
 }
 
 function setOutboundOptionSame ()
@@ -690,129 +841,39 @@ function setOutboundOptionSame ()
     $("#tmp-outbound-section-all").show();
     $("#tmp-outbound-section-all").removeClass("nuke");
 
-    /* put back order of sections after section 4 */
-    $("#i-tmp-digit-disclaimer").html( '5' );
-    $("#e-tmp-digit-disclaimer").html( '5' );
-    $("#i-tmp-digit-waiver").html( '6' );
-    $("#e-tmp-digit-waiver").html( '6' );
-    $("#i-tmp-digit-approx-waiver").html( '7' );
-    $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '5' );
-    $("#e-tmp-digit-waiver-2").html( '5' );
-    $("#i-tmp-digit-approx-waiver-2").html( '6' );
-    $("#e-tmp-digit-approx-waiver-2").html( '6' );
-    $("#i-tmp-digit-term").html( '8' );
-    $("#e-tmp-digit-term").html( '8' );
-    $("#i-tmp-digit-term-1").html( '8.1' );
-    $("#e-tmp-digit-term-1").html( '8.1' );
-    $("#i-tmp-digit-term-2").html( '8.2' );
-    $("#e-tmp-digit-term-2").html( '8.2' );
-    $("#i-tmp-digit-term-3").html( '8.3' );
-    $("#e-tmp-digit-term-3").html( '8.3' );
-    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#i-tmp-digit-misc").html( '9' );
-    $("#e-tmp-digit-misc").html( '9' );
-    $("#i-tmp-digit-misc-1").html( '9.1' );
-    $("#e-tmp-digit-misc-1").html( '9.1' );
-    $("#i-tmp-digit-misc-2").html( '9.2' );
-    $("#e-tmp-digit-misc-2").html( '9.2' );
-    $("#i-tmp-digit-misc-3").html( '9.3' );
-    $("#e-tmp-digit-misc-3").html( '9.3' );
-    $("#i-tmp-digit-misc-4").html( '9.4' );
-    $("#e-tmp-digit-misc-4").html( '9.4' );
+    $('#review-text #tmp-licenses-2').html( emptyField );
+    $('#review-text-entity #tmp-licenses-2').html( emptyField );
 
-    $("#i-tmp-term-special").show();
-    $("#e-tmp-term-special").show();
-    $("#i-tmp-term-special").removeClass("nuke");
-    $("#e-tmp-term-special").removeClass("nuke");
+    /* put back order of sections after section 4 */
+    putBackOrderOfSectionsAfterSection4();
 
     fixPatentParagraph( 'the license or licenses that We ' +
                         'are using on the Submission Date' );
 
+    $('#review-text #tmp-outbound-option-1-fsfe').hide();
+    $('#review-text #tmp-outbound-option-1-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-1-fsfe').addClass("nuke");
 
+    $('#review-text #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-fsfe').addClass("nuke");
 
-    $("#tmp-outbound-option-1").hide();
-    $("#tmp-outbound-option-1").addClass("nuke");
-    $("#i-tmp-outbound-option-2").hide();
-    $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-4").show();
-    $("#i-tmp-outbound-option-4").removeClass("nuke");
-}
+    $('#review-text #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text #tmp-outbound-option-2-non-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-2-non-fsfe').addClass("nuke");
 
-function setOutboundOptionSameLicenses ()
-{
-    configs['outbound-option'] = 'same-licenses';
+    $('#review-text #tmp-outbound-option-3-fsfe').hide();
+    $('#review-text #tmp-outbound-option-3-fsfe').addClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').hide();
+    $('#review-text-entity #tmp-outbound-option-3-fsfe').addClass("nuke");
 
-    $("#tmp-outbound-section-all").show();
-    $("#tmp-outbound-section-all").removeClass("nuke");
-
-    /* put back order of sections after section 4 */
-    $("#i-tmp-digit-disclaimer").html( '5' );
-    $("#e-tmp-digit-disclaimer").html( '5' );
-    $("#i-tmp-digit-waiver").html( '6' );
-    $("#e-tmp-digit-waiver").html( '6' );
-    $("#i-tmp-digit-approx-waiver").html( '7' );
-    $("#e-tmp-digit-approx-waiver").html( '7' );
-    $("#i-tmp-digit-waiver-2").html( '5' );
-    $("#e-tmp-digit-waiver-2").html( '5' );
-    $("#i-tmp-digit-approx-waiver-2").html( '6' );
-    $("#e-tmp-digit-approx-waiver-2").html( '6' );
-    $("#i-tmp-digit-term").html( '8' );
-    $("#e-tmp-digit-term").html( '8' );
-    $("#i-tmp-digit-term-1").html( '8.1' );
-    $("#e-tmp-digit-term-1").html( '8.1' );
-    $("#i-tmp-digit-term-2").html( '8.2' );
-    $("#e-tmp-digit-term-2").html( '8.2' );
-    $("#i-tmp-digit-term-3").html( '8.3' );
-    $("#e-tmp-digit-term-3").html( '8.3' );
-    $("#i-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#e-tmp-digit-term-special").html( '5, 6, 7, 8 and 9' );
-    $("#i-tmp-digit-misc").html( '9' );
-    $("#e-tmp-digit-misc").html( '9' );
-    $("#i-tmp-digit-misc-1").html( '9.1' );
-    $("#e-tmp-digit-misc-1").html( '9.1' );
-    $("#i-tmp-digit-misc-2").html( '9.2' );
-    $("#e-tmp-digit-misc-2").html( '9.2' );
-    $("#i-tmp-digit-misc-3").html( '9.3' );
-    $("#e-tmp-digit-misc-3").html( '9.3' );
-    $("#i-tmp-digit-misc-4").html( '9.4' );
-    $("#e-tmp-digit-misc-4").html( '9.4' );
-
-    $("#i-tmp-term-special").show();
-    $("#e-tmp-term-special").show();
-    $("#i-tmp-term-special").removeClass("nuke");
-    $("#e-tmp-term-special").removeClass("nuke");
-
-    /*
-    $("#i-tmp-licenses-2").show();
-    $("#e-tmp-licenses-2").show();
-    $("#i-tmp-licenses-2").removeClass("nuke");
-    $("#e-tmp-licenses-2").removeClass("nuke");
-    */
-
-    if ( !outboundCopyrightLicenses )
-    {
-        fixPatentParagraph( outBeforeField + " " +
-                            outAfterField + " " + emptyField );
-    } else {
-        fixPatentParagraph();
-    }
-
-
-
-    $("#i-tmp-outbound-option-1").show();
-    $("#i-tmp-outbound-option-1").removeClass("nuke");
-    $("#i-tmp-outbound-option-2").hide();
-    $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-4").hide();
-    $("#i-tmp-outbound-option-4").addClass("nuke");
-    $("#e-tmp-outbound-option-1").show();
-    $("#e-tmp-outbound-option-1").removeClass("nuke");
-    $("#e-tmp-outbound-option-2").hide();
-    $("#e-tmp-outbound-option-2").addClass("nuke");
-    $("#e-tmp-outbound-option-4").hide();
-    $("#e-tmp-outbound-option-4").addClass("nuke");
+    $('#review-text #tmp-outbound-option-4-non-fsfe').show();
+    $('#review-text #tmp-outbound-option-4-non-fsfe').removeClass("nuke");
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').show();
+    $('#review-text-entity #tmp-outbound-option-4-non-fsfe').removeClass("nuke");
 }
 
 function setOutboundOptionNoCommitment ()
@@ -828,19 +889,6 @@ function setOutboundOptionNoCommitment ()
         $("#outbound-option-no-commitment").val() );
     */
 
-
-    $("#i-tmp-outbound-option-1").hide();
-    $("#i-tmp-outbound-option-1").addClass("nuke");
-    $("#i-tmp-outbound-option-2").hide();
-    $("#i-tmp-outbound-option-2").addClass("nuke");
-    $("#i-tmp-outbound-option-4").hide();
-    $("#i-tmp-outbound-option-4").addClass("nuke");
-    $("#e-tmp-outbound-option-1").hide();
-    $("#e-tmp-outbound-option-1").addClass("nuke");
-    $("#e-tmp-outbound-option-2").hide();
-    $("#e-tmp-outbound-option-2").addClass("nuke");
-    $("#e-tmp-outbound-option-4").hide();
-    $("#e-tmp-outbound-option-4").addClass("nuke");
 
     /* remove entire section 4 */
     $("#tmp-outbound-section-all").hide();
@@ -879,10 +927,44 @@ function setOutboundOptionNoCommitment ()
     $("#e-tmp-digit-misc-4").html( '8.4' );
 
 
-    $("#i-tmp-term-special").hide();
-    $("#e-tmp-term-special").hide();
-    $("#i-tmp-term-special").addClass("nuke");
-    $("#e-tmp-term-special").addClass("nuke");
+    $('#review-text #tmp-digit-disclaimer').html( '4.' );
+    $('#review-text #tmp-digit-waiver').html( '5.' );
+    $('#review-text #tmp-digit-approx-waiver').html( '6.' );
+    $('#review-text #tmp-digit-disclaimer-2').html( '4.' );
+    $('#review-text #tmp-digit-waiver-2').html( '5.' );
+    $('#review-text #tmp-digit-term').html( '7.' );
+    $('#review-text #tmp-digit-term-1').html( '7.1' );
+    $('#review-text #tmp-digit-term-2').html( '7.2' );
+    $('#review-text #tmp-digit-term-3').html( '7.3' );
+    $('#review-text #tmp-digit-term-special').html( '4, 5, 6, 7 and 8' );
+    $('#review-text #tmp-digit-misc').html( '8' );
+    $('#review-text #tmp-digit-misc-1').html( '8.1' );
+    $('#review-text #tmp-digit-misc-2').html( '8.2' );
+    $('#review-text #tmp-digit-misc-3').html( '8.3' );
+    $('#review-text #tmp-digit-misc-4').html( '8.4' );
+    $('#review-text #tmp-digit-misc-5').html( '8.5' );
+
+    $('#review-text-entity #tmp-digit-disclaimer').html( '4.' );
+    $('#review-text-entity #tmp-digit-waiver').html( '5.' );
+    $('#review-text-entity #tmp-digit-approx-waiver').html( '6.' );
+    $('#review-text-entity #tmp-digit-disclaimer-2').html( '4.' );
+    $('#review-text-entity #tmp-digit-waiver-2').html( '5.' );
+    $('#review-text-entity #tmp-digit-term').html( '7.' );
+    $('#review-text-entity #tmp-digit-term-1').html( '7.1' );
+    $('#review-text-entity #tmp-digit-term-2').html( '7.2' );
+    $('#review-text-entity #tmp-digit-term-3').html( '7.3' );
+    $('#review-text-entity #tmp-digit-term-special').html( '4, 5, 6, 7 and 8' );
+    $('#review-text-entity #tmp-digit-misc').html( '8' );
+    $('#review-text-entity #tmp-digit-misc-1').html( '8.1' );
+    $('#review-text-entity #tmp-digit-misc-2').html( '8.2' );
+    $('#review-text-entity #tmp-digit-misc-3').html( '8.3' );
+    $('#review-text-entity #tmp-digit-misc-4').html( '8.4' );
+    $('#review-text-entity #tmp-digit-misc-5').html( '8.5' );
+
+    $('#review-text #tmp-term-special').hide();
+    $('#review-text #tmp-term-special').addClass("nuke");
+    $('#review-text-entity #tmp-term-special').hide();
+    $('#review-text-entity #tmp-term-special').addClass("nuke");
 }
 
 
@@ -1015,6 +1097,12 @@ function testCopyrightPage ()
                         outboundCopyrightLicenses);
             }
 
+            if ( !$('#license-policy-location').val() ) {
+                LicensePolicyLocation = "";
+            } else {
+                LicensePolicyLocation = $('#license-policy-location').val();
+            }
+
 
             /*
             if ( !$('#medialist').val() ) {
@@ -1145,15 +1233,18 @@ function testReviewPage ()
             if ( !$("#project-jurisdiction").val() )
             {
                 $("#review-project-jurisdiction").html( emptyField );
-                $("#i-tmp-project-jurisdiction").html( emptyField );
-                $("#e-tmp-project-jurisdiction").html( emptyField );
+                $('#review-text-fla #tmp-project-jurisdiction').html( emptyField );
+                $('#review-text #tmp-project-jurisdiction').html( emptyField );
+                $('#review-text-entity #tmp-project-jurisdiction').html( emptyField );
                 configs['project-jurisdiction'] = '';
             } else{
                 $("#review-project-jurisdiction").html(
                     $("#project-jurisdiction").val() );
-                $("#i-tmp-project-jurisdiction").html(
+                $('#review-text-fla #tmp-project-jurisdiction').html(
                     $("#project-jurisdiction").val() );
-                $("#e-tmp-project-jurisdiction").html(
+                $('#review-text #tmp-project-jurisdiction').html(
+                    $("#project-jurisdiction").val() );
+                $('#review-text-entity #tmp-project-jurisdiction').html(
                     $("#project-jurisdiction").val() );
                 configs['project-jurisdiction'] =
                     $("#project-jurisdiction").val();
@@ -1203,8 +1294,8 @@ function testReviewPage ()
             if ( $("#agreement-exclusivity").val() == 'exclusive' )
             {
                 $('#review-text-fla #tmp-contributor-exclusivity-2').html("exclusive");
-                $('#review-text #tmp-contributor-exclusivity-2').html("exclusive");
-                $('#review-text-entity #tmp-contributor-exclusivity-2').html("exclusive");
+                $('#review-text #tmp-contributor-exclusivity-2').html("Exclusive");
+                $('#review-text-entity #tmp-contributor-exclusivity-2').html("Exclusive");
                 $('#review-text #tmp-license-back').show();
                 $('#review-text #tmp-license-back').removeClass("nuke");
                 $('#review-text-entity #tmp-license-back').show();
@@ -1219,37 +1310,27 @@ function testReviewPage ()
                 $('#review-text-entity #tmp-license-back').addClass("nuke");
             }
 
+            $('#review-text-fla #tmp-licenses-2').html( fsfeField );
 
             if ( !outboundCopyrightLicenses ) {
-                $("#review-outbound-licenses").html( emptyField );
-                $("#i-tmp-licenses").html( emptyField );
-                $("#e-tmp-licenses").html( emptyField );
-                $("#i-tmp-licenses-2").html( emptyField );
-                $("#e-tmp-licenses-2").html( emptyField );
-                configs['outboundlist'] = '';
+                $('#review-text-fla #tmp-licenses-fsfe').html( emptyField );
+                $('#review-text #tmp-licenses-non-fsfe').html( emptyField );
+                $('#review-text-entity #tmp-licenses-non-fsfe').html( emptyField );
 
             } else {
-                $("#review-outbound-licenses").html(
-                    outboundCopyrightLicenses );
-                $("#i-tmp-licenses").html(
-                    outboundCopyrightLicenses );
-                $("#e-tmp-licenses").html(
-                    outboundCopyrightLicenses );
-                $("#i-tmp-licenses-2").html(
-                    outboundCopyrightLicenses );
-                $("#e-tmp-licenses-2").html(
-                    outboundCopyrightLicenses );
-                configs['outboundlist'] = outboundCopyrightLicenses;
+                $('#review-text-fla #tmp-licenses-fsfe').html( outboundCopyrightLicenses );
+                $('#review-text #tmp-licenses-non-fsfe').html( outboundCopyrightLicenses );
+                $('#review-text-entity #tmp-licenses-non-fsfe').html( outboundCopyrightLicenses );
             }
 
-            if ( $("#outbound-option-fsf").prop("checked") )
-                setOutboundOptionFsf();
+            if ( $("#outbound-option-fsfe").prop("checked") )
+                setOutboundOptionFsfe();
 
             if ( $("#outbound-option-same-licenses").prop("checked") )
                 setOutboundOptionSameLicenses();
 
-            if ( $("#outbound-option-policy-custom").prop("checked") )
-                setOutboundOptionPolicyCustom();
+            if ( $("#outbound-option-license-policy").prop("checked") )
+                setOutboundOptionLicensePolicy();
 
             if ( $("#outbound-option-same").prop("checked") )
                 setOutboundOptionSame();
@@ -1267,22 +1348,25 @@ function testReviewPage ()
                 mediaLicenses );
             configs['medialist'] = mediaLicenses;
 
+            $('#review-text-fla #tmp-outbound-media-license').hide();
+            $('#review-text-fla #tmp-outbound-media-license').addClass("nuke");
+
             if ( mediaLicenses == "None" ) {
-                $("#e-tmp-outbound-media-license").hide();
-                $("#i-tmp-outbound-media-license").hide();
-                $("#e-tmp-outbound-media-license").addClass("nuke");
-                $("#i-tmp-outbound-media-license").addClass("nuke");
+                $('#review-text #tmp-outbound-media-license').hide();
+                $('#review-text #tmp-outbound-media-license').addClass("nuke");
+                $('#review-text-entity #tmp-outbound-media-license').hide();
+                $('#review-text-entity #tmp-outbound-media-license').addClass("nuke");
             } else {
                 if ( mediaLicenses == "" )
                     mediaLicenses = emptyField;
-                $("#i-tmp-media-licenses").html(
+                $('#review-text #tmp-media-licenses').html(
                     mediaLicenses );
-                $("#e-tmp-media-licenses").html(
+                $('#review-text-entity #tmp-media-licenses').html(
                     mediaLicenses );
-                $("#i-tmp-outbound-media-license").show();
-                $("#e-tmp-outbound-media-license").show();
-                $("#i-tmp-outbound-media-license").removeClass("nuke");
-                $("#e-tmp-outbound-media-license").removeClass("nuke");
+                $('#review-text #tmp-outbound-media-license').show();
+                $('#review-text #tmp-outbound-media-license').removeClass("nuke");
+                $('#review-text-entity #tmp-outbound-media-license').show();
+                $('#review-text-entity #tmp-outbound-media-license').removeClass("nuke");
             }
 
 
@@ -1309,36 +1393,34 @@ function testReviewPage ()
                 $('#review-text-fla #tmp-patent-option-pledge').hide();
                 $('#review-text-fla #tmp-patent-option-pledge').addClass("nuke");
 
-                $('#review-text #tmp-patent-option #tmp-patent-option-traditional').show();
-                $('#review-text #tmp-patent-option #tmp-patent-option-traditional').removeClass("nuke");
-                $('#review-text #tmp-patent-option #tmp-patent-option-pledge').hide();
-                $('#review-text #tmp-patent-option #tmp-patent-option-pledge').addClass("nuke");
+                $('#review-text #tmp-patent-option-traditional').show();
+                $('#review-text #tmp-patent-option-traditional').removeClass("nuke");
+                $('#review-text #tmp-patent-option-pledge').hide();
+                $('#review-text #tmp-patent-option-pledge').addClass("nuke");
+                $('#review-text #tmp-outbound-special').show();
+                $('#review-text #tmp-outbound-special').removeClass("nuke");
 
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-traditional').show();
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-traditional').removeClass("nuke");
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-pledge').hide();
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-pledge').addClass("nuke");
-
-                $("#i-tmp-outbound-special").show();
-                $("#i-tmp-outbound-special").removeClass("nuke");
-                $("#e-tmp-outbound-special").show();
-                $("#e-tmp-outbound-special").removeClass("nuke");
+                $('#review-text-entity #tmp-patent-option-traditional').show();
+                $('#review-text-entity #tmp-patent-option-traditional').removeClass("nuke");
+                $('#review-text-entity #tmp-patent-option-pledge').hide();
+                $('#review-text-entity #tmp-patent-option-pledge').addClass("nuke");
+                $('#review-text-entity #tmp-outbound-special').show();
+                $('#review-text-entity #tmp-outbound-special').removeClass("nuke");
 
             } else {
-                $('#review-text #tmp-patent-option #tmp-patent-option-traditional').hide();
-                $('#review-text #tmp-patent-option #tmp-patent-option-traditional').addClass("nuke");
-                $('#review-text #tmp-patent-option #tmp-patent-option-pledge').show();
-                $('#review-text #tmp-patent-option #tmp-patent-option-pledge').removeClass("nuke");
+                $('#review-text #tmp-patent-option-traditional').hide();
+                $('#review-text #tmp-patent-option-traditional').addClass("nuke");
+                $('#review-text #tmp-patent-option-pledge').show();
+                $('#review-text #tmp-patent-option-pledge').removeClass("nuke");
+                $('#review-text #tmp-outbound-special').hide();
+                $('#review-text #tmp-outbound-special').addClass("nuke");
 
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-traditional').hide();
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-traditional').addClass("nuke");
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-pledge').show();
-                $('#review-text-entity #tmp-patent-option #tmp-patent-option-pledge').removeClass("nuke");
-
-                $("#i-tmp-outbound-special").hide();
-                $("#i-tmp-outbound-special").addClass("nuke");
-                $("#e-tmp-outbound-special").hide();
-                $("#e-tmp-outbound-special").addClass("nuke");
+                $('#review-text-entity #tmp-patent-option-traditional').hide();
+                $('#review-text-entity #tmp-patent-option-traditional').addClass("nuke");
+                $('#review-text-entity #tmp-patent-option-pledge').show();
+                $('#review-text-entity #tmp-patent-option-pledge').removeClass("nuke");
+                $('#review-text-entity #tmp-outbound-special').hide();
+                $('#review-text-entity #tmp-outbound-special').addClass("nuke");
 
             }
 
@@ -1470,7 +1552,7 @@ function testApplyPage ()
 
     $("#embed-offscreen").html( $( "#review-text" ).html() + finalBrew );
     $(".htmlstore-individual").val( $( "#review-text-style" ).html() +
-                         $( "#review-text"     ).html() +
+                         $( "#review-text" ).html() +
                          finalBrew );
     $("#embed-offscreen .nuke").remove();
 
@@ -1607,7 +1689,7 @@ $(document).ready(function() {
         $("#non-exclusive").remove();
         $("#outbound-option-4-label").hide();
         $("#outbound-option-5-label").hide();
-        $("#outbound-option-fsf").prop("checked", true);
+        $("#outbound-option-fsfe").prop("checked", true);
         checkOutboundOptionSameLicenses();
         $("#patent-pledge").remove();
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
@@ -1628,7 +1710,7 @@ $(document).ready(function() {
         $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
         $("#outbound-option-4-label").show();
         $("#outbound-option-5-label").show();
-        $("#outbound-option-fsf").prop("checked", true);
+        $("#outbound-option-fsfe").prop("checked", true);
         checkOutboundOptionSame();
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
@@ -1640,10 +1722,10 @@ $(document).ready(function() {
         $("#apply-fla").hide();
     }
 
-    $( "#outbound-option-fsf" ).change(function() {
+    $( "#outbound-option-fsfe" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
-        $("#policy-custom").hide();
+        $("#license-policy-location").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
@@ -1663,16 +1745,16 @@ $(document).ready(function() {
           $("#outboundlist").show();
           $("#outboundlist-custom").show();
         }
-        $("#policy-custom").hide();
+        $("#license-policy-location").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
     }
 
-    $( "#outbound-option-policy-custom" ).change(function() {
+    $( "#outbound-option-license-policy" ).change(function() {
       $("#outboundlist").hide();
       $("#outboundlist-custom").hide();
-      $("#policy-custom").show();
+      $("#license-policy-location").show();
       $("#medialist-label").show();
       $("#medialist").show();
     });
@@ -1685,7 +1767,7 @@ $(document).ready(function() {
    {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
-        $("#policy-custom").hide();
+        $("#license-policy-location").hide();
         $("#medialist-label").show();
         $("#medialist").show();
         // return testGeneralPage();
@@ -1694,7 +1776,7 @@ $(document).ready(function() {
     $( "#outbound-option-no-commitment" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
-        $("#policy-custom").hide();
+        $("#license-policy-location").hide();
         $("#medialist-label").hide();
         $("#medialist").hide();
         // return testGeneralPage();

@@ -120,8 +120,8 @@
                 <!-- <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
                             <select id="fsfe-compliance" name="fsfe-compliance" class="input-block-level">
                             <option value="FSFE Compliance">FSFE Compliance</option>
-                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option> -->
-                        </select>
+                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option>
+                        </select> -->
 
 
 
@@ -153,7 +153,7 @@
 <p id="outbound-options-label" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</p>
 <div id="outbound-option-1-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-fsf" value="Use FSF or OSI Approved Licenses">
+<input type="radio" name="outbound-options" id="outbound-option-fsfe" value="Use FSF or OSI Approved Licenses">
 <strong>Option 1</strong> - The contribution(s) can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
 </label>
 </div>
@@ -189,11 +189,11 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
 
 <div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="Type in the location of your licensing policy below." data-content="">
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-policy-custom" value="Use Same with Licenses">
+<input type="radio" name="outbound-options" id="outbound-option-license-policy" value="Custom licensing policy in accordance with FSF and OSI approved licenses">
 <strong>Option 3</strong> - The contribution(s) should only be licensed in accordance with your licensing policy, which complies with the Free Software and Open Source Licenses approved by FSFE and OSI. It is available at:
 </label></div>
 
-<input type="text" name="policy-custom" id="policy-custom"
+<input type="text" name="license-policy-location" id="license-policy-location"
 class="input-block-level" placeholder="Location of your licensing policy">
 
 <div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
@@ -459,19 +459,19 @@ class="input-block-level" placeholder="Location of your licensing policy">
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
                       	</tr>
 
                         <tr id="apply-entity">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
                         </tr>
 
                         <tr id="apply-fla">
                         <td>Fiduciary Contributor License Agreement</td>
                         <td>Fiduciary License Agreement 2.0</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-fla"><input type="hidden" name="title" value="Fiduciary License License Agreement 2.0" /><input type="hidden" name="type" value="fla" /><input type="hidden" class="htmlstore-fla" id="htmlstore-fla" name="htmlstore-fla" /><a role="button" class="btn btn-primary" id="html2pdf-fla" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-fla"><input type="hidden" name="title" value="Fiduciary License License Agreement 2.0" /><input type="hidden" name="type" value="fla" /><input type="hidden" class="htmlstore-fla" id="htmlstore-fla" name="htmlstore-fla" /><a role="button" class="btn btn-primary" id="html2pdf-fla" data-inline="true">PDF</a></form></td>
                         <!-- make sure that all values from here are actually used -->
                         </tr>
                         </table>
