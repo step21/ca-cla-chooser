@@ -1202,6 +1202,9 @@ function testReviewPage ()
             if ( !$("#project-email").val() )
             {
                 $("#review-project-email").html( emptyField );
+                $('#review-text-fla #tmp-project-email').html( emptyField );
+                $('#review-text #tmp-project-email').html( emptyField );
+                $('#review-text-entity #tmp-project-email').html( emptyField );
                 configs['project-email'] = '';
             } else
             {
@@ -1690,7 +1693,9 @@ $(document).ready(function() {
         $("#outbound-option-4-label").hide();
         $("#outbound-option-5-label").hide();
         $("#outbound-option-fsfe").prop("checked", true);
-        checkOutboundOptionSameLicenses();
+        $("#license-policy-location").hide();
+        $("#medialist-label").hide();
+        $("#medialist").hide();
         $("#patent-pledge").remove();
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
         $("#review-text").closest( "ul" ).hide();
@@ -1711,7 +1716,10 @@ $(document).ready(function() {
         $("#outbound-option-4-label").show();
         $("#outbound-option-5-label").show();
         $("#outbound-option-fsfe").prop("checked", true);
-        checkOutboundOptionSame();
+        $("#outboundlist").hide();
+        $("#outboundlist-custom").hide();
+        $("#license-policy-location").hide();
+        changeMediaList();
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
         $("#review-text").closest( "ul" ).show();
@@ -1722,56 +1730,53 @@ $(document).ready(function() {
         $("#apply-fla").hide();
     }
 
+    function changeMediaList () {
+        if ( $("#fsfe-compliance").hasClass('active') ) {
+            $("#medialist-label").hide();
+            $("#medialist").hide();
+        }
+        if ( $("#non-fsfe-compliance").hasClass('active') ) {
+            $("#medialist-label").show();
+            $("#medialist").show();
+        }
+    }
+
     $( "#outbound-option-fsfe" ).change(function() {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
         $("#license-policy-location").hide();
-        $("#medialist-label").show();
-        $("#medialist").show();
+        changeMediaList();
         // return testGeneralPage();
     });
 
     $( "#outbound-option-same-licenses" ).change(function() {
-        checkOutboundOptionSameLicenses();
-    });
-
-    function checkOutboundOptionSameLicenses ()
-    {
         if ( $("#fsfe-compliance").hasClass('active') && $("#outbound-option-same-licenses").prop( "checked" ) ) {
             $("#outboundlist").show();
             $("#outboundlist-custom").hide();
         }
         if ( $("#non-fsfe-compliance").hasClass('active') && $("#outbound-option-same-licenses").prop( "checked" ) ) {
-          $("#outboundlist").show();
-          $("#outboundlist-custom").show();
+            $("#outboundlist").show();
+            $("#outboundlist-custom").show();
         }
         $("#license-policy-location").hide();
-        $("#medialist-label").show();
-        $("#medialist").show();
+        changeMediaList();
         // return testGeneralPage();
-    }
+    });
 
     $( "#outbound-option-license-policy" ).change(function() {
       $("#outboundlist").hide();
       $("#outboundlist-custom").hide();
       $("#license-policy-location").show();
-      $("#medialist-label").show();
-      $("#medialist").show();
+      changeMediaList();
     });
 
     $( "#outbound-option-same" ).change(function() {
-        checkOutboundOptionSame();
-    });
-
-   function checkOutboundOptionSame ()
-   {
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
         $("#license-policy-location").hide();
-        $("#medialist-label").show();
-        $("#medialist").show();
+        changeMediaList();
         // return testGeneralPage();
-    }
+    });
 
     $( "#outbound-option-no-commitment" ).change(function() {
         $("#outboundlist").hide();

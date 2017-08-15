@@ -153,16 +153,17 @@
 <p id="outbound-options-label" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</p>
 <div id="outbound-option-1-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-fsfe" value="Use FSF or OSI Approved Licenses">
-<strong>Option 1</strong> - The contribution(s) can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
+<input type="radio" name="outbound-options" id="outbound-option-fsfe" value="Use FSF and OSI Approved Licenses">
+<strong>Option 1</strong> - The contribution(s) can be licensed under the terms of any licenses the Free Software Foundation classifies as <a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Free Software Licenses">Free Software Licenses</a> and which are approved by the Open Source Initiative as <a href="http://opensource.org/licenses" title="Open Source Licenses">Open Source licenses</a>.
 </label>
 </div>
 
 <div id="outbound-option-2-label" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="Use Same with Licenses">
-<strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
-</label></div>
+<strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted) (With 'Ctrl key + Click' select multiple licenses.):
+</label>
+</div>
 
     <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
     class="input-block-level">
@@ -213,7 +214,7 @@ class="input-block-level" placeholder="Location of your licensing policy">
 
 
 <div id="outbound-media-label" data-toggle="popover" data-trigger="hover" title="Documentation License" data-content="The documentation license can cover any material that is not code but still part of the contribution.">
-<label id="medialist-label" for="medialist">Would you like to add a documentation license for materials other than code?</label>
+<label id="medialist-label" for="medialist">Would you like to add a documentation license for materials other than code? (With 'Ctrl key + Click' select multiple licenses.)</label>
 </div>
     <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
       <option value="None" selected="selected">None</option>
