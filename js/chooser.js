@@ -329,23 +329,19 @@ function updateConfigs ()
     {
        var ourDate = new Date(configs["your-date"]*1000 );
 
-       $("#i-tmp-signing-you-date").html( ourDate );
-       $("#e-tmp-signing-you-date").html( ourDate );
+       $("#tmp-signing-you-date").html( ourDate );
     }
     if ( configs["your-name"] )
     {
-       $("#i-tmp-signing-you-name").html( configs["your-name"] );
-       $("#e-tmp-signing-you-name").html( configs["your-name"] );
+       $("#tmp-signing-you-name").html( configs["your-name"] );
     }
     if ( configs["your-title"] )
     {
-       $("#i-tmp-signing-you-title").html( configs["your-title"] );
-       $("#e-tmp-signing-you-title").html( configs["your-title"] );
+       $("#tmp-signing-you-title").html( configs["your-title"] );
     }
     if ( configs["your-address"] )
     {
-       $("#i-tmp-signing-you-address").html( configs["your-address"] );
-       $("#e-tmp-signing-you-address").html( configs["your-address"] );
+       $("#tmp-signing-you-address").html( configs["your-address"] );
     }
     if ( configs["your-patents"] )
     {
@@ -359,7 +355,7 @@ function updateConfigs ()
        $('#review-text-entity #tmp-patent-more').html( noneField );
     }
 
-    // e-tmp-submission-instructions
+    // tmp-submission-instructions
     if ( configs["process-url"] )
     {
        console.log( configs["process-url"] );
@@ -553,7 +549,7 @@ function fixPatentParagraph( message )
     if ( typeof message == 'undefined' )
         /*Probably never invoked until now, because message never "undefined".*/
         message = outBeforeField + " " +
-                  $("#i-tmp-licenses-2").html() + " " +
+                  $("#tmp-licenses-2").html() + " " +
                   outAfterField;
 
     $('#review-text #tmp-licenses-2').html( message );
@@ -567,7 +563,7 @@ function getEmbedCode ( ourQuery )
     'var iframe = document.createElement(\'iframe\');' + "\n" +
     'document.body.appendChild(iframe);' + "\n" +
     'iframe.src = \'' + ourQuery + '\';' + "\n" +
-    'iframe.id = \'e-sign-process\';' + "\n" +
+    'iframe.id = \'sign-process\';' + "\n" +
     'iframe.width = \'100%\';' +  "\n" +
     'iframe.height = \'100%\';' + "\n" +
     '</script>');
@@ -896,37 +892,6 @@ function setOutboundOptionNoCommitment ()
     // entire section hidden: fixPatentParagraph();
 
     /* reorder sections now that section 4 gone */
-    $("#i-tmp-digit-disclaimer").html( '4' );
-    $("#e-tmp-digit-disclaimer").html( '4' );
-    $("#i-tmp-digit-waiver").html( '5' );
-    $("#e-tmp-digit-waiver").html( '5' );
-    $("#i-tmp-digit-approx-waiver").html( '6' );
-    $("#e-tmp-digit-approx-waiver").html( '6' );
-    $("#i-tmp-digit-waiver-2").html( '4' );
-    $("#e-tmp-digit-waiver-2").html( '4' );
-    $("#i-tmp-digit-approx-waiver-2").html( '5' );
-    $("#e-tmp-digit-approx-waiver-2").html( '5' );
-    $("#i-tmp-digit-term").html( '7' );
-    $("#e-tmp-digit-term").html( '7' );
-    $("#i-tmp-digit-term-1").html( '7.1' );
-    $("#e-tmp-digit-term-1").html( '7.1' );
-    /** undisplayed  $("#i-tmp-digit-term-2").html( '7.2' ); */
-    $("#i-tmp-digit-term-3").html( '7.2' );
-    $("#e-tmp-digit-term-3").html( '7.2' );
-    $("#i-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-    $("#e-tmp-digit-term-special").html( '4, 5, 6, 7 and 8' );
-    $("#i-tmp-digit-misc").html( '8' );
-    $("#e-tmp-digit-misc").html( '8' );
-    $("#i-tmp-digit-misc-1").html( '8.1' );
-    $("#e-tmp-digit-misc-1").html( '8.1' );
-    $("#i-tmp-digit-misc-2").html( '8.2' );
-    $("#e-tmp-digit-misc-2").html( '8.2' );
-    $("#i-tmp-digit-misc-3").html( '8.3' );
-    $("#e-tmp-digit-misc-3").html( '8.3' );
-    $("#i-tmp-digit-misc-4").html( '8.4' );
-    $("#e-tmp-digit-misc-4").html( '8.4' );
-
-
     $('#review-text #tmp-digit-disclaimer').html( '4.' );
     $('#review-text #tmp-digit-waiver').html( '5.' );
     $('#review-text #tmp-digit-approx-waiver').html( '6.' );
@@ -1144,11 +1109,11 @@ function testReviewPage ()
             $('#review-text-entity #tmp-title').html("Contributor Agreement");
 
             $('#review-text-fla #tmp-subtitle-based').show();
-            $('#review-text #e-tmp-subtitle-based').removeClass("nuke");
+            $('#review-text-fla #tmp-subtitle-based').removeClass("nuke");
             $('#review-text #tmp-subtitle-based').hide();
-            $('#review-text #e-tmp-subtitle-based').addClass("nuke");
+            $('#review-text #tmp-subtitle-based').addClass("nuke");
             $('#review-text-entity #tmp-subtitle-based').hide();
-            $('#review-text-entity #e-tmp-subtitle-based').addClass("nuke");
+            $('#review-text-entity #tmp-subtitle-based').addClass("nuke");
 
             $('#review-text-fla #tmp-contributor-type').html("Individual");
             $('#review-text #tmp-contributor-type').html("Individual");
