@@ -1,3 +1,11 @@
+#general .btn-group {
+    width: 100%;
+}
+
+#general .btn {
+    width: 50%;
+}
+
 label {
     display: inline-block;
 }
@@ -101,4 +109,3 @@ ul ul {
     z-index: 9999;
     background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
-
