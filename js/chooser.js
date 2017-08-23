@@ -1677,7 +1677,9 @@ $(document).ready(function() {
 
     function selectNonFsfeCompliance ()
     {
-        $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
+        if ( !$('#non-exclusive').length ) {
+            $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
+        }
         $("#outbound-option-4-label").show();
         $("#outbound-option-5-label").show();
         $("#outbound-option-fsfe").prop("checked", true);
