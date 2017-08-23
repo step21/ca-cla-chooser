@@ -1146,6 +1146,11 @@ function testReviewPage ()
                 configs['project-name'] = $("#project-name").val();
             }
 
+            $('#review-text #tmp-preamble').hide();
+            $('#review-text #tmp-preamble').addClass("nuke");
+            $('#review-text-entity #tmp-preamble').hide();
+            $('#review-text-entity #tmp-preamble').addClass("nuke");
+
             $('#review-text-fla #tmp-how-to').html("FLA");
             $('#review-text #tmp-how-to').html("Contributor Agreement");
             $('#review-text-entity #tmp-how-to').html("Contributor Agreement");
@@ -1653,6 +1658,8 @@ $(document).ready(function() {
 
     function selectFsfeCompliance ()
     {
+        $("#agreement-exclusivity-fsfe").show();
+        $("#agreement-exclusivity-non-fsfe").hide();
         $('select[name*="agreement-exclusivity"] option[value="exclusive"]').prop('selected', true);
         $("#non-exclusive").remove();
         $("#outbound-option-4-label").hide();
@@ -1661,6 +1668,8 @@ $(document).ready(function() {
         $("#license-policy-location").hide();
         $("#medialist-label").hide();
         $("#medialist").hide();
+        $("#patent-type-fsfe").show();
+        $("#patent-type-non-fsfe").hide();
         $("#patent-pledge").remove();
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
         $("#review-text").closest( "ul" ).hide();
@@ -1677,6 +1686,8 @@ $(document).ready(function() {
 
     function selectNonFsfeCompliance ()
     {
+        $("#agreement-exclusivity-non-fsfe").show();
+        $("#agreement-exclusivity-fsfe").hide();
         if ( !$('#non-exclusive').length ) {
             $('<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>').appendTo("#agreement-exclusivity");
         }
@@ -1687,6 +1698,8 @@ $(document).ready(function() {
         $("#outboundlist-custom").hide();
         $("#license-policy-location").hide();
         changeMediaList();
+        $("#patent-type-non-fsfe").show();
+        $("#patent-type-fsfe").hide();
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
         $("#review-text").closest( "ul" ).show();

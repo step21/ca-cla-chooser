@@ -142,11 +142,17 @@
   </li>
 </ul>
 
-    <label for="agreement-exclusivity" id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="You can choose between an exclusive license and a non-exclusive license. A non-exclusive license is the right to use the contribution on a non-exclusive basis, meaning that the contributor can also grant a license to someone else to use the same contribution. An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclsuive license back to the contributor to allow him to exploit his contribution.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
+<div id="agreement-exclusivity-fsfe">
+    <p id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclusive license back to the contributor to allow him to exploit his contribution.">FLA recommended by FSFE implies an <b>exclusive</b> copyright license.</p>
+</div>
+
+<div id="agreement-exclusivity-non-fsfe">
+    <label for="agreement-exclusivity" id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="You can choose between an exclusive license and a non-exclusive license. A non-exclusive license is the right to use the contribution on a non-exclusive basis, meaning that the contributor can also grant a license to someone else to use the same contribution. An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclusive license back to the contributor to allow him to exploit his contribution.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
 <option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>
 </select>
+</div>
 
 
 
@@ -272,11 +278,17 @@ class="input-block-level" placeholder="Location of your licensing policy">
                           </li>
                         </ul>
 
+                            <div id="patent-type-fsfe">
+                            <p id="patent-type-label" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="">FLA recommended by FSFE implies a <b>traditional patent license</b>.</p>
+                            </div>
+
+                            <div id="patent-type-non-fsfe">
                             <label for="patent-type" id="patent-type-label" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="You can choose between a patent license and an identified patent pledge. The patent pledge is an alternative tailored for contributors who are reluctant to sign the patent license and looking for an alternative to control their patents. The patent pledge requires for the pledging contributor to identify the pledged patents and list them in the agreement.">What type of Patent License do you want in your agreement?</label>
                             <select id="patent-type" name="patent-type" class="input-block-level">
                             <option value="Traditional">Traditional Patent License</option>
                             <option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>
                             </select>
+                            </div>
 
 
 
