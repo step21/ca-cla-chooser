@@ -1,3 +1,43 @@
+.btn-success:after {
+  content: ' \2610';
+}
+.btn-success.active:after {
+  content: ' \2611';
+}
+
+.btn-success {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+  opacity: 1;
+}
+
+.btn-danger:after {
+  content: ' \2610';
+}
+.btn-danger.active:after {
+  content: ' \2611';
+}
+
+.btn-danger {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger.disabled,
+.btn-danger[disabled] {
+  opacity: 1;
+}
+
 #general .btn-group {
     width: 100%;
 }
