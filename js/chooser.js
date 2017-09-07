@@ -1518,7 +1518,7 @@ function testApplyPage ()
     $(".final-link").attr("href", finalLink );
 
     var finalBrew =
-        "<section><h4>Recreate this Contributor License Agreement</h4>\n" +
+        '<section class="recreate"><h4>Recreate this Contributor License Agreement</h4>\n' +
         '<p><a href="' + tmpFinalLink + '">' + tmpFinalLink + '</p>' + "\n" +
         "</section>\n";
     // console.log("finalBrew: " + finalBrew);
