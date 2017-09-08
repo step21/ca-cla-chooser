@@ -1123,10 +1123,16 @@ function testReviewPage ()
             if ( !$("#beneficiary-name").val() )
             {
                 $("#review-beneficiary-name").html( emptyField );
+                $('#review-text-fla #tmp-beneficiary-name').html( emptyField );
+                $('#review-text #tmp-beneficiary-name').html( emptyField );
+                $('#review-text-entity #tmp-beneficiary-name').html( emptyField );
                 configs['beneficiary-name'] = '';
             } else {
                 $("#review-beneficiary-name").html(
                     $("#beneficiary-name").val() );
+                $('#review-text-fla #tmp-beneficiary-name').html( $("#beneficiary-name").val() );
+                $('#review-text #tmp-beneficiary-name').html( $("#beneficiary-name").val() );
+                $('#review-text-entity #tmp-beneficiary-name').html( $("#beneficiary-name").val() );
                 configs['beneficiary-name'] = $("#beneficiary-name").val();
             }
 
