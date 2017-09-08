@@ -20,14 +20,14 @@ Installation
 Configuration
 =============
 
-The location of the microservices defaults to service.fabricatorz.com url. This can be changed through js/config.json file e.g.:
+The location of the microservices (https://github.com/contributoragreements/service.fabricatorz.com) defaults to service.fabricatorz.com url. This can be changed through js/config.json file e.g.:
 
-{
-    "serviceUrl": "http://contributoragreements.org",
-    "urlShortener": "http://contributoragreements.org/u2s"
-}
+  {
+      "serviceUrl": "http://contributoragreements.org",
+      "urlShortener": "http://contributoragreements.org/u2s"
+  }
 
-The html2pdf service location is hardcoded in index.html as "http://fab2pdf.herokuapp.com/". This probably is the case because it can't be hosted on a server where the package "wkhtmltopdf-amd64" can't be installed.
+The html2pdf service location is hardcoded in index.html as "http://fab2pdf.herokuapp.com/".
 
 Local testing
 =============

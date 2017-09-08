@@ -1678,6 +1678,7 @@ $(document).ready(function() {
         $("#patent-type-non-fsfe").hide();
         $("#patent-pledge").remove();
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+        $("#review-media-licenses-line").hide();
         $("#review-text").closest( "ul" ).hide();
         $("#review-text-entity").closest( "ul" ).hide();
         $("#review-text-fla").closest( "ul" ).show();
@@ -1708,6 +1709,7 @@ $(document).ready(function() {
         $("#patent-type-fsfe").hide();
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
+        $("#review-media-licenses-line").show();
         $("#review-text").closest( "ul" ).show();
         $("#review-text-entity").closest( "ul" ).show();
         $("#review-text-fla").closest( "ul" ).hide();
