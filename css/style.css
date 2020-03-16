@@ -1,3 +1,65 @@
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 1200px;
+}
+
+.container,
+.navbar-static-top .container,
+.navbar-fixed-top .container,
+.navbar-fixed-bottom .container {
+  width: 1200px;
+}
+
+.span12 {
+  width: 1200px;
+}
+
+#general .btn-group {
+  width: 100%;
+}
+
+#general .btn {
+  width: 50%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#general .btn-success:after {
+  content: ' \2610';
+}
+
+#general .btn-success.active:after {
+  content: ' \2611';
+}
+
+#general .btn-success:hover,
+#general .btn-success:focus,
+#general .btn-success:active,
+#general .btn-success.active,
+#general .btn-success.disabled,
+#general .btn-success[disabled] {
+  background-color: #51a351;
+  *background-color: #499249;
+}
+
+#general .btn-danger:after {
+  content: ' \2610';
+}
+
+#general .btn-danger.active:after {
+  content: ' \2611';
+}
+
+#general .btn-danger:hover,
+#general .btn-danger:focus,
+#general .btn-danger:active,
+#general .btn-danger.active,
+#general .btn-danger.disabled,
+#general .btn-danger[disabled] {
+  background-color: #bd362f;
+  *background-color: #a9302a;
+}
+
 label {
     display: inline-block;
 }
@@ -101,4 +163,3 @@ ul ul {
     z-index: 9999;
     background: url('../img/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
 }
-

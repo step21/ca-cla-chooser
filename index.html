@@ -61,22 +61,22 @@
                               <p id="top_explanation" data-toggle="popover" data-trigger="hover" data-title="Info" data-content="">Please choose if you would like to create a Fiduciary License Agreement (FLA) with provisions recommended by the Free Software Foundation Europe (FSFE) or build your own custom Contributor License Agreement by choosing your own options.
                               Either way, some information about you and your project is needed in both cases. None of you data is saved, it is only used inside your browser to create this agreement.</p>
                               </div>
-                              
-                            
+
+
                           </div>
-                          
+
                           </li>
                         </ul>
 
                         <div class="container">
 
-                        <div class="btn-group" data-toggle="buttons">
+                        <div class="btn-group" data-toggle="buttons-radio">
                                   <button for="fsfe-compliance" class="btn btn-success btn-large" type="radio" name="options" id="fsfe-compliance" autocomplete="off">FLA recommended by FSFE</button>
                                   <button for="non-fsfe-compliance" class="btn btn-danger btn-large" type="radio" name="options" id="non-fsfe-compliance" autocomplete="off">Create Custom CLA</button>
                                   </div>
                               </div>
 
-                             
+
                               <br />
                             <label for="beneficiary-name" id="beneficiary-name-label" data-toggle="popover" data-trigger="hover" data-title="Entity" data-content="Enter the name of the entity hosting your project. If you don't have an entity that can be listed here, try to set up an entity or find a trustee.">
                             Entity</label>
@@ -120,8 +120,8 @@
                 <!-- <label for="fsfe-compliance" id="fsfe-compliance-label" data-toggle="popover" data-trigger="hover" title="FSFE Compliance" data-content="You can choose if you want to make your Contributor Agreement compliant with the FSFE.">Would you like your contributor agreement to be conformant with the principles of the FSFE?</label>
                             <select id="fsfe-compliance" name="fsfe-compliance" class="input-block-level">
                             <option value="FSFE Compliance">FSFE Compliance</option>
-                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option> -->
-                        </select>
+                            <option value="No FSFE Compliance" selected>Without FSFE compliance</option>
+                        </select> -->
 
 
 
@@ -142,26 +142,34 @@
   </li>
 </ul>
 
-    <label for="agreement-exclusivity" id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="You can choose between an exclusive license and a non-exclusive license. A non-exclusive license is the right to use the contribution on a non-exclusive basis, meaning that the contributor can also grant a license to someone else to use the same contribution. An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclsuive license back to the contributor to allow him to exploit his contribution.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
+<div id="agreement-exclusivity-fsfe">
+    <p id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclusive license back to the contributor to allow him to exploit his contribution.">FLA recommended by FSFE implies an <b>exclusive</b> copyright license.</p>
+</div>
+
+<div id="agreement-exclusivity-non-fsfe">
+    <label for="agreement-exclusivity" id="agreement-exclusivity-label" data-toggle="popover" data-trigger="hover" title="Type of Inbound License" data-content="You can choose between an exclusive license and a non-exclusive license. A non-exclusive license is the right to use the contribution on a non-exclusive basis, meaning that the contributor can also grant a license to someone else to use the same contribution. An exclusive license means that no other person or company can use the contribution including the contributor himself, which is why is the exclusive license option implies a non-exclusive license back to the contributor to allow him to exploit his contribution.">Which style of contributor agreement (in regard to inbound licensing) would you like to create?</label>
     <select id="agreement-exclusivity" name="agreement-exclusivity" class="input-block-level">
 <option value="exclusive">Exclusive License</option>
-<option value="non-exclusive">Non-Exclusive License</option>
+<option id="non-exclusive" value="non-exclusive">Non-Exclusive License</option>
 </select>
+</div>
 
 
 
 <p id="outbound-options-label" data-toggle="popover" data-trigger="hover" title="Type of Outbound License" data-content="By selecting a specific type of outbound license you commit your project to using that specific type of license for the duration of this contributor agreement.">Please select an outbound license option path:</p>
-<div id="outbound_option_1" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
+<div id="outbound-option-1-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF and OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-same" value="Use Same License" checked>
-<strong>Option 1</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the material (including any rights to adopt any future version of a license).
-</label></div>
+<input type="radio" name="outbound-options" id="outbound-option-fsfe" value="Use FSF and OSI Approved Licenses">
+<strong>Option 1</strong> - The contribution(s) can be licensed under the terms of any licenses the Free Software Foundation classifies as <a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Free Software Licenses">Free Software Licenses</a> and which are approved by the Open Source Initiative as <a href="http://opensource.org/licenses" title="Open Source Licenses">Open Source licenses</a>.
+</label>
+</div>
 
-<div id="outbound-option-2-label" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license.">
+<div id="outbound-option-2-label" data-toggle="popover" data-trigger="hover" title="List of license(s) (choose below)" data-content="Gives you the option to choose one or more licenses from the list below or to enter an additional license. With 'Ctrl key + Click' select multiple licenses.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-same-licenses" value="Use Same with Licenses">
 <strong>Option 2</strong> - The contribution(s) should only be licensed under the terms of the following license or licenses (including any right to adopt any future version of a license if permitted):
-</label></div>
+</label>
+</div>
 
     <select multiple="multiple" size=3 id="outboundlist" name="outboundlist"
     class="input-block-level">
@@ -186,25 +194,32 @@
 <input type="text" name="outboundlist-custom" id="outboundlist-custom"
 class="input-block-level" placeholder="If one or more of your preferred licenses were not listed, please list other licenses here.">
 
-
-<div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="FSF Licenses and OSI Licenses" data-content="Refers to the list of licenses recommended by FSF or OSI. If you are not familiar with these organizations, please visit their websites."> <!-- make either/or possible? -->
+<div id="outbound-option-3-label" data-toggle="popover" data-trigger="hover" title="Custom Licensing Policy in accordance with FSF and OSI approved licenses" data-content="Type in the location of your licensing policy below.">
 <label class="radio">
-<input type="radio" name="outbound-options" id="outbound-option-fsf" value="Use FSF or OSI Approved Licenses">
-<strong>Option 3</strong> - The contributions can be licensed under the terms of any licenses on the Free Software Foundation's list of "<a href="https://www.gnu.org/licenses/recommended-copylefts.html" title="Recommended copyleft licenses">recommended copyleft licenses</a>" or any license approved by the <a href="http://opensource.org/licenses" title="Open Source Initiative Licenses">Open Source Initiative</a> on or after the submission date, whether or not such licenses are subsequently disapproved (including any right to adopt any future version of a license).
-</label>
-</div>
+<input type="radio" name="outbound-options" id="outbound-option-license-policy" value="Custom licensing policy in accordance with FSF and OSI approved licenses">
+<strong>Option 3</strong> - The contribution(s) should only be licensed in accordance with your licensing policy, which complies with the Free Software and Open Source Licenses approved by FSFE and OSI. It is available at:
+</label></div>
 
-<div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="Gives you the flexibility to choose any license now or in the future.">
+<input type="text" name="license-policy-location" id="license-policy-location"
+class="input-block-level" placeholder="Location of your licensing policy">
+
+<div id="outbound-option-4-label" data-toggle="popover" data-trigger="hover" title="Same License" data-content="Refers to the license you are currently using for your project.">
+<label class="radio">
+<input type="radio" name="outbound-options" id="outbound-option-same" value="Use Same License">
+<strong>Option 4</strong> - The contribution(s) should be licensed only under the terms of the license or licenses which we are using on the submission date for the material (including any rights to adopt any future version of a license).
+</label></div>
+
+<div id="outbound-option-5-label" data-toggle="popover" data-trigger="hover" title="No commitment" data-content="Gives you the flexibility to choose any license now or in the future.">
 <label class="radio">
 <input type="radio" name="outbound-options" id="outbound-option-no-commitment" value="No commitment to any specific outbound license">
-<strong>Option 4</strong> - No commitment to any specific outbound license.
+<strong>Option 5</strong> - No commitment to any specific outbound license.
 </label>
 </div>
 
 <hr />
 
 
-<div id="outbound-media-label" data-toggle="popover" data-trigger="hover" title="Documentation License" data-content="The documentation license can cover any material that is not code but still part of the contribution.">
+<div id="outbound-media-label" data-toggle="popover" data-trigger="hover" title="Documentation License" data-content="The documentation license can cover any material that is not code but still part of the contribution. With 'Ctrl key + Click' select multiple licenses.">
 <label id="medialist-label" for="medialist">Would you like to add a documentation license for materials other than code?</label>
 </div>
     <select multiple size=3 id="medialist" name="medialist" class="input-block-level">
@@ -263,11 +278,17 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                           </li>
                         </ul>
 
+                            <div id="patent-type-fsfe">
+                            <p id="patent-type-label" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="">FLA recommended by FSFE implies a <b>traditional patent license</b>.</p>
+                            </div>
+
+                            <div id="patent-type-non-fsfe">
                             <label for="patent-type" id="patent-type-label" data-toggle="popover" data-trigger="hover" title="Patent License" data-content="You can choose between a patent license and an identified patent pledge. The patent pledge is an alternative tailored for contributors who are reluctant to sign the patent license and looking for an alternative to control their patents. The patent pledge requires for the pledging contributor to identify the pledged patents and list them in the agreement.">What type of Patent License do you want in your agreement?</label>
                             <select id="patent-type" name="patent-type" class="input-block-level">
                             <option value="Traditional">Traditional Patent License</option>
-                            <option value="Patent-Pledge">Identified Patent Pledge</option>
+                            <option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>
                             </select>
+                            </div>
 
 
 
@@ -366,7 +387,7 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         </tr>
 
 
-                        <tr>
+                        <tr id="review-media-licenses-line">
                         <td>Documentation License(s)</td>
                         <td id="review-media-licenses"></td>
                         </tr>
@@ -451,19 +472,19 @@ class="input-block-level" placeholder="If one or more of your preferred licenses
                         <tr id="apply-individual">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-individual"><input type="hidden" name="title" value="Individual Contributor License Agreement 1.1" /><input type="hidden" name="type" value="individual" /><input type="hidden" class="htmlstore-individual" id="htmlstore-individual" name="htmlstore-individual" /><a role="button" class="btn btn-primary" id="html2pdf-individual" data-inline="true">PDF</a></form></td>
                       	</tr>
 
                         <tr id="apply-entity">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-entity"><input type="hidden" name="title" value="Entity Contributor License Agreement 1.1" /><input type="hidden" name="type" value="entity" /><input type="hidden" class="htmlstore-entity" id="htmlstore-entity" name="htmlstore-entity" /><a role="button" class="btn btn-primary" id="html2pdf-entity" data-inline="true">PDF</a></form></td>
                         </tr>
 
                         <tr id="apply-fla">
                         <td>Fiduciary Contributor License Agreement</td>
                         <td>Fiduciary License Agreement 2.0</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://service.fabricatorz.com/html2pdf/" id="html2pdf-form-fla"><input type="hidden" name="title" value="Fiduciary License License Agreement 2.0" /><input type="hidden" name="type" value="fla" /><input type="hidden" class="htmlstore-fla" id="htmlstore-fla" name="htmlstore-fla" /><a role="button" class="btn btn-primary" id="html2pdf-fla" data-inline="true">PDF</a></form></td>
+                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a> <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a> <form method="POST" action="http://fab2pdf.herokuapp.com/" id="html2pdf-form-fla"><input type="hidden" name="title" value="Fiduciary License License Agreement 2.0" /><input type="hidden" name="type" value="fla" /><input type="hidden" class="htmlstore-fla" id="htmlstore-fla" name="htmlstore-fla" /><a role="button" class="btn btn-primary" id="html2pdf-fla" data-inline="true">PDF</a></form></td>
                         <!-- make sure that all values from here are actually used -->
                         </tr>
                         </table>

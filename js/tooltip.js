@@ -16,9 +16,10 @@ $(document).ready(function() {
     $('#agreement-exclusivity-label').popover({ placement: 'top' });
     $('#outbound-options-label').popover({ placement: 'top' });
     $('#outbound-option-1-label').popover({ placement: 'top' });
-    $('#outbound-option_2-label').popover({ placement: 'top' });
-    $('#outbound-option_3-label').popover({ placement: 'top' });
-    $('#outbound-option_4-label').popover({ placement: 'top' });
+    $('#outbound-option-2-label').popover({ placement: 'top' });
+    $('#outbound-option-3-label').popover({ placement: 'top' });
+    $('#outbound-option-4-label').popover({ placement: 'top' });
+    $('#outbound-option-5-label').popover({ placement: 'top' });
     $('#patent-type-label').popover({ placement: 'top' });
     $('#outbound-media-label').popover({ placement: 'top' });
  });
