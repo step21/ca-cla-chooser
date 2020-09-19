@@ -33,7 +33,7 @@ Local testing
 =============
 
 In root of repo directory run for example simple python http server:
- python -m SimpleHTTPServer
+ `python -m SimpleHTTPServer` (python 2) or `python -m http.server` (python 3)
 
 Further development
 ===================
