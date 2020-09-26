@@ -884,12 +884,12 @@ function setOutboundOptionNoCommitment ()
     $("#review-outbound-license-options").html(
         $("#outbound-option-no-commitment").val() );
     */
-
-
+    
     /* remove entire section 4 */
-    $("#tmp-outbound-section-all").hide();
-    $("#tmp-outbound-section-all").addClass("nuke");
-    // entire section hidden: fixPatentParagraph();
+    // entire section hidden: fixPatentParagraph(); @TODO can this go?
+    // no multiple ids in one page... 
+    $('.tmp-outbound-section').hide();
+    $('.tmp-outbound-section').addClass("nuke");
 
     /* reorder sections now that section 4 gone */
     $('#review-text #tmp-digit-disclaimer').html( '4.' );
