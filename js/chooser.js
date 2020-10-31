@@ -18,6 +18,24 @@ var debugNeedle         = 1337;
 
 var services;
 
+var gitversion;
+
+$.ajax({
+    timeout: 1000,
+    async: false,
+    url: 'version.log',
+    dataType: "text",
+    success: function(data) {
+        gitversion = data;
+    }
+});
+
+console.log(gitversion)
+
+// added version to check what is running. maybe replace with short git commit hash added to pre
+var version = "1.0"
+$('#version').html(gitversion)
+
 // @TODO really should make this configs and convert code below
 $.ajax({
     timeout: 1000,
