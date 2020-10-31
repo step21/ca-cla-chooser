@@ -773,10 +773,10 @@ function setOutboundOptionSameLicenses ()
         $('#review-text-entity #tmp-outbound-option-2-fsfe').hide();
         $('#review-text-entity #tmp-outbound-option-2-fsfe').addClass("nuke");
 
-        $('#review-text #tmp-outbound-option-2-non-fsfe').show();
-        $('#review-text #tmp-outbound-option-2-non-fsfe').removeClass("nuke");
-        $('#review-text-entity #tmp-outbound-option-2-non-fsfe').show();
-        $('#review-text-entity #tmp-outbound-option-2-non-fsfe').removeClass("nuke");
+        $('#review-text .tmp-outbound-option-2-non-fsfe').show();
+        $('#review-text .tmp-outbound-option-2-non-fsfe').removeClass("nuke");
+        $('#review-text-entity .tmp-outbound-option-2-non-fsfe').show();
+        $('#review-text-entity .tmp-outbound-option-2-non-fsfe').removeClass("nuke");
 
         $('#review-text #tmp-outbound-option-3-fsfe').hide();
         $('#review-text #tmp-outbound-option-3-fsfe').addClass("nuke");
