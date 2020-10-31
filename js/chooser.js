@@ -50,12 +50,14 @@ $.ajax({
 var serviceUrl, urlShortener;
 
 if ( ! services || typeof services.serviceUrl === 'undefined' )
-    serviceUrl          = 'http://service.fabricatorz.com';
+    // this url does not exist right now, but does not make sense to run on service. and subdir seperately
+    serviceUrl          = 'http://service.contributoragreements.org';
 else
     serviceUrl          = services["serviceUrl"];
 
 if ( ! services || typeof services.urlShortener === 'undefined' )
-    urlShortener        = 'http://service.fabricatorz.com/u2s';
+    // this url does not exist right now, but does not make sense to run on service. and subdir seperately
+    urlShortener        = 'http://service.contributoragreements.org/u2s';
 else
     urlShortener        = services["urlShortener"];
 
