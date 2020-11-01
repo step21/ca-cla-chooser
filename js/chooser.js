@@ -1182,9 +1182,16 @@ function testReviewPage ()
             $('#review-text #tmp-how-to').html("Contributor Agreement");
             $('#review-text-entity #tmp-how-to').html("Contributor Agreement");
 
+            //
             $('#review-text-fla #tmp-entity-definitions').hide();
-            $('#review-text #tmp-entity-definitions').hide();
-
+            if ( $( "#patent-type" ).val() == 'Patent-Pledge' ) {
+                $('#review-text .tmp-entity-definitions').show();
+                $('#review-text-entity .tmp-entity-definitions').show();
+            }
+            else {
+                $('#review-text .tmp-entity-definitions').hide(); 
+                $('#review-text-entity .tmp-entity-definitions').hide();
+             }
             if ( !$("#project-website").val() )
             {
                 $("#review-project-website").html( emptyField );
