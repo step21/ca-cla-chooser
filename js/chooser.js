@@ -191,6 +191,13 @@ function htmlEscape(str) {
         .replace(/>/g, '&gt;');
 }
 
+/* Convert to markdown */
+/* $('#review-text').html() */
+function toMarkdown(node) {
+    var turndownService = new TurndownService()
+    var markdown = turndownService.turndown(node)
+    return markdown
+}
 
 /**
  * Cleanup of the query string data and setting it.
