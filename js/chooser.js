@@ -29,8 +29,8 @@ $.ajax({
         gitversion = data;
     }
 });
-
-console.log(gitversion)
+if ( doDebug )
+    console.log(gitversion)
 
 // added version to check what is running. maybe replace with short git commit hash added to pre
 var version = "1.0"
