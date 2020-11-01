@@ -104,7 +104,8 @@ var dictionary = {
     'Traditional':              'Traditional Patent License',
     'patent-pledge':            'Patent Pledge',
     'Patent-Pledge':            'Patent Pledge',
-    'non-exclusive':            'Non-Exclusive'
+    'non-exclusive':            'Non-Exclusive',
+    'exclusive':                'Exclusive',
 };
 
 /** could even set defaults here
