@@ -191,6 +191,13 @@ function htmlEscape(str) {
         .replace(/>/g, '&gt;');
 }
 
+/* Convert to markdown */
+/* $('#review-text').html() */
+function toMarkdown(node) {
+    var turndownService = new TurndownService()
+    var markdown = turndownService.turndown(node)
+    return markdown
+}
 
 /**
  * Cleanup of the query string data and setting it.
@@ -1578,10 +1585,15 @@ function testApplyPage ()
                          finalBrew );
     $("#embed-offscreen-fla .nuke").remove();
 
-
+    // insert html into html modal and mkdn into mkdn modal
     $("#embed-agreement").html( $("#embed-offscreen").html() );
+    $("#embed-agreement-mkdn").html( toMarkdown( $("#embed-offscreen").html() ) );
+    // and for entity
     $("#embed-agreement-entity").html( $("#embed-offscreen-entity").html() );
+    $("#embed-agreement-entity-mkdn").html( toMarkdown( $("#embed-offscreen-entity").html() ) );
+    // and for fla
     $("#embed-agreement-fla").html( $("#embed-offscreen-fla").html() );
+    $("#embed-agreement-fla-mkdn").html(  toMarkdown( $("#embed-offscreen-fla").html() ) );
 
     return isApplyPageOk;
 }
