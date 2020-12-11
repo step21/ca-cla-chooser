@@ -1619,12 +1619,12 @@ function makePDF( htmlContent ) {
         bold: 'fonts/Roboto-Medium.ttf',
         italics: 'fonts/Roboto-Italic.ttf',
         bolditalics: 'fonts/Roboto-MediumItalic.ttf'
-    }
-};
+        }
+    };
     
-    var html = htmlToPdfmake(htmlContent);
-    var dd = { content:html } // document definition, styling etc can be added here
-    pdfMake.createPdf(dd).download();
+    var agreementPM = htmlToPdfmake(htmlContent);
+    var dd = { content:agreementPM } // document definition, styling etc can be added here
+    pdfMake.createPdf(dd).download(); // put in new window
 }
 
 $(document).ready(function() {
@@ -1640,31 +1640,31 @@ $(document).ready(function() {
         updateTestUrls();
 
     $('#html2pdf-individual').click(function() {
-        var text = $('#review-text').prop('innerHTML');
-        makePDF(text);
-    })
+        var ddtext = $('#review-text').prop('innerHTML');
+        makePDF(ddtext);
+    });
 
     $('#html2pdf-entity').click(function() {
-        var text = $('#review-text-entity').prop('innerHTML');
-        makePDF(text);
-    })
+        var ddtext = $('#review-text-entity').prop('innerHTML');
+        makePDF(ddtext);
+    });
 
     $('#html2pdf-fla').click(function() {
-        var text = $('#review-text-fla').prop('innerHTML');
-        makePDF(text);
-    })
+        var ddtext = $('#review-text-fla').prop('innerHTML');
+        makePDF(ddtext);
+    });
 
-    $('#html2pdf-fla-entity').click(function() {
-        var text = $('#review-text-fla-entity').prop('innerHTML');
-        makePDF(text);
-    })
+    //$('#html2pdf-fla-entity').click(function() {
+    //    var ddtext = $('#review-text-fla-entity').prop('innerHTML');
+    //    makePDF(ddtext);
+    //});
 
 
 
     $("#patent-option-2-options").hide();
 
 
-    $("#html2pdf-individual").click(function() {
+    /* $("#html2pdf-individual").click(function() {
         $('#html2pdf-form-individual').submit();
     });
 
@@ -1673,7 +1673,7 @@ $(document).ready(function() {
     });
     $("#html2pdf-fla").click(function() {
         $('#html2pdf-form-fla').submit();
-    });
+    }); */
 
     // @TODO need to make these each test each input, not ALL inputs
     $( "#beneficiary-name" ).change(function() {
