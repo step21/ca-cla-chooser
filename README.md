@@ -53,9 +53,7 @@ and in the comments in the file "js/chooser.js".
 
 Probably important ones are:
 
-- include license file in the repo
 - update to bootstrap 3 or 4
-- markup export
 
 Support
 =======
