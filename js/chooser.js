@@ -1837,6 +1837,7 @@ $(document).ready(function() {
         $("#apply-individual").show();
         $("#apply-entity").show();
         $("#apply-fla").hide();
+        $("#apply-fla-entity").hide();
     }
 
     function changeMediaList () {
