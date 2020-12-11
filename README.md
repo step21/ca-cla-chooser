@@ -12,20 +12,24 @@ https://github.com/contributoragreements/ca-cla-chooser
 Installation
 ============
 
+ ```
  git clone https://github.com/contributoragreements/ca-cla-chooser
  cd ca-cla-chooser
  git submodule init
  git submodule update
+ ```
 
 Configuration
 =============
 
 The location of the microservices (https://github.com/contributoragreements/service.fabricatorz.com) defaults to service.fabricatorz.com url. This can be changed through js/config.json file e.g.:
 
+  ```
   {
       "serviceUrl": "http://contributoragreements.org",
       "urlShortener": "http://contributoragreements.org/u2s"
   }
+  ```
 
 The html2pdf service location is hardcoded in index.html as "http://fab2pdf.herokuapp.com/".
 
