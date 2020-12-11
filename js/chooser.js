@@ -1802,6 +1802,7 @@ $(document).ready(function() {
         $("#review-text").closest( "ul" ).hide();
         $("#review-text-entity").closest( "ul" ).hide();
         $("#review-text-fla").closest( "ul" ).show();
+        $("#review-text-fla-entity").closest( "ul" ).show();
         $("#apply-individual").hide();
         $("#apply-entity").hide();
         $("#apply-fla").show();
@@ -1834,6 +1835,7 @@ $(document).ready(function() {
         $("#review-text").closest( "ul" ).show();
         $("#review-text-entity").closest( "ul" ).show();
         $("#review-text-fla").closest( "ul" ).hide();
+        $("#review-text-fla-entity").closest( "ul" ).hide();
         $("#apply-individual").show();
         $("#apply-entity").show();
         $("#apply-fla").hide();
