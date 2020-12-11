@@ -1612,6 +1612,20 @@ function updateTestUrls ()
 
 }
 
+function makePDF( htmlContent ) {
+    var fonts = {
+    Roboto: {
+        normal: 'fonts/Roboto-Regular.ttf',
+        bold: 'fonts/Roboto-Medium.ttf',
+        italics: 'fonts/Roboto-Italic.ttf',
+        bolditalics: 'fonts/Roboto-MediumItalic.ttf'
+    }
+};
+    
+    var html = htmlToPdfmake(htmlContent);
+    var dd = { content:html } // document definition, styling etc can be added here
+    pdfMake.createPdf(dd).download();
+}
 
 $(document).ready(function() {
 
@@ -1625,6 +1639,25 @@ $(document).ready(function() {
     if ( '1337' == debugNeedle )
         updateTestUrls();
 
+    $('#html2pdf-individual').click(function() {
+        var text = $('#review-text').prop('innerHTML');
+        makePDF(text);
+    })
+
+    $('#html2pdf-entity').click(function() {
+        var text = $('#review-text-entity').prop('innerHTML');
+        makePDF(text);
+    })
+
+    $('#html2pdf-fla').click(function() {
+        var text = $('#review-text-fla').prop('innerHTML');
+        makePDF(text);
+    })
+
+    $('#html2pdf-fla-entity').click(function() {
+        var text = $('#review-text-fla-entity').prop('innerHTML');
+        makePDF(text);
+    })
 
 
 
