@@ -14,9 +14,9 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.KEY }}
         use_insecure_cipher: true
         cipher: diffie-hellman-group-exchange-sha256
         debug: true
