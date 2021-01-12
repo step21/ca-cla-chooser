@@ -18,6 +18,7 @@ jobs:
         key: ${{ secrets.KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         port: ${{ secrets.PORT }}
+        use_insecure_cipher: true
         script: |
           cd ~/contributoragreements.org/ca-cla-chooser
           git pull
