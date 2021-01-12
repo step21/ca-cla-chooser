@@ -208,6 +208,7 @@ function queryStringToConfigs ()
 }
 
 /**
+* this should update configs and update UI so that stuff is filled in properly
  * @todo can combine this with review code and save code, but will need
  * to abstract the following more than likely into functions.
  * Then, that will allow creating a querystring easier
