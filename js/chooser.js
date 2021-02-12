@@ -126,8 +126,8 @@ var dictionary = {
  * outboundlist-custom=STRING
  * medialist=None|GFDL-1.1|CC-BY-1.0,GFDL-1.3,LIST
  * patent-option=Traditional|Patent-Pledge
- *     'fsfe-compliance':            '',
- *  'fsfe-fla':                   '',
+ * 'fsfe-compliance':            '',
+ * 'fsfe-fla':                   '',
  *
  * your-name=STRING
  * your-date=STRING
@@ -136,6 +136,7 @@ var dictionary = {
  *
  * pos=general|copyright|patents|review|apply
  */
+
 var configs = {
     'beneficiary-name':           '',
     'project-name':               '',
