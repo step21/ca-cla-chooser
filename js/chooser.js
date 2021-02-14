@@ -197,7 +197,7 @@ function htmlEscape(str) {
 /* Convert to markdown */
 /* $('#review-text').html() */
 function toMarkdown(node) {
-    var turndownService = new TurndownService()
+    var turndownService = new TurndownService({headingStyle: 'atx'})
     var markdown = turndownService.turndown(node)
     return markdown
 }
