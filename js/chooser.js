@@ -51,13 +51,13 @@ var serviceUrl, urlShortener;
 
 if ( ! services || typeof services.serviceUrl === 'undefined' )
     // this url does not exist right now, but does not make sense to run on service. and subdir seperately
-    serviceUrl          = 'http://service.contributoragreements.org';
+    serviceUrl          = 'https://service.contributoragreements.org';
 else
     serviceUrl          = services["serviceUrl"];
 
 if ( ! services || typeof services.urlShortener === 'undefined' )
     // this url does not exist right now, but does not make sense to run on service. and subdir seperately
-    urlShortener        = 'http://service.contributoragreements.org/u2s';
+    urlShortener        = 'https://service.contributoragreements.org/u2s';
 else
     urlShortener        = services["urlShortener"];
 
@@ -497,10 +497,10 @@ function setFakeData ()
 {
     configs['beneficiary-name']         = 'Fabricatorz';
     configs['project-name']             = 'Archive Software';
-    configs['project-website']           = 'http://archive.fabricatorz.com';
+    configs['project-website']           = 'https://archive.fabricatorz.com';
     configs['project-email']             = 'jon@fabricatorz.com';
     configs['process-url']   =
-        'http://archive.fabricatorz.com/signing';
+        'https://archive.fabricatorz.com/signing';
     configs['project-jurisdiction']      =
         'United States, Hong Kong, and China Mainland.';
 }
