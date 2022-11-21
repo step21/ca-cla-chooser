@@ -32,7 +32,7 @@ $.ajax({
 if ( doDebug )
     console.log(gitversion)
 
-// added version to check what is running. maybe replace with short git commit hash added to pre
+// added version to check what is running. now displays short git commit hash as version
 var version = "1.0"
 $('#version').html(gitversion)
 
@@ -50,14 +50,14 @@ $.ajax({
 var serviceUrl, urlShortener;
 
 if ( ! services || typeof services.serviceUrl === 'undefined' )
-    // this url does not exist right now, but does not make sense to run on service. and subdir seperately
-    serviceUrl          = 'https://service.contributoragreements.org';
+    // was: service.contributoragreements.org, but this would have required separate SSL cert
+    serviceUrl          = 'https://contributoragreements.org';
 else
     serviceUrl          = services["serviceUrl"];
 
 if ( ! services || typeof services.urlShortener === 'undefined' )
     // this url does not exist right now, but does not make sense to run on service. and subdir seperately
-    urlShortener        = 'https://service.contributoragreements.org/u2s';
+    urlShortener        = 'https://contributoragreements.org/u2s';
 else
     urlShortener        = services["urlShortener"];
 
@@ -108,7 +108,7 @@ var dictionary = {
     'exclusive':                'Exclusive',
 };
 
-/** could even set defaults here
+/** could even set defaults here TODO probably outdated
  *
  * Query String Possible Parameters:
  *
@@ -195,7 +195,6 @@ function htmlEscape(str) {
 }
 
 /* Convert to markdown */
-/* $('#review-text').html() */
 function toMarkdown(node) {
     var turndownService = new TurndownService({headingStyle: 'atx'})
     turndownService.addRule('listItem', {
@@ -422,41 +421,6 @@ function updateConfigs ()
 
 function loadTemplates ()
 {
-    // var converter = new Showdown.converter();
-    /*
-    $( "#review-text" ).load(
-        "agreement-template-individual.html", function() {
-            console.log("f-sign-indy: " +  $("#review-text").html() );
-        });
-    $( "#review-text-entity" ).load(
-        "agreement-template-entity.html", function() {
-            console.log("f-sign-entity: " +  $("#review-text-entity").html() );
-        });
-
-    $( "#review-text-style" ).load( "agreement-style.html", function() { });
-    */
-
-    /*
-    $.ajax('agreement-template-individual.html', {
-        timeout: 1000,
-        async: false,
-        success: function(resp) {
-            $('#review-text').html(resp);
-            if ( doDebug )
-                console.log("f-sign-indy: " +  $("#review-text").html() );
-        }
-    });
-
-    $.ajax('agreement-template-entity.html', {
-        timeout: 1000,
-        async: false,
-        success: function(resp) {
-            $('#review-text-entity').html(resp);
-            if ( doDebug )
-                console.log("f-sign-entity: " +  $("#review-text-entity").html() );
-        }
-    });
-    */
     // maybe there should be some code here to only load whatever is wanted?
     $.ajax('agreement-template-unified.html', {
         timeout: 1000,
@@ -1705,14 +1669,7 @@ function testAllPages()
 
 function updateTestUrls ()
 {
-    /*
-     * @TODO not working now, changed to localhost in index.html for now
-     *
-    $("#html2pdf-form-individual").attr("action", serviceUrl +
-        '/html2pdf');
-    $("#html2pdf-form-entity").attr("action", serviceUrl +
-        '/html2pdf');
-    */
+    
     if ( configs['project-email'] )
         $("#link-esign").attr("href", serviceUrl + '/query2form');
     else
