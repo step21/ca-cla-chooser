@@ -1657,7 +1657,6 @@ function testApplyPage ()
                          finalBrew );
     $("#embed-offscreen .nuke").remove();
 
-
     $("#embed-offscreen-entity").html(
         $( "#review-text-entity" ).html() + finalBrew );
     $(".htmlstore-entity").val( $( "#review-text-style" ).html() +
@@ -1690,7 +1689,7 @@ function testApplyPage ()
     $("#embed-agreement-fla-mkdn").html(  toMarkdown( $("#embed-offscreen-fla").html() ) );
 
     $("#embed-agreement-fla-entity").html( $("#embed-offscreen-fla-entity").html() );
-    $("#embed-agreement-fla-mkdn-entity").html(  toMarkdown( $("#embed-offscreen-fla-entity").html() ) );
+    $("#embed-agreement-fla-entity-mkdn").html(  toMarkdown( $("#embed-offscreen-fla-entity").html() ) );
 
     return isApplyPageOk;
 }
