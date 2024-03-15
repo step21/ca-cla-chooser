@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   deploy:
+    if: github.repository_owner == 'contributoragreements'
     name: deploy
     runs-on: ubuntu-20.04
     steps:
