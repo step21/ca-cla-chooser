@@ -1,0 +1,26 @@
+name: 🔂 Surge PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+jobs:
+  preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # allow surge-preview to create/update PR comments
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: afc163/surge-preview@v1
+        id: preview_step
+        with:
+          surge_token: ${{ secrets.SURGE_TOKEN }}
+          dist: public
+          teardown: 'true'
+          #build: |
+          #  npm install
+          #  npm run build
+      - name: Get the preview_url
+        run: echo "url => ${{ steps.preview_step.outputs.preview_url }}"
