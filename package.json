@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "wdio wdio.conf.js",
-    "serve-and-test": "concurrently --kill-others --success \"npm start\" \"sleep 5 && npm test\"",
+    "serve-and-test": "concurrently --kill-others --success first \"npm start\" \"sleep 5 && npm test\"",
     "wdio": "wdio run ./wdio.conf.js"
   },
   "dependencies": {
