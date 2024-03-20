@@ -32,15 +32,15 @@
 					    <div class="navbar-inner">
 					        <div class="container">
 					            <ul class="bullets">
-					  	          <li><a href="#general"
+					  	          <li id="generalBullet" class="bullets"><a href="#general"
                                            data-toggle="tab">1. General</a></li>
-						            <li><a href="#copyright"
+						            <li id="copyrightBullet" class="bullets"><a href="#copyright"
                                            data-toggle="tab">2. Copyright</a></li>
-						            <li><a href="#patents"
+						            <li is="patentsBullet" class="bullets"><a href="#patents"
                                            data-toggle="tab">3. Patents</a></li>
-						            <li><a href="#review"
+						            <li id="reviewBullet" class="bullets"><a href="#review"
                                            data-toggle="tab">4. Review</a></li>
-						            <li><a href="#apply"
+						            <li id="applyBullet"  class="bullets"><a href="#apply"
                                            data-toggle="tab">5. Apply</a></li>
 					            </ul>
 					        </div>
@@ -482,9 +482,9 @@ class="input-block-level" placeholder="Location of your licensing policy">
                         <td>Individual Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td>
-                          <a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
-                          <a href="#myHTML" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
-                          <a href="#myMKDN" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
+                          <a href="#" role="button" id="btn-link-cla-indv" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
+                          <a href="#myHTML" role="button" id="btn-html-cla-indv" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
+                          <a href="#myMKDN" role="button" id="btn-mkdn-cla-indv" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
                         </td>
                       	</tr>
 
@@ -492,27 +492,27 @@ class="input-block-level" placeholder="Location of your licensing policy">
                         <td>Entity Contributor License Agreement</td>
                         <td>Contributor Agreements 1.1</td>
                         <td>
-                          <a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
-                          <a href="#myHTML-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
-                          <a href="#myMKDN-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
+                          <a href="#" role="button" id="btn-link-cla-entity" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
+                          <a href="#myHTML-entity" id="btn-html-cla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
+                          <a href="#myMKDN-entity" id="btn-mkdn-cla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
                         </td>
                         </tr>
 
                         <tr id="apply-fla">
                         <td>Fiduciary Contributor License Agreement</td>
                         <td>Fiduciary License Agreement 2.0</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
-                          <a href="#myHTML-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
-                          <a href="#myMKDN-fla" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
+                        <td><a href="#" role="button" id="btn-link-fla-indv" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
+                          <a href="#myHTML-fla" id="btn-html-fla-indv" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
+                          <a href="#myMKDN-fla" id="btn-mkdn-fla-indv" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
                         </td>
                         <!-- make sure that all values from here are actually used -->
                         </tr>
                         <tr id="apply-fla-entity">
                         <td>Entity Fiduciary Contributor License Agreement</td>
                         <td>Fiduciary License Agreement 2.0</td>
-                        <td><a href="#" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
-                          <a href="#myHTML-fla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
-                          <a href="#myMKDN-fla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
+                        <td><a href="#" id="btn-link-fla-entity" role="button" class="btn btn-primary btn-html final-link" data-toggle="modal" data-inline="true">LINK</a>
+                          <a href="#myHTML-fla-entity" id="btn-html-fla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">HTML</a>
+                          <a href="#myMKDN-fla-entity" id="btn-mkdn-fla-entity" role="button" class="btn btn-primary btn-html" data-toggle="modal" data-inline="true">MKDN</a>
                         </td>
                         <!-- make sure that all values from here are actually used -->
                         </tr>
