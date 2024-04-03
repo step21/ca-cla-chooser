@@ -128,8 +128,8 @@ var dictionary = {
  * process-url=URL
  * project-jurisdiction=STRING
  *
- * fsfe-compliance=fsfecompliance|non-fsfecompliance
- * agreement-exclusivity=exclusive|nonexclusive
+ * fsfe-compliance=fsfe-compliance|non-fsfecompliance
+ * agreement-exclusivity=exclusive|non-exclusive
  * outbound-option=fsfe|same-licenses|license-policy|same|no-commitment
  * outboundlist=Artistic-1.0,Apache-2.0,LIST
  * outboundlist-custom=STRING
@@ -1895,6 +1895,9 @@ $(document).ready(function() {
 
     $( "#outbound-option-same-licenses" ).change(function() {
         if ( $("#fsfe-compliance").hasClass('active') && $("#outbound-option-same-licenses").prop( "checked" ) ) {
+
+
+
             $("#outboundlist").show();
             $("#outboundlist-custom").hide();
         }
