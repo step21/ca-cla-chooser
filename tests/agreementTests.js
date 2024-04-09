@@ -46,6 +46,14 @@ describe('The length of each document version should be correct', function() {
         await expect(l).to.equal(15527);
 
     });
+    it('the query url without special options should have the same value', async function() {
+        var url = await agreementPage.applyResultLinkFla;
+        console.log(`url is: ${url}`);
+        await expect(url).to.exist;
+        var url_length = await agreementPage.getLinkFlaLength();
+        console.log(`url length is ${url_length}`)
+        await expect(url_length).to.equal(388);
+    })
 });
 
 
