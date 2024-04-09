@@ -35,8 +35,6 @@ class ApplyPage extends Page {
     async openHtmlFlaEntity () { await this.applyResultHtmlFlaEntityBtn.click() }
     async openMkdnFlaEntity () { await this.applyResultMkdnFlaEntityBtn.click() }
 
-    //get applyResultPdfFla
-
     // get custom cla format fields and content
     get applyResultLinkCla () { return $('#btn-link-cla-indv') }
     get applyResultLinkClaText () { return this.applyResultLinkCla.getAttribute('href') }
