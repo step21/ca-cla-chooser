@@ -27,6 +27,13 @@ class AgreementPage extends ApplyPage {
         return text.length
     }
 
+    async getLinkFlaLength () {
+        var link = await this.applyResultLinkFlaText;
+        console.log(`fla link: ${link}`);
+        return link.length
+    }
+
+
     //$$$fla = cheerio.load(this.applyResultHtmlFlaText);
 //    get agreementFlaTitle () { $$$fla('#tmp-title') 
     //get agreementFlaSubtitle
