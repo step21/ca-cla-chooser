@@ -21,14 +21,13 @@ class Page {
     }
     async next () {
         await this.nextBtn.click()
-        //(await this.
     }
     async previous () {
         await this.previousBtn.click()
     }
     async gotoGeneral () {
-        await browser.isElementDisplayed(await this.generalBullet.selector);
-        //await browser.waitUntil(this.generalBullet.isVisibleWithinViewport(), 20000, 'link not visible')
+        await this.generalBullet.waitForClickable({timeout: 5000});
+        //await browser.isElementDisplayed(await this.generalBullet.selector);
         await this.generalBullet.click()
     }
     async gotoCopyright () {
