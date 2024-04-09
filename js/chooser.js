@@ -1870,9 +1870,8 @@ $(document).ready(function() {
         $("#apply-fla-entity").show();
     }
 
-    // FIXME is this needed here? is this for clicking on the button or would this be executed by default?
+    // FIXME is this needed here? Is there a better place for it? 
     $( "#non-fsfe-compliance").click(function () {
-        console.log("This is inside a random non-fsfe-compliance click function");
         selectNonFsfeCompliance();
     });
 
@@ -2149,8 +2148,5 @@ $(document).ready(function() {
                 break;
         }
     }
-    // FIXME This pretty printing is not doing anything. It should be removed if not used.
-    //console.log('This is before the pretty printing FIXME')
-    //window.prettyPrint && prettyPrint()
 
 });
