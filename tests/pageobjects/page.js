@@ -1,8 +1,7 @@
 const { browser } = require('@wdio/globals')
 // Page.js
 
-module.exports = class Page {
-//export default class Page {
+class Page {
 
     get pageTitle () { return browser.getTitle() }
     get pageUrl () { return browser.getUrl() }
@@ -22,11 +21,14 @@ module.exports = class Page {
     }
     async next () {
         await this.nextBtn.click()
+        //(await this.
     }
     async previous () {
         await this.previousBtn.click()
     }
     async gotoGeneral () {
+        await browser.isElementDisplayed(await this.generalBullet.selector);
+        //await browser.waitUntil(this.generalBullet.isVisibleWithinViewport(), 20000, 'link not visible')
         await this.generalBullet.click()
     }
     async gotoCopyright () {
@@ -41,6 +43,13 @@ module.exports = class Page {
     async gotoApply () {
         await this.applyBullet.click()
     }
+    async goThroughAll () {
+        await this.gotoGeneral()
+        await this.gotoCopyright()
+        await this.gotoPatents()
+        await this.gotoReview()
+        await this.gotoApply()
+    }
 }
 
-
+module.exports = Page;

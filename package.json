@@ -21,8 +21,10 @@
     "@wdio/spec-reporter": "^8.31.1",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
+    "cheerio": "^1.0.0-rc.12",
     "concurrently": "^6.0.0",
     "mocha": "^8.3.2",
+    "nyc": "^15.1.0",
     "wdio-wait-for": "^3.0.11",
     "webdriverio": "^8.32.1"
   }

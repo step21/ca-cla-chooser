@@ -1,5 +1,5 @@
 // apply.page.js
-import Page from './page'
+const Page = require('./page');
 
 class ApplyPage extends Page {
 
@@ -61,5 +61,4 @@ class ApplyPage extends Page {
     async openMkdnClaEntity () { await this.applyResultMkdnClaEntityBtn.click() }
 }
 
-module.exports = new ApplyPage()
-//export default new ApplyPage()
+module.exports = ApplyPage;

@@ -4,7 +4,12 @@ exports.config = {
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
-    runner: 'local',
+    runner: ['local', {
+        preset: process.env.WDIO_PRESET,
+        coverage: {
+            enabled: true
+        }
+    }],
     //
     // ==================
     // Specify Test Files
@@ -22,7 +27,7 @@ exports.config = {
     //
     specs: [
         './tests/specs/**/*.js',
-        './tests/basicTests.js'
+        './tests/*Tests.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -66,7 +71,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
