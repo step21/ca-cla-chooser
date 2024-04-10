@@ -6,6 +6,8 @@
  * @TODO need to have some kind of timeout on the shorturl service, its blocking when service down
  */
 
+
+// TODO - for testing, having debug switch as a query parameter or similar would be nice
 var doDebug             = false;
 var debugNeedle         = 1337;
 
@@ -124,7 +126,7 @@ var dictionary = {
  * process-url=URL
  * project-jurisdiction=STRING
  *
- * fsfe-compliance=fsfe-compliance|non-fsfecompliance
+ * fsfe-compliance=fsfe-compliance|non-fsfe-compliance FIXME: check for consistency and implement non-fsfe-compliance properly
  * agreement-exclusivity=exclusive|non-exclusive
  * outbound-option=fsfe|same-licenses|license-policy|same|no-commitment
  * outboundlist=Artistic-1.0,Apache-2.0,LIST
@@ -280,9 +282,12 @@ function updateConfigs ()
             configs["project-jurisdiction"]);
 
     /* fsfe compliance changes */
-    // TODO move button change here?
-    if ( configs["fsfe-compliance"] )
+    // TODO move button change here? FIXME this is right, but what is the other fsfeCompliance doing?
+    if ( configs["fsfe-compliance"] == "fsfe-compliance" ) {
       $('#fsfe-compliance').val(configs["fsfe-compliance"] );
+    } else {
+        $('#fsfe-compliance').val(configs["fsfe-compliance"] );
+    }
     if ( doDebug )
         console.log("fsfe-compliance: " +
             configs["fsfe-compliance"]);
@@ -500,11 +505,15 @@ function nl2br (str, is_xhtml)
 function getShortUrl(uri)
 {
     var result = '';
+    if ( doDebug ) {
+        result = "testing"
+    } else {
     $.ajax({
         url: urlShortener + '/set/?l=' + uri,
         async: false,
         success: function(data) { result = data; }
     });
+    }
     return result;
 }
 
@@ -1062,9 +1071,6 @@ function updatePosition ()
 function testGeneralPage ()
 {
             isGeneralPageOk = true;
-            // TODO is this the correct spot and does this do what it says it does?
-            if(!$("#fsfe-compliance").val() );
-            var fsfeCompliance    = $( "#fsfe-compliance" ).val();
 
             if ( !$('#beneficiary-name').val() ) {
                 $('#beneficiary-name').addClass("cla-alert");
@@ -1103,18 +1109,20 @@ function testGeneralPage ()
             } else {
                 $('#project-jurisdiction').removeClass("cla-alert");
             }
-            // FIXME this is ... wrong here.
-            if ( !$('#fsfe-compliance').val() || $('#fsfe-compliance').val() == "no-fsfe-compliance" ) {
-                fsfeCompliance = "";
+            // FIXME this spelling is the only usage here. so likely it should be fixed or removed.
+            /*var something = $('#fsfe-compliance').val()
+            console.log(`fsfe-compliance general page ${something}`)
+            if ($('#fsfe-compliance').val() == 'fsfe-compliance'  ) {
+                fsfeCompliance = "fsfe-compliance"
+                console.log('fsfe compliance set on general page')
+            } else if ($('non-fsfe-compliance').val() || ) {
+                fsfeCompliance = "non-fsfe-compliance"
+                console.log('non-fsfe-compliance set on general page')
             } else {
-                if (fsfeCompliance == "fsfe-compliance") {
-                  if ( doDebug ) {
-                      console.log("fsfe-compliance: " +
-                              "FSFE Compliance Enabled");
-                            }
-                      }
+                console.log('neither fsfe or non-fsfe compliance set. this should probably never happen.')
+            } */
+    
 
-              }
 
     testReviewPage();
 
@@ -1158,14 +1166,14 @@ function testCopyrightPage ()
                     console.log("outboundCopyrightLicenses: " +
                         outboundCopyrightLicenses);
             }
-            // FIXME could loading from config and applying in testing pages be merged?
-            if ( !$('#license-policy-location').val() ) {
+
+           if ( !$('#license-policy-location').val() ) {
                 LicensePolicyLocation = "";
             } else {
                 LicensePolicyLocation = $('#license-policy-location').val();
             }
 
-
+            // FIXME
             /*
             if ( !$('#medialist').val() ) {
                 $('#medialist').addClass("cla-alert");
