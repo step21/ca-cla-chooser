@@ -8,11 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
     strategy:
       matrix:
+        os: [macos-13, ubuntu-latest]
         node-version: [18.x, 20.x]
+    runs-on: ${{ matrix.os }}
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - name: Checkout
