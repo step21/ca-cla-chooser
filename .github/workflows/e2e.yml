@@ -10,6 +10,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         os: [macos-13, ubuntu-latest]
         node-version: [18.x, 20.x]
