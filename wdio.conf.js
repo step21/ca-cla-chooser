@@ -111,7 +111,8 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],
+    services: [
+        ],
     //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -120,7 +121,6 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
-    
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -271,6 +271,23 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
+    afterSession: function (result, capabilities, specs) {
+      const fs = require('fs');
+      const path = require('path');
+      const os = require('os');
+
+      const tempDir = os.tmpdir(); // Gets the system temp directory
+      fs.readdir(tempDir, (err, files) => {
+          if (err) throw err;
+
+          files.forEach(file => {
+              if (file.startsWith('rust_mozProfile')) {
+                  const dirPath = path.join(tempDir, file);
+                  fs.rmdirSync(dirPath, { recursive: true }); // Ensures the entire directory is deleted
+              }
+          });
+      });
+  },
     // afterSession: function (config, capabilities, specs) {
     // },
     /**
