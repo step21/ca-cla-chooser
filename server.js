@@ -1,10 +1,10 @@
 const express = require('express');
+const morgan = require('morgan')
 const app = express();
 const port = 4000;
 
-//app.get('/', function(req, res){
-//res.sendFile(__dirname + '/privacy.html');
-//});
+
+app.use(morgan('combined'))
 
 app.use(express.static('./'));
 
