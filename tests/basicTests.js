@@ -8,7 +8,7 @@ beforeEach(async function () {
     await page.goThroughAll();
 })
 
-describe('Basic Page load testing', function() {
+describe('Basic Page load testing', async function() {
 
         it('should show the right page title', async function() {
             await page.open();
@@ -24,7 +24,7 @@ describe('Basic Page load testing', function() {
 });
 
 // chai does not allow for arrow functions because of some binding of the test
-describe('Contributoragreements.org tests', function() {
+describe('Contributoragreements.org tests', async function() {
     before(async function() {
         await browser.url('https://contributoragreements.org/ca-cla-chooser/');
     });
