@@ -44,19 +44,18 @@ class ApplyPage extends Page {
     get applyResultHtmlClaText () { return $('#embed-agreement') }
     get applyResultMkdnClaBtn () { return $('[href=#myMKDN]') }
     get applyResultMkdnClaText () { return $('#embed-agreement-mkdn') }
-    // get applyResultPdfCla
     get applyResultHtmlClaEntityBtn () { return $('[href=#myHTML-entity]') }
     get applyResultHtmlClaEntityText () { return $('#embed-agreement-entity') }
     get applyResultMkdnClaEntityBtn () { return $('[href=#myMKDN-entity]') }
     get applyResultMkdnClaEntityText () { return $('#embed-agreement-entity-mkdn') }
-    // get e-signing content
-    get applyLinkEsign () { $('#link-esign').getAttribute('href') }
-    get applyEmbedCodeEsign () { $('#embed-esign') }
-    get applyEmbedCodeEsignValue () { this.applyEmbedCodeEsign.getValue() }
     async openHtmlCla () { await this.applyResultHtmlClaBtn.click() }
     async openMkdnCla () { await this.applyResultMkdnClaBtn.click() }
     async openHtmlClaEntity () { await this.applyResultHtmlClaEntityBtn.click() }
     async openMkdnClaEntity () { await this.applyResultMkdnClaEntityBtn.click() }
+    // get e-signing content
+    get applyLinkEsign () { $('#link-esign').getAttribute('href') }
+    get applyEmbedCodeEsign () { $('#embed-esign') }
+    get applyEmbedCodeEsignValue () { this.applyEmbedCodeEsign.getValue() }
 }
 
 module.exports = ApplyPage;

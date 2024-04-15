@@ -7,7 +7,7 @@ const agreementPage = new AgreementPage()
 /*
  * For now, these tests compare the character count of generated documents as a proxy metric for changes in the document.
  */
-describe('The length of each document version should be correct', function() {
+describe('The length of each document version should be correct', async function() {
 
     beforeEach(async function() {
         await agreementPage.open();
@@ -33,6 +33,18 @@ describe('The length of each document version should be correct', function() {
         await expect(l).to.equal(17015);
     });
 
+    it('the fla version with outbound option 1 should be correct', async function() {
+       console.log('STUB: testing if the length of fla-outbound option 1 is correct')
+    });
+
+    it('the fla version with outbound option 2 should be correct', async function() {
+        console.log('STUB: testing if the length of fla-outbound option 2 is correct')
+    })
+
+    it('the fla version with outbound option 3 should be correct', async function() {
+        console.log('STUB: testing if the length of fla-outbound option 3 is correct')
+    })
+
 
     it('the cla version (html) with default values should have the right length', async function() {
         await expect(agreementPage.applyResultHtmlClaText).to.exist;
@@ -41,6 +53,53 @@ describe('The length of each document version should be correct', function() {
         await expect(l).to.equal(15531);
 
     });
+
+    it('the cla version with outbound option 1 traditional patent license should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 1 is correct')
+    })
+
+    it('the cla version with outbound option 2 traditional patent license should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 2 is correct')
+    })
+
+    it('the cla version with outbound option 3 traditional patent license should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 3 is correct')
+    })
+
+    it('the cla version with outbound option 4 traditional patent license should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 4 is correct')
+    })
+
+    it('the cla version with outbound option 5 traditional patent license should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 5 is correct')
+    })
+
+    
+    it('the cla version with outbound option 1 patent pledge should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 1 is correct')
+    })
+    
+    it('the cla version with outbound option 2 patent pledge should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 2 is correct')
+    })
+
+
+    it('the cla version with outbound option 3 patent pledge should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 3 is correct')
+    })
+
+
+    it('the cla version with outbound option 4 patent pledge should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 4 is correct')
+        //also - add patent info
+    })
+
+
+    it('the cla version with outbound option 5 patent pledge should be correct', async function() {
+        console.log('STUB: testing if the length of cla-outbound option 5 is correct')
+    })
+
+    // FIXME add media license option test, patent info test
 
     it('the cla entity version (html) with default values should have the right length', async function() {
         await expect(agreementPage.applyResultHtmlClaEntityText).to.exist;
@@ -67,10 +126,14 @@ describe('the url parameters should be correct', async function () {
          await agreementPage.goThroughAll();
      });
         it('the amount of parameters should be the same', async function () {
+            var reg = /http.*:4000\/(.*)/;
             var url = await agreementPage.applyResultLinkFlaText;
-            var searchParams = new URLSearchParams(url);
+            var url = url.match(reg);
+            var searchParams = new URLSearchParams(url[1]);
+            console.log(`There are ${searchParams.size} parameters`)
             for (const p of searchParams) {
                 console.log(p);
+                
             }
         })
     })
