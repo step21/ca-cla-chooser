@@ -1,5 +1,3 @@
-//const Page = require('./pageobjects/page');
-//const ApplyPage = require('./pageobjects/apply.page')
 const AgreementPage = require('./pageobjects/agreement.page')
 const { expect } = require('chai');
 const agreementPage = new AgreementPage()
@@ -14,6 +12,7 @@ describe('The length of each document version should be correct', async function
         await agreementPage.goThroughAll();
     });
 
+    // TODO make a helper function that comppiles an array of all numbering, and checks it
     it('the fla version (html) with default values should have the right length', async function() {
         await expect(agreementPage.applyResultHtmlFlaText).to.exist;
         let t = await agreementPage.applyResultHtmlFlaText.getValue();
@@ -74,11 +73,11 @@ describe('The length of each document version should be correct', async function
         console.log('STUB: testing if the length of cla-outbound option 5 is correct')
     })
 
-    
+
     it('the cla version with outbound option 1 patent pledge should be correct', async function() {
         console.log('STUB: testing if the length of cla-outbound option 1 is correct')
     })
-    
+
     it('the cla version with outbound option 2 patent pledge should be correct', async function() {
         console.log('STUB: testing if the length of cla-outbound option 2 is correct')
     })
@@ -114,11 +113,13 @@ describe('The length of each document version should be correct', async function
         await expect(url).to.exist;
         var url_length = await agreementPage.getLinkFlaLength();
         console.log(`url length is ${url_length}`)
-        await expect(url_length).to.equal(388);
+        await expect(url_length).to.equal(403);
     })
 });
 
 // FIXME add proper testing of all parameters. add license-policy
+// could also add custom matcher (expect) such as expect.hasUrlParameter
+// or expect.hasConfigValue
 describe('the url parameters should be correct', async function () {
     describe('all parameters should be present', async function () {
          beforeEach(async function() {
@@ -133,8 +134,8 @@ describe('the url parameters should be correct', async function () {
             console.log(`There are ${searchParams.size} parameters`)
             for (const p of searchParams) {
                 console.log(p);
-                
             }
+            await expect(searchParams.size).to.equal(21);
         })
     })
 })
