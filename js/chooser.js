@@ -282,11 +282,16 @@ function updateConfigs ()
             configs["project-jurisdiction"]);
 
     /* fsfe compliance changes */
-    // TODO move button change here? FIXME this is right, but what is the other fsfeCompliance doing?
     if ( configs["fsfe-compliance"] == "fsfe-compliance" ) {
       $('#fsfe-compliance').val(configs["fsfe-compliance"] );
+        $('#non-fsfe-compliance').val('');
+        $('#fsfe-compliance').addClass('active');
+        $('#non-fsfe-compliance').removeClass('active');
     } else {
-        $('#fsfe-compliance').val(configs["fsfe-compliance"] );
+        $('#fsfe-compliance').val('');
+        $('#non-fsfe-compliance').val(configs["fsfe-compliance"] );
+        $('#non-fsfe-compliance').addClass('active');
+        $('#fsfe-compliance').removeClass('active');
     }
     if ( doDebug )
         console.log("fsfe-compliance: " +
@@ -300,10 +305,6 @@ function updateConfigs ()
     if ( doDebug )
         console.log("agreement-exclusivity: " +
             configs["agreement-exclusivity"]);
-
-
-    if ( configs["outbound-option"] == 'same' )
-        $("#contributor-option-individual").prop('checked', true );
 
     // hide by default
     $("#outboundlist").hide();
@@ -331,15 +332,8 @@ function updateConfigs ()
         case 'license-policy':
             $("#outbound-option-license-policy").prop('checked', true);
             $("#outbound-option-license-policy").change();
-            if ( configs["license-policy"] )
-                 $("#license-policy-location" ).val( configs["license-policy-location"] );
-            break;
-        // option-5
-        case 'no-commitment':
-            $("#outbound-option-no-commitment").prop('checked', true );
-            $("#outbound-option-no-commitment" ).trigger( 'change' );
-            // @todo delete later if no need
-            // setOutboundOptionNoCommitment();
+            $("#license-policy-location").show();
+            $("#license-policy-location" ).val( configs["license-policy-location"] );
             break;
         // option-4
         case 'same':
@@ -348,6 +342,13 @@ function updateConfigs ()
             $("#outbound-option-same" ).trigger( 'change' );
             // @todo delete later if no need
             // setOutboundOptionSame();
+        // option-5
+        case 'no-commitment':
+            $("#outbound-option-no-commitment").prop('checked', true );
+            $("#outbound-option-no-commitment" ).trigger( 'change' );
+            // @todo delete later if no need
+            // setOutboundOptionNoCommitment();
+            break;
     }
 
     if ( doDebug )
@@ -861,6 +862,10 @@ function setOutboundOptionSameLicenses ()
 
   function setOutboundOptionLicensePolicy ()
 {
+    configs['outbound-option'] = 'license-policy';
+    if ( !!$('#license-policy-location').val() ) {
+    configs['license-policy-location'] = $("#license-policy-location").val();
+    }
     // sets the value of the license policy on the review tab to the value of the input on the copyright tab
     $("#review-outbound-licenses").html(
       $("#outbound-option-license-policy").val() );
@@ -1109,19 +1114,6 @@ function testGeneralPage ()
             } else {
                 $('#project-jurisdiction').removeClass("cla-alert");
             }
-            // FIXME this spelling is the only usage here. so likely it should be fixed or removed.
-            /*var something = $('#fsfe-compliance').val()
-            console.log(`fsfe-compliance general page ${something}`)
-            if ($('#fsfe-compliance').val() == 'fsfe-compliance'  ) {
-                fsfeCompliance = "fsfe-compliance"
-                console.log('fsfe compliance set on general page')
-            } else if ($('non-fsfe-compliance').val() || ) {
-                fsfeCompliance = "non-fsfe-compliance"
-                console.log('non-fsfe-compliance set on general page')
-            } else {
-                console.log('neither fsfe or non-fsfe compliance set. this should probably never happen.')
-            } */
-    
 
 
     testReviewPage();
@@ -1171,6 +1163,7 @@ function testCopyrightPage ()
                 LicensePolicyLocation = "";
             } else {
                 LicensePolicyLocation = $('#license-policy-location').val();
+
             }
 
             // FIXME
@@ -1446,7 +1439,7 @@ function testReviewPage ()
                 $('#review-text-entity #tmp-license-back').addClass("nuke");
             }
 
-            // inserts the fsfeField into the possivble licenses FIXME - if this is not even checked, why is this not fixed in text?
+            // inserts the fsfeField into the possible licenses FIXME - if this is not even checked, why is this not fixed in text?
             $('#review-text-fla #tmp-licenses-2').html( fsfeField );
             $('#review-text-fla-entity #tmp-licenses-2').html( fsfeField );
             // If not outbound copyright licenses are set, insert a blank space into the text
@@ -1801,28 +1794,32 @@ $(document).ready(function() {
 
     // These are meant to update the configs or run functions if an input field changes. FIXME Only some are used.
     $( "#beneficiary-name" ).change(function() {
+        configs["beneficiary-name"] = $("#beneficiary-name").val();
         // return testGeneralPage();
     });
 
     $( "#project-name" ).change(function() {
+        configs["project-name"] = $("#project-name").val();
         // return testGeneralPage();
     });
 
     $( "#project-website" ).change(function() {
+        configs["project-website"] = $("#project-website").val();
         // return testGeneralPage();
     });
 
     $( "#project-email" ).change(function() {
         configs["project-email"] = $( "#project-email" ).val();
-
         // return testGeneralPage();
     });
 
     $( "#contributor-process-url" ).change(function() {
+        configs("process-url") = $("#contributor-process-url").val();
         // return testGeneralPage();
     });
 
     $( "#project-jurisdiction" ).change(function() {
+        configs["project-jurisdiction"] = $("#project-jurisdiction").val();
         // return testGeneralPage();
     });
 
@@ -1840,16 +1837,17 @@ $(document).ready(function() {
     });
 
     // This sets the default FSFE compliant status by default
+    if (!configs["fsfe-compliance"] || configs["fsfe-compliance"] === "fsfe-compliance") {
     $("#fsfe-compliance").button("toggle"); // this is needed to set the default button to the green fsfe compliance
     selectFsfeCompliance(); // this is needed for fsfe compliance to activate / ui changes to happen without clicking the fsfe button
-
-    // this should prob be under general page (and maybe use change for consistency)
-    $( "#fsfe-compliance").click(function() {
-        selectFsfeCompliance();
-    });
+    }
+    else {
+        // or just set relevant agreement buttons to hidden?
+        selectNonFsfeCompliance();
+    }
 
     /*
-     * Select all options for FSFE Compliance. FIXME should this be here or under testGeneral page or similar at least not directly after document load.
+     * Select all options for FSFE Compliance. FIXME should this be here or under testGeneral page?
      */
     function selectFsfeCompliance ()
     {
@@ -1876,12 +1874,9 @@ $(document).ready(function() {
         $("#apply-entity").hide();
         $("#apply-fla").show();
         $("#apply-fla-entity").show();
+        // set config option // hard-coded for now as $("#fsfe-compliance").val() has weird inconsistent results
+        configs["fsfe-compliance"] = "fsfe-compliance";
     }
-
-    // FIXME is this needed here? Is there a better place for it? 
-    $( "#non-fsfe-compliance").click(function () {
-        selectNonFsfeCompliance();
-    });
 
     /*
      * Select the options for non-fsfe compliance
@@ -1896,7 +1891,10 @@ $(document).ready(function() {
         }
         $("#outbound-option-4-label").show();
         $("#outbound-option-5-label").show();
-        $("#outbound-option-fsfe").prop("checked", true);
+        // FIXME disabled this, as it was prevening from loading query string/configs properly
+        //if ( !!$('#outbound-option-license-policy').val() || !!$('#outbound-option-no-commitment').val() || !!$('#outbound-option-same-licenses').val() || !!($('#outbound-option-same').val() ) ) {
+        //$("#outbound-option-fsfe").prop("checked", true); 
+        //    }
         $("#outboundlist").hide();
         $("#outboundlist-custom").hide();
         $("#license-policy-location").hide();
@@ -1905,6 +1903,7 @@ $(document).ready(function() {
         $("#patent-type-fsfe").hide();
         // FIXME Probably remove adding patent pledge here, as it then exists double
         $('<option id="patent-pledge" value="Patent-Pledge">Identified Patent Pledge</option>').appendTo("#patent-type");
+        // FIXME this probably also has to be remove, as
         $('select[name*="patent-type"] option[value="Traditional"]').prop('selected', true);
         $("#review-media-licenses-line").show();
         $("#review-text").closest( "ul" ).show();
@@ -1915,7 +1914,18 @@ $(document).ready(function() {
         $("#apply-entity").show();
         $("#apply-fla").hide();
         $("#apply-fla-entity").hide();
+        configs["fsfe-compliance"] = "non-fsfe-compliance";
     }
+
+
+    // this should prob be under general page (and maybe use change for consistency)
+    $( "#fsfe-compliance").click(function() {
+        selectFsfeCompliance();
+    });
+
+    $( "#non-fsfe-compliance").click(function () {
+        selectNonFsfeCompliance();
+    });
 
     /*
      * This function shows the media list for CLA (non-fsfe) and hides it for FLA (fsfe)
@@ -1947,7 +1957,6 @@ $(document).ready(function() {
 
     /*
     * On changing the outbound-option same licenses, show relevant UI elements
-    * FIXME This is the same for both, so should be reduced
     */
 
     $( "#outbound-option-same-licenses" ).change(function() {
