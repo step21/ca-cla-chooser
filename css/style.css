@@ -1,18 +1,19 @@
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 1200px;
+  /*width: 1200px;*/
 }
 
 .container,
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 1200px;
+  /* width: 1200px; */
 }
 
 .span12 {
-  width: 1200px;
+  /*width: 1200px;*/
+  list-style: none;
 }
 
 #general .btn-group {
@@ -89,10 +90,12 @@ th.apply-format {
 
 .bullets {
     width: 100%;
+    border: 1em;
+    /*border-color: rgba(0, 0, 0, 0.5);*/
 }
 
 .navbar .nav>li {
-    width: 20%;
+    width: 19%;
 
 }
 
