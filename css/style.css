@@ -11,7 +11,7 @@
   /* width: 1200px; */
 }
 
-.span12 {
+.col-md-12 {
   /*width: 1200px;*/
   list-style: none;
 }
@@ -66,6 +66,7 @@ label {
 }
 label.radio {
     display: block;
+    font-weight: normal;
 }
 
 th.version {
@@ -140,8 +141,8 @@ table.signing .head {
 }
 table.signing .underline {
         border-bottom: 1px solid black;
-            width: 80%;
-                display: inline-block;
+        width: 80%;
+        display: inline-block;
 
 }
 
